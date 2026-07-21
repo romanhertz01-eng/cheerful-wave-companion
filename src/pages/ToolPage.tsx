@@ -22,26 +22,26 @@ const imageTools: { Icon: LucideIcon; label: string }[] = [
 const providerTabs = ["Google", "Flux", "Ideogram", "GPT"];
 
 const communityWorks = [
-  { author: "Алексей", gradient: "linear-gradient(135deg,#1a1030,#2a1050)", likes: 234, views: 1200 },
-  { author: "Мария", gradient: "linear-gradient(135deg,#0f1a2e,#1a2050)", likes: 187, views: 890 },
-  { author: "Дмитрий", gradient: "linear-gradient(135deg,#1a0f20,#301030)", likes: 312, views: 1500 },
-  { author: "Анна", gradient: "linear-gradient(135deg,#0f1a1a,#103030)", likes: 156, views: 720 },
-  { author: "Иван", gradient: "linear-gradient(135deg,#1a1a0f,#302a10)", likes: 278, views: 1100 },
-  { author: "Ольга", gradient: "linear-gradient(135deg,#0f0f2e,#201050)", likes: 198, views: 950 },
-  { author: "Сергей", gradient: "linear-gradient(135deg,#1a0f1a,#301040)", likes: 342, views: 1800 },
-  { author: "Елена", gradient: "linear-gradient(135deg,#0f1a1a,#1a2e2e)", likes: 145, views: 670 },
+  { author: "Алексей", image: "/community/01.jpg", likes: 234, views: 1200 },
+  { author: "Мария",   image: "/community/02.jpg", likes: 187, views: 890 },
+  { author: "Дмитрий", image: "/community/03.jpg", likes: 312, views: 1500 },
+  { author: "Анна",    image: "/community/04.jpg", likes: 156, views: 720 },
+  { author: "Иван",    image: "/community/05.jpg", likes: 278, views: 1100 },
+  { author: "Ольга",   image: "/community/06.jpg", likes: 198, views: 950 },
+  { author: "Сергей",  image: "/community/07.jpg", likes: 342, views: 1800 },
+  { author: "Елена",   image: "/community/08.jpg", likes: 145, views: 670 },
 ];
 
 const modelCards = [
-  { name: "Seedream 5.0 Lite", badge: "NEW", desc: "Поиск в интернете в реальном времени..." },
-  { name: "Google Nano Banana 2", badge: "NEW", desc: "Более быстрое создание высококачественных из..." },
-  { name: "Grok Imagine", desc: "Проработанные персонажи и смелая стилизация..." },
-  { name: "Kling V3 Omni", badge: "NEW", desc: "Высококачественные изображения с безупречной..." },
-  { name: "Kling 3.0", badge: "NEW", desc: "Целостные раскадровки с ультрадетализирован..." },
-  { name: "GPT Image 1.5", desc: "Безупречная проработка персонажей, освещение..." },
-  { name: "Google Nano Banana Pro", desc: "Самая сильная модель, когда-либо созданная..." },
-  { name: "Google Nano Banana", desc: "Усовершенствованный рендеринг текста и пейзаж..." },
-  { name: "Kling 01", desc: "Привязка к нескольким изображениям и расшир..." },
+  { name: "Seedream 5.0 Lite", badge: "NEW", desc: "Поиск в интернете в реальном времени...", image: "/models/01.jpg" },
+  { name: "Google Nano Banana 2", badge: "NEW", desc: "Более быстрое создание высококачественных из...", image: "/models/02.jpg" },
+  { name: "Grok Imagine", desc: "Проработанные персонажи и смелая стилизация...", image: "/models/03.jpg" },
+  { name: "Kling V3 Omni", badge: "NEW", desc: "Высококачественные изображения с безупречной...", image: "/models/04.jpg" },
+  { name: "Kling 3.0", badge: "NEW", desc: "Целостные раскадровки с ультрадетализирован...", image: "/models/05.jpg" },
+  { name: "GPT Image 1.5", desc: "Безупречная проработка персонажей, освещение...", image: "/models/06.jpg" },
+  { name: "Google Nano Banana Pro", desc: "Самая сильная модель, когда-либо созданная...", image: "/models/01.jpg" },
+  { name: "Google Nano Banana", desc: "Усовершенствованный рендеринг текста и пейзаж...", image: "/models/02.jpg" },
+  { name: "Kling 01", desc: "Привязка к нескольким изображениям и расшир...", image: "/models/03.jpg" },
 ];
 
 const ToolPage = () => {
@@ -133,7 +133,8 @@ const ToolPage = () => {
         <h2 className="text-xl md:text-2xl font-bold mb-6">Изучите другие источники вдохновения от сообщества ERA2</h2>
         <div className="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
           {communityWorks.map((w) => (
-            <div key={w.author} className="break-inside-avoid rounded-xl border border-border relative overflow-hidden cursor-pointer hover:scale-[1.02] transition-transform group" style={{ height: `${180 + Math.random() * 80}px`, background: w.gradient }}>
+            <div key={w.author} className="break-inside-avoid rounded-xl border border-white/10 bg-white/[0.04] shadow-[0_2px_12px_rgba(0,0,0,0.4)] relative overflow-hidden cursor-pointer hover:scale-[1.02] hover:border-primary/40 hover:bg-white/[0.06] transition-all group">
+              <img src={w.image} alt={w.author} loading="lazy" className="w-full h-auto block object-cover" />
               <div className="absolute bottom-0 left-0 right-0 p-2.5 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-between">
                 <span className="text-white text-[11px]">{w.author}</span>
                 <div className="flex items-center gap-2 text-white/70 text-[10px]">
@@ -209,13 +210,16 @@ const ToolPage = () => {
         <h2 className="text-xl font-bold mb-6">Модели</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {modelCards.map((m) => (
-            <div key={m.name} className="bg-card border border-border rounded-xl p-4 hover:border-primary/30 transition-colors cursor-pointer">
+            <div key={m.name} className="bg-white/[0.04] border border-white/10 shadow-[0_2px_12px_rgba(0,0,0,0.4)] rounded-xl overflow-hidden hover:border-primary/40 hover:bg-white/[0.06] transition-colors cursor-pointer">
+              <img src={m.image} alt={m.name} loading="lazy" className="w-full h-[72px] object-cover" />
+              <div className="p-4">
               <div className="flex items-center gap-2 mb-2">
                 <ModelGlyph name={m.name} size={32} />
                 <span className="font-semibold text-sm">{m.name}</span>
                 {m.badge && <span className="text-[9px] gradient-accent text-white px-1.5 py-0.5 rounded-full font-bold">{m.badge}</span>}
               </div>
               <p className="text-xs text-muted-foreground">{m.desc}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -229,7 +233,7 @@ const ToolPage = () => {
         </div>
         <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
           {imageTools.map((t) => (
-            <div key={t.label} className="shrink-0 w-[180px] h-[120px] border border-border rounded-xl flex flex-col items-center justify-center gap-3 hover:border-primary/30 hover:bg-accent/50 transition-colors cursor-pointer">
+            <div key={t.label} className="shrink-0 w-[180px] h-[120px] border border-white/10 bg-white/[0.04] shadow-[0_2px_12px_rgba(0,0,0,0.4)] rounded-xl flex flex-col items-center justify-center gap-3 hover:border-primary/40 hover:bg-white/[0.06] transition-colors cursor-pointer">
               <div className="w-10 h-10 rounded-[8px] flex items-center justify-center" style={{ background: "rgba(232, 84, 32, 0.1)", border: "1px solid rgba(232, 84, 32, 0.18)" }}>
                 <t.Icon size={20} strokeWidth={1.75} style={{ color: "hsl(var(--primary))" }} />
               </div>
