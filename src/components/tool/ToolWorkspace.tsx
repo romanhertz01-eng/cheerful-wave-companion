@@ -202,11 +202,21 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
           <div className="shrink-0">
             <p className="text-xs text-muted-foreground mb-1.5">История</p>
             <div className="grid grid-cols-3 gap-2">
-              {[0, 1, 2].map((i) => (
+              {[
+                "/community/01.jpg",
+                "/community/02.jpg",
+                "/community/03.jpg",
+              ].map((src, i) => (
                 <div
                   key={i}
-                  className="h-16 rounded-lg border border-dashed border-border bg-background/40"
-                />
+                  className="h-16 rounded-lg border border-white/10 overflow-hidden hover:border-primary/40 transition-colors"
+                >
+                  <img
+                    src={src}
+                    alt={`history ${i + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
               ))}
             </div>
           </div>
