@@ -105,6 +105,36 @@ const ToolPage = () => {
 
       {data.tool && <ToolWorkspace data={data} />}
 
+      {/* How it works */}
+      {data.tool && data.howItWorks && (
+        <section className="max-w-5xl mx-auto px-4 py-12">
+          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">
+            {data.howItWorks.title}
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {data.howItWorks.steps.map((step, i) => (
+              <div
+                key={i}
+                className="bg-white/[0.04] border border-white/10 shadow-[0_2px_12px_rgba(0,0,0,0.4)] rounded-xl p-6 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
+              >
+                <span className="gradient-accent-text font-bold text-sm mb-2 block">Шаг {i + 1}</span>
+                <h4 className="font-semibold mb-1">{step.title}</h4>
+                <p className="text-sm text-muted-foreground">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="gradient-accent text-white rounded-full px-8 py-3 font-semibold hover:opacity-90 transition-opacity"
+            >
+              Оживить фото
+            </button>
+          </div>
+        </section>
+      )}
+
       {/* Community gallery */}
       <section className="max-w-6xl mx-auto px-4 py-12">
         <h2 className="text-xl md:text-2xl font-bold mb-6">Изучите другие источники вдохновения от сообщества ERA2</h2>
