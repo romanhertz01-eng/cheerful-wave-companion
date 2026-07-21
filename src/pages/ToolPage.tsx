@@ -105,6 +105,61 @@ const ToolPage = () => {
 
       {data.tool && <ToolWorkspace data={data} />}
 
+      {/* Community gallery */}
+      <section className="max-w-6xl mx-auto px-4 py-12">
+        <h2 className="text-xl md:text-2xl font-bold mb-6">Изучите другие источники вдохновения от сообщества ERA2</h2>
+        <div className="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
+          {communityWorks.map((w) => (
+            <div key={w.author} className="break-inside-avoid rounded-xl border border-white/10 bg-white/[0.04] shadow-[0_2px_12px_rgba(0,0,0,0.4)] relative overflow-hidden cursor-pointer hover:scale-[1.02] hover:border-primary/40 hover:bg-white/[0.06] transition-all group">
+              <img src={w.image} alt={w.author} loading="lazy" className="w-full h-auto block object-cover" />
+              <div className="absolute bottom-0 left-0 right-0 p-2.5 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-between">
+                <span className="text-white text-[11px]">{w.author}</span>
+                <div className="flex items-center gap-2 text-white/70 text-[10px]">
+                  <span className="flex items-center gap-0.5"><Heart className="w-3 h-3" /> {w.likes}</span>
+                  <span className="flex items-center gap-0.5"><Eye className="w-3 h-3" /> {w.views}</span>
+                </div>
+              </div>
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="gradient-accent text-white text-[10px] px-3 py-1.5 rounded-full font-medium">Создать похожее</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <Link to={targetPage} className="inline-flex items-center gap-1 mt-4 text-sm text-primary hover:underline">
+          Генерировать больше →
+        </Link>
+      </section>
+
+      {/* Feature blocks (tool pages) */}
+      {data.tool && data.featureBlocks && (
+        <section className="max-w-5xl mx-auto px-4 py-12 flex flex-col gap-16">
+          {data.featureBlocks.map((b, i) => (
+            <div
+              key={i}
+              className={cn(
+                "flex flex-col gap-6 md:gap-12 items-center",
+                i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+              )}
+            >
+              <div className="md:w-1/2 w-full rounded-2xl border border-white/10 overflow-hidden aspect-[4/3]">
+                <img src={b.image} alt={b.title} loading="lazy" className="w-full h-full object-cover" />
+              </div>
+              <div className="md:w-1/2 w-full">
+                <h3 className="text-2xl md:text-[28px] font-bold mb-3">{b.title}</h3>
+                <p className="text-muted-foreground mb-5 leading-relaxed">{b.desc}</p>
+                <button
+                  type="button"
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  className="gradient-accent text-white rounded-full px-6 py-2.5 font-semibold hover:opacity-90 transition-opacity"
+                >
+                  {b.cta}
+                </button>
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
+
       {/* How it works */}
       {data.tool && data.howItWorks && (
         <section className="max-w-5xl mx-auto px-4 py-12">
@@ -135,32 +190,8 @@ const ToolPage = () => {
         </section>
       )}
 
-      {/* Community gallery */}
-      <section className="max-w-6xl mx-auto px-4 py-12">
-        <h2 className="text-xl md:text-2xl font-bold mb-6">Изучите другие источники вдохновения от сообщества ERA2</h2>
-        <div className="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
-          {communityWorks.map((w) => (
-            <div key={w.author} className="break-inside-avoid rounded-xl border border-white/10 bg-white/[0.04] shadow-[0_2px_12px_rgba(0,0,0,0.4)] relative overflow-hidden cursor-pointer hover:scale-[1.02] hover:border-primary/40 hover:bg-white/[0.06] transition-all group">
-              <img src={w.image} alt={w.author} loading="lazy" className="w-full h-auto block object-cover" />
-              <div className="absolute bottom-0 left-0 right-0 p-2.5 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-between">
-                <span className="text-white text-[11px]">{w.author}</span>
-                <div className="flex items-center gap-2 text-white/70 text-[10px]">
-                  <span className="flex items-center gap-0.5"><Heart className="w-3 h-3" /> {w.likes}</span>
-                  <span className="flex items-center gap-0.5"><Eye className="w-3 h-3" /> {w.views}</span>
-                </div>
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="gradient-accent text-white text-[10px] px-3 py-1.5 rounded-full font-medium">Создать похожее</span>
-              </div>
-            </div>
-          ))}
-        </div>
-        <Link to={targetPage} className="inline-flex items-center gap-1 mt-4 text-sm text-primary hover:underline">
-          Генерировать больше →
-        </Link>
-      </section>
-
-      {/* Features */}
+      {/* Features (model landings only) */}
+      {!data.tool && (
       <section className="max-w-5xl mx-auto px-4 py-12">
         <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">
           Основные возможности {data.modelName}
@@ -182,6 +213,7 @@ const ToolPage = () => {
           ))}
         </div>
       </section>
+      )}
 
       {/* Video tutorial — только для лендингов моделей изображений */}
       {!data.tool && data.category === "image" && (
@@ -219,7 +251,8 @@ const ToolPage = () => {
       </section>
       )}
 
-      {/* Model cards */}
+      {/* Model cards (model landings only) */}
+      {!data.tool && (
       <section className="max-w-5xl mx-auto px-4 py-16">
         <h2 className="text-xl font-bold mb-6">Модели</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -238,6 +271,7 @@ const ToolPage = () => {
           ))}
         </div>
       </section>
+      )}
 
       {/* Image tools */}
       <section className="max-w-6xl mx-auto px-4 py-12">
@@ -277,6 +311,22 @@ const ToolPage = () => {
       )}
 
       <FAQ items={toolPageItems} />
+
+      {/* Final CTA (tool pages) */}
+      {data.tool && data.finalCta && (
+        <section className="max-w-3xl mx-auto px-4 py-16 md:py-20 text-center">
+          <h2 className="text-[24px] md:text-[32px] font-bold mb-4 leading-tight">{data.finalCta.title}</h2>
+          <p className="text-muted-foreground text-sm md:text-base mb-8 max-w-[600px] mx-auto">{data.finalCta.subtitle}</p>
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="gradient-accent text-white rounded-full px-8 py-3.5 font-semibold hover:opacity-90 transition-opacity"
+          >
+            {data.finalCta.button}
+          </button>
+        </section>
+      )}
+
       <Footer />
     </div>
   );
