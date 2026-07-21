@@ -42,9 +42,9 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
 
   return (
     <section className="border-y border-border" style={{ background: "hsl(var(--card))" }}>
-      <div className="max-w-6xl mx-auto px-4 py-8 grid gap-6 md:grid-cols-[360px_1fr] md:grid-rows-1">
+      <div className="max-w-6xl mx-auto px-4 py-8 grid gap-6 md:grid-cols-[360px_1fr] md:grid-rows-[min-content]">
         {/* LEFT PANEL */}
-        <div className="rounded-2xl border border-border bg-background/60 p-3 flex flex-col gap-3 h-fit md:h-full">
+        <div className="rounded-2xl border border-border bg-background/60 p-3 flex flex-col gap-3 h-full">
           <div className="flex items-center gap-2">
             <Link to="/toolkit" className="p-1.5 rounded-md hover:bg-muted transition-colors">
               <ArrowLeft size={16} />
