@@ -1,107 +1,23 @@
 import { useState, useEffect } from "react";
-import { Check, ChevronDown, Users, Copy } from "lucide-react";
+import { Check, ChevronDown, Users, Copy, Infinity as InfinityIcon, X, ArrowRight } from "lucide-react";
 import { useCopyToast } from "@/components/shared/CopyToast";
 import { cn } from "@/lib/utils";
 import { Footer } from "@/components/shared/Footer";
 import { motion } from "framer-motion";
+import { plans, creditPacks } from "@/data/plans";
+import { PlanComparisonModal } from "@/components/pricing/PlanComparisonModal";
 
 const fadeUp = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.5 } } };
 const stagger = { show: { transition: { staggerChildren: 0.08 } } };
 
 type Period = "year" | "month";
 
-const plans = [
-  {
-    name: "Старт",
-    badge: "БЕСПЛАТНО",
-    oldPrice: null as string | null,
-    yearPrice: "0 ₽",
-    monthPrice: "0 ₽",
-    credits: "100 кредитов",
-    creditsNote: "единоразово",
-    features: [
-      "5 текстовых моделей (GPT 4.1 Mini, Claude 4 Sonnet, Gemini 2.5 Flash, DeepSeek V3, Qwen 3)",
-      "3 модели изображений (Nano Banana, Flux.1, Seedream 4)",
-      "1 видео-модель (Kling 1.5)",
-      "Базовые агенты",
-      "Качество до 1K",
-      "Очередь генерации",
-    ],
-    cta: "Начать бесплатно",
-    recommended: false,
-    popular: false,
-  },
-  {
-    name: "Базовый",
-    badge: "-30%",
-    oldPrice: "38 100 ₽",
-    yearPrice: "756 ₽/мес",
-    monthPrice: "890 ₽/мес",
-    credits: "3 000 кредитов",
-    creditsNote: "ежемесячно",
-    features: [
-      "Все текстовые модели (30+)",
-      "Все модели изображений (10+)",
-      "5 видео-моделей",
-      "ElevenLabs озвучка",
-      "Качество до 2K",
-      "Приоритетная очередь",
-      "История генераций 30 дней",
-    ],
-    cta: "Выбрать план",
-    recommended: false,
-    popular: false,
-  },
-  {
-    name: "Про",
-    badge: "ПОПУЛЯРНЫЙ",
-    oldPrice: "66 200 ₽",
-    yearPrice: "1 436 ₽/мес",
-    monthPrice: "1 690 ₽/мес",
-    credits: "8 000 кредитов",
-    creditsNote: "ежемесячно",
-    features: [
-      "Все 90+ моделей без ограничений",
-      "Все видео-модели (Kling 3.0, Veo 3, Sora 2)",
-      "ElevenLabs + Suno",
-      "Качество до 4K",
-      "Быстрая генерация (без очереди)",
-      "Все 27 агентов",
-      "API-доступ",
-      "История генераций 90 дней",
-    ],
-    cta: "Выбрать план",
-    recommended: true,
-    popular: true,
-  },
-  {
-    name: "Бизнес",
-    badge: null as string | null,
-    oldPrice: "66 200 ₽",
-    yearPrice: "1 691 ₽/мес",
-    monthPrice: "1 990 ₽/мес",
-    credits: "∞ Безлимит",
-    creditsNote: "без кредитов",
-    features: [
-      "∞ Все 90+ моделей без кредитов",
-      "Максимальное качество 4K+",
-      "Мгновенная генерация",
-      "Приоритетная поддержка",
-      "Команда до 5 человек",
-      "Выделенный API",
-      "Кастомные агенты",
-      "История генераций бессрочно",
-    ],
-    cta: "Связаться",
-    recommended: false,
-    popular: false,
-  },
-];
+const fmtRub = (n: number) => `${n.toLocaleString("ru-RU")} ₽`;
 
 const faqItems = [
   {
     q: "Что такое кредиты?",
-    a: "Каждая генерация стоит определённое количество кредитов. Текст: 6 cr, Изображение: 80–300 cr, Видео: 75–150 cr, Аудио: 30–60 cr.",
+    a: "Каждая генерация стоит фиксированное число кредитов. Текст: от 3 cr, изображения: 20–380 cr, видео: от 105 cr, аудио: 5–400 cr. Кредиты не сгорают и переносятся, тратятся при активной подписке.",
   },
   {
     q: "Можно ли перейти на другой план?",
@@ -118,8 +34,9 @@ const faqItems = [
 ];
 
 const PricingPage = () => {
-  const [period, setPeriod] = useState<Period>("year");
+  const [period, setPeriod] = useState<Period>("month");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [compareOpen, setCompareOpen] = useState(false);
   const copy = useCopyToast();
 
   useEffect(() => { document.title = "ERA2 — Тарифы"; }, []);
@@ -134,20 +51,29 @@ const PricingPage = () => {
           <motion.h1 variants={fadeUp} className="text-[32px] md:text-[44px] font-bold mb-4">Простые тарифы для каждого</motion.h1>
           <motion.p variants={fadeUp} className="text-muted-foreground mb-8">Одна подписка — доступ ко всем 90+ нейросетям. Начните бесплатно.</motion.p>
 
-          {/* Period toggle */}
-          <motion.div variants={fadeUp} className="inline-flex rounded-full border border-[hsl(var(--border))] p-1">
+          {/* Period toggle + compare */}
+          <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="inline-flex rounded-full border border-[hsl(var(--border))] p-1">
+              <button
+                onClick={() => setPeriod("month")}
+                className={cn("px-6 py-2 rounded-full text-sm font-medium transition-colors", period === "month" ? "gradient-accent text-white" : "text-muted-foreground hover:text-foreground")}
+              >
+                Месяц
+              </button>
+              <button
+                onClick={() => setPeriod("year")}
+                className={cn("px-6 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2", period === "year" ? "gradient-accent text-white" : "text-muted-foreground hover:text-foreground")}
+              >
+                Год
+                <span className="font-mono tabular-nums text-[10px] bg-white/20 px-1.5 py-0.5 rounded-full font-bold">−15%</span>
+              </button>
+            </div>
             <button
-              onClick={() => setPeriod("year")}
-              className={cn("px-6 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2", period === "year" ? "gradient-accent text-white" : "text-muted-foreground hover:text-foreground")}
+              onClick={() => setCompareOpen(true)}
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] transition-colors"
             >
-              Год
-              <span className="font-mono tabular-nums text-[10px] bg-white/20 px-1.5 py-0.5 rounded-full font-bold">−18%</span>
-            </button>
-            <button
-              onClick={() => setPeriod("month")}
-              className={cn("px-6 py-2 rounded-full text-sm font-medium transition-colors", period === "month" ? "gradient-accent text-white" : "text-muted-foreground hover:text-foreground")}
-            >
-              Месяц
+              Сравнить все тарифы
+              <ArrowRight className="h-4 w-4" />
             </button>
           </motion.div>
         </motion.div>
@@ -155,67 +81,104 @@ const PricingPage = () => {
 
       {/* Plan cards */}
       <section className="max-w-7xl mx-auto px-4 pb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
           {plans.map((plan) => {
-            const isFree = plan.badge === "БЕСПЛАТНО";
-            const isPopular = plan.badge === "ПОПУЛЯРНЫЙ";
-            const isPrimaryCta = isFree || plan.recommended;
+            const isEnterprise = !!plan.enterprise;
+            const isHighlight = !!plan.highlight;
+            const showYear = period === "year" && plan.monthPrice !== null && plan.yearPricePerMonth !== null;
+            const priceMain =
+              plan.priceLabel
+                ? plan.priceLabel
+                : showYear
+                ? `${fmtRub(plan.yearPricePerMonth as number)}/мес`
+                : plan.monthPrice === 0
+                ? "0 ₽"
+                : `${fmtRub(plan.monthPrice as number)}/мес`;
             return (
               <motion.div
-                key={plan.name}
+                key={plan.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 className={cn(
-                  "relative bg-card border rounded-card p-6 text-left flex flex-col",
-                  plan.recommended ? "border-primary glow-accent" : "border-border"
+                  "relative rounded-2xl p-5 text-left flex flex-col shadow-[0_2px_12px_rgba(0,0,0,0.4)]",
+                  isEnterprise
+                    ? "border"
+                    : "bg-white/[0.04] border border-white/10",
+                  isHighlight && "border-primary shadow-[0_0_40px_-10px_rgba(232,84,32,0.55)]"
                 )}
+                style={
+                  isEnterprise
+                    ? {
+                        background:
+                          "radial-gradient(ellipse 100% 100% at 50% 0%, rgba(232,84,32,0.22) 0%, rgba(232,84,32,0.06) 50%, transparent 100%), rgba(255,255,255,0.03)",
+                        borderColor: "rgba(232,84,32,0.35)",
+                      }
+                    : undefined
+                }
               >
                 {plan.badge && (
-                  <div className="absolute -top-3 left-6">
+                  <div className="absolute -top-3 left-5">
                     <span
                       className={cn(
                         "inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide",
-                        isFree && "bg-emerald-500/15 text-emerald-400",
-                        isPopular && "bg-primary/15 text-primary",
-                        !isFree && !isPopular && "bg-muted text-foreground"
+                        plan.badge.tone === "free" && "bg-emerald-500/15 text-emerald-400",
+                        plan.badge.tone === "accent" && "bg-primary text-white",
+                        plan.badge.tone === "muted" && "bg-white/10 text-foreground"
                       )}
                     >
-                      {plan.badge}
+                      {plan.badge.text}
                     </span>
                   </div>
                 )}
-                <h3 className="text-xl font-bold mb-2 tracking-tight">{plan.name}</h3>
-                <div className="mb-2 min-h-[20px]">
-                  {plan.oldPrice && (
-                    <span className="font-mono tabular-nums text-sm text-muted-foreground line-through mr-2">{plan.oldPrice}</span>
+
+                <h3 className="text-lg font-bold mb-3 tracking-tight">{plan.name}</h3>
+
+                <div className="mb-3">
+                  <div className="text-[22px] font-bold font-mono tabular-nums tracking-tight leading-tight">
+                    {priceMain}
+                  </div>
+                  {showYear && plan.monthPrice !== 0 && (
+                    <div className="text-xs text-muted-foreground font-mono line-through mt-1">
+                      {fmtRub(plan.monthPrice as number)}/мес
+                    </div>
                   )}
                 </div>
-                <div className="mb-4">
-                  <span className="text-[28px] font-bold font-mono tabular-nums tracking-tight">
-                    {period === "year" ? plan.yearPrice : plan.monthPrice}
-                  </span>
+
+                <div className="mb-4 pb-4 border-b border-white/10">
+                  <div className="text-lg font-bold text-foreground">
+                    {plan.credits}
+                    {!isEnterprise && plan.id !== "start" && (
+                      <span className="text-xs text-muted-foreground font-normal ml-1">кредитов</span>
+                    )}
+                  </div>
+                  {plan.creditsNote && (
+                    <div className="text-xs text-muted-foreground font-mono">{plan.creditsNote}</div>
+                  )}
                 </div>
 
-                <div className="mb-6">
-                  <div className="text-2xl font-bold text-foreground">{plan.credits}</div>
-                  <div className="text-xs text-muted-foreground font-mono">{plan.creditsNote}</div>
-                </div>
-
-                <ul className="space-y-3 mb-6 flex-1">
-                  {plan.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm">
-                      <Check className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                      <span>{f}</span>
-                    </li>
-                  ))}
+                <ul className="space-y-2 mb-5 flex-1">
+                  {plan.features.map((f) => {
+                    const Icon = f.negative ? X : f.unlimited ? InfinityIcon : Check;
+                    return (
+                      <li key={f.text} className="flex items-start gap-2 text-[13px] leading-snug">
+                        <Icon
+                          className={cn(
+                            "h-4 w-4 shrink-0 mt-0.5",
+                            f.negative ? "text-muted-foreground" : "text-primary"
+                          )}
+                        />
+                        <span className={cn(f.negative && "text-muted-foreground")}>{f.text}</span>
+                      </li>
+                    );
+                  })}
                 </ul>
 
                 <button
                   className={cn(
-                    "w-full py-3 rounded-button text-sm font-semibold transition-all",
-                    isPrimaryCta
+                    "w-full py-2.5 rounded-full text-sm font-semibold transition-all",
+                    isHighlight || isEnterprise
                       ? "gradient-accent text-white hover:opacity-90"
-                      : "border border-border text-foreground hover:bg-muted"
+                      : "border border-white/15 text-foreground hover:bg-white/[0.06]"
                   )}
                 >
                   {plan.cta}
@@ -227,8 +190,38 @@ const PricingPage = () => {
 
         {/* Trust block */}
         <div className="text-center mt-12">
-          <p className="text-muted-foreground text-sm">Оплата через ЮKassa · Карты РФ · СБП · Рассрочка</p>
-          <p className="text-muted-foreground text-xs mt-2">Отмена подписки в любой момент · Возврат в течение 3 дней</p>
+          <p className="text-muted-foreground text-sm">
+            Оплата через ЮKassa · Карты РФ · СБП · Рассрочка · Возврат в течение 3 дней · Отмена подписки в любой момент
+          </p>
+        </div>
+      </section>
+
+      {/* Credit packs */}
+      <section className="max-w-5xl mx-auto px-4 pb-16">
+        <div className="text-center mb-6">
+          <h2 className="text-xl md:text-2xl font-bold mb-2">Докупка кредитов</h2>
+          <p className="text-sm text-muted-foreground">
+            Докупка доступна при активной подписке. Кредиты не сгорают и переносятся.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {creditPacks.map((p) => (
+            <div
+              key={p.id}
+              className="bg-white/[0.04] border border-white/10 rounded-xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.4)] flex items-center justify-between"
+            >
+              <div>
+                <div className="text-sm text-muted-foreground">{p.name}</div>
+                <div className="text-lg font-bold font-mono tabular-nums">
+                  {p.credits.toLocaleString("ru-RU")} cr
+                </div>
+              </div>
+              <div className="text-right">
+                <div className="font-mono tabular-nums font-bold">{fmtRub(p.price)}</div>
+                <button className="text-xs text-primary hover:underline mt-1">Купить</button>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -300,6 +293,7 @@ const PricingPage = () => {
       </section>
 
       <Footer />
+      <PlanComparisonModal open={compareOpen} onClose={() => setCompareOpen(false)} />
     </div>
   );
 };
