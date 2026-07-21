@@ -15,6 +15,7 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
   const [motion, setMotion] = useState(50);
   const [duration, setDuration] = useState<5 | 10>(5);
   const [status, setStatus] = useState<Status>("idle");
+  const [selectedType, setSelectedType] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -48,8 +49,32 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
             <Link to="/toolkit" className="p-1.5 rounded-md hover:bg-muted transition-colors">
               <ArrowLeft size={16} />
             </Link>
-            <span className="font-semibold text-sm">{data.modelName}</span>
+            <span className="font-semibold text-sm">{data.heroTitle}</span>
           </div>
+
+          {has("type-preset") && tool.types && (
+            <div>
+              <label className="text-xs text-muted-foreground mb-1 block">Тип</label>
+              <div className="grid grid-cols-3 gap-2">
+                {tool.types.map((t, i) => (
+                  <button
+                    key={t.id}
+                    type="button"
+                    onClick={() => setSelectedType(i)}
+                    className={cn(
+                      "relative h-[72px] rounded-lg overflow-hidden border-2 transition-colors",
+                      i === selectedType ? "border-primary" : "border-transparent"
+                    )}
+                  >
+                    <img src={t.image} alt={t.label} className="absolute inset-0 w-full h-full object-cover" />
+                    <span className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/70 to-transparent text-white text-[10px] font-medium px-1.5 py-1 text-center leading-tight">
+                      {t.label}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
 
           {has("upload-1") && (
             <div>
@@ -81,6 +106,7 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
                 className="hidden"
                 onChange={(e) => onFile(e.target.files?.[0] ?? null)}
               />
+              <p className="text-[11px] text-muted-foreground mt-1.5">Загрузите одно фото с одним или несколькими людьми — крупный план лиц, чёткое изображение.</p>
             </div>
           )}
 
@@ -139,7 +165,9 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
           {has("generate") && (
             <div className="pt-1 border-t border-border">
               <p className="text-[11px] text-muted-foreground mb-2">
-                модель: {tool.modelName} · {tool.credits} кредитов
+                {tool.types
+                  ? `Требуется кредитов: ${tool.types[selectedType].credits}`
+                  : `модель: ${tool.modelName} · ${tool.credits} кредитов`}
               </p>
               <button
                 type="button"
