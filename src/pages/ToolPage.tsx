@@ -5,6 +5,7 @@ import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { getToolPageData } from "@/data/toolPages";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
+import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
@@ -98,6 +99,8 @@ const ToolPage = () => {
           </div>
         </div>
       </section>
+
+      {data.tool && <ToolWorkspace data={data} />}
 
       {/* Provider tabs */}
       <section className="max-w-4xl mx-auto px-4 py-8">
