@@ -14,6 +14,7 @@ export interface ToolPageData {
     modelName: string;
     credits: number;
     bricks: string[];
+    types?: { id: string; label: string; credits: number; image: string }[];
   };
   howItWorks?: {
     title: string;
@@ -44,7 +45,12 @@ export const toolPages: ToolPageData[] = [
       model: "kling-3.0",
       modelName: "Kling 3.0",
       credits: 75,
-      bricks: ["upload-1", "model", "slider-motion", "duration", "generate"],
+      bricks: ["type-preset", "upload-1", "generate"],
+      types: [
+        { id: "general",  label: "Общий",                 credits: 75, image: "/community/01.jpg" },
+        { id: "colorize", label: "Раскрасить и оживить",  credits: 90, image: "/community/02.jpg" },
+        { id: "leap",     label: "Прыжок в жизнь",         credits: 90, image: "/community/03.jpg" },
+      ],
     },
     howItWorks: {
       title: "Как оживить фото за 3 шага",
