@@ -68,8 +68,8 @@ const ToolPage = () => {
       {/* Hero with prompt bar */}
       <section className="relative overflow-hidden" style={{ background: "linear-gradient(to bottom, hsl(var(--background)), hsl(var(--card)))" }}>
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(232,84,32,0.15) 0%, rgba(255,122,61,0.05) 40%, transparent 70%)" }} />
-        <div className="relative max-w-4xl mx-auto px-4 pt-16 pb-14 md:pt-20 md:pb-16">
-          <nav className="flex items-center gap-1.5 text-[13px] text-muted-foreground mb-8">
+        <div className={cn("relative max-w-4xl mx-auto px-4", data.tool ? "pt-8 pb-5 md:pt-10 md:pb-6" : "pt-16 pb-14 md:pt-20 md:pb-16")}>
+          <nav className={cn("flex items-center gap-1.5 text-[13px] text-muted-foreground", data.tool ? "mb-0" : "mb-8")}>
             <Link to="/" className="hover:text-foreground transition-colors">Главная</Link>
             <ChevronRight className="w-3 h-3" />
             <Link to="/toolkit" className="hover:text-foreground transition-colors">Инструменты</Link>
@@ -77,27 +77,29 @@ const ToolPage = () => {
             <span className="text-foreground/70">{data.modelName}</span>
           </nav>
 
-          <h1 className="text-[28px] md:text-[44px] font-bold leading-[1.1] tracking-tight mb-5">{data.heroTitle}</h1>
-          <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-[640px] mb-10">{data.heroDescription}</p>
-
-          {/* Prompt bar — только для чистых лендингов без встроенного инструмента */}
           {!data.tool && (
-          <div className="bg-card border border-border rounded-2xl p-5 md:p-6 max-w-2xl">
-            <div className="flex gap-2 mb-4">
-              <span className="px-4 py-1.5 rounded-full gradient-accent text-white text-sm font-medium">Текст в изображение</span>
-              <span className="px-4 py-1.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground cursor-pointer transition-colors border border-border">Изображение в изображение</span>
-            </div>
-            <input readOnly placeholder="Введите текст запроса для генерации" className="w-full bg-muted border border-border rounded-xl px-4 py-3 text-sm placeholder:text-muted-foreground mb-4 outline-none" />
-            <div className="flex items-center gap-2 flex-wrap">
-              <span className="px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground">{data.modelName}</span>
-              <span className="px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground">4:3</span>
-              <span className="px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground">×1</span>
-              <Link to={targetPage as any} className="ml-auto px-5 py-2 rounded-xl gradient-accent text-white text-sm font-semibold hover:opacity-90 transition-opacity">
-                Создать
-              </Link>
-            </div>
-            <p className="text-[11px] text-muted-foreground mt-3">1 изображение создаётся, фон, цвет и стиль из настроенных</p>
-          </div>
+            <>
+              <h1 className="text-[28px] md:text-[44px] font-bold leading-[1.1] tracking-tight mb-5">{data.heroTitle}</h1>
+              <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-[640px] mb-10">{data.heroDescription}</p>
+
+              {/* Prompt bar */}
+              <div className="bg-card border border-border rounded-2xl p-5 md:p-6 max-w-2xl">
+                <div className="flex gap-2 mb-4">
+                  <span className="px-4 py-1.5 rounded-full gradient-accent text-white text-sm font-medium">Текст в изображение</span>
+                  <span className="px-4 py-1.5 rounded-full text-sm font-medium text-muted-foreground hover:text-foreground cursor-pointer transition-colors border border-border">Изображение в изображение</span>
+                </div>
+                <input readOnly placeholder="Введите текст запроса для генерации" className="w-full bg-muted border border-border rounded-xl px-4 py-3 text-sm placeholder:text-muted-foreground mb-4 outline-none" />
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground">{data.modelName}</span>
+                  <span className="px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground">4:3</span>
+                  <span className="px-3 py-1.5 rounded-full border border-border text-xs text-muted-foreground">×1</span>
+                  <Link to={targetPage as any} className="ml-auto px-5 py-2 rounded-xl gradient-accent text-white text-sm font-semibold hover:opacity-90 transition-opacity">
+                    Создать
+                  </Link>
+                </div>
+                <p className="text-[11px] text-muted-foreground mt-3">1 изображение создаётся, фон, цвет и стиль из настроенных</p>
+              </div>
+            </>
           )}
         </div>
       </section>
