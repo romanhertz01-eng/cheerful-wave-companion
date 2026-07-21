@@ -138,7 +138,7 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
           )}
 
           {has("generate") && (
-            <div className="pt-1 border-t border-border mt-auto">
+            <div className="pt-1 border-t border-border">
               <p className="text-[11px] text-muted-foreground mb-2">
                 модель: {tool.modelName} · {tool.credits} кредитов
               </p>
