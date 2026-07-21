@@ -80,7 +80,8 @@ const ToolPage = () => {
           <h1 className="text-[28px] md:text-[44px] font-bold leading-[1.1] tracking-tight mb-5">{data.heroTitle}</h1>
           <p className="text-muted-foreground text-sm md:text-base leading-relaxed max-w-[640px] mb-10">{data.heroDescription}</p>
 
-          {/* Prompt bar */}
+          {/* Prompt bar — только для чистых лендингов без встроенного инструмента */}
+          {!data.tool && (
           <div className="bg-card border border-border rounded-2xl p-5 md:p-6 max-w-2xl">
             <div className="flex gap-2 mb-4">
               <span className="px-4 py-1.5 rounded-full gradient-accent text-white text-sm font-medium">Текст в изображение</span>
@@ -97,6 +98,7 @@ const ToolPage = () => {
             </div>
             <p className="text-[11px] text-muted-foreground mt-3">1 изображение создаётся, фон, цвет и стиль из настроенных</p>
           </div>
+          )}
         </div>
       </section>
 
@@ -164,7 +166,8 @@ const ToolPage = () => {
         </div>
       </section>
 
-      {/* Video tutorial */}
+      {/* Video tutorial — только для лендингов моделей изображений */}
+      {!data.tool && data.category === "image" && (
       <section className="bg-card border-y border-border">
         <div className="max-w-5xl mx-auto px-4 py-16">
           <h2 className="text-2xl md:text-[32px] font-bold mb-8">Как работает генератор текста в изображение ERA2</h2>
@@ -197,6 +200,7 @@ const ToolPage = () => {
           </div>
         </div>
       </section>
+      )}
 
       {/* Model cards */}
       <section className="max-w-5xl mx-auto px-4 py-16">
@@ -233,7 +237,8 @@ const ToolPage = () => {
         </div>
       </section>
 
-      {/* Enhanced CTA */}
+      {/* Enhanced CTA — только для лендингов моделей изображений */}
+      {!data.tool && data.category === "image" && (
       <section className="max-w-3xl mx-auto px-4 py-16 md:py-20 text-center">
         <h2 className="text-[24px] md:text-[32px] font-bold mb-4 leading-tight">
           Превращайте слова в нечто удивительное с нашим ИИ-генератором изображений.
@@ -249,6 +254,7 @@ const ToolPage = () => {
         </Link>
         <div className="mt-8 max-w-[400px] mx-auto aspect-[4/3] rounded-xl border border-border" style={{ background: "linear-gradient(135deg, #1a1030, #0f1a2e)" }} />
       </section>
+      )}
 
       <FAQ items={toolPageItems} />
       <Footer />
