@@ -8,9 +8,41 @@ export interface ToolPageData {
   keyFeatureDescription: string;
   technologyDescription: string;
   category: "image" | "video" | "audio" | "text";
+  tool?: {
+    layout: "panel" | "row";
+    model: string;
+    modelName: string;
+    credits: number;
+    bricks: string[];
+  };
 }
 
 export const toolPages: ToolPageData[] = [
+  {
+    slug: "ozhivit-foto",
+    modelName: "Kling 3.0",
+    heroTitle: "Оживить фото — превратите фото в видео с ИИ",
+    heroDescription:
+      "Загрузите фото и получите живое видео за секунды. Работает на модели Kling 3.0.",
+    category: "video",
+    features: [
+      { icon: "🎬", title: "Фото в видео", description: "Оживите любое изображение одним кликом" },
+      { icon: "⚡", title: "Быстрый результат", description: "Готовое видео за минуту" },
+      { icon: "🎚", title: "Контроль движения", description: "Настройте интенсивность анимации" },
+    ],
+    keyFeatureTitle: "Естественное движение",
+    keyFeatureDescription:
+      "Kling 3.0 создаёт плавную реалистичную анимацию, сохраняя детали исходного фото.",
+    technologyDescription:
+      "Модель Kling анализирует изображение и достраивает движение по законам физики и композиции.",
+    tool: {
+      layout: "panel",
+      model: "kling-3.0",
+      modelName: "Kling 3.0",
+      credits: 75,
+      bricks: ["upload-1", "model", "slider-motion", "duration", "generate"],
+    },
+  },
   {
     slug: "nano-banana",
     modelName: "Nano Banana",
