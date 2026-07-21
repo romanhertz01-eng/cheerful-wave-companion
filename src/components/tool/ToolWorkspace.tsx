@@ -2,12 +2,11 @@ import { useRef, useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowLeft, Upload, Play, Loader2, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { aiVideo } from "@/data/placeholderImages";
 import type { ToolPageData } from "@/data/toolPages";
 
 type Status = "idle" | "loading" | "done";
 
-const DEMO_PREVIEW = aiVideo[1];
+const DEMO_PREVIEW = "/examples/ozhivit-preview.jpg";
 
 export function ToolWorkspace({ data }: { data: ToolPageData }) {
   const tool = data.tool!;
@@ -42,9 +41,9 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
 
   return (
     <section className="border-y border-border" style={{ background: "hsl(var(--card))" }}>
-      <div className="max-w-6xl mx-auto px-4 py-8 grid gap-6 md:grid-cols-[360px_1fr] md:grid-rows-[min-content]">
+      <div className="max-w-6xl mx-auto px-4 py-8 grid gap-5 md:grid-cols-[320px_1fr] md:grid-rows-[min-content]">
         {/* LEFT PANEL */}
-        <div className="rounded-2xl border border-border bg-background/60 p-3 flex flex-col gap-3 h-full">
+        <div className="rounded-2xl border border-border bg-background/60 p-3 flex flex-col gap-2.5 h-full">
           <div className="flex items-center gap-2">
             <Link to="/toolkit" className="p-1.5 rounded-md hover:bg-muted transition-colors">
               <ArrowLeft size={16} />
@@ -54,7 +53,7 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
 
           {has("upload-1") && (
             <div>
-              <label className="text-xs text-muted-foreground mb-1.5 block">Изображение</label>
+              <label className="text-xs text-muted-foreground mb-1 block">Изображение</label>
               <button
                 type="button"
                 onClick={() => inputRef.current?.click()}
@@ -63,7 +62,7 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
                   e.preventDefault();
                   onFile(e.dataTransfer.files?.[0] ?? null);
                 }}
-                className="h-[160px] aspect-[4/3] mx-auto rounded-xl border-2 border-dashed border-border hover:border-primary/50 transition-colors flex flex-col items-center justify-center gap-1.5 text-center px-3 overflow-hidden relative"
+                className="w-full h-[120px] rounded-xl border-2 border-dashed border-border hover:border-primary/50 transition-colors flex flex-col items-center justify-center gap-1.5 text-center px-3 overflow-hidden relative"
               >
                 {preview ? (
                   <img src={preview} alt="preview" className="absolute inset-0 w-full h-full object-cover" />
@@ -87,7 +86,7 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
 
           {has("model") && (
             <div>
-              <label className="text-xs text-muted-foreground mb-1.5 block">Модель</label>
+              <label className="text-xs text-muted-foreground mb-1 block">Модель</label>
               <button
                 type="button"
                 className="w-full flex items-center justify-between px-3 py-2 rounded-lg border border-border bg-muted/40 text-sm"
@@ -100,7 +99,7 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
 
           {has("slider-motion") && (
             <div>
-              <div className="flex items-center justify-between mb-1.5">
+              <div className="flex items-center justify-between mb-1">
                 <label className="text-xs text-muted-foreground">Движение</label>
                 <span className="text-xs font-medium">{motion}</span>
               </div>
@@ -117,7 +116,7 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
 
           {has("duration") && (
             <div>
-              <label className="text-xs text-muted-foreground mb-1.5 block">Длительность</label>
+              <label className="text-xs text-muted-foreground mb-1 block">Длительность</label>
               <div className="grid grid-cols-2 gap-2">
                 {([5, 10] as const).map((d) => (
                   <button
@@ -195,6 +194,7 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
                   <Play size={22} className="ml-0.5 text-black" fill="black" />
                 </div>
                 <span className="text-xs text-white/90 font-medium">Пример результата</span>
+                <span className="text-[10px] text-white/70">фото → видео</span>
               </div>
             )}
           </div>
