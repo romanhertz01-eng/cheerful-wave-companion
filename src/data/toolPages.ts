@@ -21,9 +21,9 @@ export const toolPages: ToolPageData[] = [
   {
     slug: "ozhivit-foto",
     modelName: "Kling 3.0",
-    heroTitle: "Оживить фото — превратите фото в видео с ИИ",
+    heroTitle: "Оживить фото",
     heroDescription:
-      "Загрузите фото и получите живое видео за секунды. Работает на модели Kling 3.0.",
+      "Превратите фото в живое видео за секунды",
     category: "video",
     features: [
       { icon: "🎬", title: "Фото в видео", description: "Оживите любое изображение одним кликом" },
