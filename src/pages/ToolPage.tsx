@@ -154,15 +154,22 @@ const ToolPage = () => {
       </section>
 
       {/* Features */}
-      <section className="max-w-4xl mx-auto px-4 py-12">
-        <h2 className="text-2xl md:text-[32px] font-bold mb-8">Основные возможности {data.modelName}</h2>
-        <div className="space-y-5">
+      <section className="max-w-5xl mx-auto px-4 py-12">
+        <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">
+          Основные возможности {data.modelName}
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {data.features.map((f, i) => (
-            <div key={i} className="flex gap-4 items-start">
-              <span className="shrink-0 mt-2 inline-block" style={{ width: 6, height: 6, borderRadius: 999, background: "hsl(var(--primary))" }} />
+            <div
+              key={i}
+              className="bg-white/[0.04] border border-white/10 shadow-[0_2px_12px_rgba(0,0,0,0.4)] rounded-xl p-5 flex flex-col gap-3 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
+            >
+              <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-xl shrink-0">
+                {f.icon}
+              </div>
               <div>
-                <span className="font-bold text-sm">{f.title}</span>
-                <span className="text-sm text-muted-foreground"> — {f.description}</span>
+                <h4 className="font-semibold mb-1">{f.title}</h4>
+                <p className="text-sm text-muted-foreground">{f.description}</p>
               </div>
             </div>
           ))}
