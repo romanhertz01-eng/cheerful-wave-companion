@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { useParams, Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronRight, Play, Heart, Eye, ZoomIn, Scissors, Wand2, Package, Eraser, RefreshCw, Brush, type LucideIcon } from "lucide-react";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
@@ -19,7 +19,7 @@ const imageTools: { Icon: LucideIcon; label: string }[] = [
   { Icon: Brush,     label: "ИИ Ластик" },
 ];
 
-const providerTabs = ["Google", "Flux", "Ideogram", "GPT"];
+
 
 const communityWorks = [
   { author: "Алексей", image: "/community/01.jpg", likes: 234, views: 1200 },
@@ -47,7 +47,6 @@ const modelCards = [
 const ToolPage = () => {
   const { slug } = useParams({ strict: false }) as { slug?: string };
   const data = slug ? getToolPageData(slug) : undefined;
-  const [activeProvider, setActiveProvider] = useState(0);
 
   if (!data) {
     return (
@@ -105,28 +104,6 @@ const ToolPage = () => {
       </section>
 
       {data.tool && <ToolWorkspace data={data} />}
-
-      {/* Provider tabs */}
-      <section className="max-w-4xl mx-auto px-4 py-8">
-        <h2 className="text-lg font-bold mb-4">Выбор ИИ-моделей</h2>
-        <div className="flex gap-2 mb-4">
-          {providerTabs.map((t, i) => (
-            <button
-              key={t}
-              onClick={() => setActiveProvider(i)}
-              className={cn(
-                "px-4 py-2 rounded-full text-sm font-medium transition-colors",
-                activeProvider === i ? "gradient-accent text-white" : "border border-border hover:bg-muted"
-              )}
-            >
-              {t}
-            </button>
-          ))}
-        </div>
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          Модели {providerTabs[activeProvider]} охватывают различные варианты использования: от фотореалистичной генерации до редактирования на естественном языке.
-        </p>
-      </section>
 
       {/* Community gallery */}
       <section className="max-w-6xl mx-auto px-4 py-12">
