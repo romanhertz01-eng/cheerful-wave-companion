@@ -15,6 +15,10 @@ export interface ToolPageData {
     credits: number;
     bricks: string[];
   };
+  howItWorks?: {
+    title: string;
+    steps: { title: string; desc: string }[];
+  };
 }
 
 export const toolPages: ToolPageData[] = [
@@ -41,6 +45,14 @@ export const toolPages: ToolPageData[] = [
       modelName: "Kling 3.0",
       credits: 75,
       bricks: ["upload-1", "model", "slider-motion", "duration", "generate"],
+    },
+    howItWorks: {
+      title: "Как оживить фото за 3 шага",
+      steps: [
+        { title: "Загрузите фото", desc: "Перетащите изображение или выберите файл — JPEG, PNG или WEBP." },
+        { title: "ИИ оживляет кадр", desc: "Kling анализирует фото и достраивает естественное движение примерно за минуту." },
+        { title: "Скачайте видео", desc: "Сохраните готовый ролик или сразу поделитесь им." },
+      ],
     },
   },
   {
