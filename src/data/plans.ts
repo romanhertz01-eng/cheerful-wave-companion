@@ -95,7 +95,8 @@ export const plans: Plan[] = [
   {
     id: "ultra",
     name: "Ультра",
-    badge: { text: "Максимум", tone: "muted" },
+    badge: { text: "Максимум", tone: "accent" },
+    highlight: true,
     monthPrice: 9990,
     yearPricePerMonth: 8492,
     credits: "70 000",
