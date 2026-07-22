@@ -13,6 +13,7 @@ export type Plan = {
   features: PlanFeature[];
   highlight?: boolean; // orange border + glow
   enterprise?: boolean; // accent bg card
+  audience?: "personal" | "team";
 };
 
 export const plans: Plan[] = [
@@ -25,6 +26,7 @@ export const plans: Plan[] = [
     credits: "150",
     creditsNote: "разово",
     cta: "Начать бесплатно",
+    audience: "personal",
     features: [
       { text: "150 кредитов при регистрации" },
       { text: "Чат DeepSeek — 10 сообщений в день" },
@@ -42,6 +44,7 @@ export const plans: Plan[] = [
     credits: "3 000",
     creditsNote: "в месяц",
     cta: "Выбрать план",
+    audience: "personal",
     features: [
       { text: "Все текстовые модели (30+)" },
       { text: "Все модели изображений" },
@@ -61,6 +64,7 @@ export const plans: Plan[] = [
     creditsNote: "в месяц",
     cta: "Выбрать план",
     highlight: true,
+    audience: "personal",
     features: [
       { text: "Все 90+ моделей без ограничений" },
       { text: "Качество до 4K" },
@@ -79,6 +83,7 @@ export const plans: Plan[] = [
     credits: "24 000",
     creditsNote: "в месяц",
     cta: "Выбрать план",
+    audience: "team",
     features: [
       { text: "Всё из Про" },
       { text: "Безлимит в 15+ нейросетях", unlimited: true },
@@ -96,6 +101,7 @@ export const plans: Plan[] = [
     credits: "70 000",
     creditsNote: "в месяц",
     cta: "Выбрать план",
+    audience: "team",
     features: [
       { text: "Всё из Макс" },
       { text: "Безлимит во ВСЕХ языковых моделях (вкл. Claude Opus, GPT-5.6)", unlimited: true },
@@ -113,6 +119,7 @@ export const plans: Plan[] = [
     credits: "от 15 мест",
     cta: "Оставить заявку",
     enterprise: true,
+    audience: "team",
     features: [
       { text: "Личный менеджер" },
       { text: "Постоплата и договор" },
