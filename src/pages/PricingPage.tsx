@@ -4,13 +4,14 @@ import { useCopyToast } from "@/components/shared/CopyToast";
 import { cn } from "@/lib/utils";
 import { Footer } from "@/components/shared/Footer";
 import { motion } from "framer-motion";
-import { plans, creditPacks } from "@/data/plans";
+import { plans, creditPacks, type Plan } from "@/data/plans";
 import { PlanComparisonModal } from "@/components/pricing/PlanComparisonModal";
 
 const fadeUp = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.5 } } };
 const stagger = { show: { transition: { staggerChildren: 0.08 } } };
 
 type Period = "year" | "month";
+type Audience = "personal" | "team";
 
 const fmtRub = (n: number) => `${n.toLocaleString("ru-RU")} ₽`;
 
@@ -33,52 +34,164 @@ const faqItems = [
   },
 ];
 
-const planStyleById = {
-  start: { border: "border-white/8", bg: "bg-white/[0.03]" },
-  basic: { border: "border-white/10", bg: "bg-white/[0.03]" },
-  pro: { border: "border-primary", bg: "bg-white/[0.04]" },
-  max: { border: "border-white/14", bg: "bg-white/[0.05]" },
-  ultra: { border: "border-white/18", bg: "bg-white/[0.05]" },
-};
-
 const PricingPage = () => {
   const [period, setPeriod] = useState<Period>("month");
+  const [audience, setAudience] = useState<Audience>("personal");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [compareOpen, setCompareOpen] = useState(false);
   const copy = useCopyToast();
 
   useEffect(() => { document.title = "ERA2 — Тарифы"; }, []);
 
+  const visiblePlans = plans.filter((p) => (p.audience ?? "personal") === audience);
+
+  const renderPlanCard = (plan: Plan) => {
+    const isEnterprise = !!plan.enterprise;
+    const isHighlight = !!plan.highlight;
+    const showYear = period === "year" && plan.monthPrice !== null && plan.yearPricePerMonth !== null;
+    const priceValue = plan.priceLabel
+      ? plan.priceLabel
+      : showYear
+      ? fmtRub(plan.yearPricePerMonth as number)
+      : plan.monthPrice === 0
+      ? "0 ₽"
+      : fmtRub(plan.monthPrice as number);
+    const showPerMonth = !plan.priceLabel;
+    const yearSaving =
+      plan.monthPrice && plan.yearPricePerMonth
+        ? (plan.monthPrice - plan.yearPricePerMonth) * 12
+        : 0;
+    const billingLine = plan.priceLabel
+      ? "Индивидуальные условия · договор"
+      : plan.monthPrice === 0
+      ? "Без карты · навсегда бесплатно"
+      : period === "year" && yearSaving > 0
+      ? `При годовой оплате · экономия ${fmtRub(yearSaving)} в год`
+      : "Отмена в любой момент";
+
+    const features = plan.features.slice(0, 5);
+
+    return (
+      <motion.div
+        key={plan.id}
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        className={cn(
+          "relative rounded-2xl px-6 py-6 text-left flex flex-col bg-white/[0.04] border",
+          isHighlight ? "border-primary" : "border-white/10"
+        )}
+      >
+        {plan.badge && (
+          <div className="absolute -top-3 left-6">
+            <span
+              className={cn(
+                "inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide",
+                plan.badge.tone === "free" && "bg-white/10 text-foreground",
+                plan.badge.tone === "accent" && "bg-primary text-primary-foreground",
+                plan.badge.tone === "muted" && "bg-white/10 text-foreground"
+              )}
+            >
+              {plan.badge.text}
+            </span>
+          </div>
+        )}
+
+        <h3 className="text-xl font-semibold mb-1">{plan.name}</h3>
+
+        <div className="flex items-baseline gap-2">
+          <div className="text-[36px] leading-none font-mono tabular-nums font-bold">
+            {priceValue}
+          </div>
+          {showPerMonth && (
+            <span className="text-sm text-muted-foreground">₽/мес</span>
+          )}
+        </div>
+        <div className="text-xs text-muted-foreground mt-1.5">{billingLine}</div>
+
+        <button
+          className={cn(
+            "mt-4 w-full py-3 rounded-xl text-sm font-semibold transition-colors",
+            isHighlight
+              ? "bg-primary text-primary-foreground hover:opacity-90"
+              : "border border-white/15 text-foreground hover:bg-white/[0.06]"
+          )}
+        >
+          {plan.cta}
+        </button>
+
+        <div className="border-t border-white/10 my-5" />
+
+        <div className="text-[13px] text-muted-foreground mb-3">
+          <span className="text-foreground font-semibold">{plan.credits}</span>{" "}
+          {isEnterprise ? "" : plan.id === "start" ? "кредитов · разово" : "кредитов в месяц"}
+        </div>
+
+        <ul className="flex flex-col gap-2.5 flex-1">
+          {features.map((f, idx) => {
+            const isSummary = idx === 0 && /^Всё из/i.test(f.text);
+            const Icon = f.negative ? X : f.unlimited ? InfinityIcon : Check;
+            return (
+              <li
+                key={f.text}
+                className="flex items-start gap-2 text-[13px] leading-[1.4]"
+                style={{ wordBreak: "normal", overflowWrap: "normal" }}
+              >
+                {isSummary ? (
+                  <span className="h-4 w-4 shrink-0" />
+                ) : (
+                  <Icon
+                    className={cn(
+                      "h-4 w-4 shrink-0 mt-[2px]",
+                      f.unlimited ? "text-foreground" : "text-muted-foreground"
+                    )}
+                  />
+                )}
+                <span className={cn(f.negative ? "text-muted-foreground" : isSummary ? "text-foreground font-medium" : "text-foreground/90")}>
+                  {f.text}
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+      </motion.div>
+    );
+  };
+
   return (
     <div className="min-w-0">
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(232,84,32,0.12) 0%, rgba(255,122,61,0.04) 40%, transparent 70%)" }} />
-        <motion.div className="relative max-w-4xl mx-auto text-center px-4 pt-12 pb-8 md:pt-14" initial="hidden" animate="show" variants={stagger}>
-          <motion.p variants={fadeUp} className="text-xs uppercase tracking-[2px] text-primary font-semibold mb-4">Тарифы</motion.p>
+      <section className="relative">
+        <motion.div className="relative max-w-4xl mx-auto text-center px-4 pt-12 pb-8" initial="hidden" animate="show" variants={stagger}>
+          <motion.p variants={fadeUp} className="text-xs uppercase tracking-[2px] text-muted-foreground font-semibold mb-4">Тарифы</motion.p>
           <motion.h1 variants={fadeUp} className="text-[32px] md:text-[44px] font-bold mb-3">Простые тарифы для каждого</motion.h1>
           <motion.p variants={fadeUp} className="text-muted-foreground mb-6">Одна подписка — доступ ко всем 90+ нейросетям. Начните бесплатно.</motion.p>
 
           {/* Period toggle + compare */}
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <div className="inline-flex rounded-full border border-[hsl(var(--border))] p-1">
+            <div className="inline-flex rounded-full border border-white/10 p-1">
               <button
                 onClick={() => setPeriod("month")}
-                className={cn("px-6 py-2 rounded-full text-sm font-medium transition-colors", period === "month" ? "gradient-accent text-white" : "text-muted-foreground hover:text-foreground")}
+                className={cn(
+                  "px-6 py-2 rounded-full text-sm font-medium transition-colors",
+                  period === "month" ? "bg-white/[0.08] text-foreground" : "text-muted-foreground hover:text-foreground"
+                )}
               >
                 Месяц
               </button>
               <button
                 onClick={() => setPeriod("year")}
-                className={cn("px-6 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2", period === "year" ? "gradient-accent text-white" : "text-muted-foreground hover:text-foreground")}
+                className={cn(
+                  "px-6 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2",
+                  period === "year" ? "bg-white/[0.08] text-foreground" : "text-muted-foreground hover:text-foreground"
+                )}
               >
                 Год
-                <span className="font-mono tabular-nums text-[10px] bg-white/20 px-1.5 py-0.5 rounded-full font-bold">−15%</span>
+                <span className="font-mono tabular-nums text-[10px] bg-white/10 px-1.5 py-0.5 rounded-full font-bold">−15%</span>
               </button>
             </div>
             <button
               onClick={() => setCompareOpen(true)}
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold border border-white/10 bg-white/[0.04] hover:bg-white/[0.08] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold border border-white/10 hover:bg-white/[0.06] transition-colors"
             >
               Сравнить все тарифы
               <ArrowRight className="h-4 w-4" />
@@ -87,128 +200,33 @@ const PricingPage = () => {
         </motion.div>
       </section>
 
-      {/* Plan cards */}
-      <section className="max-w-7xl mx-auto px-4 pb-6">
-        <div className="flex gap-4 overflow-x-auto pb-4 xl:grid xl:grid-cols-6 xl:overflow-visible xl:pb-0 snap-x snap-mandatory xl:snap-none">
-          {plans.map((plan) => {
-            const isEnterprise = !!plan.enterprise;
-            const isHighlight = !!plan.highlight;
-            const showYear = period === "year" && plan.monthPrice !== null && plan.yearPricePerMonth !== null;
-            const priceValue = plan.priceLabel
-              ? plan.priceLabel
-              : showYear
-              ? fmtRub(plan.yearPricePerMonth as number)
-              : plan.monthPrice === 0
-              ? "0 ₽"
-              : fmtRub(plan.monthPrice as number);
-            const priceSuffix = plan.priceLabel || plan.monthPrice === 0 ? "" : "/мес";
-            const planStyle = planStyleById[plan.id as keyof typeof planStyleById] ?? { border: "border-white/10", bg: "bg-white/[0.04]" };
-
-            return (
-              <motion.div
-                key={plan.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+      {/* Audience tabs */}
+      <section className="max-w-6xl mx-auto px-4">
+        <div className="flex justify-center mb-6">
+          <div className="inline-flex rounded-full border border-white/10 p-1">
+            {(
+              [
+                { id: "personal", label: "Для себя" },
+                { id: "team", label: "Для профи и команд" },
+              ] as { id: Audience; label: string }[]
+            ).map((t) => (
+              <button
+                key={t.id}
+                onClick={() => setAudience(t.id)}
                 className={cn(
-                  "relative rounded-2xl px-5 py-6 text-left flex flex-col shadow-[0_2px_12px_rgba(0,0,0,0.4)] shrink-0 basis-[292px] min-w-[276px] snap-start xl:basis-auto xl:min-w-0",
-                  isEnterprise
-                    ? "bg-white/[0.05] border border-primary/25"
-                    : cn(planStyle.bg, "border", planStyle.border),
-                  isHighlight && "border-primary shadow-[0_8px_28px_-12px_rgba(232,84,32,0.45)]"
+                  "px-5 py-2 rounded-full text-sm font-medium transition-colors",
+                  audience === t.id ? "bg-white/[0.08] text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
-                style={isEnterprise ? { backgroundImage: "linear-gradient(180deg, rgba(232,84,32,0.10), transparent 55%)" } : undefined}
               >
-                {plan.badge && (
-                  <div className="absolute -top-3 left-5">
-                    <span
-                      className={cn(
-                        "inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide",
-                        plan.badge.tone === "free" && "bg-emerald-500/15 text-emerald-400",
-                        plan.badge.tone === "accent" && "bg-primary text-white",
-                        plan.badge.tone === "muted" && "bg-white/10 text-foreground"
-                      )}
-                    >
-                      {plan.badge.text}
-                    </span>
-                  </div>
-                )}
-
-                <h3
-                  className="text-lg font-semibold mb-3 tracking-tight leading-none"
-                  style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 500 }}
-                >
-                  {plan.name}
-                </h3>
-
-                <div className="mb-2">
-                  <div className="flex items-baseline gap-1.5">
-                    <div className="text-[32px] leading-none font-mono tabular-nums tracking-tight font-bold">
-                      {priceValue}
-                    </div>
-                    {priceSuffix && (
-                      <span className="text-sm text-muted-foreground">/мес</span>
-                    )}
-                  </div>
-                  {showYear && plan.monthPrice !== 0 && (
-                    <div className="text-xs text-muted-foreground font-mono line-through mt-1">
-                      {fmtRub(plan.monthPrice as number)}/мес
-                    </div>
-                  )}
-                </div>
-
-                <div className="mb-3 pb-4 border-b border-white/10">
-                  <div className="text-[15px] font-semibold text-muted-foreground">
-                    <span className="text-foreground">{plan.credits}</span>
-                    {!isEnterprise && plan.id !== "start" && (
-                      <span className="ml-1">кредитов</span>
-                    )}
-                  </div>
-                  {plan.creditsNote && (
-                    <div className="text-xs text-muted-foreground font-mono">{plan.creditsNote}</div>
-                  )}
-                </div>
-
-                <ul className="flex flex-col gap-2 mb-5 flex-1">
-                  {plan.features.map((f) => {
-                    const Icon = f.negative ? X : f.unlimited ? InfinityIcon : Check;
-                    return (
-                      <li
-                        key={f.text}
-                        className="flex items-start gap-2 text-[13px] leading-[1.35]"
-                        style={{ wordBreak: "normal", overflowWrap: "normal" }}
-                      >
-                        <Icon
-                          className={cn(
-                            "h-4 w-4 shrink-0 mt-[3px]",
-                            f.negative ? "text-muted-foreground" : "text-primary"
-                          )}
-                        />
-                        <span className={cn(f.negative && "text-muted-foreground")}>{f.text}</span>
-                      </li>
-                    );
-                  })}
-                </ul>
-
-                <button
-                  className={cn(
-                    "w-full py-2.5 rounded-full text-sm font-semibold transition-all",
-                    isHighlight || isEnterprise
-                      ? "gradient-accent text-white hover:opacity-90"
-                      : "border border-white/15 text-foreground hover:bg-white/[0.06]"
-                  )}
-                >
-                  {plan.cta}
-                </button>
-              </motion.div>
-            );
-          })}
+                {t.label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Trust block */}
-        <div className="text-center mt-12">
-          <p className="text-muted-foreground text-sm">
-            Оплата через ЮKassa · Карты РФ · СБП · Рассрочка · Возврат в течение 3 дней · Отмена подписки в любой момент
-          </p>
+        {/* Plan cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 pb-6">
+          {visiblePlans.map(renderPlanCard)}
         </div>
       </section>
 
