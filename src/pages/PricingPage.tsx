@@ -242,18 +242,19 @@ const PricingPage = () => {
           {creditPacks.map((p) => (
             <div
               key={p.id}
-              className="bg-white/[0.04] border border-white/10 rounded-xl p-6 flex flex-col justify-between gap-4 min-h-[132px]"
+              className="bg-white/[0.04] border border-white/10 rounded-xl p-4 flex items-center justify-between gap-3"
             >
-              <div className="flex items-start justify-between gap-3">
-                <div className="text-sm text-muted-foreground">{p.name}</div>
-                <div className="tabular-nums font-bold">{fmtRub(p.price)}</div>
-              </div>
-              <div className="flex items-end justify-between gap-3">
-                <div className="text-lg font-semibold tabular-nums">
+              <div className="flex flex-col">
+                <div className="text-[15px] font-medium text-foreground tabular-nums">
                   {p.credits.toLocaleString("ru-RU")} кредитов
                 </div>
-                <button className="text-xs text-foreground hover:underline underline-offset-4">Купить</button>
+                <div className="text-[13px] text-muted-foreground mt-1 tabular-nums">
+                  {fmtRub(p.price)}
+                </div>
               </div>
+              <button className="px-3.5 py-[7px] rounded-lg text-xs whitespace-nowrap border border-white/15 text-foreground hover:bg-white/[0.06] transition-colors">
+                Купить
+              </button>
             </div>
           ))}
         </div>
