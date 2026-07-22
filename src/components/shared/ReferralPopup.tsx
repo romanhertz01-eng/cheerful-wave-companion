@@ -88,11 +88,11 @@ export function ReferralPopup({ onClose }: { onClose: () => void }) {
 
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleCopy}
             className="mt-5 w-full h-11 rounded-[12px] text-[14px] font-medium text-white transition-transform hover:scale-[1.01]"
             style={{ background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)" }}
           >
-            Скопировать ссылку
+            {copied ? "Ссылка скопирована" : "Скопировать ссылку"}
           </button>
         </motion.div>
       </motion.div>
