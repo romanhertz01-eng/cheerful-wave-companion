@@ -242,7 +242,7 @@ const PricingPage = () => {
           {creditPacks.map((p) => (
             <div
               key={p.id}
-              className="bg-white/[0.04] border border-white/10 rounded-xl p-5 shadow-[0_2px_12px_rgba(0,0,0,0.4)] flex items-center justify-between"
+              className="bg-white/[0.04] border border-white/10 rounded-xl p-5 flex items-center justify-between"
             >
               <div>
                 <div className="text-sm text-muted-foreground">{p.name}</div>
@@ -252,11 +252,18 @@ const PricingPage = () => {
               </div>
               <div className="text-right">
                 <div className="font-mono tabular-nums font-bold">{fmtRub(p.price)}</div>
-                <button className="text-xs text-primary hover:underline mt-1">Купить</button>
+                <button className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-4 mt-1">Купить</button>
               </div>
             </div>
           ))}
         </div>
+      </section>
+
+      {/* Trust / payment line */}
+      <section className="max-w-5xl mx-auto px-4 pb-6">
+        <p className="text-center text-xs md:text-sm text-muted-foreground">
+          Оплата через ЮKassa · Карты РФ · СБП · Рассрочка · Возврат в течение 3 дней · Отмена подписки в любой момент
+        </p>
       </section>
 
       {/* FAQ */}
@@ -267,7 +274,7 @@ const PricingPage = () => {
             <div key={i}>
               <button
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                className="w-full flex items-center justify-between py-4 text-left font-medium text-foreground hover:text-primary transition-colors"
+                className="w-full flex items-center justify-between py-4 text-left font-medium text-foreground hover:text-foreground/80 transition-colors"
               >
                 <span>{item.q}</span>
                 <ChevronDown
@@ -292,15 +299,9 @@ const PricingPage = () => {
 
       {/* Реферальный баннер */}
       <section className="max-w-4xl mx-auto px-4 pb-12">
-        <div
-          className="relative overflow-hidden rounded-[24px] p-8 md:p-12 text-center"
-          style={{
-            background: "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(232,84,32,0.18) 0%, rgba(255,122,61,0.06) 40%, transparent 75%), hsl(var(--card))",
-            border: "1px solid rgba(232,84,32,0.2)",
-          }}
-        >
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full mb-4" style={{ background: "rgba(232,84,32,0.12)" }}>
-            <Users className="h-5 w-5" style={{ color: "hsl(var(--primary))" }} />
+        <div className="relative overflow-hidden rounded-[24px] p-8 md:p-12 text-center bg-white/[0.04] border border-white/10">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full mb-4 bg-white/[0.06]">
+            <Users className="h-5 w-5 text-foreground" />
           </div>
           <h2 className="text-2xl md:text-3xl font-bold mb-3 text-foreground">
             Приведи друга — получи 100 кредитов
@@ -309,12 +310,12 @@ const PricingPage = () => {
             За каждого друга, который зарегистрируется по вашей ссылке, вы оба получите по 100 бесплатных кредитов. Без ограничений на количество приглашений.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-5">
-            <div className="px-4 py-2.5 rounded-full font-mono text-sm text-foreground" style={{ background: "hsl(var(--secondary))", border: "1px solid hsl(var(--border))" }}>
+            <div className="px-4 py-2.5 rounded-full font-mono text-sm text-foreground bg-white/[0.04] border border-white/10">
               era2.ai/ref/user123
             </div>
             <button
               onClick={() => copy("https://era2.ai/ref/user123", "Реферальная ссылка скопирована")}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-white gradient-accent shadow-[0_10px_30px_-10px_rgba(232,84,32,0.55),inset_0_1px_0_rgba(255,255,255,0.25)] hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold border border-white/15 text-foreground hover:bg-white/[0.06] transition-colors"
             >
               <Copy className="h-4 w-4" />
               Копировать
