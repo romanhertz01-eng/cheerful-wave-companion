@@ -42,45 +42,29 @@ export function ReferralPopup({ onClose }: { onClose: () => void }) {
           </button>
 
           <div
-            className="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center text-white mb-4"
-            style={{ background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)" }}
+            className="w-14 h-14 mx-auto rounded-full flex items-center justify-center mb-4 text-foreground"
+            style={{ background: "rgba(255,255,255,0.05)", border: "1px solid hsl(var(--border))" }}
           >
             <Gift size={26} strokeWidth={1.8} />
           </div>
 
           <h3 className="text-[20px] font-semibold text-foreground">Пригласить друга</h3>
           <p className="text-[13px] text-muted-foreground mt-1.5">
-            и зарабатывайте бесплатные кредиты
+            Вы оба получите по 100 кредитов
           </p>
 
-          <div className="grid grid-cols-2 gap-2.5 mt-5">
-            <div
-              className="rounded-[12px] p-3 text-left"
-              style={{ background: "hsl(var(--secondary))", border: "1px solid hsl(var(--border))" }}
-            >
-              <div className="text-[18px] mb-1">📩</div>
-              <div className="text-[12px] font-semibold text-foreground">Регистрация</div>
-              <div className="text-[11px] text-muted-foreground mt-0.5">Друг создаёт аккаунт</div>
-              <div
-                className="text-[12px] font-mono font-semibold mt-1.5"
-                style={{ color: "hsl(var(--primary))" }}
-              >
-                +30 кредитов
-              </div>
+          <div
+            className="mt-5 rounded-[12px] p-4 text-left"
+            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid hsl(var(--border))" }}
+          >
+            <div className="text-[13px] font-semibold text-foreground">
+              Когда друг оформит первую подписку
             </div>
-            <div
-              className="rounded-[12px] p-3 text-left"
-              style={{ background: "hsl(var(--secondary))", border: "1px solid hsl(var(--border))" }}
-            >
-              <div className="text-[18px] mb-1">⭐</div>
-              <div className="text-[12px] font-semibold text-foreground">Подписка</div>
-              <div className="text-[11px] text-muted-foreground mt-0.5">Друг оформляет план</div>
-              <div
-                className="text-[12px] font-mono font-semibold mt-1.5"
-                style={{ color: "hsl(var(--primary))" }}
-              >
-                +50 кредитов
-              </div>
+            <div className="text-[13px] text-muted-foreground mt-1">
+              по 100 кредитов вам и другу
+            </div>
+            <div className="text-xs text-muted-foreground mt-2">
+              Без ограничений на количество приглашений
             </div>
           </div>
 
@@ -108,7 +92,7 @@ export function ReferralPopup({ onClose }: { onClose: () => void }) {
             className="mt-5 w-full h-11 rounded-[12px] text-[14px] font-medium text-white transition-transform hover:scale-[1.01]"
             style={{ background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)" }}
           >
-            Порекомендуйте сейчас
+            Скопировать ссылку
           </button>
         </motion.div>
       </motion.div>
