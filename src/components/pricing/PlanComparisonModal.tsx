@@ -11,6 +11,7 @@ const groupIcons: Record<ComparisonGroup["id"], typeof Video> = {
 };
 
 const INITIAL_VISIBLE = 3;
+const COLLAPSE_THRESHOLD = 6;
 
 // grid template: model column + one column per tier
 const GRID_COLS = "minmax(240px,1.4fr) repeat(4, minmax(120px, 1fr))";
@@ -19,12 +20,7 @@ function ValueCell({ value }: { value: ComparisonValue }) {
   if (value === "unlimited") {
     return (
       <span
-        className="inline-flex items-center gap-1 rounded-lg border px-3 py-1 text-xs font-semibold"
-        style={{
-          background: "rgba(232,84,32,0.14)",
-          borderColor: "rgba(232,84,32,0.35)",
-          color: "hsl(var(--primary))",
-        }}
+        className="inline-flex items-center gap-1 rounded-lg border border-white/15 bg-white/[0.08] px-3 py-1 text-xs font-semibold text-foreground"
       >
         <InfinityIcon className="h-3.5 w-3.5" />
         Безлимит
@@ -63,6 +59,15 @@ export function PlanComparisonModal({ open, onClose }: { open: boolean; onClose:
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   if (!open) return null;
 
   return (
@@ -72,7 +77,7 @@ export function PlanComparisonModal({ open, onClose }: { open: boolean; onClose:
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative flex w-full max-w-[1100px] flex-col overflow-hidden border border-white/10 bg-[#1a1614] shadow-[0_24px_80px_rgba(0,0,0,0.6)] md:my-8 md:rounded-3xl"
+        className="relative flex w-full max-w-[1100px] max-h-[100dvh] flex-col overflow-hidden border border-white/10 bg-[#1a1614] shadow-[0_24px_80px_rgba(0,0,0,0.6)] md:my-8 md:max-h-[85vh] md:rounded-3xl"
       >
         {/* Header */}
         <div className="flex items-center justify-between border-b border-white/10 px-8 py-5 md:px-10">
@@ -125,8 +130,10 @@ export function PlanComparisonModal({ open, onClose }: { open: boolean; onClose:
             {comparisonTiers.map((t) => (
               <div
                 key={t.id}
-                className="text-center text-sm font-bold"
-                style={{ color: "#E85420" }}
+                className={cn(
+                  "text-center text-sm font-semibold",
+                  t.id === "pro" ? "text-primary" : "text-foreground"
+                )}
               >
                 {t.name}
               </div>
@@ -140,16 +147,16 @@ export function PlanComparisonModal({ open, onClose }: { open: boolean; onClose:
           {filtered.map((group) => {
             const Icon = groupIcons[group.id];
             const isExpanded = expanded[group.id] ?? false;
-            const visible = isExpanded ? group.rows : group.rows.slice(0, INITIAL_VISIBLE);
-            const hasMore = group.rows.length > INITIAL_VISIBLE;
+            const canCollapse = group.rows.length > COLLAPSE_THRESHOLD;
+            const visible = !canCollapse || isExpanded ? group.rows : group.rows.slice(0, INITIAL_VISIBLE);
+            const hasMore = canCollapse;
             return (
               <Fragment key={group.id}>
                 <div className="mb-4 mt-8 flex items-center gap-3">
                   <span
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-lg"
-                    style={{ background: "rgba(232,84,32,0.14)" }}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.05]"
                   >
-                    <Icon className="h-5 w-5" style={{ color: "#E85420" }} />
+                    <Icon className="h-5 w-5 text-muted-foreground" />
                   </span>
                   <h3 className="text-lg md:text-xl font-bold tracking-tight">{group.title}</h3>
                 </div>
@@ -158,18 +165,12 @@ export function PlanComparisonModal({ open, onClose }: { open: boolean; onClose:
                   {visible.map((row) => (
                     <div
                       key={`${group.id}-${row.model}`}
-                      className="grid items-center border-b border-white/[0.08] py-3.5 transition-colors hover:bg-white/[0.02]"
+                      className="grid items-center border-b border-white/[0.08] py-3.5 transition-colors hover:bg-white/[0.03]"
                       style={{ gridTemplateColumns: GRID_COLS }}
                     >
-                      <div className="flex items-center gap-3 pr-4">
-                        {/* icon placeholder — TODO: brand icon */}
-                        <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded bg-white/[0.04]">
-                          <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
-                        </span>
-                        <div className="min-w-0">
-                          <div className="truncate font-medium text-foreground">{row.model}</div>
-                          <div className="text-xs text-muted-foreground">{row.unit}</div>
-                        </div>
+                      <div className="min-w-0 pr-4">
+                        <div className="truncate font-medium text-foreground">{row.model}</div>
+                        <div className="text-xs text-muted-foreground">{row.unit}</div>
                       </div>
                       {comparisonTiers.map((t) => (
                         <div key={t.id} className="flex items-center justify-center">
@@ -182,7 +183,7 @@ export function PlanComparisonModal({ open, onClose }: { open: boolean; onClose:
                     <div className="pt-3">
                       <button
                         onClick={() => setExpanded((s) => ({ ...s, [group.id]: !isExpanded }))}
-                        className="text-xs font-semibold text-primary transition-opacity hover:opacity-80"
+                        className="text-xs font-semibold text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
                       >
                         {isExpanded ? "Скрыть" : `Показать ещё (${group.rows.length - INITIAL_VISIBLE})`}
                       </button>
