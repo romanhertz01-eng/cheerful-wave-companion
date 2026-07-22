@@ -31,8 +31,8 @@ function ValueCell({ value }: { value: ComparisonValue }) {
     return <span className="text-muted-foreground/70 text-sm">—</span>;
   }
   return (
-    <span className="inline-flex items-baseline gap-1 rounded-lg border border-white/10 bg-white/[0.05] px-3 py-1">
-      <span className="font-mono tabular-nums font-medium text-sm text-foreground">{value}</span>
+      <span className="inline-flex items-baseline gap-1 rounded-lg border border-white/10 bg-white/[0.05] px-3 py-1">
+      <span className="tabular-nums font-medium text-sm text-foreground">{value}</span>
       <span className="text-xs text-muted-foreground">ген.</span>
     </span>
   );
