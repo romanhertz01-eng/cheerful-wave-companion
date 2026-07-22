@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { X, Search, Download, Infinity as InfinityIcon, Video, Image as ImageIcon, Music, Type } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { comparisonGroups, comparisonTiers, type ComparisonValue, type ComparisonGroup } from "@/data/planComparison";
@@ -12,12 +12,19 @@ const groupIcons: Record<ComparisonGroup["id"], typeof Video> = {
 
 const INITIAL_VISIBLE = 3;
 
+// grid template: model column + one column per tier
+const GRID_COLS = "minmax(240px,1.4fr) repeat(4, minmax(120px, 1fr))";
+
 function ValueCell({ value }: { value: ComparisonValue }) {
   if (value === "unlimited") {
     return (
       <span
-        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold"
-        style={{ background: "rgba(232,84,32,0.15)", color: "hsl(var(--primary))" }}
+        className="inline-flex items-center gap-1 rounded-lg border px-3 py-1 text-xs font-semibold"
+        style={{
+          background: "rgba(232,84,32,0.14)",
+          borderColor: "rgba(232,84,32,0.35)",
+          color: "hsl(var(--primary))",
+        }}
       >
         <InfinityIcon className="h-3.5 w-3.5" />
         Безлимит
@@ -25,11 +32,12 @@ function ValueCell({ value }: { value: ComparisonValue }) {
     );
   }
   if (value === null) {
-    return <span className="text-muted-foreground text-xs">—</span>;
+    return <span className="text-muted-foreground/70 text-sm">—</span>;
   }
   return (
-    <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-mono tabular-nums bg-white/[0.06] border border-white/10">
-      {value} ген.
+    <span className="inline-flex items-baseline gap-1 rounded-lg border border-white/10 bg-white/[0.05] px-3 py-1">
+      <span className="font-mono tabular-nums font-medium text-sm text-foreground">{value}</span>
+      <span className="text-xs text-muted-foreground">ген.</span>
     </span>
   );
 }
@@ -48,17 +56,35 @@ export function PlanComparisonModal({ open, onClose }: { open: boolean; onClose:
       .filter((g) => g.rows.length > 0);
   }, [query]);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open, onClose]);
+
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-stretch justify-center bg-black/70 backdrop-blur-sm">
-      <div className="relative w-full max-w-6xl bg-[#0d0d0f] border border-white/10 md:my-8 md:rounded-2xl overflow-hidden flex flex-col shadow-2xl">
+    <div
+      className="fixed inset-0 z-50 flex items-stretch justify-center bg-black/70 backdrop-blur-sm md:items-center"
+      onClick={onClose}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative flex w-full max-w-[1100px] flex-col overflow-hidden border border-white/10 bg-[#1a1614] shadow-[0_24px_80px_rgba(0,0,0,0.6)] md:my-8 md:rounded-3xl"
+      >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
-          <h2 className="text-lg md:text-xl font-bold">Сравнение тарифов</h2>
+        <div className="flex items-center justify-between border-b border-white/10 px-8 py-5 md:px-10">
+          <div>
+            <h2 className="text-xl md:text-2xl font-bold tracking-tight">Сравнение тарифов</h2>
+            <p className="mt-1 text-xs text-muted-foreground">
+              Сколько генераций даёт каждый план на популярных моделях
+            </p>
+          </div>
           <div className="flex items-center gap-2">
             <button
-              className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/[0.06] transition-colors"
+              className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-white/[0.06] hover:text-foreground disabled:opacity-50"
               title="Скачать PDF (скоро)"
               disabled
             >
@@ -66,7 +92,7 @@ export function PlanComparisonModal({ open, onClose }: { open: boolean; onClose:
             </button>
             <button
               onClick={onClose}
-              className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/[0.06] transition-colors"
+              className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-white/[0.06] hover:text-foreground"
             >
               <X className="h-4 w-4" />
             </button>
@@ -74,93 +100,98 @@ export function PlanComparisonModal({ open, onClose }: { open: boolean; onClose:
         </div>
 
         {/* Search */}
-        <div className="px-6 py-3 border-b border-white/10">
+        <div className="border-b border-white/10 px-8 py-4 md:px-10">
           <div className="relative max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Поиск по моделям…"
-              className="w-full pl-9 pr-3 py-2 bg-white/[0.04] border border-white/10 rounded-lg text-sm focus:outline-none focus:border-primary/50"
+              className="w-full rounded-lg border border-white/10 bg-white/[0.04] py-2 pl-9 pr-3 text-sm focus:border-primary/50 focus:outline-none"
             />
           </div>
         </div>
 
-        {/* Sticky column header */}
-        <div className="overflow-auto flex-1">
-          <table className="w-full text-sm border-collapse">
-            <thead className="sticky top-0 z-10 bg-[#0d0d0f]">
-              <tr className="border-b border-white/10">
-                <th className="text-left font-semibold px-6 py-3 min-w-[240px]">Тариф</th>
-                {comparisonTiers.map((t) => (
-                  <th
-                    key={t.id}
-                    className="text-center font-bold px-4 py-3 min-w-[130px]"
-                    style={{ color: "hsl(var(--primary))" }}
+        {/* Scroll region */}
+        <div className="flex-1 overflow-auto px-8 pb-8 pt-2 md:px-10 md:pb-10">
+          {/* Sticky column header */}
+          <div
+            className="sticky top-0 z-10 -mx-8 grid items-center border-b border-white/10 bg-[#1a1614] px-8 py-3 md:-mx-10 md:px-10"
+            style={{ gridTemplateColumns: GRID_COLS }}
+          >
+            <div className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
+              Модель
+            </div>
+            {comparisonTiers.map((t) => (
+              <div
+                key={t.id}
+                className="text-center text-sm font-bold"
+                style={{ color: "#E85420" }}
+              >
+                {t.name}
+              </div>
+            ))}
+          </div>
+
+          {filtered.length === 0 && (
+            <div className="py-16 text-center text-muted-foreground">Ничего не найдено</div>
+          )}
+
+          {filtered.map((group) => {
+            const Icon = groupIcons[group.id];
+            const isExpanded = expanded[group.id] ?? false;
+            const visible = isExpanded ? group.rows : group.rows.slice(0, INITIAL_VISIBLE);
+            const hasMore = group.rows.length > INITIAL_VISIBLE;
+            return (
+              <Fragment key={group.id}>
+                <div className="mb-4 mt-8 flex items-center gap-3">
+                  <span
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-lg"
+                    style={{ background: "rgba(232,84,32,0.14)" }}
                   >
-                    {t.name}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.length === 0 && (
-                <tr>
-                  <td colSpan={5} className="text-center py-12 text-muted-foreground">
-                    Ничего не найдено
-                  </td>
-                </tr>
-              )}
-              {filtered.map((group) => {
-                const Icon = groupIcons[group.id];
-                const isExpanded = expanded[group.id] ?? false;
-                const visible = isExpanded ? group.rows : group.rows.slice(0, INITIAL_VISIBLE);
-                const hasMore = group.rows.length > INITIAL_VISIBLE;
-                return (
-                  <>
-                    <tr key={`h-${group.id}`} className="bg-white/[0.02]">
-                      <td colSpan={5} className="px-6 py-4">
-                        <div className="flex items-center gap-2 text-base md:text-lg font-bold">
-                          <Icon className="h-5 w-5" style={{ color: "hsl(var(--primary))" }} />
-                          {group.title}
-                        </div>
-                      </td>
-                    </tr>
-                    {visible.map((row) => (
-                      <tr
-                        key={`${group.id}-${row.model}`}
-                        className="border-b border-white/[0.06] hover:bg-white/[0.02]"
-                      >
-                        <td className="px-6 py-3">
-                          <div className="font-medium">{row.model}</div>
+                    <Icon className="h-5 w-5" style={{ color: "#E85420" }} />
+                  </span>
+                  <h3 className="text-lg md:text-xl font-bold tracking-tight">{group.title}</h3>
+                </div>
+
+                <div>
+                  {visible.map((row) => (
+                    <div
+                      key={`${group.id}-${row.model}`}
+                      className="grid items-center border-b border-white/[0.08] py-3.5 transition-colors hover:bg-white/[0.02]"
+                      style={{ gridTemplateColumns: GRID_COLS }}
+                    >
+                      <div className="flex items-center gap-3 pr-4">
+                        {/* icon placeholder — TODO: brand icon */}
+                        <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded bg-white/[0.04]">
+                          <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                        </span>
+                        <div className="min-w-0">
+                          <div className="truncate font-medium text-foreground">{row.model}</div>
                           <div className="text-xs text-muted-foreground">{row.unit}</div>
-                        </td>
-                        {comparisonTiers.map((t) => (
-                          <td key={t.id} className="text-center px-4 py-3">
-                            <ValueCell value={row.values[t.id]} />
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                    {hasMore && (
-                      <tr key={`m-${group.id}`}>
-                        <td colSpan={5} className="px-6 py-2">
-                          <button
-                            onClick={() => setExpanded((s) => ({ ...s, [group.id]: !isExpanded }))}
-                            className={cn(
-                              "text-xs font-semibold text-primary hover:opacity-80 transition-opacity"
-                            )}
-                          >
-                            {isExpanded ? "Скрыть" : `Показать ещё (${group.rows.length - INITIAL_VISIBLE})`}
-                          </button>
-                        </td>
-                      </tr>
-                    )}
-                  </>
-                );
-              })}
-            </tbody>
-          </table>
+                        </div>
+                      </div>
+                      {comparisonTiers.map((t) => (
+                        <div key={t.id} className="flex items-center justify-center">
+                          <ValueCell value={row.values[t.id]} />
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                  {hasMore && (
+                    <div className="pt-3">
+                      <button
+                        onClick={() => setExpanded((s) => ({ ...s, [group.id]: !isExpanded }))}
+                        className="text-xs font-semibold text-primary transition-opacity hover:opacity-80"
+                      >
+                        {isExpanded ? "Скрыть" : `Показать ещё (${group.rows.length - INITIAL_VISIBLE})`}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </Fragment>
+            );
+          })}
         </div>
       </div>
     </div>

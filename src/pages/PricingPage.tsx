@@ -81,7 +81,7 @@ const PricingPage = () => {
 
       {/* Plan cards */}
       <section className="max-w-7xl mx-auto px-4 pb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+        <div className="flex gap-4 overflow-x-auto pb-4 xl:grid xl:grid-cols-6 xl:overflow-visible xl:pb-0 snap-x snap-mandatory xl:snap-none">
           {plans.map((plan) => {
             const isEnterprise = !!plan.enterprise;
             const isHighlight = !!plan.highlight;
@@ -100,11 +100,11 @@ const PricingPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 className={cn(
-                  "relative rounded-2xl p-5 text-left flex flex-col shadow-[0_2px_12px_rgba(0,0,0,0.4)]",
+                  "relative rounded-2xl p-6 text-left flex flex-col shadow-[0_2px_12px_rgba(0,0,0,0.4)] shrink-0 basis-[260px] min-w-[240px] snap-start xl:basis-auto xl:min-w-0",
                   isEnterprise
                     ? "border"
                     : "bg-white/[0.04] border border-white/10",
-                  isHighlight && "border-primary shadow-[0_0_40px_-10px_rgba(232,84,32,0.55)]"
+                  isHighlight && "border-primary/60 shadow-[0_0_28px_-12px_rgba(232,84,32,0.45)]"
                 )}
                 style={
                   isEnterprise
@@ -131,7 +131,12 @@ const PricingPage = () => {
                   </div>
                 )}
 
-                <h3 className="text-lg font-bold mb-3 tracking-tight">{plan.name}</h3>
+                <h3
+                  className="text-3xl mb-4 tracking-tight leading-none"
+                  style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 500 }}
+                >
+                  {plan.name}
+                </h3>
 
                 <div className="mb-3">
                   <div className="text-[22px] font-bold font-mono tabular-nums tracking-tight leading-tight">
@@ -156,11 +161,15 @@ const PricingPage = () => {
                   )}
                 </div>
 
-                <ul className="space-y-2 mb-5 flex-1">
+                <ul className="flex flex-col gap-2.5 mb-5 flex-1">
                   {plan.features.map((f) => {
                     const Icon = f.negative ? X : f.unlimited ? InfinityIcon : Check;
                     return (
-                      <li key={f.text} className="flex items-start gap-2 text-[13px] leading-snug">
+                      <li
+                        key={f.text}
+                        className="flex items-start gap-2 text-[13px] leading-snug"
+                        style={{ wordBreak: "normal", overflowWrap: "normal" }}
+                      >
                         <Icon
                           className={cn(
                             "h-4 w-4 shrink-0 mt-0.5",
