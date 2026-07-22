@@ -23,7 +23,7 @@ export function PromoBanner() {
       }}
     >
       <Zap size={14} className="shrink-0" />
-      <span className="font-semibold whitespace-nowrap">100 кредитов бесплатно</span>
+      <span className="font-semibold whitespace-nowrap">150 кредитов бесплатно</span>
       <span className="opacity-70 hidden md:inline">·</span>
       <span className="opacity-90 hidden md:inline">
         Попробуйте 90+ нейросетей без VPN
