@@ -199,3 +199,10 @@ export const comparisonGroups: ComparisonGroup[] = [
     ],
   },
 ];
+
+export const comparisonTiers: { id: "basic" | "pro" | "max" | "ultra"; name: string }[] = [
+  { id: "basic", name: "Базовый" },
+  { id: "pro", name: "Про" },
+  { id: "max", name: "Макс" },
+  { id: "ultra", name: "Ультра" },
+];
