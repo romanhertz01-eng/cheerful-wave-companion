@@ -66,7 +66,7 @@ export const plans: Plan[] = [
     highlight: true,
     audience: "personal",
     features: [
-      { text: "Все 90+ моделей без ограничений" },
+      { text: "Доступ ко всем 90+ моделям" },
       { text: "Качество до 4K" },
       { text: "Генерация без очереди" },
       { text: "API-доступ" },
