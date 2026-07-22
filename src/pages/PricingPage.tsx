@@ -231,28 +231,28 @@ const PricingPage = () => {
       </section>
 
       {/* Credit packs */}
-      <section className="max-w-5xl mx-auto px-4 pb-12">
+      <section className="max-w-6xl mx-auto px-4 pb-12">
         <div className="text-center mb-6">
           <h2 className="text-xl md:text-2xl font-bold mb-2">Докупка кредитов</h2>
           <p className="text-sm text-muted-foreground">
             Докупка доступна при активной подписке. Кредиты не сгорают и переносятся.
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
           {creditPacks.map((p) => (
             <div
               key={p.id}
-              className="bg-white/[0.04] border border-white/10 rounded-xl p-5 flex items-center justify-between"
+              className="bg-white/[0.04] border border-white/10 rounded-xl p-6 flex flex-col justify-between gap-4 min-h-[132px]"
             >
-              <div>
+              <div className="flex items-start justify-between gap-3">
                 <div className="text-sm text-muted-foreground">{p.name}</div>
-                <div className="text-lg font-bold tabular-nums">
+                <div className="tabular-nums font-bold">{fmtRub(p.price)}</div>
+              </div>
+              <div className="flex items-end justify-between gap-3">
+                <div className="text-lg font-semibold tabular-nums">
                   {p.credits.toLocaleString("ru-RU")} кредитов
                 </div>
-              </div>
-              <div className="text-right">
-                <div className="tabular-nums font-bold">{fmtRub(p.price)}</div>
-                <button className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-4 mt-1">Купить</button>
+                <button className="text-xs text-foreground hover:underline underline-offset-4">Купить</button>
               </div>
             </div>
           ))}
