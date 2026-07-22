@@ -18,7 +18,7 @@ const fmtRub = (n: number) => `${n.toLocaleString("ru-RU")} ₽`;
 const faqItems = [
   {
     q: "Что такое кредиты?",
-    a: "Каждая генерация стоит фиксированное число кредитов. Текст: от 3 cr, изображения: 20–380 cr, видео: от 105 cr, аудио: 5–400 cr. Кредиты не сгорают и переносятся, тратятся при активной подписке.",
+    a: "Каждая генерация стоит фиксированное число кредитов. Текст: от 3 кредитов, изображения: 20–380, видео: от 105, аудио: 5–400. Кредиты не сгорают и переносятся, тратятся при активной подписке.",
   },
   {
     q: "Можно ли перейти на другой план?",
@@ -99,7 +99,7 @@ const PricingPage = () => {
         <h3 className="text-xl font-semibold mb-1">{plan.name}</h3>
 
         <div className="flex items-baseline gap-2">
-          <div className="text-[36px] leading-none font-mono tabular-nums font-bold">
+          <div className="text-[36px] leading-none tabular-nums font-bold">
             {priceValue}
           </div>
           {showPerMonth && (
@@ -186,7 +186,7 @@ const PricingPage = () => {
                 )}
               >
                 Год
-                <span className="font-mono tabular-nums text-[10px] bg-white/10 px-1.5 py-0.5 rounded-full font-bold">−15%</span>
+                <span className="tabular-nums text-[10px] bg-white/10 px-1.5 py-0.5 rounded-full font-bold">−15%</span>
               </button>
             </div>
             <button
@@ -246,12 +246,12 @@ const PricingPage = () => {
             >
               <div>
                 <div className="text-sm text-muted-foreground">{p.name}</div>
-                <div className="text-lg font-bold font-mono tabular-nums">
-                  {p.credits.toLocaleString("ru-RU")} cr
+                <div className="text-lg font-bold tabular-nums">
+                  {p.credits.toLocaleString("ru-RU")} кредитов
                 </div>
               </div>
               <div className="text-right">
-                <div className="font-mono tabular-nums font-bold">{fmtRub(p.price)}</div>
+                <div className="tabular-nums font-bold">{fmtRub(p.price)}</div>
                 <button className="text-xs text-muted-foreground hover:text-foreground underline underline-offset-4 mt-1">Купить</button>
               </div>
             </div>
@@ -310,7 +310,7 @@ const PricingPage = () => {
             За каждого друга, который зарегистрируется по вашей ссылке, вы оба получите по 100 бесплатных кредитов. Без ограничений на количество приглашений.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-5">
-            <div className="px-4 py-2.5 rounded-full font-mono text-sm text-foreground bg-white/[0.04] border border-white/10">
+            <div className="px-4 py-2.5 rounded-full text-sm text-foreground bg-white/[0.04] border border-white/10">
               era2.ai/ref/user123
             </div>
             <button
@@ -321,7 +321,7 @@ const PricingPage = () => {
               Копировать
             </button>
           </div>
-          <p className="text-xs text-muted-foreground font-mono">
+          <p className="text-xs text-muted-foreground tabular-nums">
             Уже пригласили: 0 друзей · Заработано: 0 кредитов
           </p>
         </div>
