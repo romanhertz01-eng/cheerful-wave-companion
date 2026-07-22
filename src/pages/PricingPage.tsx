@@ -54,9 +54,9 @@ const PricingPage = () => {
       : showYear
       ? fmtRub(plan.yearPricePerMonth as number)
       : plan.monthPrice === 0
-      ? "0 ₽"
+      ? "Бесплатно"
       : fmtRub(plan.monthPrice as number);
-    const showPerMonth = !plan.priceLabel;
+    const showPerMonth = !plan.priceLabel && plan.monthPrice !== 0;
     const yearSaving =
       plan.monthPrice && plan.yearPricePerMonth
         ? (plan.monthPrice - plan.yearPricePerMonth) * 12
@@ -172,7 +172,7 @@ const PricingPage = () => {
               <button
                 onClick={() => setPeriod("month")}
                 className={cn(
-                  "px-6 py-2 rounded-full text-sm font-medium transition-colors",
+                  "px-6 py-2 rounded-full text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-0",
                   period === "month" ? "bg-white/[0.08] text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -181,7 +181,7 @@ const PricingPage = () => {
               <button
                 onClick={() => setPeriod("year")}
                 className={cn(
-                  "px-6 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2",
+                  "px-6 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-0",
                   period === "year" ? "bg-white/[0.08] text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
@@ -214,7 +214,7 @@ const PricingPage = () => {
                 key={t.id}
                 onClick={() => setAudience(t.id)}
                 className={cn(
-                  "px-5 py-2 rounded-full text-sm font-medium transition-colors",
+                  "px-5 py-2 rounded-full text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-0",
                   audience === t.id ? "bg-white/[0.08] text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
