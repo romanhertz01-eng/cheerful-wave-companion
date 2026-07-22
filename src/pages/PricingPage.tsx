@@ -54,9 +54,9 @@ const PricingPage = () => {
       : showYear
       ? fmtRub(plan.yearPricePerMonth as number)
       : plan.monthPrice === 0
-      ? "0 ₽"
+      ? "Бесплатно"
       : fmtRub(plan.monthPrice as number);
-    const showPerMonth = !plan.priceLabel;
+    const showPerMonth = !plan.priceLabel && plan.monthPrice !== 0;
     const yearSaving =
       plan.monthPrice && plan.yearPricePerMonth
         ? (plan.monthPrice - plan.yearPricePerMonth) * 12
