@@ -33,6 +33,14 @@ const faqItems = [
   },
 ];
 
+const planStyleById = {
+  start: { border: "border-white/8", bg: "bg-white/[0.03]" },
+  basic: { border: "border-white/10", bg: "bg-white/[0.03]" },
+  pro: { border: "border-primary", bg: "bg-white/[0.04]" },
+  max: { border: "border-white/14", bg: "bg-white/[0.05]" },
+  ultra: { border: "border-white/18", bg: "bg-white/[0.05]" },
+};
+
 const PricingPage = () => {
   const [period, setPeriod] = useState<Period>("month");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -46,10 +54,10 @@ const PricingPage = () => {
       {/* Hero */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(232,84,32,0.12) 0%, rgba(255,122,61,0.04) 40%, transparent 70%)" }} />
-        <motion.div className="relative max-w-4xl mx-auto text-center px-4 pt-16 pb-10 md:pt-20" initial="hidden" animate="show" variants={stagger}>
+        <motion.div className="relative max-w-4xl mx-auto text-center px-4 pt-12 pb-8 md:pt-14" initial="hidden" animate="show" variants={stagger}>
           <motion.p variants={fadeUp} className="text-xs uppercase tracking-[2px] text-primary font-semibold mb-4">Тарифы</motion.p>
-          <motion.h1 variants={fadeUp} className="text-[32px] md:text-[44px] font-bold mb-4">Простые тарифы для каждого</motion.h1>
-          <motion.p variants={fadeUp} className="text-muted-foreground mb-8">Одна подписка — доступ ко всем 90+ нейросетям. Начните бесплатно.</motion.p>
+          <motion.h1 variants={fadeUp} className="text-[32px] md:text-[44px] font-bold mb-3">Простые тарифы для каждого</motion.h1>
+          <motion.p variants={fadeUp} className="text-muted-foreground mb-6">Одна подписка — доступ ко всем 90+ нейросетям. Начните бесплатно.</motion.p>
 
           {/* Period toggle + compare */}
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -80,41 +88,35 @@ const PricingPage = () => {
       </section>
 
       {/* Plan cards */}
-      <section className="max-w-7xl mx-auto px-4 pb-8">
+      <section className="max-w-7xl mx-auto px-4 pb-6">
         <div className="flex gap-4 overflow-x-auto pb-4 xl:grid xl:grid-cols-6 xl:overflow-visible xl:pb-0 snap-x snap-mandatory xl:snap-none">
           {plans.map((plan) => {
             const isEnterprise = !!plan.enterprise;
             const isHighlight = !!plan.highlight;
             const showYear = period === "year" && plan.monthPrice !== null && plan.yearPricePerMonth !== null;
-            const priceMain =
-              plan.priceLabel
-                ? plan.priceLabel
-                : showYear
-                ? `${fmtRub(plan.yearPricePerMonth as number)}/мес`
-                : plan.monthPrice === 0
-                ? "0 ₽"
-                : `${fmtRub(plan.monthPrice as number)}/мес`;
+            const priceValue = plan.priceLabel
+              ? plan.priceLabel
+              : showYear
+              ? fmtRub(plan.yearPricePerMonth as number)
+              : plan.monthPrice === 0
+              ? "0 ₽"
+              : fmtRub(plan.monthPrice as number);
+            const priceSuffix = plan.priceLabel || plan.monthPrice === 0 ? "" : "/мес";
+            const planStyle = planStyleById[plan.id as keyof typeof planStyleById] ?? { border: "border-white/10", bg: "bg-white/[0.04]" };
+
             return (
               <motion.div
                 key={plan.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 className={cn(
-                  "relative rounded-2xl p-6 text-left flex flex-col shadow-[0_2px_12px_rgba(0,0,0,0.4)] shrink-0 basis-[260px] min-w-[240px] snap-start xl:basis-auto xl:min-w-0",
+                  "relative rounded-2xl px-5 py-6 text-left flex flex-col shadow-[0_2px_12px_rgba(0,0,0,0.4)] shrink-0 basis-[292px] min-w-[276px] snap-start xl:basis-auto xl:min-w-0",
                   isEnterprise
-                    ? "border"
-                    : "bg-white/[0.04] border border-white/10",
-                  isHighlight && "border-primary/60 shadow-[0_0_28px_-12px_rgba(232,84,32,0.45)]"
+                    ? "bg-white/[0.05] border border-primary/25"
+                    : cn(planStyle.bg, "border", planStyle.border),
+                  isHighlight && "border-primary shadow-[0_8px_28px_-12px_rgba(232,84,32,0.45)]"
                 )}
-                style={
-                  isEnterprise
-                    ? {
-                        background:
-                          "radial-gradient(ellipse 100% 100% at 50% 0%, rgba(232,84,32,0.22) 0%, rgba(232,84,32,0.06) 50%, transparent 100%), rgba(255,255,255,0.03)",
-                        borderColor: "rgba(232,84,32,0.35)",
-                      }
-                    : undefined
-                }
+                style={isEnterprise ? { backgroundImage: "linear-gradient(180deg, rgba(232,84,32,0.10), transparent 55%)" } : undefined}
               >
                 {plan.badge && (
                   <div className="absolute -top-3 left-5">
@@ -132,15 +134,20 @@ const PricingPage = () => {
                 )}
 
                 <h3
-                  className="text-3xl mb-4 tracking-tight leading-none"
+                  className="text-lg font-semibold mb-3 tracking-tight leading-none"
                   style={{ fontFamily: 'Georgia, "Times New Roman", serif', fontWeight: 500 }}
                 >
                   {plan.name}
                 </h3>
 
-                <div className="mb-3">
-                  <div className="text-[22px] font-bold font-mono tabular-nums tracking-tight leading-tight">
-                    {priceMain}
+                <div className="mb-2">
+                  <div className="flex items-baseline gap-1.5">
+                    <div className="text-[32px] leading-none font-mono tabular-nums tracking-tight font-bold">
+                      {priceValue}
+                    </div>
+                    {priceSuffix && (
+                      <span className="text-sm text-muted-foreground">/мес</span>
+                    )}
                   </div>
                   {showYear && plan.monthPrice !== 0 && (
                     <div className="text-xs text-muted-foreground font-mono line-through mt-1">
@@ -149,11 +156,11 @@ const PricingPage = () => {
                   )}
                 </div>
 
-                <div className="mb-4 pb-4 border-b border-white/10">
-                  <div className="text-lg font-bold text-foreground">
-                    {plan.credits}
+                <div className="mb-3 pb-4 border-b border-white/10">
+                  <div className="text-[15px] font-semibold text-muted-foreground">
+                    <span className="text-foreground">{plan.credits}</span>
                     {!isEnterprise && plan.id !== "start" && (
-                      <span className="text-xs text-muted-foreground font-normal ml-1">кредитов</span>
+                      <span className="ml-1">кредитов</span>
                     )}
                   </div>
                   {plan.creditsNote && (
@@ -161,18 +168,18 @@ const PricingPage = () => {
                   )}
                 </div>
 
-                <ul className="flex flex-col gap-2.5 mb-5 flex-1">
+                <ul className="flex flex-col gap-2 mb-5 flex-1">
                   {plan.features.map((f) => {
                     const Icon = f.negative ? X : f.unlimited ? InfinityIcon : Check;
                     return (
                       <li
                         key={f.text}
-                        className="flex items-start gap-2 text-[13px] leading-snug"
+                        className="flex items-start gap-2 text-[13px] leading-[1.35]"
                         style={{ wordBreak: "normal", overflowWrap: "normal" }}
                       >
                         <Icon
                           className={cn(
-                            "h-4 w-4 shrink-0 mt-0.5",
+                            "h-4 w-4 shrink-0 mt-[3px]",
                             f.negative ? "text-muted-foreground" : "text-primary"
                           )}
                         />
@@ -206,7 +213,7 @@ const PricingPage = () => {
       </section>
 
       {/* Credit packs */}
-      <section className="max-w-5xl mx-auto px-4 pb-16">
+      <section className="max-w-5xl mx-auto px-4 pb-12">
         <div className="text-center mb-6">
           <h2 className="text-xl md:text-2xl font-bold mb-2">Докупка кредитов</h2>
           <p className="text-sm text-muted-foreground">
@@ -235,7 +242,7 @@ const PricingPage = () => {
       </section>
 
       {/* FAQ */}
-      <section className="max-w-3xl mx-auto px-4 py-16">
+      <section className="max-w-3xl mx-auto px-4 py-12">
         <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">Частые вопросы</h2>
         <div className="divide-y divide-border border-y border-border">
           {faqItems.map((item, i) => (
@@ -266,7 +273,7 @@ const PricingPage = () => {
       </section>
 
       {/* Реферальный баннер */}
-      <section className="max-w-4xl mx-auto px-4 pb-16">
+      <section className="max-w-4xl mx-auto px-4 pb-12">
         <div
           className="relative overflow-hidden rounded-[24px] p-8 md:p-12 text-center"
           style={{
