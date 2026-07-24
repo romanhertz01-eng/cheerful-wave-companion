@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Link, useSearch, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
+import { SiVisa, SiMastercard } from "@icons-pack/react-simple-icons";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { plans } from "@/data/plans";
@@ -266,8 +267,10 @@ export default function CheckoutPage() {
                 {isGift ? "Подарить" : "Оплатить"} {fmtRub(selected.total)}
               </button>
 
-              <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
-                {["Visa", "Mastercard", "МИР", "СБП", "SberPay", "ЮMoney"].map((b) => (
+              <div className="mt-4 flex items-center justify-center gap-3 flex-wrap text-muted-foreground">
+                <SiVisa size={22} color="currentColor" />
+                <SiMastercard size={22} color="currentColor" />
+                {["МИР", "СБП", "SberPay", "ЮMoney"].map((b) => (
                   <span
                     key={b}
                     className="inline-flex items-center h-7 px-2.5 rounded-md border border-white/10 bg-white/[0.04] text-[11px] font-semibold text-muted-foreground tracking-wide"
