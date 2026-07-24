@@ -318,10 +318,10 @@ export default function AccountPage() {
                   value={promo}
                   onChange={(e) => setPromo(e.target.value)}
                   placeholder="Введите промокод"
-                  className="flex-1 h-9 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
+                  className="flex-1 h-10 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
                 />
                 <button
-                  className={btnSecondary}
+                  className={`${btnSecondary} h-10 shrink-0`}
                   onClick={() => toast("Проверка промокода недоступна в демо")}
                 >
                   Применить
@@ -337,10 +337,10 @@ export default function AccountPage() {
                   value={cert}
                   onChange={(e) => setCert(e.target.value)}
                   placeholder="Код сертификата"
-                  className="flex-1 h-9 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
+                  className="flex-1 h-10 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
                 />
                 <button
-                  className={btnSecondary}
+                  className={`${btnSecondary} h-10 shrink-0`}
                   onClick={() => toast("Активация сертификата недоступна в демо")}
                 >
                   Активировать
