@@ -1,7 +1,7 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import {
   Home, Image, Video, MessageSquare, Mic, Bot, LayoutGrid, Layers,
-  CreditCard, History, ChevronLeft, ChevronDown, X, ArrowRight, Gem, Plus, Gift, Copy, User, Flame, Check,
+  CreditCard, History, ChevronLeft, ChevronDown, X, ArrowRight, Gem, Plus, Gift, Copy, User,
 } from "lucide-react";
 import { useState } from "react";
 import { useCopyToast } from "@/components/shared/CopyToast";
@@ -9,7 +9,6 @@ import { StatusBadge } from "@/components/ui/era/StatusBadge";
 import { MOCK_HISTORY } from "@/data/mockHistory";
 import { cn } from "@/lib/utils";
 import { ReferralPopup } from "@/components/shared/ReferralPopup";
-import { DailyCheckIn, useDailyCheckIn, DAYS } from "@/components/shared/DailyCheckIn";
 
 const recentChats = MOCK_HISTORY.slice(0, 8).map((h) => ({
   id: h.id,
@@ -66,8 +65,6 @@ export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarP
   const copy = useCopyToast();
   const [recentOpen, setRecentOpen] = useState(true);
   const [showReferral, setShowReferral] = useState(false);
-  const [showCheckIn, setShowCheckIn] = useState(false);
-  const { streak, claimedToday, claim, current } = useDailyCheckIn();
   const isActive = (path: string) => location.pathname === path;
 
   const renderItem = (item: { icon: React.ElementType; label: string; path: string; badge?: "new" | "soon" }) => (
