@@ -134,7 +134,7 @@ export default function CheckoutPage() {
               <Row label="Период" value={selected.label} />
             </div>
 
-            <div className="my-5 h-px bg-muted" />
+            <div className="my-5 h-px bg-border" />
 
             <div className="text-[13px] text-muted-foreground">К оплате</div>
             <div className="flex items-baseline gap-3 mt-1">
