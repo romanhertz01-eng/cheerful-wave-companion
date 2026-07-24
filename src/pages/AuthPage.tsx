@@ -121,10 +121,10 @@ const AuthPage = () => {
 
         {/* Social buttons */}
         <div className="grid grid-cols-2 gap-2.5 mb-5">
-          <SocialButton icon={<SiTelegram size={18} color="currentColor" />} label="Telegram" />
-          <SocialButton icon={<span className="text-[18px] leading-none font-bold">Я</span>} label="Яндекс" />
-          <SocialButton icon={<SiGoogle size={18} color="currentColor" />} label="Google" />
-          <SocialButton icon={<SiVk size={18} color="currentColor" />} label="VK" />
+          <SocialButton icon={<SiTelegram size={18} color="#26A5E4" />} label="Telegram" />
+          <SocialButton icon={<span className="text-[18px] leading-none font-bold" style={{ color: "#FC3F1D" }}>Я</span>} label="Яндекс" />
+          <SocialButton icon={<SiGoogle size={18} color="#4285F4" />} label="Google" />
+          <SocialButton icon={<SiVk size={18} color="#0077FF" />} label="VK" />
         </div>
 
         {/* Divider */}
