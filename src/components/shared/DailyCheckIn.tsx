@@ -3,6 +3,7 @@ import { useLocation } from "@tanstack/react-router";
 import { X, Gift, Check, Flame } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCopyToast } from "@/components/shared/CopyToast";
+import { useCredits } from "@/hooks/useCredits";
 
 export const DAYS = [
   { day: 1, credits: 5 },
@@ -30,23 +31,26 @@ export function useDailyCheckIn() {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const last = localStorage.getItem("era2_checkin_date");
     const today = new Date().toDateString();
+    const lastSeen = localStorage.getItem("era2_checkin_seen");
+    const claimed = localStorage.getItem("era2_checkin_claimed");
     const savedStreak = parseInt(localStorage.getItem("era2_checkin_streak") || "0");
-    if (last === today) {
+    if (lastSeen === today) {
       setStreak(Math.max(1, savedStreak));
-      setClaimedToday(true);
+      setClaimedToday(claimed === today);
       return;
     }
     const yesterday = new Date(Date.now() - 86400000).toDateString();
-    const newStreak = last === yesterday ? Math.min(savedStreak + 1, 7) : 1;
+    const newStreak = lastSeen === yesterday ? Math.min(savedStreak + 1, 7) : 1;
+    // Визит засчитывается фактом захода, без клика «Забрать»
+    localStorage.setItem("era2_checkin_seen", today);
+    localStorage.setItem("era2_checkin_streak", String(newStreak));
     setStreak(newStreak);
-    setClaimedToday(false);
+    setClaimedToday(claimed === today);
   }, []);
 
   const claim = () => {
-    localStorage.setItem("era2_checkin_date", new Date().toDateString());
-    localStorage.setItem("era2_checkin_streak", String(streak));
+    localStorage.setItem("era2_checkin_claimed", new Date().toDateString());
     setClaimedToday(true);
   };
 
@@ -58,6 +62,7 @@ export function DailyCheckIn() {
   const [open, setOpen] = useState(false);
   const onClose = () => setOpen(false);
   const toast = useCopyToast();
+  const { addCredits } = useCredits();
   const location = useLocation();
   const shownThisSession = useRef(false);
 
@@ -71,7 +76,7 @@ export function DailyCheckIn() {
     if (shownThisSession.current) return;
     if (claimedToday) return;
 
-    // Первый визит — записать и выйти
+    // Первый визит — записать и выйти (только на страницах, где поп-ап может появиться)
     if (!localStorage.getItem("era2_visited")) {
       localStorage.setItem("era2_visited", "1");
       return;
@@ -123,6 +128,7 @@ export function DailyCheckIn() {
 
   const handleCheckin = () => {
     claim();
+    addCredits(current.credits);
     toast("", `+${current.credits} кредитов зачислены`);
     onClose();
   };
