@@ -47,6 +47,11 @@ export default function CheckoutPage() {
   );
   const [agreed, setAgreed] = useState(false);
   const [promo, setPromo] = useState("");
+  const [isGift, setIsGift] = useState(false);
+  const [giftEmail, setGiftEmail] = useState("");
+
+  const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+  const giftEmailValid = isValidEmail(giftEmail);
 
   const monthPrice = plan.monthPrice ?? 0;
 
@@ -62,9 +67,11 @@ export default function CheckoutPage() {
 
   const selected = rows.find((r) => r.id === period)!;
   const nextBilling = fmtDate(addMonths(new Date(), selected.months));
+  const periodWord = selected.months === 1 ? "месяц" : selected.months === 12 ? "год" : `${selected.months} мес.`;
 
   const handlePay = () => {
     if (!agreed) return;
+    if (isGift && !giftEmailValid) return;
     toast("Переход к оплате", { description: `${plan.name} · ${selected.label} · ${fmtRub(selected.total)}` });
   };
 
@@ -92,7 +99,10 @@ export default function CheckoutPage() {
             <div className="text-3xl md:text-[32px] font-semibold mt-1">{plan.name}</div>
 
             <div className="mt-5 space-y-2.5 text-[13px]">
-              <Row label="Аккаунт" value={EMAIL} />
+              <Row
+                label={isGift ? "Получатель" : "Аккаунт"}
+                value={isGift ? (giftEmail.trim() || "— укажите email —") : EMAIL}
+              />
               <Row label="Кредитов в месяц" value={`${plan.credits}`} />
               {selected.discount > 0 && (
                 <Row label="Скидка" value={`${Math.round(selected.discount * 100)} %`} />
@@ -114,7 +124,9 @@ export default function CheckoutPage() {
               )}
             </div>
             <div className="text-xs text-muted-foreground mt-2 tabular-nums">
-              Следующее списание: {nextBilling} · {fmtRub(selected.total)}
+              {isGift
+                ? `Подписка активна до ${nextBilling} · без автопродления`
+                : `Следующее списание: ${nextBilling} · ${fmtRub(selected.total)}`}
             </div>
 
             <div className="mt-5">
@@ -133,6 +145,46 @@ export default function CheckoutPage() {
                   Применить
                 </button>
               </div>
+            </div>
+
+            <div className="mt-5 pt-5 border-t border-white/10">
+              <div className="flex items-center justify-between gap-3">
+                <div className="text-[13px] text-foreground">Подарить подписку другу</div>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={isGift}
+                  onClick={() => setIsGift((v) => !v)}
+                  className={cn(
+                    "relative inline-flex h-6 w-11 shrink-0 rounded-full transition-colors",
+                    isGift ? "bg-white/[0.25]" : "bg-white/[0.10]"
+                  )}
+                >
+                  <span
+                    className={cn(
+                      "absolute top-0.5 h-5 w-5 rounded-full bg-white transition-transform",
+                      isGift ? "translate-x-[22px]" : "translate-x-0.5"
+                    )}
+                  />
+                </button>
+              </div>
+              <p className="mt-1.5 text-xs text-muted-foreground">
+                Вы оплачиваете — подписка активируется на аккаунте друга
+              </p>
+              {isGift && (
+                <div className="mt-3 space-y-1.5 animate-in fade-in slide-in-from-top-1 duration-200">
+                  <input
+                    type="email"
+                    value={giftEmail}
+                    onChange={(e) => setGiftEmail(e.target.value)}
+                    placeholder="Email друга"
+                    className="w-full h-10 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Отправим письмо с активацией на этот адрес
+                  </p>
+                </div>
+              )}
             </div>
           </div>
 
@@ -197,19 +249,21 @@ export default function CheckoutPage() {
                   <a href="#" className="text-foreground underline underline-offset-2">оферты</a>
                   {" "}и{" "}
                   <a href="#" className="text-foreground underline underline-offset-2">политики конфиденциальности</a>
-                  {" "}и разрешаю {LEGAL} списывать {fmtRub(selected.total)} раз в {selected.months === 1 ? "месяц" : selected.months === 12 ? "год" : `${selected.months} мес.`} с привязанной карты в счёт подписки «{plan.name}». Отменить автопродление можно в любой момент в разделе Аккаунт.
+                  {isGift
+                    ? `. Это разовый платёж ${fmtRub(selected.total)} за подписку «${plan.name}» на ${selected.label.toLowerCase()} для указанного получателя. Автопродление не подключается.`
+                    : ` и разрешаю ${LEGAL} списывать ${fmtRub(selected.total)} раз в ${periodWord} с привязанной карты в счёт подписки «${plan.name}». Отменить автопродление можно в любой момент в разделе Аккаунт.`}
                 </span>
               </label>
 
               <button
                 onClick={handlePay}
-                disabled={!agreed}
+                disabled={!agreed || (isGift && !giftEmailValid)}
                 className={cn(
                   "mt-5 w-full h-11 rounded-xl text-[14px] font-semibold text-white bg-gradient-to-r from-[#E85420] to-[#ff7a3d] transition-opacity",
-                  agreed ? "hover:opacity-95" : "opacity-50 cursor-not-allowed"
+                  !agreed || (isGift && !giftEmailValid) ? "opacity-50 cursor-not-allowed" : "hover:opacity-95"
                 )}
               >
-                Оплатить {fmtRub(selected.total)}
+                {isGift ? "Подарить" : "Оплатить"} {fmtRub(selected.total)}
               </button>
 
               <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
