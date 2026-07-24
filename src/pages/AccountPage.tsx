@@ -310,68 +310,6 @@ export default function AccountPage() {
               </div>
             </div>
 
-            {/* Промокод */}
-            <div className={card}>
-              <CardHeader icon={<Gift className="h-4 w-4" />} title="Промокод" />
-              <div className="mt-3 flex items-center gap-2">
-                <input
-                  value={promo}
-                  onChange={(e) => setPromo(e.target.value)}
-                  placeholder="Введите промокод"
-                  className="flex-1 h-9 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
-                />
-                <button
-                  className={btnSecondary}
-                  onClick={() => toast("Проверка промокода недоступна в демо")}
-                >
-                  Применить
-                </button>
-              </div>
-            </div>
-
-            {/* Сертификат */}
-            <div className={card}>
-              <CardHeader icon={<Ticket className="h-4 w-4" />} title="Сертификат" />
-              <div className="mt-3 flex items-center gap-2">
-                <input
-                  value={cert}
-                  onChange={(e) => setCert(e.target.value)}
-                  placeholder="Код сертификата"
-                  className="flex-1 h-9 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
-                />
-                <button
-                  className={btnSecondary}
-                  onClick={() => toast("Активация сертификата недоступна в демо")}
-                >
-                  Активировать
-                </button>
-              </div>
-            </div>
-
-            {/* Реферальная программа */}
-            <div className={card}>
-              <CardHeader
-                icon={<Users className="h-4 w-4" />}
-                title="Реферальная программа"
-                hint="По 100 кредитов вам и другу за первую подписку"
-              />
-              <div className="mt-2 text-[13px] text-muted-foreground tabular-nums">
-                Приглашено: <span className="text-foreground">0</span> · Начислено:{" "}
-                <span className="text-foreground">0</span>
-              </div>
-              <div className="mt-3 flex items-center gap-2">
-                <input
-                  readOnly
-                  value={REF_LINK}
-                  className="flex-1 h-9 px-3 rounded-lg text-[12px] bg-white/[0.04] border border-white/10 text-foreground truncate focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-                />
-                <button className={btnSecondary} onClick={handleCopyRef}>
-                  {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                  <span className="ml-1.5">Копировать</span>
-                </button>
-              </div>
-            </div>
-
             {/* Способ оплаты */}
             <div className={card}>
               <CardHeader icon={<CreditCard className="h-4 w-4" />} title="Способ оплаты" />
@@ -406,6 +344,68 @@ export default function AccountPage() {
                   </button>
                 </div>
               )}
+            </div>
+
+            {/* Промокод */}
+            <div className={card}>
+              <CardHeader icon={<Gift className="h-4 w-4" />} title="Промокод" />
+              <div className="mt-3 flex items-center gap-2">
+                <input
+                  value={promo}
+                  onChange={(e) => setPromo(e.target.value)}
+                  placeholder="Введите промокод"
+                  className="flex-1 h-10 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
+                />
+                <button
+                  className={`${btnSecondary} h-10 shrink-0`}
+                  onClick={() => toast("Проверка промокода недоступна в демо")}
+                >
+                  Применить
+                </button>
+              </div>
+            </div>
+
+            {/* Сертификат */}
+            <div className={card}>
+              <CardHeader icon={<Ticket className="h-4 w-4" />} title="Сертификат" />
+              <div className="mt-3 flex items-center gap-2">
+                <input
+                  value={cert}
+                  onChange={(e) => setCert(e.target.value)}
+                  placeholder="Код сертификата"
+                  className="flex-1 h-10 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
+                />
+                <button
+                  className={`${btnSecondary} h-10 shrink-0`}
+                  onClick={() => toast("Активация сертификата недоступна в демо")}
+                >
+                  Активировать
+                </button>
+              </div>
+            </div>
+
+            {/* Реферальная программа */}
+            <div className={card}>
+              <CardHeader
+                icon={<Users className="h-4 w-4" />}
+                title="Реферальная программа"
+                hint="По 100 кредитов вам и другу за первую подписку"
+              />
+              <div className="mt-2 text-[13px] text-muted-foreground tabular-nums">
+                Приглашено: <span className="text-foreground">0</span> · Начислено:{" "}
+                <span className="text-foreground">0</span>
+              </div>
+              <div className="mt-3 flex items-center gap-2">
+                <input
+                  readOnly
+                  value={REF_LINK}
+                  className="flex-1 h-9 px-3 rounded-lg text-[12px] bg-white/[0.04] border border-white/10 text-foreground truncate focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                />
+                <button className={btnSecondary} onClick={handleCopyRef}>
+                  {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                  <span className="ml-1.5">Копировать</span>
+                </button>
+              </div>
             </div>
 
             {/* Удаление аккаунта */}
