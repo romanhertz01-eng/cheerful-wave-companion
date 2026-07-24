@@ -259,7 +259,7 @@ export default function AccountPage() {
                 </div>
               )}
             </div>
-            <div className="shrink-0">
+            <div className="shrink-0 mt-8">
               {subscription === "active" && (
                 <button className={btnSecondary} onClick={() => setCancelOpen(true)}>
                   Отменить подписку
