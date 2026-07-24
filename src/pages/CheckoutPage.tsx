@@ -1,12 +1,11 @@
 import { useMemo, useState } from "react";
 import { Link, useSearch, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft, CreditCard, Smartphone } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { plans } from "@/data/plans";
 
 type PeriodId = "1m" | "3m" | "6m" | "12m";
-type Method = "card" | "sbp";
 
 const PERIODS: { id: PeriodId; months: number; label: string; discount: number; badge?: string }[] = [
   { id: "1m", months: 1, label: "1 месяц", discount: 0 },
@@ -46,7 +45,6 @@ export default function CheckoutPage() {
   const [period, setPeriod] = useState<PeriodId>(
     (["1m", "3m", "6m", "12m"].includes(search?.period ?? "") ? (search!.period as PeriodId) : "1m")
   );
-  const [method, setMethod] = useState<Method>("card");
   const [agreed, setAgreed] = useState(false);
   const [promo, setPromo] = useState("");
 
@@ -186,24 +184,6 @@ export default function CheckoutPage() {
               <p className="mt-3 text-xs text-muted-foreground">
                 Чем длиннее период — тем ниже цена месяца. Списание раз в выбранный период.
               </p>
-            </div>
-
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
-              <h2 className="text-[15px] font-semibold">Способ оплаты</h2>
-              <div className="mt-3 grid grid-cols-2 gap-2">
-                <MethodCard
-                  active={method === "card"}
-                  onClick={() => setMethod("card")}
-                  icon={<CreditCard className="h-4 w-4" />}
-                  label="Банковская карта"
-                />
-                <MethodCard
-                  active={method === "sbp"}
-                  onClick={() => setMethod("sbp")}
-                  icon={<Smartphone className="h-4 w-4" />}
-                  label="СБП"
-                />
-              </div>
 
               <label className="mt-5 flex items-start gap-3 cursor-pointer text-[12px] leading-[1.5] text-muted-foreground">
                 <input
@@ -217,7 +197,7 @@ export default function CheckoutPage() {
                   <a href="#" className="text-foreground underline underline-offset-2">оферты</a>
                   {" "}и{" "}
                   <a href="#" className="text-foreground underline underline-offset-2">политики конфиденциальности</a>
-                  {" "}и разрешаю {LEGAL} списывать {fmtRub(selected.total)} раз в {selected.months === 1 ? "месяц" : selected.months === 12 ? "год" : `${selected.months} мес.`} в счёт подписки «{plan.name}». Отменить автопродление можно в любой момент в разделе Аккаунт.
+                  {" "}и разрешаю {LEGAL} списывать {fmtRub(selected.total)} раз в {selected.months === 1 ? "месяц" : selected.months === 12 ? "год" : `${selected.months} мес.`} с привязанной карты в счёт подписки «{plan.name}». Отменить автопродление можно в любой момент в разделе Аккаунт.
                 </span>
               </label>
 
@@ -233,7 +213,7 @@ export default function CheckoutPage() {
               </button>
 
               <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
-                {["Visa", "Mastercard", "МИР", "СБП"].map((b) => (
+                {["Visa", "Mastercard", "МИР", "СБП", "SberPay", "ЮMoney"].map((b) => (
                   <span
                     key={b}
                     className="inline-flex items-center h-7 px-2.5 rounded-md border border-white/10 bg-white/[0.04] text-[11px] font-semibold text-muted-foreground tracking-wide"
@@ -243,7 +223,7 @@ export default function CheckoutPage() {
                 ))}
               </div>
               <div className="mt-3 text-center text-xs text-muted-foreground">
-                Оплата через ЮKassa · Возврат в течение 3 дней
+                Способ оплаты выберете на защищённой странице ЮKassa · Возврат в течение 3 дней
               </div>
             </div>
 
@@ -265,24 +245,5 @@ function Row({ label, value }: { label: string; value: string }) {
       <span className="text-muted-foreground">{label}</span>
       <span className="text-foreground tabular-nums truncate">{value}</span>
     </div>
-  );
-}
-
-function MethodCard({
-  active, onClick, icon, label,
-}: { active: boolean; onClick: () => void; icon: React.ReactNode; label: string }) {
-  return (
-    <button
-      onClick={onClick}
-      className={cn(
-        "flex items-center gap-2.5 h-11 px-3 rounded-xl border text-[13px] text-foreground transition-colors",
-        active
-          ? "border-white/25 bg-white/[0.06]"
-          : "border-white/10 hover:bg-white/[0.03]"
-      )}
-    >
-      <span className="text-muted-foreground">{icon}</span>
-      {label}
-    </button>
   );
 }
