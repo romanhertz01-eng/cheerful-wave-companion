@@ -78,8 +78,8 @@ const PricingPage = () => {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         className={cn(
-          "relative rounded-2xl px-6 py-6 text-left flex flex-col bg-white/[0.04] border",
-          isHighlight ? "border-primary" : "border-white/10"
+          "relative rounded-2xl px-6 py-6 text-left flex flex-col bg-card border",
+          isHighlight ? "border-primary" : "border-border"
         )}
       >
         {plan.badge && (
@@ -87,9 +87,9 @@ const PricingPage = () => {
             <span
               className={cn(
                 "inline-flex items-center px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide",
-                plan.badge.tone === "free" && "bg-white/10 text-foreground",
+                plan.badge.tone === "free" && "bg-muted text-foreground",
                 plan.badge.tone === "accent" && "bg-primary text-primary-foreground",
-                plan.badge.tone === "muted" && "bg-white/10 text-foreground"
+                plan.badge.tone === "muted" && "bg-muted text-foreground"
               )}
             >
               {plan.badge.text}
@@ -114,7 +114,7 @@ const PricingPage = () => {
             href="mailto:sales@era2.ai?subject=Enterprise%20запрос"
             className={cn(
               "mt-4 w-full py-3 rounded-xl text-sm font-semibold transition-colors text-center",
-              "border border-white/15 text-foreground hover:bg-white/[0.06]"
+              "border border-border text-foreground hover:bg-muted/50"
             )}
           >
             {plan.cta}
@@ -124,7 +124,7 @@ const PricingPage = () => {
             to="/auth"
             className={cn(
               "mt-4 w-full py-3 rounded-xl text-sm font-semibold transition-colors text-center",
-              "border border-white/15 text-foreground hover:bg-white/[0.06]"
+              "border border-border text-foreground hover:bg-muted/50"
             )}
           >
             {plan.cta}
@@ -137,14 +137,14 @@ const PricingPage = () => {
               "mt-4 w-full py-3 rounded-xl text-sm font-semibold transition-colors text-center",
               isHighlight
                 ? "bg-primary text-primary-foreground hover:opacity-90"
-                : "border border-white/15 text-foreground hover:bg-white/[0.06]"
+                : "border border-border text-foreground hover:bg-muted/50"
             )}
           >
             {plan.cta}
           </Link>
         )}
 
-        <div className="border-t border-white/10 my-5" />
+        <div className="border-t border-border my-5" />
 
         <div className="text-[13px] text-muted-foreground mb-3">
           <span className="text-foreground font-semibold">{plan.credits}</span>{" "}
@@ -193,12 +193,12 @@ const PricingPage = () => {
 
           {/* Period toggle + compare */}
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <div className="inline-flex rounded-full border border-white/10 p-1">
+            <div className="inline-flex rounded-full border border-border p-1">
               <button
                 onClick={() => setPeriod("month")}
                 className={cn(
                   "px-6 py-2 rounded-full text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-0",
-                  period === "month" ? "bg-white/[0.08] text-foreground" : "text-muted-foreground hover:text-foreground"
+                  period === "month" ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Месяц
@@ -207,16 +207,16 @@ const PricingPage = () => {
                 onClick={() => setPeriod("year")}
                 className={cn(
                   "px-6 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-0",
-                  period === "year" ? "bg-white/[0.08] text-foreground" : "text-muted-foreground hover:text-foreground"
+                  period === "year" ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 Год
-                <span className="tabular-nums text-[10px] bg-white/10 px-1.5 py-0.5 rounded-full font-bold">−15%</span>
+                <span className="tabular-nums text-[10px] bg-muted px-1.5 py-0.5 rounded-full font-bold">−15%</span>
               </button>
             </div>
             <button
               onClick={() => setCompareOpen(true)}
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold border border-white/10 hover:bg-white/[0.06] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold border border-border hover:bg-muted/50 transition-colors"
             >
               Сравнить все тарифы
               <ArrowRight className="h-4 w-4" />
@@ -228,7 +228,7 @@ const PricingPage = () => {
       {/* Audience tabs */}
       <section className="max-w-6xl mx-auto px-4">
         <div className="flex justify-center mb-6">
-          <div className="inline-flex rounded-full border border-white/10 p-1">
+          <div className="inline-flex rounded-full border border-border p-1">
             {(
               [
                 { id: "personal", label: "Для себя" },
@@ -240,7 +240,7 @@ const PricingPage = () => {
                 onClick={() => setAudience(t.id)}
                 className={cn(
                   "px-5 py-2 rounded-full text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-0",
-                  audience === t.id ? "bg-white/[0.08] text-foreground" : "text-muted-foreground hover:text-foreground"
+                  audience === t.id ? "bg-muted text-foreground" : "text-muted-foreground hover:text-foreground"
                 )}
               >
                 {t.label}
@@ -267,7 +267,7 @@ const PricingPage = () => {
           {creditPacks.map((p) => (
             <div
               key={p.id}
-              className="bg-white/[0.04] border border-white/10 rounded-xl p-4 flex items-center justify-between gap-3"
+              className="bg-card border border-border rounded-xl p-4 flex items-center justify-between gap-3"
             >
               <div className="flex flex-col">
                 <div className="text-[15px] font-medium text-foreground tabular-nums">
@@ -277,7 +277,7 @@ const PricingPage = () => {
                   {fmtRub(p.price)}
                 </div>
               </div>
-              <button className="px-3.5 py-[7px] rounded-lg text-xs whitespace-nowrap border border-white/15 text-foreground hover:bg-white/[0.06] transition-colors">
+              <button className="px-3.5 py-[7px] rounded-lg text-xs whitespace-nowrap border border-border text-foreground hover:bg-muted/50 transition-colors">
                 Купить
               </button>
             </div>
@@ -325,8 +325,8 @@ const PricingPage = () => {
 
       {/* Реферальный баннер */}
       <section className="max-w-4xl mx-auto px-4 pb-12">
-        <div className="relative overflow-hidden rounded-[24px] p-8 md:p-12 text-center bg-white/[0.04] border border-white/10">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full mb-4 bg-white/[0.06]">
+        <div className="relative overflow-hidden rounded-[24px] p-8 md:p-12 text-center bg-card border border-border">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full mb-4 bg-muted">
             <Users className="h-5 w-5 text-foreground" />
           </div>
           <h2 className="text-2xl md:text-3xl font-bold mb-3 text-foreground">
@@ -336,12 +336,12 @@ const PricingPage = () => {
             Когда друг оформит первую подписку по вашей ссылке, вы оба получите по 100 кредитов. Без ограничений на количество приглашений.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-5">
-            <div className="px-4 py-2.5 rounded-full text-sm text-foreground bg-white/[0.04] border border-white/10">
+            <div className="px-4 py-2.5 rounded-full text-sm text-foreground bg-card border border-border">
               era2.ai/ref/user123
             </div>
             <button
               onClick={() => copy("https://era2.ai/ref/user123", "Реферальная ссылка скопирована")}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold border border-white/15 text-foreground hover:bg-white/[0.06] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold border border-border text-foreground hover:bg-muted/50 transition-colors"
             >
               <Copy className="h-4 w-4" />
               Копировать

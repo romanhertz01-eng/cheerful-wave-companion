@@ -110,7 +110,7 @@ const ToolPage = () => {
         <h2 className="text-xl md:text-2xl font-bold mb-6">Изучите другие источники вдохновения от сообщества ERA2</h2>
         <div className="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
           {communityWorks.map((w) => (
-            <div key={w.author} className="break-inside-avoid rounded-xl border border-white/10 bg-white/[0.04] shadow-[0_2px_12px_rgba(0,0,0,0.4)] relative overflow-hidden cursor-pointer hover:scale-[1.02] hover:border-primary/40 hover:bg-white/[0.06] transition-all group">
+            <div key={w.author} className="break-inside-avoid rounded-xl border border-border bg-card shadow-sm relative overflow-hidden cursor-pointer hover:scale-[1.02] hover:border-primary/40 hover:bg-muted/50 transition-all group">
               <img src={w.image} alt={w.author} loading="lazy" className="w-full h-auto block object-cover" />
               <div className="absolute bottom-0 left-0 right-0 p-2.5 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-between">
                 <span className="text-white text-[11px]">{w.author}</span>
@@ -141,7 +141,7 @@ const ToolPage = () => {
                 i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
               )}
             >
-              <div className="md:w-1/2 w-full rounded-2xl border border-white/10 overflow-hidden aspect-[4/3]">
+              <div className="md:w-1/2 w-full rounded-2xl border border-border overflow-hidden aspect-[4/3]">
                 <img src={b.image} alt={b.title} loading="lazy" className="w-full h-full object-cover" />
               </div>
               <div className="md:w-1/2 w-full">
@@ -170,7 +170,7 @@ const ToolPage = () => {
             {data.howItWorks.steps.map((step, i) => (
               <div
                 key={i}
-                className="bg-white/[0.04] border border-white/10 shadow-[0_2px_12px_rgba(0,0,0,0.4)] rounded-xl p-6 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
+                className="bg-card border border-border shadow-sm rounded-xl p-6 hover:border-primary/40 hover:bg-muted/50 transition-colors"
               >
                 <span className="gradient-accent-text font-bold text-sm mb-2 block">Шаг {i + 1}</span>
                 <h4 className="font-semibold mb-1">{step.title}</h4>
@@ -200,7 +200,7 @@ const ToolPage = () => {
           {data.features.map((f, i) => (
             <div
               key={i}
-              className="bg-white/[0.04] border border-white/10 shadow-[0_2px_12px_rgba(0,0,0,0.4)] rounded-xl p-5 flex flex-col gap-3 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
+              className="bg-card border border-border shadow-sm rounded-xl p-5 flex flex-col gap-3 hover:border-primary/40 hover:bg-muted/50 transition-colors"
             >
               <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-xl shrink-0">
                 {f.icon}
@@ -257,7 +257,7 @@ const ToolPage = () => {
         <h2 className="text-xl font-bold mb-6">Модели</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {modelCards.map((m) => (
-            <div key={m.name} className="bg-white/[0.04] border border-white/10 shadow-[0_2px_12px_rgba(0,0,0,0.4)] rounded-xl overflow-hidden hover:border-primary/40 hover:bg-white/[0.06] transition-colors cursor-pointer">
+            <div key={m.name} className="bg-card border border-border shadow-sm rounded-xl overflow-hidden hover:border-primary/40 hover:bg-muted/50 transition-colors cursor-pointer">
               <img src={m.image} alt={m.name} loading="lazy" className="w-full h-[72px] object-cover" />
               <div className="p-4">
               <div className="flex items-center gap-2 mb-2">
@@ -281,7 +281,7 @@ const ToolPage = () => {
         </div>
         <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
           {imageTools.map((t) => (
-            <div key={t.label} className="shrink-0 w-[180px] h-[120px] border border-white/10 bg-white/[0.04] shadow-[0_2px_12px_rgba(0,0,0,0.4)] rounded-xl flex flex-col items-center justify-center gap-3 hover:border-primary/40 hover:bg-white/[0.06] transition-colors cursor-pointer">
+            <div key={t.label} className="shrink-0 w-[180px] h-[120px] border border-border bg-card shadow-sm rounded-xl flex flex-col items-center justify-center gap-3 hover:border-primary/40 hover:bg-muted/50 transition-colors cursor-pointer">
               <div className="w-10 h-10 rounded-[8px] flex items-center justify-center" style={{ background: "rgba(232, 84, 32, 0.1)", border: "1px solid rgba(232, 84, 32, 0.18)" }}>
                 <t.Icon size={20} strokeWidth={1.75} style={{ color: "hsl(var(--primary))" }} />
               </div>
