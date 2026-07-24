@@ -1,6 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { CreditsProvider } from "@/hooks/useCredits";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Layout } from "@/components/layout/Layout";
 import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
@@ -80,6 +81,7 @@ function RootComponent() {
   return (
     <ThemeProvider>
       <AuthProvider>
+        <CreditsProvider>
         <TooltipProvider>
           <Layout>
             <ErrorBoundary>
@@ -91,6 +93,7 @@ function RootComponent() {
           <CornerPromo />
           <DailyCheckIn />
         </TooltipProvider>
+        </CreditsProvider>
       </AuthProvider>
     </ThemeProvider>
   );
