@@ -1,14 +1,28 @@
 import { useEffect, useState } from "react";
-import { CreditCard, X, Zap, Mail, Copy, Check, Trash2 } from "lucide-react";
+import {
+  CreditCard,
+  X,
+  Zap,
+  Mail,
+  Copy,
+  Check,
+  Trash2,
+  KeyRound,
+  Gift,
+  Ticket,
+  Users,
+  HelpCircle,
+  Plus,
+} from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
 
 type SubStatus = "active" | "cancelled" | "none";
 type Card = { brand: string; last4: string; exp: string } | null;
+type Tab = "profile" | "history";
 
 const PLAN_NAME = "Про";
-const PLAN_BADGE: "PRO" | "FREE" = "PRO";
 const NEXT_BILLING = "22 августа 2026";
 const PRICE = "1 490 ₽";
 const CREDITS_USED = 6240;
@@ -76,15 +90,48 @@ function Modal({
 
 const btnSecondary =
   "inline-flex items-center justify-center h-9 px-3.5 rounded-lg text-[13px] font-medium border border-white/15 text-foreground hover:bg-white/[0.06] transition-colors";
+const btnSecondarySm =
+  "inline-flex items-center justify-center h-8 px-3 rounded-lg text-[12px] font-medium border border-white/15 text-foreground hover:bg-white/[0.06] transition-colors";
 const btnDestructive =
   "inline-flex items-center justify-center h-9 px-3.5 rounded-lg text-[13px] font-medium bg-destructive text-destructive-foreground hover:bg-destructive/90 transition-colors";
-const btnAccent =
-  "inline-flex items-center justify-center h-9 px-3.5 rounded-lg text-[13px] font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-colors";
 
 const card = "rounded-2xl border border-white/10 bg-white/[0.04] p-5";
 
+function CardIcon({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.05] text-muted-foreground">
+      {children}
+    </span>
+  );
+}
+
+function CardHeader({
+  icon,
+  title,
+  hint,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  hint?: string;
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <CardIcon>{icon}</CardIcon>
+      <div className="flex items-center gap-1.5">
+        <h3 className="text-[15px] font-semibold">{title}</h3>
+        {hint && (
+          <span title={hint} className="text-muted-foreground/70">
+            <HelpCircle className="h-3.5 w-3.5" />
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function AccountPage() {
   const { userName } = useAuth();
+  const [tab, setTab] = useState<Tab>("profile");
   const [subscription, setSubscription] = useState<SubStatus>("active");
   const [card1, setCard1] = useState<Card>({ brand: "Visa", last4: "4242", exp: "09/28" });
   const [cancelOpen, setCancelOpen] = useState(false);
@@ -95,7 +142,6 @@ export default function AccountPage() {
   const [copied, setCopied] = useState(false);
 
   const initial = (userName || DISPLAY_NAME).charAt(0).toUpperCase();
-  const balancePct = Math.min(100, Math.round((CREDITS_USED / CREDITS_TOTAL) * 100));
 
   const handleCopyRef = () => {
     navigator.clipboard.writeText(REF_LINK);
@@ -104,113 +150,112 @@ export default function AccountPage() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const statusBadge =
-    subscription === "active" ? (
-      <span className="inline-flex items-center rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-0.5 text-[11px] font-medium text-emerald-300">
-        Активна
-      </span>
-    ) : subscription === "cancelled" ? (
-      <span className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.06] px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
-        Отменена
-      </span>
-    ) : (
-      <span className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.06] px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
-        Не активна
-      </span>
-    );
+  const tabBtn = (active: boolean) =>
+    `h-9 px-4 rounded-full text-[13px] font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
+      active
+        ? "bg-white/[0.08] text-foreground"
+        : "text-muted-foreground hover:text-foreground"
+    }`;
 
   return (
     <div className="min-h-[calc(100vh-var(--header-height,64px))]">
       <div className="max-w-4xl mx-auto px-4 py-8 space-y-5">
-        {/* Header */}
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-4 min-w-0">
-            <div className="w-14 h-14 rounded-full p-[2px] bg-gradient-to-br from-[#E85420] via-[#ff7a3d] to-[#ffb27a] shrink-0">
-              <div className="w-full h-full rounded-full bg-[#1a1614] flex items-center justify-center text-xl font-semibold text-foreground">
-                {initial}
-              </div>
-            </div>
-            <div className="min-w-0">
-              <h1 className="text-2xl md:text-3xl font-semibold tracking-tight truncate">{DISPLAY_NAME}</h1>
-              <p className="text-sm text-muted-foreground truncate">{EMAIL}</p>
+        {/* 1. Header */}
+        <div className="flex items-center gap-4">
+          <div className="h-[88px] w-[88px] rounded-full border-2 border-primary p-1 shrink-0">
+            <div className="h-full w-full rounded-full bg-[#1a1614] flex items-center justify-center text-2xl font-semibold text-foreground">
+              {initial}
             </div>
           </div>
-          <span
-            className={
-              PLAN_BADGE === "PRO"
-                ? "inline-flex items-center rounded-full border border-[#E85420]/40 bg-[#E85420]/10 px-3 py-1 text-xs font-semibold text-[#ff9a6a]"
-                : "inline-flex items-center rounded-full border border-white/15 bg-white/[0.06] px-3 py-1 text-xs font-semibold text-muted-foreground"
-            }
-          >
-            {PLAN_BADGE === "PRO" ? "Про" : "Free"}
-          </span>
+          <div className="min-w-0">
+            <h1 className="text-3xl font-semibold tracking-tight truncate">{DISPLAY_NAME}</h1>
+            <p className="text-sm text-muted-foreground truncate">{EMAIL}</p>
+          </div>
         </div>
 
-        {/* Balance */}
+        {/* 2. Balance */}
         <div className={card}>
           <div className="flex items-center justify-between gap-4 flex-wrap">
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2 text-[13px] text-muted-foreground">
-                <Zap className="h-4 w-4 text-[#ff9a6a]" />
-                Текущий баланс
+            <div className="flex items-center gap-4 min-w-0">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/[0.06] border border-white/10">
+                <Zap className="h-5 w-5 text-primary" />
+              </span>
+              <div className="min-w-0">
+                <div className="text-sm text-muted-foreground">Текущий баланс</div>
+                <div className="mt-0.5 text-4xl font-bold tabular-nums leading-none">
+                  {CREDITS_USED.toLocaleString("ru-RU")}
+                  <span className="ml-2 text-base font-normal text-muted-foreground align-middle">
+                    кредитов
+                  </span>
+                </div>
               </div>
-              <div className="mt-2 text-3xl md:text-[32px] font-semibold tabular-nums">
-                {CREDITS_USED.toLocaleString("ru-RU")} / {CREDITS_TOTAL.toLocaleString("ru-RU")}{" "}
-                <span className="text-base font-normal text-muted-foreground">кредитов</span>
-              </div>
-              <div className="mt-3 h-1.5 w-full max-w-md bg-white/[0.06] rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-gradient-to-r from-[#E85420] to-[#ff7a3d] rounded-full"
-                  style={{ width: `${balancePct}%` }}
-                />
-              </div>
-              <div className="text-xs text-muted-foreground mt-2">Хватит на ~12 генераций</div>
             </div>
             <Link
               to="/pricing"
               hash="credit-packs"
-              className="inline-flex items-center justify-center h-10 px-5 rounded-lg text-[13px] font-semibold text-white bg-gradient-to-r from-[#E85420] to-[#ff7a3d] hover:opacity-95 transition-opacity"
+              className="inline-flex items-center gap-1.5 h-10 px-5 rounded-full text-[13px] font-semibold text-primary-foreground bg-primary hover:bg-primary/90 transition-colors"
             >
+              <Plus className="h-4 w-4" />
               Пополнить
             </Link>
           </div>
         </div>
 
-        {/* Subscription */}
+        {/* 3. Subscription */}
         <div className={card}>
           <div className="flex items-start justify-between gap-4">
             <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <h2 className="text-lg font-semibold">Подписка</h2>
-              </div>
-              <div className="mt-2 flex items-center gap-2">
-                <span className="text-[15px] font-medium text-foreground">План «{PLAN_NAME}»</span>
-                {statusBadge}
-              </div>
+              <h2 className="text-lg font-semibold">Подписка</h2>
               {subscription === "active" && (
-                <div className="mt-3 space-y-1 text-[13px] text-muted-foreground">
-                  <div>
-                    Следующее списание:{" "}
-                    <span className="text-foreground tabular-nums">{NEXT_BILLING} · {PRICE}</span>
-                  </div>
-                  <div>
-                    Кредиты:{" "}
-                    <span className="text-foreground tabular-nums">
-                      {CREDITS_USED.toLocaleString("ru-RU")} из {CREDITS_TOTAL.toLocaleString("ru-RU")}
+                <>
+                  <div className="mt-2 flex items-center gap-2">
+                    <span className="text-[15px] font-medium text-foreground">
+                      План «{PLAN_NAME}»
+                    </span>
+                    <span className="inline-flex items-center rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-0.5 text-[11px] font-medium text-emerald-300">
+                      Активна
                     </span>
                   </div>
-                </div>
+                  <div className="mt-2 space-y-1 text-sm text-muted-foreground">
+                    <div>
+                      Следующее списание:{" "}
+                      <span className="text-foreground tabular-nums">
+                        {NEXT_BILLING} · {PRICE}
+                      </span>
+                    </div>
+                    <div>
+                      Кредиты:{" "}
+                      <span className="text-foreground tabular-nums">
+                        {CREDITS_USED.toLocaleString("ru-RU")} из{" "}
+                        {CREDITS_TOTAL.toLocaleString("ru-RU")}
+                      </span>
+                    </div>
+                  </div>
+                </>
               )}
               {subscription === "cancelled" && (
-                <div className="mt-3 text-[13px] text-muted-foreground">
-                  <span className="inline-flex items-center rounded-md border border-white/10 bg-white/[0.05] px-2 py-1">
-                    Активна до <span className="ml-1 text-foreground">{NEXT_BILLING}</span>
-                  </span>
-                </div>
+                <>
+                  <div className="mt-2 flex items-center gap-2">
+                    <span className="text-[15px] font-medium text-foreground">
+                      План «{PLAN_NAME}»
+                    </span>
+                    <span className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.06] px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
+                      Активна до {NEXT_BILLING}
+                    </span>
+                  </div>
+                  <div className="mt-2 text-sm text-muted-foreground">
+                    Кредиты:{" "}
+                    <span className="text-foreground tabular-nums">
+                      {CREDITS_USED.toLocaleString("ru-RU")} из{" "}
+                      {CREDITS_TOTAL.toLocaleString("ru-RU")}
+                    </span>
+                  </div>
+                </>
               )}
               {subscription === "none" && (
-                <div className="mt-3 text-[13px] text-muted-foreground">
-                  Активной подписки нет.
+                <div className="mt-2 text-[15px] text-foreground">
+                  План «Старт» ·{" "}
+                  <span className="text-muted-foreground">Бесплатно</span>
                 </div>
               )}
             </div>
@@ -226,174 +271,191 @@ export default function AccountPage() {
                 </button>
               )}
               {subscription === "none" && (
-                <a href="/pricing" className={btnAccent}>Выбрать план</a>
+                <Link to="/pricing" className={btnSecondary}>
+                  Выбрать тариф
+                </Link>
               )}
             </div>
           </div>
         </div>
 
-        {/* Payment method */}
-        <div className={card}>
-          <h2 className="text-lg font-semibold">Способ оплаты</h2>
-          {card1 ? (
-            <div className="mt-3 flex items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <span className="flex h-9 w-12 items-center justify-center rounded-md border border-white/10 bg-white/[0.06]">
-                  <CreditCard className="h-4 w-4 text-muted-foreground" />
+        {/* 4. Tabs */}
+        <div className="flex items-center gap-1 pt-1">
+          <button className={tabBtn(tab === "profile")} onClick={() => setTab("profile")}>
+            Профиль
+          </button>
+          <button className={tabBtn(tab === "history")} onClick={() => setTab("history")}>
+            История
+          </button>
+        </div>
+
+        {/* 5. Profile tab */}
+        {tab === "profile" && (
+          <div className="grid md:grid-cols-2 gap-4">
+            {/* Способ входа */}
+            <div className={card}>
+              <CardHeader
+                icon={<KeyRound className="h-4 w-4" />}
+                title="Способ входа"
+                hint="Через какой аккаунт вы вошли"
+              />
+              <div className="mt-3 flex items-center gap-3">
+                <span className="flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-white/[0.06]">
+                  <Mail className="h-4 w-4 text-muted-foreground" />
                 </span>
-                <div className="text-[13px]">
-                  <div className="text-foreground tabular-nums">
-                    {card1.brand} •••• {card1.last4}
-                  </div>
-                  <div className="text-muted-foreground tabular-nums">до {card1.exp}</div>
+                <div className="text-[13px] min-w-0">
+                  <div className="text-foreground">Email</div>
+                  <div className="text-muted-foreground truncate">{EMAIL}</div>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <button className={btnSecondary}>Заменить карту</button>
-                <button className={btnSecondary} onClick={() => setDetachOpen(true)}>
-                  Отвязать
+            </div>
+
+            {/* Промокод */}
+            <div className={card}>
+              <CardHeader icon={<Gift className="h-4 w-4" />} title="Промокод" />
+              <div className="mt-3 flex items-center gap-2">
+                <input
+                  value={promo}
+                  onChange={(e) => setPromo(e.target.value)}
+                  placeholder="Введите промокод"
+                  className="flex-1 h-9 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
+                />
+                <button
+                  className={btnSecondary}
+                  onClick={() => toast("Проверка промокода недоступна в демо")}
+                >
+                  Применить
                 </button>
               </div>
             </div>
-          ) : (
-            <div className="mt-3 flex items-center justify-between gap-4">
-              <div className="text-[13px] text-muted-foreground">Карта не привязана</div>
-              <button
-                className={btnSecondary}
-                onClick={() => setCard1({ brand: "Visa", last4: "4242", exp: "09/28" })}
-              >
-                Привязать карту
-              </button>
+
+            {/* Сертификат */}
+            <div className={card}>
+              <CardHeader icon={<Ticket className="h-4 w-4" />} title="Сертификат" />
+              <div className="mt-3 flex items-center gap-2">
+                <input
+                  value={cert}
+                  onChange={(e) => setCert(e.target.value)}
+                  placeholder="Код сертификата"
+                  className="flex-1 h-9 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
+                />
+                <button
+                  className={btnSecondary}
+                  onClick={() => toast("Активация сертификата недоступна в демо")}
+                >
+                  Активировать
+                </button>
+              </div>
             </div>
-          )}
-        </div>
 
-        {/* History */}
-        <div className={card}>
-          <h2 className="text-lg font-semibold">История начислений</h2>
-          <div className="mt-4 overflow-hidden rounded-xl border border-white/10">
-            <table className="w-full text-[13px]">
-              <thead>
-                <tr className="bg-white/[0.03] text-muted-foreground">
-                  <th className="px-4 py-2.5 text-left font-medium">Дата</th>
-                  <th className="px-4 py-2.5 text-left font-medium">Описание</th>
-                  <th className="px-4 py-2.5 text-right font-medium">Сумма</th>
-                </tr>
-              </thead>
-              <tbody>
-                {HISTORY.map((row, i) => (
-                  <tr
-                    key={i}
-                    className="border-t border-white/[0.06] hover:bg-white/[0.02] transition-colors"
+            {/* Реферальная программа */}
+            <div className={card}>
+              <CardHeader
+                icon={<Users className="h-4 w-4" />}
+                title="Реферальная программа"
+                hint="По 100 кредитов вам и другу за первую подписку"
+              />
+              <div className="mt-2 text-[13px] text-muted-foreground tabular-nums">
+                Приглашено: <span className="text-foreground">0</span> · Начислено:{" "}
+                <span className="text-foreground">0</span>
+              </div>
+              <div className="mt-3 flex items-center gap-2">
+                <input
+                  readOnly
+                  value={REF_LINK}
+                  className="flex-1 h-9 px-3 rounded-lg text-[12px] bg-white/[0.04] border border-white/10 text-foreground truncate focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                />
+                <button className={btnSecondary} onClick={handleCopyRef}>
+                  {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                  <span className="ml-1.5">Копировать</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Способ оплаты */}
+            <div className={card}>
+              <CardHeader icon={<CreditCard className="h-4 w-4" />} title="Способ оплаты" />
+              {card1 ? (
+                <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
+                  <div className="text-[13px] tabular-nums">
+                    <span className="text-foreground">
+                      {card1.brand} •••• {card1.last4}
+                    </span>{" "}
+                    <span className="text-muted-foreground">· до {card1.exp}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      className={btnSecondarySm}
+                      onClick={() => toast("Замена карты недоступна в демо")}
+                    >
+                      Заменить карту
+                    </button>
+                    <button className={btnSecondarySm} onClick={() => setDetachOpen(true)}>
+                      Отвязать
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
+                  <div className="text-[13px] text-muted-foreground">Карта не привязана</div>
+                  <button
+                    className={btnSecondarySm}
+                    onClick={() => setCard1({ brand: "Visa", last4: "4242", exp: "09/28" })}
                   >
-                    <td className="px-4 py-3 tabular-nums text-muted-foreground">{row.date}</td>
-                    <td className="px-4 py-3 text-foreground">{row.desc}</td>
-                    <td className="px-4 py-3 text-right tabular-nums text-foreground">
-                      {row.amount}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+                    Привязать карту
+                  </button>
+                </div>
+              )}
+            </div>
 
-        {/* 2x2 grid */}
-        <div className="grid md:grid-cols-2 gap-4">
-          {/* Auth method */}
-          <div className={card}>
-            <h3 className="text-[15px] font-semibold">Способ входа</h3>
-            <div className="mt-3 flex items-center gap-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-white/[0.06]">
-                <Mail className="h-4 w-4 text-muted-foreground" />
-              </span>
-              <div className="text-[13px]">
-                <div className="text-foreground">Email</div>
-                <div className="text-muted-foreground truncate">{EMAIL}</div>
+            {/* Удаление аккаунта */}
+            <div className={card}>
+              <CardHeader icon={<Trash2 className="h-4 w-4" />} title="Удаление аккаунта" />
+              <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
+                <p className="text-[13px] text-muted-foreground">
+                  Все данные будут удалены без возможности восстановления
+                </p>
+                <button
+                  onClick={() => setDeleteOpen(true)}
+                  className="text-[13px] font-medium text-destructive hover:underline"
+                >
+                  Удалить аккаунт
+                </button>
               </div>
             </div>
           </div>
+        )}
 
-          {/* Promo */}
+        {/* 6. History tab */}
+        {tab === "history" && (
           <div className={card}>
-            <h3 className="text-[15px] font-semibold">Промокод</h3>
-            <div className="mt-3 flex items-center gap-2">
-              <input
-                value={promo}
-                onChange={(e) => setPromo(e.target.value)}
-                placeholder="Введите промокод"
-                className="flex-1 h-9 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
-              />
-              <button
-                className={btnSecondary}
-                onClick={() => toast("Проверка промокода недоступна в демо")}
-              >
-                Применить
-              </button>
+            <div className="overflow-hidden rounded-xl border border-white/10">
+              <table className="w-full text-[13px]">
+                <thead>
+                  <tr className="bg-white/[0.03] text-muted-foreground">
+                    <th className="px-4 py-2.5 text-left font-medium">Дата</th>
+                    <th className="px-4 py-2.5 text-left font-medium">Описание</th>
+                    <th className="px-4 py-2.5 text-right font-medium">Сумма</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {HISTORY.map((row, i) => (
+                    <tr
+                      key={i}
+                      className="border-t border-white/[0.06] hover:bg-white/[0.02] transition-colors"
+                    >
+                      <td className="px-4 py-3 tabular-nums text-muted-foreground">{row.date}</td>
+                      <td className="px-4 py-3 text-foreground">{row.desc}</td>
+                      <td className="px-4 py-3 text-right tabular-nums text-foreground">
+                        {row.amount}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
-
-          {/* Certificate */}
-          <div className={card}>
-            <h3 className="text-[15px] font-semibold">Сертификат</h3>
-            <div className="mt-3 flex items-center gap-2">
-              <input
-                value={cert}
-                onChange={(e) => setCert(e.target.value)}
-                placeholder="Код сертификата"
-                className="flex-1 h-9 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
-              />
-              <button
-                className={btnSecondary}
-                onClick={() => toast("Активация сертификата недоступна в демо")}
-              >
-                Активировать
-              </button>
-            </div>
-          </div>
-
-          {/* Referral */}
-          <div className={card}>
-            <h3 className="text-[15px] font-semibold">Реферальная программа</h3>
-            <div className="mt-2 text-[13px] text-muted-foreground tabular-nums">
-              Приглашено: <span className="text-foreground">0</span> · Начислено:{" "}
-              <span className="text-foreground">0</span>
-            </div>
-            <div className="mt-3 flex items-center gap-2">
-              <input
-                readOnly
-                value={REF_LINK}
-                className="flex-1 h-9 px-3 rounded-lg text-[12px] bg-white/[0.04] border border-white/10 text-foreground truncate focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-              />
-              <button className={btnSecondary} onClick={handleCopyRef}>
-                {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                <span className="ml-1.5">Копировать</span>
-              </button>
-            </div>
-            <div className="mt-2 text-xs text-muted-foreground">
-              По 100 кредитов вам и другу, когда друг оформит первую подписку
-            </div>
-          </div>
-        </div>
-
-        {/* Delete account */}
-        <div className="rounded-2xl border border-white/10 p-5">
-          <div className="flex items-start justify-between gap-4 flex-wrap">
-            <div className="min-w-0">
-              <h3 className="text-[15px] font-semibold">Удаление аккаунта</h3>
-              <p className="mt-1 text-[13px] text-muted-foreground">
-                Аккаунт и все генерации будут удалены без возможности восстановления
-              </p>
-            </div>
-            <button
-              onClick={() => setDeleteOpen(true)}
-              className="inline-flex items-center gap-1.5 h-9 px-3.5 rounded-lg text-[13px] font-medium border border-destructive/30 text-destructive hover:bg-destructive/10 transition-colors"
-            >
-              <Trash2 className="h-3.5 w-3.5" />
-              Удалить аккаунт
-            </button>
-          </div>
-        </div>
+        )}
       </div>
 
       <Modal
