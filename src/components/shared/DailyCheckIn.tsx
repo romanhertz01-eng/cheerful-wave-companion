@@ -5,14 +5,22 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useCopyToast } from "@/components/shared/CopyToast";
 
 export const DAYS = [
-  { day: 1, credits: 3 },
-  { day: 2, credits: 3 },
-  { day: 3, credits: 5 },
-  { day: 4, credits: 5 },
-  { day: 5, credits: 7 },
-  { day: 6, credits: 7 },
-  { day: 7, credits: 30, isBonus: true },
+  { day: 1, credits: 5 },
+  { day: 2, credits: 5 },
+  { day: 3, credits: 8 },
+  { day: 4, credits: 8 },
+  { day: 5, credits: 12 },
+  { day: 6, credits: 12 },
+  { day: 7, credits: 50, isBonus: true },
 ];
+
+function plurDays(n: number): string {
+  const mod10 = n % 10;
+  const mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return "день";
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return "дня";
+  return "дней";
+}
 
 // TODO: показывать только залогиненным
 // TODO: начисление на бэкенде, стрик считать по времени сервера
@@ -53,13 +61,13 @@ export function DailyCheckIn() {
   const location = useLocation();
   const shownThisSession = useRef(false);
 
-  // Умный показ: только на главной, задержка 3с, не в первый визит,
-  // отмена при активности пользователя, один раз в день.
+  // Умный показ: везде кроме /tools и /checkout, задержка 3с,
+  // не в первый визит, отмена при активности, один раз в день.
   // TODO: авторизация — показывать только залогиненным
   // TODO: серверный стрик — считать по времени сервера
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (location.pathname !== "/") return;
+    if (location.pathname.startsWith("/tools") || location.pathname.startsWith("/checkout")) return;
     if (shownThisSession.current) return;
     if (claimedToday) return;
 
@@ -157,7 +165,7 @@ export function DailyCheckIn() {
               Заходите 7 дней подряд
             </h2>
             <p className="text-sm text-muted-foreground mb-5">
-              и получите до 60 кредитов бесплатно
+              и получите до 100 кредитов бесплатно
             </p>
 
             <div
@@ -168,7 +176,7 @@ export function DailyCheckIn() {
               }}
             >
               <span className="text-sm text-foreground">
-                Вы на <span className="font-semibold">{streak}-м</span> дне
+                Ваш стрик: <span className="font-semibold">{streak} {plurDays(streak)}</span> из 7
               </span>
               <span
                 className="text-sm font-bold font-mono"
@@ -217,10 +225,6 @@ export function DailyCheckIn() {
                 );
               })}
             </div>
-
-            <p className="text-xs text-muted-foreground mb-5">
-              60 кредитов — это одна генерация изображения
-            </p>
 
             {claimedToday ? (
               <div className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-[14px] text-sm font-medium text-muted-foreground border border-white/10 bg-white/[0.04]">
