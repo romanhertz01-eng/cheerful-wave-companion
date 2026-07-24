@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useLocation } from "@tanstack/react-router";
 import { X, Gift, Check, Flame } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCopyToast } from "@/components/shared/CopyToast";
@@ -44,17 +45,61 @@ export function useDailyCheckIn() {
   return { streak, claimedToday, claim, current: DAYS[streak - 1] };
 }
 
-interface DailyCheckInProps {
-  open: boolean;
-  onClose: () => void;
-  streak: number;
-  claimedToday: boolean;
-  onClaim: () => void;
-}
-
-export function DailyCheckIn({ open, onClose, streak, claimedToday, onClaim }: DailyCheckInProps) {
-  const current = DAYS[streak - 1];
+export function DailyCheckIn() {
+  const { streak, claimedToday, claim, current } = useDailyCheckIn();
+  const [open, setOpen] = useState(false);
+  const onClose = () => setOpen(false);
   const toast = useCopyToast();
+  const location = useLocation();
+  const shownThisSession = useRef(false);
+
+  // Умный показ: только на главной, задержка 3с, не в первый визит,
+  // отмена при активности пользователя, один раз в день.
+  // TODO: авторизация — показывать только залогиненным
+  // TODO: серверный стрик — считать по времени сервера
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (location.pathname !== "/") return;
+    if (shownThisSession.current) return;
+    if (claimedToday) return;
+
+    // Первый визит — записать и выйти
+    if (!localStorage.getItem("era2_visited")) {
+      localStorage.setItem("era2_visited", "1");
+      return;
+    }
+
+    let cancelled = false;
+    const timer = window.setTimeout(() => {
+      if (cancelled) return;
+      shownThisSession.current = true;
+      setOpen(true);
+      cleanup();
+    }, 3000);
+
+    const onActivity = () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+      shownThisSession.current = true;
+      cleanup();
+    };
+
+    const cleanup = () => {
+      window.removeEventListener("click", onActivity);
+      window.removeEventListener("keydown", onActivity);
+      window.removeEventListener("scroll", onActivity);
+    };
+
+    window.addEventListener("click", onActivity);
+    window.addEventListener("keydown", onActivity);
+    window.addEventListener("scroll", onActivity, { passive: true });
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+      cleanup();
+    };
+  }, [location.pathname, claimedToday]);
 
   useEffect(() => {
     if (!open) return;
@@ -69,7 +114,7 @@ export function DailyCheckIn({ open, onClose, streak, claimedToday, onClaim }: D
   }, [open, onClose]);
 
   const handleCheckin = () => {
-    onClaim();
+    claim();
     toast("", `+${current.credits} кредитов зачислены`);
     onClose();
   };
