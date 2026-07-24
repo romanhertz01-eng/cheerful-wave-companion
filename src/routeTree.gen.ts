@@ -16,6 +16,7 @@ import { Route as StudiosRouteImport } from './routes/studios'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as DesignRouteImport } from './routes/design'
+import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AudioRouteImport } from './routes/audio'
 import { Route as AgentsRouteImport } from './routes/agents'
@@ -62,6 +63,11 @@ const HistoryRoute = HistoryRouteImport.update({
 const DesignRoute = DesignRouteImport.update({
   id: '/design',
   path: '/design',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -131,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/agents': typeof AgentsRoute
   '/audio': typeof AudioRoute
   '/auth': typeof AuthRoute
+  '/checkout': typeof CheckoutRoute
   '/design': typeof DesignRoute
   '/history': typeof HistoryRoute
   '/pricing': typeof PricingRoute
@@ -152,6 +159,7 @@ export interface FileRoutesByTo {
   '/agents': typeof AgentsRoute
   '/audio': typeof AudioRoute
   '/auth': typeof AuthRoute
+  '/checkout': typeof CheckoutRoute
   '/design': typeof DesignRoute
   '/history': typeof HistoryRoute
   '/pricing': typeof PricingRoute
@@ -174,6 +182,7 @@ export interface FileRoutesById {
   '/agents': typeof AgentsRoute
   '/audio': typeof AudioRoute
   '/auth': typeof AuthRoute
+  '/checkout': typeof CheckoutRoute
   '/design': typeof DesignRoute
   '/history': typeof HistoryRoute
   '/pricing': typeof PricingRoute
@@ -197,6 +206,7 @@ export interface FileRouteTypes {
     | '/agents'
     | '/audio'
     | '/auth'
+    | '/checkout'
     | '/design'
     | '/history'
     | '/pricing'
@@ -218,6 +228,7 @@ export interface FileRouteTypes {
     | '/agents'
     | '/audio'
     | '/auth'
+    | '/checkout'
     | '/design'
     | '/history'
     | '/pricing'
@@ -239,6 +250,7 @@ export interface FileRouteTypes {
     | '/agents'
     | '/audio'
     | '/auth'
+    | '/checkout'
     | '/design'
     | '/history'
     | '/pricing'
@@ -261,6 +273,7 @@ export interface RootRouteChildren {
   AgentsRoute: typeof AgentsRoute
   AudioRoute: typeof AudioRoute
   AuthRoute: typeof AuthRoute
+  CheckoutRoute: typeof CheckoutRoute
   DesignRoute: typeof DesignRoute
   HistoryRoute: typeof HistoryRoute
   PricingRoute: typeof PricingRoute
@@ -326,6 +339,13 @@ declare module '@tanstack/react-router' {
       path: '/design'
       fullPath: '/design'
       preLoaderRoute: typeof DesignRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -421,6 +441,7 @@ const rootRouteChildren: RootRouteChildren = {
   AgentsRoute: AgentsRoute,
   AudioRoute: AudioRoute,
   AuthRoute: AuthRoute,
+  CheckoutRoute: CheckoutRoute,
   DesignRoute: DesignRoute,
   HistoryRoute: HistoryRoute,
   PricingRoute: PricingRoute,

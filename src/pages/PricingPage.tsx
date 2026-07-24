@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "@tanstack/react-router";
 import { Check, ChevronDown, Users, Copy, Infinity as InfinityIcon, X, ArrowRight } from "lucide-react";
 import { useCopyToast } from "@/components/shared/CopyToast";
 import { cn } from "@/lib/utils";
@@ -108,16 +109,40 @@ const PricingPage = () => {
         </div>
         <div className="text-xs text-muted-foreground mt-1.5">{billingLine}</div>
 
-        <button
-          className={cn(
-            "mt-4 w-full py-3 rounded-xl text-sm font-semibold transition-colors",
-            isHighlight
-              ? "bg-primary text-primary-foreground hover:opacity-90"
-              : "border border-white/15 text-foreground hover:bg-white/[0.06]"
-          )}
-        >
-          {plan.cta}
-        </button>
+        {isEnterprise ? (
+          <a
+            href="mailto:sales@era2.ai?subject=Enterprise%20запрос"
+            className={cn(
+              "mt-4 w-full py-3 rounded-xl text-sm font-semibold transition-colors text-center",
+              "border border-white/15 text-foreground hover:bg-white/[0.06]"
+            )}
+          >
+            {plan.cta}
+          </a>
+        ) : plan.monthPrice === 0 ? (
+          <Link
+            to="/auth"
+            className={cn(
+              "mt-4 w-full py-3 rounded-xl text-sm font-semibold transition-colors text-center",
+              "border border-white/15 text-foreground hover:bg-white/[0.06]"
+            )}
+          >
+            {plan.cta}
+          </Link>
+        ) : (
+          <Link
+            to="/checkout"
+            search={{ plan: plan.id }}
+            className={cn(
+              "mt-4 w-full py-3 rounded-xl text-sm font-semibold transition-colors text-center",
+              isHighlight
+                ? "bg-primary text-primary-foreground hover:opacity-90"
+                : "border border-white/15 text-foreground hover:bg-white/[0.06]"
+            )}
+          >
+            {plan.cta}
+          </Link>
+        )}
 
         <div className="border-t border-white/10 my-5" />
 
