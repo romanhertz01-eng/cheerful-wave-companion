@@ -116,7 +116,7 @@ export default function CheckoutPage() {
           </button>
         </div>
 
-        <div className="grid md:grid-cols-[1fr_1.05fr] gap-5">
+        <div className="grid md:grid-cols-[1fr_1.05fr] gap-5 items-start">
           {/* LEFT: Order summary */}
           <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
             <div className="text-[13px] text-muted-foreground">Ваш план</div>
@@ -173,7 +173,17 @@ export default function CheckoutPage() {
 
             <div className="mt-5 pt-5 border-t border-white/10">
               <div className="flex items-center justify-between gap-3">
-                <div className="text-[13px] text-foreground">Подарить подписку другу</div>
+                <div className="flex items-center gap-3 min-w-0">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/[0.05] border border-white/10">
+                    <Gift className="h-4 w-4 text-muted-foreground" />
+                  </span>
+                  <div className="min-w-0">
+                    <div className="text-[13px] text-foreground">Подарить подписку другу</div>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      После оплаты вы получите ссылку — отправьте её другу в любой мессенджер
+                    </p>
+                  </div>
+                </div>
                 <button
                   type="button"
                   role="switch"
@@ -192,9 +202,6 @@ export default function CheckoutPage() {
                   />
                 </button>
               </div>
-              <p className="mt-1.5 text-xs text-muted-foreground">
-                После оплаты вы получите ссылку — отправьте её другу в любой мессенджер
-              </p>
             </div>
           </div>
 
