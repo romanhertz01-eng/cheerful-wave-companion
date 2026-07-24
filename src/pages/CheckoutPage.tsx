@@ -276,17 +276,25 @@ export default function CheckoutPage() {
                 {isGift ? `Подарить за ${fmtRub(selected.total)}` : `Оплатить ${fmtRub(selected.total)}`}
               </button>
 
-              <div className="mt-4 flex items-center justify-center gap-3 flex-wrap text-muted-foreground">
-                <SiVisa size={22} color="currentColor" />
-                <SiMastercard size={22} color="currentColor" />
-                {["МИР", "СБП", "SberPay", "ЮMoney"].map((b) => (
-                  <span
-                    key={b}
-                    className="inline-flex items-center h-7 px-2.5 rounded-md border border-white/10 bg-white/[0.04] text-[11px] font-semibold text-muted-foreground tracking-wide"
-                  >
-                    {b}
-                  </span>
-                ))}
+              <div className="mt-4 flex items-center justify-center gap-2 flex-wrap">
+                <span className="bg-white rounded-md px-2.5 py-1.5 flex items-center">
+                  <SiVisa color="#1A1F71" size={20} />
+                </span>
+                <span className="bg-white rounded-md px-2.5 py-1.5 flex items-center">
+                  <SiMastercard color="#EB001B" size={20} />
+                </span>
+                <span className="bg-white rounded-md px-2.5 py-1.5 flex items-center font-semibold text-xs" style={{ color: "#0F754E" }}>
+                  МИР
+                </span>
+                <span className="bg-white rounded-md px-2.5 py-1.5 flex items-center font-semibold text-xs" style={{ color: "#1D1D1B" }}>
+                  СБП
+                </span>
+                <span className="bg-white rounded-md px-2.5 py-1.5 flex items-center font-semibold text-xs" style={{ color: "#21A038" }}>
+                  SberPay
+                </span>
+                <span className="bg-white rounded-md px-2.5 py-1.5 flex items-center font-semibold text-xs" style={{ color: "#8B3FFC" }}>
+                  ЮMoney
+                </span>
               </div>
               <div className="mt-3 text-center text-xs text-muted-foreground">
                 Способ оплаты выберете на защищённой странице ЮKassa · Возврат в течение 3 дней
