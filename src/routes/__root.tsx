@@ -7,6 +7,7 @@ import { ErrorBoundary } from "@/components/shared/ErrorBoundary";
 import { OnboardingTour } from "@/components/shared/OnboardingTour";
 import { CopyToastProvider } from "@/components/shared/CopyToast";
 import { CornerPromo } from "@/components/shared/CornerPromo";
+import { DailyCheckIn } from "@/components/shared/DailyCheckIn";
 
 import appCss from "../styles.css?url";
 
@@ -88,6 +89,7 @@ function RootComponent() {
           <OnboardingTour />
           <CopyToastProvider />
           <CornerPromo />
+          <DailyCheckIn />
         </TooltipProvider>
       </AuthProvider>
     </ThemeProvider>

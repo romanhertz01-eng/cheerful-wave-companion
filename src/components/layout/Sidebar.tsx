@@ -1,7 +1,7 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import {
   Home, Image, Video, MessageSquare, Mic, Bot, LayoutGrid, Layers,
-  CreditCard, History, ChevronLeft, ChevronDown, X, ArrowRight, Gem, Plus, Gift, Copy, User, Flame, Check,
+  CreditCard, History, ChevronLeft, ChevronDown, X, ArrowRight, Gem, Plus, Gift, Copy, User,
 } from "lucide-react";
 import { useState } from "react";
 import { useCopyToast } from "@/components/shared/CopyToast";
@@ -9,7 +9,6 @@ import { StatusBadge } from "@/components/ui/era/StatusBadge";
 import { MOCK_HISTORY } from "@/data/mockHistory";
 import { cn } from "@/lib/utils";
 import { ReferralPopup } from "@/components/shared/ReferralPopup";
-import { DailyCheckIn, useDailyCheckIn, DAYS } from "@/components/shared/DailyCheckIn";
 
 const recentChats = MOCK_HISTORY.slice(0, 8).map((h) => ({
   id: h.id,
@@ -66,8 +65,6 @@ export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarP
   const copy = useCopyToast();
   const [recentOpen, setRecentOpen] = useState(true);
   const [showReferral, setShowReferral] = useState(false);
-  const [showCheckIn, setShowCheckIn] = useState(false);
-  const { streak, claimedToday, claim, current } = useDailyCheckIn();
   const isActive = (path: string) => location.pathname === path;
 
   const renderItem = (item: { icon: React.ElementType; label: string; path: string; badge?: "new" | "soon" }) => (
@@ -270,47 +267,6 @@ export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarP
             </div>
           )}
 
-          {/* TODO: показывать только залогиненным */}
-          {!collapsed && (
-            <div
-              onClick={() => setShowCheckIn(true)}
-              className="mx-3 mb-3 p-3 rounded-xl bg-white/[0.04] border border-white/10 cursor-pointer hover:bg-white/[0.06] transition-colors"
-            >
-              <div className="flex items-center gap-2 mb-2">
-                <Flame className="h-4 w-4 text-muted-foreground" />
-                <span className="text-[13px] font-medium text-foreground">Ежедневный бонус</span>
-              </div>
-              <div className="flex items-center gap-1 mb-1.5">
-                {DAYS.map((d) => {
-                  const done = d.day < streak || (d.day === streak && claimedToday);
-                  const active = d.day === streak && !claimedToday;
-                  return (
-                    <span
-                      key={d.day}
-                      className={cn(
-                        "h-1.5 w-1.5 rounded-full",
-                        done ? "bg-primary/70" : active ? "bg-white/[0.10] ring-1 ring-primary" : "bg-white/[0.10]"
-                      )}
-                    />
-                  );
-                })}
-              </div>
-              <p className="text-xs text-muted-foreground mb-2">День {streak} из 7</p>
-              {claimedToday ? (
-                <div className="w-full h-8 inline-flex items-center justify-center gap-1.5 rounded-md text-xs text-muted-foreground border border-white/10">
-                  <Check className="h-3 w-3" />
-                  Забрано сегодня
-                </div>
-              ) : (
-                <button
-                  onClick={(e) => { e.stopPropagation(); setShowCheckIn(true); }}
-                  className="w-full h-8 inline-flex items-center justify-center rounded-md text-xs font-medium text-foreground bg-white/[0.06] hover:bg-white/[0.10] border border-white/10 transition-colors"
-                >
-                  Забрать +{current.credits}
-                </button>
-              )}
-            </div>
-          )}
         </div>
 
         {/* Bottom CTA — ghost link */}
@@ -341,13 +297,6 @@ export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarP
         </button>
       </aside>
       {showReferral && <ReferralPopup onClose={() => setShowReferral(false)} />}
-      <DailyCheckIn
-        open={showCheckIn}
-        onClose={() => setShowCheckIn(false)}
-        streak={streak}
-        claimedToday={claimedToday}
-        onClaim={claim}
-      />
     </>
   );
 }
