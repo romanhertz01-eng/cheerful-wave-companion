@@ -125,7 +125,7 @@ export default function CheckoutPage() {
             <div className="mt-5 space-y-2.5 text-[13px]">
               <Row
                 label={isGift ? "Получатель" : "Аккаунт"}
-                value={isGift ? (giftEmail.trim() || "— укажите email —") : EMAIL}
+                value={isGift ? "По ссылке-подарку" : EMAIL}
               />
               <Row label="Кредитов в месяц" value={`${plan.credits}`} />
               {selected.discount > 0 && (
@@ -149,7 +149,7 @@ export default function CheckoutPage() {
             </div>
             <div className="text-xs text-muted-foreground mt-2 tabular-nums">
               {isGift
-                ? `Подписка активна до ${nextBilling} · без автопродления`
+                ? `Подписка на ${selected.label.toLowerCase()} · активируется по ссылке · без автопродления`
                 : `Следующее списание: ${nextBilling} · ${fmtRub(selected.total)}`}
             </div>
 
@@ -193,22 +193,8 @@ export default function CheckoutPage() {
                 </button>
               </div>
               <p className="mt-1.5 text-xs text-muted-foreground">
-                Вы оплачиваете — подписка активируется на аккаунте друга
+                После оплаты вы получите ссылку — отправьте её другу в любой мессенджер
               </p>
-              {isGift && (
-                <div className="mt-3 space-y-1.5 animate-in fade-in slide-in-from-top-1 duration-200">
-                  <input
-                    type="email"
-                    value={giftEmail}
-                    onChange={(e) => setGiftEmail(e.target.value)}
-                    placeholder="Email друга"
-                    className="w-full h-10 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
-                  />
-                  <p className="text-xs text-muted-foreground">
-                    Отправим письмо с активацией на этот адрес
-                  </p>
-                </div>
-              )}
             </div>
           </div>
 
@@ -274,20 +260,20 @@ export default function CheckoutPage() {
                   {" "}и{" "}
                   <a href="#" className="text-foreground underline underline-offset-2">политики конфиденциальности</a>
                   {isGift
-                    ? `. Это разовый платёж ${fmtRub(selected.total)} за подписку «${plan.name}» на ${selected.label.toLowerCase()} для указанного получателя. Автопродление не подключается.`
+                    ? `. Это разовый платёж ${fmtRub(selected.total)} за подарочную подписку «${plan.name}» на ${selected.label.toLowerCase()}. Автопродление не подключается.`
                     : ` и разрешаю ${LEGAL} списывать ${fmtRub(selected.total)} раз в ${periodWord} с привязанной карты в счёт подписки «${plan.name}». Отменить автопродление можно в любой момент в разделе Аккаунт.`}
                 </span>
               </label>
 
               <button
                 onClick={handlePay}
-                disabled={!agreed || (isGift && !giftEmailValid)}
+                disabled={!agreed}
                 className={cn(
                   "mt-5 w-full h-11 rounded-xl text-[14px] font-semibold text-white bg-gradient-to-r from-[#E85420] to-[#ff7a3d] transition-opacity",
-                  !agreed || (isGift && !giftEmailValid) ? "opacity-50 cursor-not-allowed" : "hover:opacity-95"
+                  !agreed ? "opacity-50 cursor-not-allowed" : "hover:opacity-95"
                 )}
               >
-                {isGift ? "Подарить" : "Оплатить"} {fmtRub(selected.total)}
+                {isGift ? `Подарить за ${fmtRub(selected.total)}` : `Оплатить ${fmtRub(selected.total)}`}
               </button>
 
               <div className="mt-4 flex items-center justify-center gap-3 flex-wrap text-muted-foreground">
