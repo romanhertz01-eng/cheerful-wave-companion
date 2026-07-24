@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, type ReactNode } from "react";
+import { createContext, useContext, useMemo, useState, useCallback, type ReactNode } from "react";
 
 export type CreditsState = {
   balance: number;
@@ -6,10 +6,11 @@ export type CreditsState = {
   periodSpent: number;
   isUnlimited: boolean;
   isLoading: boolean;
+  addCredits: (n: number) => void;
 };
 
 // TODO: источник истины — бэкенд, значения приходят после каждой генерации
-const MOCK: CreditsState = {
+const INITIAL = {
   balance: 6240,
   periodGranted: 8000,
   periodSpent: 1760,
@@ -17,10 +18,29 @@ const MOCK: CreditsState = {
   isLoading: false,
 };
 
-const CreditsContext = createContext<CreditsState>(MOCK);
+const CreditsContext = createContext<CreditsState>({
+  ...INITIAL,
+  addCredits: () => {},
+});
 
 export function CreditsProvider({ children }: { children: ReactNode }) {
-  const value = useMemo(() => MOCK, []);
+  const [balance, setBalance] = useState(INITIAL.balance);
+  // TODO: на бэкенде начисление подтверждает сервер, клиентское значение
+  // перезаписывается ответом
+  const addCredits = useCallback((n: number) => {
+    setBalance((b) => b + n);
+  }, []);
+  const value = useMemo<CreditsState>(
+    () => ({
+      balance,
+      periodGranted: INITIAL.periodGranted,
+      periodSpent: INITIAL.periodSpent,
+      isUnlimited: INITIAL.isUnlimited,
+      isLoading: INITIAL.isLoading,
+      addCredits,
+    }),
+    [balance, addCredits],
+  );
   return <CreditsContext.Provider value={value}>{children}</CreditsContext.Provider>;
 }
 
