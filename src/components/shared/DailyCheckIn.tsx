@@ -74,38 +74,44 @@ export function DailyCheckIn() {
     if (typeof window === "undefined") return;
     if (location.pathname.startsWith("/tools") || location.pathname.startsWith("/checkout")) return;
     if (shownThisSession.current) return;
-    if (claimedToday) return;
 
-    // Первый визит — записать и выйти (только на страницах, где поп-ап может появиться)
-    if (!localStorage.getItem("era2_visited")) {
-      localStorage.setItem("era2_visited", "1");
-      return;
+    const debug = localStorage.getItem("era2_debug_checkin") === "1";
+    if (!debug && claimedToday) return;
+
+    // Первый визит — отложить, а не пропустить: показать, только если
+    // человек задержался на сайте > 60с с самого первого захода.
+    if (!debug) {
+      const firstSeenRaw = localStorage.getItem("era2_first_seen");
+      if (!firstSeenRaw) {
+        localStorage.setItem("era2_first_seen", String(Date.now()));
+        return;
+      }
+      const firstSeen = parseInt(firstSeenRaw, 10);
+      if (!Number.isFinite(firstSeen) || Date.now() - firstSeen < 60_000) return;
     }
 
     let cancelled = false;
+    const delay = debug ? 500 : 3000;
     const timer = window.setTimeout(() => {
       if (cancelled) return;
       shownThisSession.current = true;
       setOpen(true);
       cleanup();
-    }, 3000);
+    }, delay);
 
     const onActivity = () => {
       cancelled = true;
       window.clearTimeout(timer);
-      shownThisSession.current = true;
       cleanup();
     };
 
     const cleanup = () => {
       window.removeEventListener("click", onActivity);
       window.removeEventListener("keydown", onActivity);
-      window.removeEventListener("scroll", onActivity);
     };
 
     window.addEventListener("click", onActivity);
     window.addEventListener("keydown", onActivity);
-    window.addEventListener("scroll", onActivity, { passive: true });
 
     return () => {
       cancelled = true;
