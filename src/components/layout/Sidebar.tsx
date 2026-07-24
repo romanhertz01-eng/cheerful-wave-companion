@@ -267,47 +267,6 @@ export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarP
             </div>
           )}
 
-          {/* TODO: показывать только залогиненным */}
-          {!collapsed && (
-            <div
-              onClick={() => setShowCheckIn(true)}
-              className="mx-3 mb-3 p-3 rounded-xl bg-white/[0.04] border border-white/10 cursor-pointer hover:bg-white/[0.06] transition-colors"
-            >
-              <div className="flex items-center gap-2 mb-2">
-                <Flame className="h-4 w-4 text-muted-foreground" />
-                <span className="text-[13px] font-medium text-foreground">Ежедневный бонус</span>
-              </div>
-              <div className="flex items-center gap-1 mb-1.5">
-                {DAYS.map((d) => {
-                  const done = d.day < streak || (d.day === streak && claimedToday);
-                  const active = d.day === streak && !claimedToday;
-                  return (
-                    <span
-                      key={d.day}
-                      className={cn(
-                        "h-1.5 w-1.5 rounded-full",
-                        done ? "bg-primary/70" : active ? "bg-white/[0.10] ring-1 ring-primary" : "bg-white/[0.10]"
-                      )}
-                    />
-                  );
-                })}
-              </div>
-              <p className="text-xs text-muted-foreground mb-2">День {streak} из 7</p>
-              {claimedToday ? (
-                <div className="w-full h-8 inline-flex items-center justify-center gap-1.5 rounded-md text-xs text-muted-foreground border border-white/10">
-                  <Check className="h-3 w-3" />
-                  Забрано сегодня
-                </div>
-              ) : (
-                <button
-                  onClick={(e) => { e.stopPropagation(); setShowCheckIn(true); }}
-                  className="w-full h-8 inline-flex items-center justify-center rounded-md text-xs font-medium text-foreground bg-white/[0.06] hover:bg-white/[0.10] border border-white/10 transition-colors"
-                >
-                  Забрать +{current.credits}
-                </button>
-              )}
-            </div>
-          )}
         </div>
 
         {/* Bottom CTA — ghost link */}
@@ -338,13 +297,6 @@ export function Sidebar({ open, collapsed, onClose, onToggleCollapse }: SidebarP
         </button>
       </aside>
       {showReferral && <ReferralPopup onClose={() => setShowReferral(false)} />}
-      <DailyCheckIn
-        open={showCheckIn}
-        onClose={() => setShowCheckIn(false)}
-        streak={streak}
-        claimedToday={claimedToday}
-        onClaim={claim}
-      />
     </>
   );
 }
