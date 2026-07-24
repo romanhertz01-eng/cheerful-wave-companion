@@ -132,7 +132,7 @@ const PricingPage = () => {
         ) : (
           <Link
             to="/checkout"
-            search={{ plan: plan.id }}
+            search={{ plan: plan.id, period: period === "year" ? "12m" : "1m" }}
             className={cn(
               "mt-4 w-full py-3 rounded-xl text-sm font-semibold transition-colors text-center",
               isHighlight

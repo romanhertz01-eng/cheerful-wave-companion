@@ -38,12 +38,14 @@ const btnSecondary =
   "inline-flex items-center justify-center h-9 px-3.5 rounded-lg text-[13px] font-medium border border-white/15 text-foreground hover:bg-white/[0.06] transition-colors";
 
 export default function CheckoutPage() {
-  const search = useSearch({ strict: false }) as { plan?: string };
+  const search = useSearch({ strict: false }) as { plan?: string; period?: string };
   const navigate = useNavigate();
   const planId = search?.plan ?? "pro";
   const plan = plans.find((p) => p.id === planId && !p.enterprise) ?? plans.find((p) => p.id === "pro")!;
 
-  const [period, setPeriod] = useState<PeriodId>("12m");
+  const [period, setPeriod] = useState<PeriodId>(
+    (["1m", "3m", "6m", "12m"].includes(search?.period ?? "") ? (search!.period as PeriodId) : "1m")
+  );
   const [method, setMethod] = useState<Method>("card");
   const [agreed, setAgreed] = useState(false);
   const [promo, setPromo] = useState("");
@@ -181,6 +183,9 @@ export default function CheckoutPage() {
                   );
                 })}
               </div>
+              <p className="mt-3 text-xs text-muted-foreground">
+                Чем длиннее период — тем ниже цена месяца. Списание раз в выбранный период.
+              </p>
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
