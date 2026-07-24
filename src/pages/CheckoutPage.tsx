@@ -183,6 +183,9 @@ export default function CheckoutPage() {
                   );
                 })}
               </div>
+              <p className="mt-3 text-xs text-muted-foreground">
+                Чем длиннее период — тем ниже цена месяца. Списание раз в выбранный период.
+              </p>
             </div>
 
             <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
