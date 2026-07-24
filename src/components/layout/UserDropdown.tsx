@@ -9,10 +9,9 @@ import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/ui/era/StatusBadge";
 import { useAuth } from "@/contexts/AuthContext";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useCredits, getCreditsMetrics, ringColorClass, barColorClass } from "@/hooks/useCredits";
 
 const PLAN: "PRO" | "FREE" = "FREE";
-const CREDITS_USED = 1000;
-const CREDITS_TOTAL = 5000;
 const EMAIL = "roman2024gerts@gmail.com";
 const DISPLAY_NAME = "Роман Г.";
 
@@ -20,8 +19,24 @@ export function UserDropdown() {
   const { logout, userName } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
+  const credits = useCredits();
+  const { hasPeriod, leftPct } = getCreditsMetrics(credits);
   const initial = (userName || DISPLAY_NAME).charAt(0).toUpperCase();
-  const pct = Math.min(100, Math.round((CREDITS_USED / CREDITS_TOTAL) * 100));
+  const leftPctRounded = Math.round(leftPct);
+
+  const radius = 20;
+  const circumference = 2 * Math.PI * radius;
+  const dashOffset = hasPeriod
+    ? circumference - (leftPct / 100) * circumference
+    : 0;
+  const ringCls = ringColorClass(leftPct);
+  const barCls = barColorClass(leftPct);
+
+  const ariaLabel = credits.isUnlimited
+    ? "Аккаунт. Безлимитный тариф"
+    : hasPeriod
+      ? `Аккаунт. Осталось ${leftPctRounded}% кредитов периода`
+      : "Аккаунт";
 
   const handleLogout = () => {
     logout();
@@ -35,10 +50,33 @@ export function UserDropdown() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button
-          aria-label="Профиль"
-          className="w-9 h-9 rounded-full p-[2px] bg-gradient-to-br from-[#E85420] via-[#ff7a3d] to-[#ffb27a] hover:scale-105 transition-transform cursor-pointer"
+          aria-label={ariaLabel}
+          className="relative inline-flex w-9 h-9 rounded-full items-center justify-center hover:scale-105 transition-transform cursor-pointer"
         >
-          <span className="w-full h-full rounded-full bg-card flex items-center justify-center font-mono text-sm font-semibold text-foreground">
+          <svg
+            viewBox="0 0 44 44"
+            className="absolute inset-0 -rotate-90 pointer-events-none"
+            aria-hidden="true"
+          >
+            <circle cx="22" cy="22" r="20" fill="none" strokeWidth="2" className="stroke-border" />
+            {credits.isUnlimited ? (
+              <circle cx="22" cy="22" r="20" fill="none" strokeWidth="2" className="stroke-primary" />
+            ) : hasPeriod && !credits.isLoading ? (
+              <circle
+                cx="22"
+                cy="22"
+                r="20"
+                fill="none"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeDasharray={circumference}
+                strokeDashoffset={dashOffset}
+                className={ringCls}
+                style={{ transition: "stroke-dashoffset 300ms ease, stroke 200ms ease" }}
+              />
+            ) : null}
+          </svg>
+          <span className="w-[30px] h-[30px] rounded-full bg-card flex items-center justify-center font-mono text-sm font-semibold text-foreground">
             {initial}
           </span>
         </button>
@@ -67,16 +105,34 @@ export function UserDropdown() {
               Кредиты
             </span>
             <span className="font-mono tabular-nums text-sm text-foreground">
-              {CREDITS_USED.toLocaleString("ru-RU")} / {CREDITS_TOTAL.toLocaleString("ru-RU")}
+              {credits.balance.toLocaleString("ru-RU")}
+              {!credits.isUnlimited && credits.periodGranted > 0 && (
+                <> / {credits.periodGranted.toLocaleString("ru-RU")}</>
+              )}
             </span>
           </div>
-          <div className="h-1.5 w-full bg-secondary rounded-full overflow-hidden mt-2">
-            <div
-              className="h-full bg-gradient-to-r from-[#E85420] to-[#ff7a3d] rounded-full"
-              style={{ width: `${pct}%` }}
-            />
-          </div>
-          <div className="text-xs text-muted-foreground mt-2">Хватит на ~12 генераций</div>
+          {credits.isUnlimited ? (
+            <div className="text-xs text-muted-foreground mt-2">Безлимитный тариф</div>
+          ) : hasPeriod ? (
+            <>
+              <div className="h-1.5 w-full bg-secondary rounded-full overflow-hidden mt-2">
+                <div
+                  className={`h-full ${barCls} rounded-full transition-all`}
+                  style={{ width: `${leftPct}%` }}
+                />
+              </div>
+              <div className="text-xs text-muted-foreground mt-2">
+                Осталось {leftPctRounded}% от месячной квоты
+              </div>
+              {credits.balance > credits.periodGranted && (
+                <div className="text-xs text-muted-foreground">
+                  включая перенесённые и докупленные
+                </div>
+              )}
+            </>
+          ) : (
+            <div className="h-1.5 w-full bg-secondary rounded-full overflow-hidden mt-2" />
+          )}
         </div>
 
         <div className="px-2 pb-2 pt-1">

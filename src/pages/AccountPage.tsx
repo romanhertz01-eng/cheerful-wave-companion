@@ -17,6 +17,7 @@ import {
 import { Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { useAuth } from "@/contexts/AuthContext";
+import { useCredits } from "@/hooks/useCredits";
 
 type SubStatus = "active" | "cancelled" | "none";
 type Card = { brand: string; last4: string; exp: string } | null;
@@ -25,8 +26,6 @@ type Tab = "profile" | "history";
 const PLAN_NAME = "Про";
 const NEXT_BILLING = "22 августа 2026";
 const PRICE = "1 490 ₽";
-const CREDITS_USED = 6240;
-const CREDITS_TOTAL = 8000;
 const EMAIL = "roman2024gerts@gmail.com";
 const DISPLAY_NAME = "Роман Г.";
 const REF_LINK = "https://era2.ai/?ref=USER123";
@@ -131,6 +130,7 @@ function CardHeader({
 
 export default function AccountPage() {
   const { userName } = useAuth();
+  const { balance, periodGranted } = useCredits();
   const [tab, setTab] = useState<Tab>("profile");
   const [subscription, setSubscription] = useState<SubStatus>("active");
   const [card1, setCard1] = useState<Card>({ brand: "Visa", last4: "4242", exp: "09/28" });
@@ -183,7 +183,7 @@ export default function AccountPage() {
               <div className="min-w-0">
                 <div className="text-sm text-muted-foreground">Текущий баланс</div>
                 <div className="mt-0.5 text-4xl font-bold tabular-nums leading-none">
-                  {CREDITS_USED.toLocaleString("ru-RU")}
+                  {balance.toLocaleString("ru-RU")}
                   <span className="ml-2 text-base font-normal text-muted-foreground align-middle">
                     кредитов
                   </span>
@@ -226,8 +226,8 @@ export default function AccountPage() {
                     <div>
                       Кредиты:{" "}
                       <span className="text-foreground tabular-nums">
-                        {CREDITS_USED.toLocaleString("ru-RU")} из{" "}
-                        {CREDITS_TOTAL.toLocaleString("ru-RU")}
+                        {balance.toLocaleString("ru-RU")} из{" "}
+                        {periodGranted.toLocaleString("ru-RU")}
                       </span>
                     </div>
                   </div>
@@ -246,8 +246,8 @@ export default function AccountPage() {
                   <div className="mt-2 text-sm text-muted-foreground">
                     Кредиты:{" "}
                     <span className="text-foreground tabular-nums">
-                      {CREDITS_USED.toLocaleString("ru-RU")} из{" "}
-                      {CREDITS_TOTAL.toLocaleString("ru-RU")}
+                      {balance.toLocaleString("ru-RU")} из{" "}
+                      {periodGranted.toLocaleString("ru-RU")}
                     </span>
                   </div>
                 </>
