@@ -301,6 +301,62 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
+
+      {giftModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+          onClick={() => setGiftModal(null)}
+        >
+          <div
+            className="relative w-full max-w-md max-h-[90vh] overflow-auto rounded-2xl border border-white/10 bg-[#111] p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setGiftModal(null)}
+              className="absolute right-3 top-3 h-8 w-8 inline-flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/[0.06] transition-colors"
+              aria-label="Закрыть"
+            >
+              <X className="h-4 w-4" />
+            </button>
+
+            <div className="h-12 w-12 rounded-full bg-white/[0.05] flex items-center justify-center text-foreground">
+              <Gift className="h-5 w-5" />
+            </div>
+            <h3 className="mt-4 text-[18px] font-semibold">Подарок готов</h3>
+            <p className="mt-1.5 text-[13px] text-muted-foreground leading-[1.55]">
+              Подписка «{plan.name}» на {selected.label.toLowerCase()}. Отправьте ссылку другу — он активирует её сам. Ссылка действует 90 дней.
+            </p>
+
+            <div className="mt-4">
+              <input
+                readOnly
+                value={giftModal.link}
+                onFocus={(e) => e.currentTarget.select()}
+                className="w-full h-10 px-3 rounded-lg text-[13px] font-mono tabular-nums bg-white/[0.04] border border-white/10 text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+              />
+            </div>
+
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <button onClick={copyLink} className={btnSecondary + " w-full"}>
+                Скопировать
+              </button>
+              <a
+                href={`https://t.me/share/url?url=${encodeURIComponent(giftModal.link)}&text=${encodeURIComponent("Дарю тебе подписку ЭРА2")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={btnSecondary + " w-full gap-2"}
+              >
+                <SiTelegram size={16} color="currentColor" />
+                Отправить в Telegram
+              </a>
+            </div>
+
+            <p className="mt-4 text-[11px] text-muted-foreground text-center">
+              Ссылку также отправили вам на почту
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
