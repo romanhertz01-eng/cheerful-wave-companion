@@ -146,7 +146,7 @@ function ToolsAndModelsPage() {
                 : { background: "hsl(var(--secondary))", border: "1px solid hsl(var(--border))" }
               }
             >
-              {t === "tools" ? "⚡ Инструменты" : "⊕ Модели"}
+              {t === "tools" ? "Инструменты" : "Модели"}
             </button>
           ))}
         </div>
