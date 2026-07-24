@@ -91,10 +91,10 @@ export function UserDropdown() {
         <div className="my-1 h-px bg-border" />
 
         <div className="space-y-0.5">
-          <button className={itemCls} onClick={() => {}}>
+          <Link to="/account" className={itemCls}>
             <User className="h-3.5 w-3.5 text-muted-foreground" />
-            Профиль
-          </button>
+            Аккаунт
+          </Link>
           <Link to="/history" className={itemCls}>
             <Clock className="h-3.5 w-3.5 text-muted-foreground" />
             История

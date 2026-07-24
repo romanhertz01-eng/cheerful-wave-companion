@@ -1,7 +1,7 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import {
   Home, Image, Video, MessageSquare, Mic, Bot, LayoutGrid, Layers,
-  CreditCard, History, ChevronLeft, ChevronDown, X, ArrowRight, Gem, Plus, Gift, Copy,
+  CreditCard, History, ChevronLeft, ChevronDown, X, ArrowRight, Gem, Plus, Gift, Copy, User,
 } from "lucide-react";
 import { useState } from "react";
 import { useCopyToast } from "@/components/shared/CopyToast";
@@ -56,6 +56,7 @@ const toolItems: Array<{ icon: React.ElementType; label: string; path: string; b
 
 const bottomItems = [
   { icon: CreditCard, label: "Тарифы", path: "/pricing" },
+  { icon: User, label: "Аккаунт", path: "/account" },
   { icon: History, label: "История", path: "/history" },
 ];
 
