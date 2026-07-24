@@ -1,7 +1,7 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useSearch, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
-import { SiVisa, SiMastercard } from "@icons-pack/react-simple-icons";
+import { ArrowLeft, Gift, X } from "lucide-react";
+import { SiVisa, SiMastercard, SiTelegram } from "@icons-pack/react-simple-icons";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { plans } from "@/data/plans";
@@ -49,10 +49,7 @@ export default function CheckoutPage() {
   const [agreed, setAgreed] = useState(false);
   const [promo, setPromo] = useState("");
   const [isGift, setIsGift] = useState(false);
-  const [giftEmail, setGiftEmail] = useState("");
-
-  const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
-  const giftEmailValid = isValidEmail(giftEmail);
+  const [giftModal, setGiftModal] = useState<null | { link: string }>(null);
 
   const monthPrice = plan.monthPrice ?? 0;
 
@@ -72,8 +69,34 @@ export default function CheckoutPage() {
 
   const handlePay = () => {
     if (!agreed) return;
-    if (isGift && !giftEmailValid) return;
+    if (isGift) {
+      const code = Math.random().toString(36).slice(2, 6).toUpperCase();
+      setGiftModal({ link: `https://era2.ai/gift/DEMO-${code}` });
+      return;
+    }
     toast("Переход к оплате", { description: `${plan.name} · ${selected.label} · ${fmtRub(selected.total)}` });
+  };
+
+  useEffect(() => {
+    if (!giftModal) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setGiftModal(null);
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [giftModal]);
+
+  const copyLink = async () => {
+    if (!giftModal) return;
+    try {
+      await navigator.clipboard.writeText(giftModal.link);
+      toast("Ссылка скопирована");
+    } catch {
+      toast("Не удалось скопировать");
+    }
   };
 
   return (
@@ -102,7 +125,7 @@ export default function CheckoutPage() {
             <div className="mt-5 space-y-2.5 text-[13px]">
               <Row
                 label={isGift ? "Получатель" : "Аккаунт"}
-                value={isGift ? (giftEmail.trim() || "— укажите email —") : EMAIL}
+                value={isGift ? "По ссылке-подарку" : EMAIL}
               />
               <Row label="Кредитов в месяц" value={`${plan.credits}`} />
               {selected.discount > 0 && (
@@ -126,7 +149,7 @@ export default function CheckoutPage() {
             </div>
             <div className="text-xs text-muted-foreground mt-2 tabular-nums">
               {isGift
-                ? `Подписка активна до ${nextBilling} · без автопродления`
+                ? `Подписка на ${selected.label.toLowerCase()} · активируется по ссылке · без автопродления`
                 : `Следующее списание: ${nextBilling} · ${fmtRub(selected.total)}`}
             </div>
 
@@ -170,22 +193,8 @@ export default function CheckoutPage() {
                 </button>
               </div>
               <p className="mt-1.5 text-xs text-muted-foreground">
-                Вы оплачиваете — подписка активируется на аккаунте друга
+                После оплаты вы получите ссылку — отправьте её другу в любой мессенджер
               </p>
-              {isGift && (
-                <div className="mt-3 space-y-1.5 animate-in fade-in slide-in-from-top-1 duration-200">
-                  <input
-                    type="email"
-                    value={giftEmail}
-                    onChange={(e) => setGiftEmail(e.target.value)}
-                    placeholder="Email друга"
-                    className="w-full h-10 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
-                  />
-                  <p className="text-xs text-muted-foreground">
-                    Отправим письмо с активацией на этот адрес
-                  </p>
-                </div>
-              )}
             </div>
           </div>
 
@@ -251,20 +260,20 @@ export default function CheckoutPage() {
                   {" "}и{" "}
                   <a href="#" className="text-foreground underline underline-offset-2">политики конфиденциальности</a>
                   {isGift
-                    ? `. Это разовый платёж ${fmtRub(selected.total)} за подписку «${plan.name}» на ${selected.label.toLowerCase()} для указанного получателя. Автопродление не подключается.`
+                    ? `. Это разовый платёж ${fmtRub(selected.total)} за подарочную подписку «${plan.name}» на ${selected.label.toLowerCase()}. Автопродление не подключается.`
                     : ` и разрешаю ${LEGAL} списывать ${fmtRub(selected.total)} раз в ${periodWord} с привязанной карты в счёт подписки «${plan.name}». Отменить автопродление можно в любой момент в разделе Аккаунт.`}
                 </span>
               </label>
 
               <button
                 onClick={handlePay}
-                disabled={!agreed || (isGift && !giftEmailValid)}
+                disabled={!agreed}
                 className={cn(
                   "mt-5 w-full h-11 rounded-xl text-[14px] font-semibold text-white bg-gradient-to-r from-[#E85420] to-[#ff7a3d] transition-opacity",
-                  !agreed || (isGift && !giftEmailValid) ? "opacity-50 cursor-not-allowed" : "hover:opacity-95"
+                  !agreed ? "opacity-50 cursor-not-allowed" : "hover:opacity-95"
                 )}
               >
-                {isGift ? "Подарить" : "Оплатить"} {fmtRub(selected.total)}
+                {isGift ? `Подарить за ${fmtRub(selected.total)}` : `Оплатить ${fmtRub(selected.total)}`}
               </button>
 
               <div className="mt-4 flex items-center justify-center gap-3 flex-wrap text-muted-foreground">
@@ -292,6 +301,62 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
+
+      {giftModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+          onClick={() => setGiftModal(null)}
+        >
+          <div
+            className="relative w-full max-w-md max-h-[90vh] overflow-auto rounded-2xl border border-white/10 bg-[#111] p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setGiftModal(null)}
+              className="absolute right-3 top-3 h-8 w-8 inline-flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/[0.06] transition-colors"
+              aria-label="Закрыть"
+            >
+              <X className="h-4 w-4" />
+            </button>
+
+            <div className="h-12 w-12 rounded-full bg-white/[0.05] flex items-center justify-center text-foreground">
+              <Gift className="h-5 w-5" />
+            </div>
+            <h3 className="mt-4 text-[18px] font-semibold">Подарок готов</h3>
+            <p className="mt-1.5 text-[13px] text-muted-foreground leading-[1.55]">
+              Подписка «{plan.name}» на {selected.label.toLowerCase()}. Отправьте ссылку другу — он активирует её сам. Ссылка действует 90 дней.
+            </p>
+
+            <div className="mt-4">
+              <input
+                readOnly
+                value={giftModal.link}
+                onFocus={(e) => e.currentTarget.select()}
+                className="w-full h-10 px-3 rounded-lg text-[13px] font-mono tabular-nums bg-white/[0.04] border border-white/10 text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+              />
+            </div>
+
+            <div className="mt-3 grid grid-cols-2 gap-2">
+              <button onClick={copyLink} className={btnSecondary + " w-full"}>
+                Скопировать
+              </button>
+              <a
+                href={`https://t.me/share/url?url=${encodeURIComponent(giftModal.link)}&text=${encodeURIComponent("Дарю тебе подписку ЭРА2")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={btnSecondary + " w-full gap-2"}
+              >
+                <SiTelegram size={16} color="currentColor" />
+                Отправить в Telegram
+              </a>
+            </div>
+
+            <p className="mt-4 text-[11px] text-muted-foreground text-center">
+              Ссылку также отправили вам на почту
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
