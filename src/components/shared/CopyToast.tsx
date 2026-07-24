@@ -6,7 +6,7 @@ let showToastGlobal: ((msg: string) => void) | null = null;
 
 export function useCopyToast() {
   return (text: string, message = "Скопировано") => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
+    if (text && typeof navigator !== "undefined" && navigator.clipboard) {
       navigator.clipboard.writeText(text);
     }
     if (showToastGlobal) showToastGlobal(message);
