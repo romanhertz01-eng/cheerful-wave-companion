@@ -1,42 +1,78 @@
 import { useState, useEffect } from "react";
-import { X, Gift, Check } from "lucide-react";
+import { X, Gift, Check, Flame } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useCopyToast } from "@/components/shared/CopyToast";
 
-const DAYS = [
-  { day: 1, credits: 2 },
-  { day: 2, credits: 2 },
-  { day: 3, credits: 3 },
-  { day: 4, credits: 3 },
-  { day: 5, credits: 4 },
-  { day: 6, credits: 4 },
-  { day: 7, credits: 15, isBonus: true },
+export const DAYS = [
+  { day: 1, credits: 3 },
+  { day: 2, credits: 3 },
+  { day: 3, credits: 5 },
+  { day: 4, credits: 5 },
+  { day: 5, credits: 7 },
+  { day: 6, credits: 7 },
+  { day: 7, credits: 30, isBonus: true },
 ];
 
-export function DailyCheckIn() {
-  const [open, setOpen] = useState(false);
+// TODO: показывать только залогиненным
+// TODO: начисление на бэкенде, стрик считать по времени сервера
+export function useDailyCheckIn() {
   const [streak, setStreak] = useState(1);
+  const [claimedToday, setClaimedToday] = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
     const last = localStorage.getItem("era2_checkin_date");
     const today = new Date().toDateString();
-    if (last === today) return;
-
     const savedStreak = parseInt(localStorage.getItem("era2_checkin_streak") || "0");
+    if (last === today) {
+      setStreak(Math.max(1, savedStreak));
+      setClaimedToday(true);
+      return;
+    }
     const yesterday = new Date(Date.now() - 86400000).toDateString();
     const newStreak = last === yesterday ? Math.min(savedStreak + 1, 7) : 1;
-
     setStreak(newStreak);
-    const t = setTimeout(() => setOpen(true), 1500);
-    return () => clearTimeout(t);
+    setClaimedToday(false);
   }, []);
 
-  const handleCheckin = () => {
+  const claim = () => {
     localStorage.setItem("era2_checkin_date", new Date().toDateString());
     localStorage.setItem("era2_checkin_streak", String(streak));
-    setOpen(false);
+    setClaimedToday(true);
   };
 
+  return { streak, claimedToday, claim, current: DAYS[streak - 1] };
+}
+
+interface DailyCheckInProps {
+  open: boolean;
+  onClose: () => void;
+  streak: number;
+  claimedToday: boolean;
+  onClaim: () => void;
+}
+
+export function DailyCheckIn({ open, onClose, streak, claimedToday, onClaim }: DailyCheckInProps) {
   const current = DAYS[streak - 1];
+  const toast = useCopyToast();
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [open, onClose]);
+
+  const handleCheckin = () => {
+    onClaim();
+    toast("", `+${current.credits} кредитов зачислены`);
+    onClose();
+  };
 
   return (
     <AnimatePresence>
@@ -45,7 +81,7 @@ export function DailyCheckIn() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onClick={() => setOpen(false)}
+          onClick={onClose}
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4"
         >
           <motion.div
@@ -61,20 +97,22 @@ export function DailyCheckIn() {
             }}
           >
             <button
-              onClick={() => setOpen(false)}
+              onClick={onClose}
               aria-label="Закрыть"
               className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors"
             >
               <X size={18} />
             </button>
 
-            <div className="text-4xl mb-3">🔥</div>
+            <div className="mb-3 flex justify-center">
+              <Flame size={36} style={{ color: "hsl(var(--primary))" }} />
+            </div>
 
             <h2 className="text-xl font-bold text-foreground mb-1">
               Заходите 7 дней подряд
             </h2>
             <p className="text-sm text-muted-foreground mb-5">
-              и получите до 33 кредитов бесплатно
+              и получите до 60 кредитов бесплатно
             </p>
 
             <div
@@ -91,11 +129,11 @@ export function DailyCheckIn() {
                 className="text-sm font-bold font-mono"
                 style={{ color: "hsl(var(--primary))" }}
               >
-                +{current.credits} cr
+                +{current.credits} кредитов
               </span>
             </div>
 
-            <div className="grid grid-cols-7 gap-1.5 mb-6">
+            <div className="grid grid-cols-7 gap-1.5 mb-3">
               {DAYS.map((d) => {
                 const done = d.day < streak;
                 const active = d.day === streak;
@@ -135,16 +173,27 @@ export function DailyCheckIn() {
               })}
             </div>
 
-            <button
-              onClick={handleCheckin}
-              className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-[14px] text-sm font-semibold text-white transition-all hover:opacity-95"
-              style={{
-                background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)",
-                boxShadow: "0 8px 22px -8px rgba(232,84,32,0.55)",
-              }}
-            >
-              Забрать +{current.credits} кредитов
-            </button>
+            <p className="text-xs text-muted-foreground mb-5">
+              60 кредитов — это одна генерация изображения
+            </p>
+
+            {claimedToday ? (
+              <div className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-[14px] text-sm font-medium text-muted-foreground border border-white/10 bg-white/[0.04]">
+                <Check size={16} />
+                Забрано сегодня
+              </div>
+            ) : (
+              <button
+                onClick={handleCheckin}
+                className="w-full inline-flex items-center justify-center gap-2 py-3 rounded-[14px] text-sm font-semibold text-white transition-all hover:opacity-95"
+                style={{
+                  background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)",
+                  boxShadow: "0 8px 22px -8px rgba(232,84,32,0.55)",
+                }}
+              >
+                Забрать +{current.credits} кредитов
+              </button>
+            )}
           </motion.div>
         </motion.div>
       )}
