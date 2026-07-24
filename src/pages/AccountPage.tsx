@@ -66,16 +66,16 @@ function Modal({
   if (!open) return null;
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm px-4"
       onClick={onClose}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-md rounded-2xl border border-white/10 bg-[#1a1614] p-6 shadow-[0_24px_80px_rgba(0,0,0,0.6)]"
+        className="relative w-full max-w-md rounded-2xl border border-border bg-card p-6 shadow-[0_24px_80px_rgba(0,0,0,0.6)]"
       >
         <button
           onClick={onClose}
-          className="absolute right-3 top-3 rounded-lg p-2 text-muted-foreground transition-colors hover:bg-white/[0.06] hover:text-foreground"
+          className="absolute right-3 top-3 rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
           aria-label="Закрыть"
         >
           <X className="h-4 w-4" />
@@ -89,17 +89,17 @@ function Modal({
 }
 
 const btnSecondary =
-  "inline-flex items-center justify-center h-9 px-3.5 rounded-lg text-[13px] font-medium border border-white/15 text-foreground hover:bg-white/[0.06] transition-colors";
+  "inline-flex items-center justify-center h-9 px-3.5 rounded-lg text-[13px] font-medium border border-border text-foreground hover:bg-muted/50 transition-colors";
 const btnSecondarySm =
-  "inline-flex items-center justify-center h-8 px-3 rounded-lg text-[12px] font-medium border border-white/15 text-foreground hover:bg-white/[0.06] transition-colors";
+  "inline-flex items-center justify-center h-8 px-3 rounded-lg text-[12px] font-medium border border-border text-foreground hover:bg-muted/50 transition-colors";
 const btnDestructive =
   "inline-flex items-center justify-center h-9 px-3.5 rounded-lg text-[13px] font-medium bg-destructive text-destructive-foreground hover:bg-destructive/90 transition-colors";
 
-const card = "rounded-2xl border border-white/10 bg-white/[0.04] p-5";
+const card = "rounded-2xl border border-border bg-card p-5";
 
 function CardIcon({ children }: { children: React.ReactNode }) {
   return (
-    <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.05] text-muted-foreground">
+    <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground">
       {children}
     </span>
   );
@@ -153,7 +153,7 @@ export default function AccountPage() {
   const tabBtn = (active: boolean) =>
     `h-9 px-4 rounded-full text-[13px] font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
       active
-        ? "bg-white/[0.08] text-foreground"
+        ? "bg-muted text-foreground"
         : "text-muted-foreground hover:text-foreground"
     }`;
 
@@ -163,7 +163,7 @@ export default function AccountPage() {
         {/* 1. Header */}
         <div className="flex items-center gap-4">
           <div className="h-[88px] w-[88px] rounded-full border-2 border-primary p-1 shrink-0">
-            <div className="h-full w-full rounded-full bg-[#1a1614] flex items-center justify-center text-2xl font-semibold text-foreground">
+            <div className="h-full w-full rounded-full bg-card flex items-center justify-center text-2xl font-semibold text-foreground">
               {initial}
             </div>
           </div>
@@ -177,7 +177,7 @@ export default function AccountPage() {
         <div className={card}>
           <div className="flex items-center justify-between gap-4 flex-wrap">
             <div className="flex items-center gap-4 min-w-0">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/[0.06] border border-white/10">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-muted border border-border">
                 <Zap className="h-5 w-5 text-primary" />
               </span>
               <div className="min-w-0">
@@ -239,7 +239,7 @@ export default function AccountPage() {
                     <span className="text-[15px] font-medium text-foreground">
                       План «{PLAN_NAME}»
                     </span>
-                    <span className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.06] px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
+                    <span className="inline-flex items-center rounded-full border border-border bg-muted px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground">
                       Активна до {NEXT_BILLING}
                     </span>
                   </div>
@@ -300,7 +300,7 @@ export default function AccountPage() {
                 hint="Через какой аккаунт вы вошли"
               />
               <div className="mt-3 flex items-center gap-3">
-                <span className="flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-white/[0.06]">
+                <span className="flex h-9 w-9 items-center justify-center rounded-md border border-border bg-muted">
                   <Mail className="h-4 w-4 text-muted-foreground" />
                 </span>
                 <div className="text-[13px] min-w-0">
@@ -354,7 +354,7 @@ export default function AccountPage() {
                   value={promo}
                   onChange={(e) => setPromo(e.target.value)}
                   placeholder="Введите промокод"
-                  className="flex-1 h-10 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
+                  className="flex-1 h-10 px-3 rounded-lg text-[13px] bg-card border border-border focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
                 />
                 <button
                   className={`${btnSecondary} h-10 shrink-0`}
@@ -373,7 +373,7 @@ export default function AccountPage() {
                   value={cert}
                   onChange={(e) => setCert(e.target.value)}
                   placeholder="Код сертификата"
-                  className="flex-1 h-10 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
+                  className="flex-1 h-10 px-3 rounded-lg text-[13px] bg-card border border-border focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
                 />
                 <button
                   className={`${btnSecondary} h-10 shrink-0`}
@@ -399,7 +399,7 @@ export default function AccountPage() {
                 <input
                   readOnly
                   value={REF_LINK}
-                  className="flex-1 h-9 px-3 rounded-lg text-[12px] bg-white/[0.04] border border-white/10 text-foreground truncate focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                  className="flex-1 h-9 px-3 rounded-lg text-[12px] bg-card border border-border text-foreground truncate focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                 />
                 <button className={btnSecondary} onClick={handleCopyRef}>
                   {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
@@ -429,10 +429,10 @@ export default function AccountPage() {
         {/* 6. History tab */}
         {tab === "history" && (
           <div className={card}>
-            <div className="overflow-hidden rounded-xl border border-white/10">
+            <div className="overflow-hidden rounded-xl border border-border">
               <table className="w-full text-[13px]">
                 <thead>
-                  <tr className="bg-white/[0.03] text-muted-foreground">
+                  <tr className="bg-card text-muted-foreground">
                     <th className="px-4 py-2.5 text-left font-medium">Дата</th>
                     <th className="px-4 py-2.5 text-left font-medium">Описание</th>
                     <th className="px-4 py-2.5 text-right font-medium">Сумма</th>
@@ -442,7 +442,7 @@ export default function AccountPage() {
                   {HISTORY.map((row, i) => (
                     <tr
                       key={i}
-                      className="border-t border-white/[0.06] hover:bg-white/[0.02] transition-colors"
+                      className="border-t border-border hover:bg-muted/50 transition-colors"
                     >
                       <td className="px-4 py-3 tabular-nums text-muted-foreground">{row.date}</td>
                       <td className="px-4 py-3 text-foreground">{row.desc}</td>

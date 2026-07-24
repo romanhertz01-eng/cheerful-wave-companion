@@ -35,7 +35,7 @@ function fmtDate(d: Date) {
 }
 
 const btnSecondary =
-  "inline-flex items-center justify-center h-9 px-3.5 rounded-lg text-[13px] font-medium border border-white/15 text-foreground hover:bg-white/[0.06] transition-colors";
+  "inline-flex items-center justify-center h-9 px-3.5 rounded-lg text-[13px] font-medium border border-border text-foreground hover:bg-muted/50 transition-colors";
 
 export default function CheckoutPage() {
   const search = useSearch({ strict: false }) as { plan?: string; period?: string };
@@ -118,7 +118,7 @@ export default function CheckoutPage() {
 
         <div className="grid md:grid-cols-[1fr_1.05fr] gap-5 items-start">
           {/* LEFT: Order summary */}
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+          <div className="rounded-2xl border border-border bg-card p-6">
             <div className="text-[13px] text-muted-foreground">Ваш план</div>
             <div className="text-3xl md:text-[32px] font-semibold mt-1">{plan.name}</div>
 
@@ -134,7 +134,7 @@ export default function CheckoutPage() {
               <Row label="Период" value={selected.label} />
             </div>
 
-            <div className="my-5 h-px bg-white/10" />
+            <div className="my-5 h-px bg-border" />
 
             <div className="text-[13px] text-muted-foreground">К оплате</div>
             <div className="flex items-baseline gap-3 mt-1">
@@ -160,7 +160,7 @@ export default function CheckoutPage() {
                   value={promo}
                   onChange={(e) => setPromo(e.target.value)}
                   placeholder="Введите промокод"
-                  className="flex-1 h-9 px-3 rounded-lg text-[13px] bg-white/[0.04] border border-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
+                  className="flex-1 h-9 px-3 rounded-lg text-[13px] bg-card border border-border focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 placeholder:text-muted-foreground"
                 />
                 <button
                   className={btnSecondary}
@@ -171,10 +171,10 @@ export default function CheckoutPage() {
               </div>
             </div>
 
-            <div className="mt-5 pt-5 border-t border-white/10">
+            <div className="mt-5 pt-5 border-t border-border">
               <div className="flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3 min-w-0">
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/[0.05] border border-white/10">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-card border border-border">
                     <Gift className="h-4 w-4 text-muted-foreground" />
                   </span>
                   <div className="min-w-0">
@@ -191,7 +191,7 @@ export default function CheckoutPage() {
                   onClick={() => setIsGift((v) => !v)}
                   className={cn(
                     "relative inline-flex h-6 w-11 shrink-0 rounded-full transition-colors",
-                    isGift ? "bg-white/[0.25]" : "bg-white/[0.10]"
+                    isGift ? "bg-foreground/25" : "bg-muted"
                   )}
                 >
                   <span
@@ -207,7 +207,7 @@ export default function CheckoutPage() {
 
           {/* RIGHT: Period + payment */}
           <div className="space-y-5">
-            <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+            <div className="rounded-2xl border border-border bg-card p-6">
               <h2 className="text-[15px] font-semibold">Период оплаты</h2>
               <div className="mt-3 space-y-2">
                 {rows.map((r) => {
@@ -218,21 +218,21 @@ export default function CheckoutPage() {
                       className={cn(
                         "flex items-center gap-3 px-4 py-3 rounded-xl border cursor-pointer transition-colors",
                         active
-                          ? "border-white/25 bg-white/[0.06]"
-                          : "border-white/10 hover:bg-white/[0.03]"
+                          ? "border-border bg-muted"
+                          : "border-border hover:bg-muted/50"
                       )}
                     >
                       <span
                         className={cn(
                           "h-4 w-4 rounded-full border flex items-center justify-center shrink-0",
-                          active ? "border-foreground" : "border-white/25"
+                          active ? "border-foreground" : "border-border"
                         )}
                       >
                         {active && <span className="h-2 w-2 rounded-full bg-foreground" />}
                       </span>
                       <span className="flex-1 text-[13px] text-foreground">{r.label}</span>
                       {r.badge && (
-                        <span className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.06] px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
+                        <span className="inline-flex items-center rounded-full border border-border bg-muted px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
                           {r.badge}
                         </span>
                       )}
@@ -259,7 +259,7 @@ export default function CheckoutPage() {
                   type="checkbox"
                   checked={agreed}
                   onChange={(e) => setAgreed(e.target.checked)}
-                  className="mt-0.5 h-4 w-4 shrink-0 rounded border-white/25 bg-white/[0.04] accent-primary"
+                  className="mt-0.5 h-4 w-4 shrink-0 rounded border-border bg-card accent-primary"
                 />
                 <span>
                   Я принимаю условия{" "}
@@ -319,22 +319,22 @@ export default function CheckoutPage() {
 
       {giftModal && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/80 backdrop-blur-sm"
           onClick={() => setGiftModal(null)}
         >
           <div
-            className="relative w-full max-w-md max-h-[90vh] overflow-auto rounded-2xl border border-white/10 bg-[#111] p-6"
+            className="relative w-full max-w-md max-h-[90vh] overflow-auto rounded-2xl border border-border bg-card p-6"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               onClick={() => setGiftModal(null)}
-              className="absolute right-3 top-3 h-8 w-8 inline-flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/[0.06] transition-colors"
+              className="absolute right-3 top-3 h-8 w-8 inline-flex items-center justify-center rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
               aria-label="Закрыть"
             >
               <X className="h-4 w-4" />
             </button>
 
-            <div className="h-12 w-12 rounded-full bg-white/[0.05] flex items-center justify-center text-foreground">
+            <div className="h-12 w-12 rounded-full bg-card flex items-center justify-center text-foreground">
               <Gift className="h-5 w-5" />
             </div>
             <h3 className="mt-4 text-[18px] font-semibold">Подарок готов</h3>
@@ -347,7 +347,7 @@ export default function CheckoutPage() {
                 readOnly
                 value={giftModal.link}
                 onFocus={(e) => e.currentTarget.select()}
-                className="w-full h-10 px-3 rounded-lg text-[13px] font-mono tabular-nums bg-white/[0.04] border border-white/10 text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                className="w-full h-10 px-3 rounded-lg text-[13px] font-mono tabular-nums bg-card border border-border text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
               />
             </div>
 

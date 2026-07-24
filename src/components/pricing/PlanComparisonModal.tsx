@@ -20,7 +20,7 @@ function ValueCell({ value }: { value: ComparisonValue }) {
   if (value === "unlimited") {
     return (
       <span
-        className="inline-flex items-center gap-1 rounded-lg border border-white/15 bg-white/[0.08] px-3 py-1 text-xs font-semibold text-foreground"
+        className="inline-flex items-center gap-1 rounded-lg border border-border bg-muted px-3 py-1 text-xs font-semibold text-foreground"
       >
         <InfinityIcon className="h-3.5 w-3.5" />
         Безлимит
@@ -31,7 +31,7 @@ function ValueCell({ value }: { value: ComparisonValue }) {
     return <span className="text-muted-foreground/70 text-sm">—</span>;
   }
   return (
-      <span className="inline-flex items-baseline gap-1 rounded-lg border border-white/10 bg-white/[0.05] px-3 py-1">
+      <span className="inline-flex items-baseline gap-1 rounded-lg border border-border bg-card px-3 py-1">
       <span className="tabular-nums font-medium text-sm text-foreground">{value}</span>
       <span className="text-xs text-muted-foreground">ген.</span>
     </span>
@@ -72,15 +72,15 @@ export function PlanComparisonModal({ open, onClose }: { open: boolean; onClose:
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-stretch justify-center bg-black/70 backdrop-blur-sm md:items-center"
+      className="fixed inset-0 z-50 flex items-stretch justify-center bg-background/80 backdrop-blur-sm md:items-center"
       onClick={onClose}
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative flex w-full max-w-[1100px] max-h-[100dvh] flex-col overflow-hidden border border-white/10 bg-[#1a1614] shadow-[0_24px_80px_rgba(0,0,0,0.6)] md:my-8 md:max-h-[85vh] md:rounded-3xl"
+        className="relative flex w-full max-w-[1100px] max-h-[100dvh] flex-col overflow-hidden border border-border bg-card shadow-[0_24px_80px_rgba(0,0,0,0.6)] md:my-8 md:max-h-[85vh] md:rounded-3xl"
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-white/10 px-8 py-5 md:px-10">
+        <div className="flex items-center justify-between border-b border-border px-8 py-5 md:px-10">
           <div>
             <h2 className="text-xl md:text-2xl font-bold tracking-tight">Сравнение тарифов</h2>
             <p className="mt-1 text-xs text-muted-foreground">
@@ -89,7 +89,7 @@ export function PlanComparisonModal({ open, onClose }: { open: boolean; onClose:
           </div>
           <div className="flex items-center gap-2">
             <button
-              className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-white/[0.06] hover:text-foreground disabled:opacity-50"
+              className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground disabled:opacity-50"
               title="Скачать PDF (скоро)"
               disabled
             >
@@ -97,7 +97,7 @@ export function PlanComparisonModal({ open, onClose }: { open: boolean; onClose:
             </button>
             <button
               onClick={onClose}
-              className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-white/[0.06] hover:text-foreground"
+              className="rounded-lg p-2 text-muted-foreground transition-colors hover:bg-muted/50 hover:text-foreground"
             >
               <X className="h-4 w-4" />
             </button>
@@ -105,14 +105,14 @@ export function PlanComparisonModal({ open, onClose }: { open: boolean; onClose:
         </div>
 
         {/* Search */}
-        <div className="border-b border-white/10 px-8 py-4 md:px-10">
+        <div className="border-b border-border px-8 py-4 md:px-10">
           <div className="relative max-w-md">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Поиск по моделям…"
-              className="w-full rounded-lg border border-white/10 bg-white/[0.04] py-2 pl-9 pr-3 text-sm focus:border-primary/50 focus:outline-none"
+              className="w-full rounded-lg border border-border bg-card py-2 pl-9 pr-3 text-sm focus:border-primary/50 focus:outline-none"
             />
           </div>
         </div>
@@ -121,7 +121,7 @@ export function PlanComparisonModal({ open, onClose }: { open: boolean; onClose:
         <div className="flex-1 overflow-auto px-8 pb-8 pt-2 md:px-10 md:pb-10">
           {/* Sticky column header */}
           <div
-            className="sticky top-0 z-10 -mx-8 grid items-center border-b border-white/10 bg-[#1a1614] px-8 py-3 md:-mx-10 md:px-10"
+            className="sticky top-0 z-10 -mx-8 grid items-center border-b border-border bg-card px-8 py-3 md:-mx-10 md:px-10"
             style={{ gridTemplateColumns: GRID_COLS }}
           >
             <div className="text-xs uppercase tracking-wider text-muted-foreground font-semibold">
@@ -154,7 +154,7 @@ export function PlanComparisonModal({ open, onClose }: { open: boolean; onClose:
               <Fragment key={group.id}>
                 <div className="mb-4 mt-8 flex items-center gap-3">
                   <span
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/[0.05]"
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card"
                   >
                     <Icon className="h-5 w-5 text-muted-foreground" />
                   </span>
@@ -165,7 +165,7 @@ export function PlanComparisonModal({ open, onClose }: { open: boolean; onClose:
                   {visible.map((row) => (
                     <div
                       key={`${group.id}-${row.model}`}
-                      className="grid items-center border-b border-white/[0.08] py-3.5 transition-colors hover:bg-white/[0.03]"
+                      className="grid items-center border-b border-border py-3.5 transition-colors hover:bg-muted/50"
                       style={{ gridTemplateColumns: GRID_COLS }}
                     >
                       <div className="min-w-0 pr-4">
