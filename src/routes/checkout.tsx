@@ -10,6 +10,7 @@ export const Route = createFileRoute("/checkout")({
   ),
   validateSearch: (search: Record<string, unknown>) => ({
     plan: typeof search.plan === "string" ? search.plan : undefined,
+    period: typeof search.period === "string" ? search.period : undefined,
   }),
   head: () => ({
     meta: [
