@@ -231,7 +231,7 @@ const PricingPage = () => {
       </section>
 
       {/* Credit packs */}
-      <section className="max-w-6xl mx-auto px-4 pb-12">
+      <section id="credit-packs" className="max-w-6xl mx-auto px-4 pb-12 scroll-mt-24">
         <div className="text-center mb-6">
           <h2 className="text-xl md:text-2xl font-bold mb-2">Докупка кредитов</h2>
           <p className="text-sm text-muted-foreground">
