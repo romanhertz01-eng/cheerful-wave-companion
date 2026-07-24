@@ -1,7 +1,7 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useSearch, useNavigate } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
-import { SiVisa, SiMastercard } from "@icons-pack/react-simple-icons";
+import { ArrowLeft, Gift, X } from "lucide-react";
+import { SiVisa, SiMastercard, SiTelegram } from "@icons-pack/react-simple-icons";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { plans } from "@/data/plans";
@@ -49,10 +49,7 @@ export default function CheckoutPage() {
   const [agreed, setAgreed] = useState(false);
   const [promo, setPromo] = useState("");
   const [isGift, setIsGift] = useState(false);
-  const [giftEmail, setGiftEmail] = useState("");
-
-  const isValidEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
-  const giftEmailValid = isValidEmail(giftEmail);
+  const [giftModal, setGiftModal] = useState<null | { link: string }>(null);
 
   const monthPrice = plan.monthPrice ?? 0;
 
@@ -72,8 +69,34 @@ export default function CheckoutPage() {
 
   const handlePay = () => {
     if (!agreed) return;
-    if (isGift && !giftEmailValid) return;
+    if (isGift) {
+      const code = Math.random().toString(36).slice(2, 6).toUpperCase();
+      setGiftModal({ link: `https://era2.ai/gift/DEMO-${code}` });
+      return;
+    }
     toast("Переход к оплате", { description: `${plan.name} · ${selected.label} · ${fmtRub(selected.total)}` });
+  };
+
+  useEffect(() => {
+    if (!giftModal) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setGiftModal(null);
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [giftModal]);
+
+  const copyLink = async () => {
+    if (!giftModal) return;
+    try {
+      await navigator.clipboard.writeText(giftModal.link);
+      toast("Ссылка скопирована");
+    } catch {
+      toast("Не удалось скопировать");
+    }
   };
 
   return (
