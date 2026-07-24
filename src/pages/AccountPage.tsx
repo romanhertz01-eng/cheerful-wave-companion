@@ -310,6 +310,42 @@ export default function AccountPage() {
               </div>
             </div>
 
+            {/* Способ оплаты */}
+            <div className={card}>
+              <CardHeader icon={<CreditCard className="h-4 w-4" />} title="Способ оплаты" />
+              {card1 ? (
+                <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
+                  <div className="text-[13px] tabular-nums">
+                    <span className="text-foreground">
+                      {card1.brand} •••• {card1.last4}
+                    </span>{" "}
+                    <span className="text-muted-foreground">· до {card1.exp}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      className={btnSecondarySm}
+                      onClick={() => toast("Замена карты недоступна в демо")}
+                    >
+                      Заменить карту
+                    </button>
+                    <button className={btnSecondarySm} onClick={() => setDetachOpen(true)}>
+                      Отвязать
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
+                  <div className="text-[13px] text-muted-foreground">Карта не привязана</div>
+                  <button
+                    className={btnSecondarySm}
+                    onClick={() => setCard1({ brand: "Visa", last4: "4242", exp: "09/28" })}
+                  >
+                    Привязать карту
+                  </button>
+                </div>
+              )}
+            </div>
+
             {/* Промокод */}
             <div className={card}>
               <CardHeader icon={<Gift className="h-4 w-4" />} title="Промокод" />
@@ -370,42 +406,6 @@ export default function AccountPage() {
                   <span className="ml-1.5">Копировать</span>
                 </button>
               </div>
-            </div>
-
-            {/* Способ оплаты */}
-            <div className={card}>
-              <CardHeader icon={<CreditCard className="h-4 w-4" />} title="Способ оплаты" />
-              {card1 ? (
-                <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
-                  <div className="text-[13px] tabular-nums">
-                    <span className="text-foreground">
-                      {card1.brand} •••• {card1.last4}
-                    </span>{" "}
-                    <span className="text-muted-foreground">· до {card1.exp}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      className={btnSecondarySm}
-                      onClick={() => toast("Замена карты недоступна в демо")}
-                    >
-                      Заменить карту
-                    </button>
-                    <button className={btnSecondarySm} onClick={() => setDetachOpen(true)}>
-                      Отвязать
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div className="mt-3 flex items-center justify-between gap-3 flex-wrap">
-                  <div className="text-[13px] text-muted-foreground">Карта не привязана</div>
-                  <button
-                    className={btnSecondarySm}
-                    onClick={() => setCard1({ brand: "Visa", last4: "4242", exp: "09/28" })}
-                  >
-                    Привязать карту
-                  </button>
-                </div>
-              )}
             </div>
 
             {/* Удаление аккаунта */}
