@@ -72,7 +72,14 @@ export function DailyCheckIn() {
   // TODO: серверный стрик — считать по времени сервера
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (location.pathname.startsWith("/tools") || location.pathname.startsWith("/checkout")) return;
+    // Страницы, где поп-ап неуместен:
+    //   /tools    — человек генерирует, не мешаем работе
+    //   /checkout — оплачивает, не отвлекаем от платежа
+    //   /pricing  — выбирает тариф; «получите бесплатно» бьёт по решению купить
+    //   /auth     — регистрируется, начислять некому
+    //   /account  — управляет подпиской, часто пришёл с проблемой
+    const BLOCKED = ["/tools", "/checkout", "/pricing", "/auth", "/account"];
+    if (BLOCKED.some((p) => location.pathname.startsWith(p))) return;
     if (shownThisSession.current) return;
 
     const debug = localStorage.getItem("era2_debug_checkin") === "1";
