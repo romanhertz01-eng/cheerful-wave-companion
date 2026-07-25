@@ -41,7 +41,7 @@ export const aiVideoPage: SeoPage = {
         items: [
           { title: 'Оживить фото', desc: 'Фото → живое видео', href: '/tools/ozhivit-foto', icon: '🎬' },
           { title: 'Создать видео', desc: 'Видео из текста', href: '/tools/video-generation', icon: '✨' },
-          { title: 'ИИ-аватар', desc: 'Говорящий персонаж', href: '/tools/video-generation', icon: '🧑' },
+          { title: 'ИИ-аватар', desc: 'Говорящий персонаж', href: '/tools/talking-avatar', icon: '🧑' },
           { title: 'Апскейл видео', desc: 'Улучшить качество', href: '/tools/video-generation', icon: '🔍' },
         ],
       },
@@ -54,9 +54,9 @@ export const aiVideoPage: SeoPage = {
         heading: 'Модели для видео',
         items: [
           { name: 'Kling 3.0', badge: 'NEW', desc: 'Целостные раскадровки с ультрадетализированной динамикой', image: '/models/05.jpg' },
-          { name: 'Veo 3', desc: 'Кинематографичное видео со звуком', image: '/models/02.jpg' },
-          { name: 'Sora 2', desc: 'Сложные сцены и длинные планы', image: '/models/03.jpg' },
-          { name: 'Seedance 2.0', desc: 'Танцы и динамичные движения', image: '/models/04.jpg' },
+          { name: 'Veo 3', desc: 'Кинематографичное видео со звуком', image: '/models/02.jpg', href: '/tools/veo' },
+          { name: 'Sora 2', desc: 'Сложные сцены и длинные планы', image: '/models/03.jpg', href: '/tools/sora' },
+          { name: 'Seedance 2.0', desc: 'Танцы и динамичные движения', image: '/models/04.jpg', href: '/tools/seedance' },
           { name: 'Hailuo', desc: 'Быстрая генерация коротких роликов', image: '/models/06.jpg' },
           { name: 'Wan 2.7', desc: 'Стабильные персонажи и сцены', image: '/models/01.jpg' },
         ],
