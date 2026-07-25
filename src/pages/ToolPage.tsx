@@ -6,6 +6,7 @@ import { getToolPageData } from "@/data/toolPages";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
 import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
+import { AuthCTALink } from "@/components/auth/AuthCTALink";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
@@ -110,6 +111,27 @@ const ToolPage = () => {
         <section className="max-w-3xl mx-auto px-4 py-12 text-center">
           <h2 className="text-2xl md:text-[32px] font-bold mb-4">{data.intro.heading}</h2>
           <p className="text-muted-foreground leading-relaxed">{data.intro.text}</p>
+        </section>
+      )}
+
+      {/* Model chips (tool pages) */}
+      {data.tool && data.modelChips && (
+        <section className="max-w-5xl mx-auto px-4 py-12">
+          <h2 className="text-2xl md:text-[32px] font-bold mb-3 text-center">{data.modelChips.heading}</h2>
+          {data.modelChips.sub && (
+            <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">{data.modelChips.sub}</p>
+          )}
+          <div className="flex flex-wrap justify-center gap-3">
+            {data.modelChips.models.map((name) => (
+              <div
+                key={name}
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-white/10 bg-white/[0.04] text-sm font-medium hover:border-primary/40 transition-colors"
+              >
+                <ModelGlyph name={name} size={20} />
+                <span>{name}</span>
+              </div>
+            ))}
+          </div>
         </section>
       )}
 
@@ -366,6 +388,25 @@ const ToolPage = () => {
               </div>
             ))}
           </div>
+        </section>
+      )}
+
+      {/* Big stat (tool pages) */}
+      {data.tool && data.bigStat && (
+        <section className="px-4 py-16 md:py-24 text-center">
+          <div className="text-[56px] md:text-[88px] font-bold gradient-accent-text leading-none">{data.bigStat.value}</div>
+          <div className="text-xl md:text-2xl font-bold mt-3">{data.bigStat.label}</div>
+          {data.bigStat.sub && (
+            <p className="text-muted-foreground mt-2 max-w-[560px] mx-auto">{data.bigStat.sub}</p>
+          )}
+          {data.bigStat.button && (
+            <AuthCTALink
+              to={targetPage}
+              className="inline-block gradient-accent text-white rounded-full px-8 py-3.5 font-semibold mt-8 hover:opacity-90 transition-opacity"
+            >
+              {data.bigStat.button}
+            </AuthCTALink>
+          )}
         </section>
       )}
 
