@@ -22,7 +22,6 @@ import { Route as AudioRouteImport } from './routes/audio'
 import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ToolsVideoGenerationRouteImport } from './routes/tools.video-generation'
 import { Route as ToolsTextGenerationRouteImport } from './routes/tools.text-generation'
 import { Route as ToolsNanoBananaRouteImport } from './routes/tools.nano-banana'
 import { Route as ToolsAudioGenerationRouteImport } from './routes/tools.audio-generation'
@@ -97,11 +96,6 @@ const AccountRoute = AccountRouteImport.update({
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ToolsVideoGenerationRoute = ToolsVideoGenerationRouteImport.update({
-  id: '/tools/video-generation',
-  path: '/tools/video-generation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ToolsTextGenerationRoute = ToolsTextGenerationRouteImport.update({
@@ -179,7 +173,6 @@ export interface FileRoutesByFullPath {
   '/tools/audio-generation': typeof ToolsAudioGenerationRoute
   '/tools/nano-banana': typeof ToolsNanoBananaRoute
   '/tools/text-generation': typeof ToolsTextGenerationRoute
-  '/tools/video-generation': typeof ToolsVideoGenerationRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -205,7 +198,6 @@ export interface FileRoutesByTo {
   '/tools/audio-generation': typeof ToolsAudioGenerationRoute
   '/tools/nano-banana': typeof ToolsNanoBananaRoute
   '/tools/text-generation': typeof ToolsTextGenerationRoute
-  '/tools/video-generation': typeof ToolsVideoGenerationRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -232,7 +224,6 @@ export interface FileRoutesById {
   '/tools/audio-generation': typeof ToolsAudioGenerationRoute
   '/tools/nano-banana': typeof ToolsNanoBananaRoute
   '/tools/text-generation': typeof ToolsTextGenerationRoute
-  '/tools/video-generation': typeof ToolsVideoGenerationRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -260,7 +251,6 @@ export interface FileRouteTypes {
     | '/tools/audio-generation'
     | '/tools/nano-banana'
     | '/tools/text-generation'
-    | '/tools/video-generation'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -286,7 +276,6 @@ export interface FileRouteTypes {
     | '/tools/audio-generation'
     | '/tools/nano-banana'
     | '/tools/text-generation'
-    | '/tools/video-generation'
   id:
     | '__root__'
     | '/'
@@ -312,7 +301,6 @@ export interface FileRouteTypes {
     | '/tools/audio-generation'
     | '/tools/nano-banana'
     | '/tools/text-generation'
-    | '/tools/video-generation'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -339,7 +327,6 @@ export interface RootRouteChildren {
   ToolsAudioGenerationRoute: typeof ToolsAudioGenerationRoute
   ToolsNanoBananaRoute: typeof ToolsNanoBananaRoute
   ToolsTextGenerationRoute: typeof ToolsTextGenerationRoute
-  ToolsVideoGenerationRoute: typeof ToolsVideoGenerationRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -433,13 +420,6 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/tools/video-generation': {
-      id: '/tools/video-generation'
-      path: '/tools/video-generation'
-      fullPath: '/tools/video-generation'
-      preLoaderRoute: typeof ToolsVideoGenerationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tools/text-generation': {
@@ -539,7 +519,6 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsAudioGenerationRoute: ToolsAudioGenerationRoute,
   ToolsNanoBananaRoute: ToolsNanoBananaRoute,
   ToolsTextGenerationRoute: ToolsTextGenerationRoute,
-  ToolsVideoGenerationRoute: ToolsVideoGenerationRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
