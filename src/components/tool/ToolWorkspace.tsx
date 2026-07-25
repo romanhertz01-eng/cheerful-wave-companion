@@ -58,7 +58,7 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
 
   return (
     <section className="border-y border-border" style={{ background: "hsl(var(--card))" }}>
-      <div className="max-w-6xl mx-auto px-4 py-8 grid gap-5 md:grid-cols-[320px_1fr] md:grid-rows-[min-content] items-start">
+      <div className="max-w-6xl mx-auto px-4 py-8 grid gap-5 md:grid-cols-[440px_1fr] md:grid-rows-[min-content] items-start">
         {/* LEFT PANEL */}
         <div className="rounded-2xl border border-border bg-background/60 p-3 flex flex-col gap-2.5">
           <div className="flex items-center gap-2">
@@ -128,6 +128,16 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
                 className="hidden"
                 onChange={(e) => onFile(e.target.files?.[0] ?? null)}
               />
+              {tool.uploadHints && tool.uploadHints.length > 0 && (
+                <ul className="mt-2 space-y-1.5">
+                  {tool.uploadHints.map((h) => (
+                    <li key={h} className="flex items-start gap-1.5 text-xs text-muted-foreground">
+                      <Check size={14} className="text-primary mt-0.5 shrink-0" />
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           )}
 
@@ -248,8 +258,8 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
         {/* RIGHT PREVIEW */}
         <div className="flex flex-col gap-3">
           <div className="shrink-0">
-            <h1 className="text-xl md:text-2xl font-bold leading-tight">{data.heroTitle}</h1>
-            <p className="text-sm text-muted-foreground mt-1.5">{data.heroDescription}</p>
+            <h1 className="text-[28px] md:text-[40px] font-bold leading-[1.1] tracking-tight text-center">{data.heroTitle}</h1>
+            <p className="text-sm text-muted-foreground mt-1.5 text-center max-w-[560px] mx-auto">{data.heroDescription}</p>
           </div>
 
           <div className="w-full aspect-[4/3] rounded-2xl border border-border bg-background/60 overflow-hidden relative flex items-center justify-center">
