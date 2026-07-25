@@ -11,6 +11,19 @@ const productLinks = [
   { label: "Тарифы", to: "/pricing" },
 ];
 
+const toolsLinks = [
+  { label: "Оживить фото", to: "/tools/ozhivit-foto" },
+  { label: "Генератор изображений", to: "/tools/image-generation" },
+  { label: "Создать видео", to: "/tools/video-generation" },
+  { label: "Удалить фон", to: "/tools/remove-background" },
+  { label: "Апскейл", to: "/tools/image-upscaler" },
+  { label: "Реставрация фото", to: "/tools/photo-restoration" },
+  { label: "Озвучка текста", to: "/tools/text-to-speech" },
+  { label: "ChatGPT", to: "/tools/chatgpt" },
+  { label: "Midjourney", to: "/tools/midjourney" },
+  { label: "Sora", to: "/tools/sora" },
+];
+
 function FooterColumn({ title, links }: { title: string; links: { label: string; to: string }[] }) {
   return (
     <div>
