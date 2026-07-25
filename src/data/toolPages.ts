@@ -110,9 +110,12 @@ export const toolPages: ToolPageData[] = [
       modelName: "Recraft",
       credits: 10,
       bricks: ["upload-1", "generate"],
+      demoImage: "/community/06.jpg",
+      demoCaption: "До и после: фон удалён",
     },
     howItWorks: {
       title: "Как удалить фон за 3 шага",
+      cta: "Удалить фон",
       steps: [
         { title: "Загрузите фото", desc: "Поддерживаются JPEG, PNG и WEBP." },
         { title: "ИИ удалит фон", desc: "Обработка занимает несколько секунд." },
@@ -168,9 +171,12 @@ export const toolPages: ToolPageData[] = [
       credits: 80,
       bricks: ["model", "upload-1", "select", "generate"],
       selects: [{ label: "Масштаб", options: ["2K", "4K", "8K"], defaultIndex: 0 }],
+      demoImage: "/community/05.jpg",
+      demoCaption: "Пример: детали после апскейла",
     },
     howItWorks: {
       title: "Как улучшить фото за 3 шага",
+      cta: "Улучшить фото",
       steps: [
         { title: "Загрузите изображение", desc: "Любой JPEG, PNG или WEBP." },
         { title: "Выберите масштаб", desc: "2K, 4K или 8K — и запустите обработку." },
@@ -227,9 +233,12 @@ export const toolPages: ToolPageData[] = [
       credits: 40,
       bricks: ["upload-1", "select", "generate"],
       selects: [{ label: "Соотношение сторон", options: ["1:1", "3:2", "2:3"], defaultIndex: 0 }],
+      demoImage: "/community/08.jpg",
+      demoCaption: "Пример: фото после реставрации",
     },
     howItWorks: {
       title: "Как восстановить фото за 3 шага",
+      cta: "Восстановить фото",
       steps: [
         { title: "Загрузите фото", desc: "Скан или снимок старого фото — JPEG, PNG или WEBP." },
         { title: "ИИ восстановит снимок", desc: "Уберёт повреждения и вернёт чёткость деталям." },
@@ -285,9 +294,12 @@ export const toolPages: ToolPageData[] = [
       credits: 40,
       bricks: ["upload-1", "select", "generate"],
       selects: [{ label: "Соотношение сторон", options: ["1:1", "3:2", "2:3"], defaultIndex: 0 }],
+      demoImage: "/community/01.jpg",
+      demoCaption: "Пример: снимок в цвете",
     },
     howItWorks: {
       title: "Как раскрасить фото за 3 шага",
+      cta: "Раскрасить фото",
       steps: [
         { title: "Загрузите фото", desc: "Чёрно-белый снимок в JPEG, PNG или WEBP." },
         { title: "ИИ подберёт цвета", desc: "Естественные оттенки по семантике сцены." },
