@@ -10,6 +10,7 @@ export function CornerPromo() {
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (localStorage.getItem("era2_corner_dismissed") === "true") return;
+    if (window.matchMedia("(max-width: 767px)").matches) return;
 
     const timer = setTimeout(() => setVisible(true), 30000);
     return () => clearTimeout(timer);
