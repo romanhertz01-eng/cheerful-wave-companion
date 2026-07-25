@@ -12,16 +12,19 @@ import { blockRegistry } from './blocks/registry';
 export function SeoRenderer({ def }: { def: SeoPage }) {
   const blocks = def.blocks.filter((b) => b.enabled).sort((a, b) => a.order - b.order);
 
-  const breadcrumbLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: def.breadcrumbs.map((c, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: c.label,
-      item: `https://era2.ai${c.href}`,
-    })),
-  };
+  const hasBreadcrumbs = def.breadcrumbs.length > 0;
+  const breadcrumbLd = hasBreadcrumbs
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: def.breadcrumbs.map((c, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: c.label,
+          item: `https://era2.ai${c.href}`,
+        })),
+      }
+    : null;
 
   const faqBlock = def.blocks.find((b) => b.type === 'faq' && b.enabled);
   const faqItems = (faqBlock?.data as { items?: { q: string; a: string }[] } | undefined)?.items;
@@ -39,17 +42,20 @@ export function SeoRenderer({ def }: { def: SeoPage }) {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
+      {breadcrumbLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+        />
+      )}
       {faqLd && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
         />
       )}
-      <div className="max-w-5xl mx-auto px-4 pt-6">
+      {hasBreadcrumbs && (
+        <div className="max-w-5xl mx-auto px-4 pt-6">
         <Breadcrumb>
           <BreadcrumbList>
             {def.breadcrumbs.map((crumb, i) => {
@@ -69,7 +75,8 @@ export function SeoRenderer({ def }: { def: SeoPage }) {
             })}
           </BreadcrumbList>
         </Breadcrumb>
-      </div>
+        </div>
+      )}
       {blocks.map((b) => {
         const C = blockRegistry[b.type];
         return <C key={b.order} type={b.type} {...(b.data || {})} />;
