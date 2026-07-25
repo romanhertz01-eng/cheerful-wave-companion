@@ -50,9 +50,9 @@ const TABS: TabConfig[] = [
     models: [
       { name: "ChatGPT", desc: "GPT от OpenAI", publicHref: "/tools/chatgpt" },
       { name: "Claude", desc: "От Anthropic", publicHref: "/tools/claude" },
-      { name: "Gemini", desc: "От Google" },
+      { name: "Gemini", desc: "От Google", publicHref: "/tools/gemini" },
       { name: "Perplexity", desc: "Поиск с ИИ" },
-      { name: "Grok", desc: "От xAI" },
+      { name: "Grok", desc: "От xAI", publicHref: "/tools/grok" },
       { name: "Qwen", desc: "От Alibaba" },
       { name: "DeepSeek", desc: "Reasoning модель" },
     ],
