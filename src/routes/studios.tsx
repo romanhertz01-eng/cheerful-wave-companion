@@ -13,12 +13,23 @@ import { textProviders } from "@/data/textModels";
 import { imageProviders } from "@/data/imageModels";
 import { videoProviders } from "@/data/videoModels";
 
+const STUDIOS_TITLE = "Все нейросети — каталог из 90+ ИИ-моделей | ERA2.ai";
+const STUDIOS_DESCRIPTION =
+  "Полный каталог нейросетей ЭРА2: генерация текста, изображений, видео и озвучки. Выбирайте модель под задачу — всё в одной подписке, без VPN.";
+const STUDIOS_CANONICAL = "https://era2.ai/studios";
+
 export const Route = createFileRoute("/studios")({
   head: () => ({
     meta: [
-      { title: "Инструменты и Модели — ERA2.ai" },
-      { name: "description", content: "AI-инструменты и модели для работы с текстом, изображениями, видео и аудио." },
+      { title: STUDIOS_TITLE },
+      { name: "description", content: STUDIOS_DESCRIPTION },
+      { name: "robots", content: "index, follow" },
+      { property: "og:title", content: STUDIOS_TITLE },
+      { property: "og:description", content: STUDIOS_DESCRIPTION },
+      { property: "og:url", content: STUDIOS_CANONICAL },
+      { property: "og:image", content: "https://era2.ai/og-image.png" },
     ],
+    links: [{ rel: "canonical", href: STUDIOS_CANONICAL }],
   }),
   component: ToolsAndModelsPage,
 });
