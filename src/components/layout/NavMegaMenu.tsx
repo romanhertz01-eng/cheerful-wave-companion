@@ -274,38 +274,30 @@ export function NavMegaMenu() {
                   })}
                 </div>
                 <Link
-                  to="/toolkit"
+                  to={isAuthed ? "/toolkit" : "/studios"}
                   onClick={() => setActive(null)}
                   className="mt-3 inline-flex items-center gap-1 text-[12px] font-medium px-3"
                   style={{ color: "var(--c-accent)" }}
                 >
                   Все ИИ-модели <ArrowRight size={12} />
                 </Link>
-                {activeTab.key === "text" && (
-                  <Link to="/ai/text" onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
-                    Все текстовые нейросети →
-                  </Link>
-                )}
-                {activeTab.key === "design" && (
-                  <Link to="/tools/image-generation" onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
-                    Все нейросети для изображений →
-                  </Link>
-                )}
-                {activeTab.key === "video" && (
-                  <Link to="/tools/video-generation" onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
-                    Все видео нейросети →
-                  </Link>
-                )}
-                {activeTab.key === "audio" && (
-                  <Link to="/ai/audio" onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
-                    Все аудио нейросети →
-                  </Link>
-                )}
-                {activeTab.key === "agents" && (
-                  <Link to="/ai/agents" onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
-                    Все ИИ-агенты →
-                  </Link>
-                )}
+                {(() => {
+                  const labels: Record<string, string> = {
+                    text: "Все текстовые нейросети →",
+                    design: "Все нейросети для изображений →",
+                    video: "Все видео нейросети →",
+                    audio: "Все аудио нейросети →",
+                    agents: "Все ИИ-агенты →",
+                  };
+                  const label = labels[activeTab.key];
+                  if (!label) return null;
+                  const href = isAuthed ? activeTab.route : activeTab.publicRoute;
+                  return (
+                    <Link to={href} onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
+                      {label}
+                    </Link>
+                  );
+                })()}
               </div>
             </div>
           </motion.div>
