@@ -271,7 +271,7 @@ export function NavMegaMenu() {
                   Все ИИ-модели <ArrowRight size={12} />
                 </Link>
                 {activeTab.key === "text" && (
-                  <Link to="/tools/text-generation" onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
+                  <Link to="/ai/text" onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
                     Все текстовые нейросети →
                   </Link>
                 )}
@@ -286,12 +286,12 @@ export function NavMegaMenu() {
                   </Link>
                 )}
                 {activeTab.key === "audio" && (
-                  <Link to="/tools/audio-generation" onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
+                  <Link to="/ai/audio" onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
                     Все аудио нейросети →
                   </Link>
                 )}
                 {activeTab.key === "agents" && (
-                  <Link to="/tools/agents" onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
+                  <Link to="/ai/agents" onClick={() => setActive(null)} className="flex items-center gap-1.5 mt-3 pt-3 mx-3 text-[12px] font-medium transition-colors hover:opacity-80 border-t" style={{ borderColor: "hsl(var(--border))", color: "hsl(var(--primary))" }}>
                     Все ИИ-агенты →
                   </Link>
                 )}

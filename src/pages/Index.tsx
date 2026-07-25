@@ -126,11 +126,11 @@ const Index = () => {
           <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">Нейросети по категориям</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             {[
-              { label: "Генерация текста", to: "/tools/text-generation", emoji: "💬" },
+              { label: "Генерация текста", to: "/ai/text", emoji: "💬" },
               { label: "Генерация изображений", to: "/tools/image-generation", emoji: "🎨" },
               { label: "Генерация видео", to: "/tools/video-generation", emoji: "🎬" },
-              { label: "Генерация аудио", to: "/tools/audio-generation", emoji: "🎵" },
-              { label: "ИИ-агенты", to: "/tools/agents", emoji: "🤖" },
+              { label: "Генерация аудио", to: "/ai/audio", emoji: "🎵" },
+              { label: "ИИ-агенты", to: "/ai/agents", emoji: "🤖" },
               { label: "Nano Banana", to: "/tools/nano-banana", emoji: "🍌" },
             ].map((item) => (
               <Link

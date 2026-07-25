@@ -40,7 +40,7 @@ export const aiTextPage: SeoPage = {
         heading: 'Текстовые инструменты',
         items: [
           { title: 'Чат с ИИ', desc: 'Диалог с моделью', href: '/text', icon: '💬' },
-          { title: 'Написать текст', desc: 'Статьи и посты', href: '/tools/text-generation', icon: '✍️' },
+          { title: 'Написать текст', desc: 'Статьи и посты', href: '/ai/text', icon: '✍️' },
           { title: 'Перевод', desc: 'На любой язык', href: '/text', icon: '🌍' },
           { title: 'Написать код', desc: 'Генерация и разбор', href: '/text', icon: '💻' },
         ],

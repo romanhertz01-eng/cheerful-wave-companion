@@ -23,7 +23,6 @@ import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ToolsTextGenerationRouteImport } from './routes/tools.text-generation'
-import { Route as ToolsNanoBananaRouteImport } from './routes/tools.nano-banana'
 import { Route as ToolsAudioGenerationRouteImport } from './routes/tools.audio-generation'
 import { Route as ToolsAgentsRouteImport } from './routes/tools.agents'
 import { Route as ToolsSlugRouteImport } from './routes/tools.$slug'
@@ -103,11 +102,6 @@ const ToolsTextGenerationRoute = ToolsTextGenerationRouteImport.update({
   path: '/tools/text-generation',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ToolsNanoBananaRoute = ToolsNanoBananaRouteImport.update({
-  id: '/tools/nano-banana',
-  path: '/tools/nano-banana',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ToolsAudioGenerationRoute = ToolsAudioGenerationRouteImport.update({
   id: '/tools/audio-generation',
   path: '/tools/audio-generation',
@@ -171,7 +165,6 @@ export interface FileRoutesByFullPath {
   '/tools/$slug': typeof ToolsSlugRoute
   '/tools/agents': typeof ToolsAgentsRoute
   '/tools/audio-generation': typeof ToolsAudioGenerationRoute
-  '/tools/nano-banana': typeof ToolsNanoBananaRoute
   '/tools/text-generation': typeof ToolsTextGenerationRoute
 }
 export interface FileRoutesByTo {
@@ -196,7 +189,6 @@ export interface FileRoutesByTo {
   '/tools/$slug': typeof ToolsSlugRoute
   '/tools/agents': typeof ToolsAgentsRoute
   '/tools/audio-generation': typeof ToolsAudioGenerationRoute
-  '/tools/nano-banana': typeof ToolsNanoBananaRoute
   '/tools/text-generation': typeof ToolsTextGenerationRoute
 }
 export interface FileRoutesById {
@@ -222,7 +214,6 @@ export interface FileRoutesById {
   '/tools/$slug': typeof ToolsSlugRoute
   '/tools/agents': typeof ToolsAgentsRoute
   '/tools/audio-generation': typeof ToolsAudioGenerationRoute
-  '/tools/nano-banana': typeof ToolsNanoBananaRoute
   '/tools/text-generation': typeof ToolsTextGenerationRoute
 }
 export interface FileRouteTypes {
@@ -249,7 +240,6 @@ export interface FileRouteTypes {
     | '/tools/$slug'
     | '/tools/agents'
     | '/tools/audio-generation'
-    | '/tools/nano-banana'
     | '/tools/text-generation'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -274,7 +264,6 @@ export interface FileRouteTypes {
     | '/tools/$slug'
     | '/tools/agents'
     | '/tools/audio-generation'
-    | '/tools/nano-banana'
     | '/tools/text-generation'
   id:
     | '__root__'
@@ -299,7 +288,6 @@ export interface FileRouteTypes {
     | '/tools/$slug'
     | '/tools/agents'
     | '/tools/audio-generation'
-    | '/tools/nano-banana'
     | '/tools/text-generation'
   fileRoutesById: FileRoutesById
 }
@@ -325,7 +313,6 @@ export interface RootRouteChildren {
   ToolsSlugRoute: typeof ToolsSlugRoute
   ToolsAgentsRoute: typeof ToolsAgentsRoute
   ToolsAudioGenerationRoute: typeof ToolsAudioGenerationRoute
-  ToolsNanoBananaRoute: typeof ToolsNanoBananaRoute
   ToolsTextGenerationRoute: typeof ToolsTextGenerationRoute
 }
 
@@ -429,13 +416,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsTextGenerationRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/tools/nano-banana': {
-      id: '/tools/nano-banana'
-      path: '/tools/nano-banana'
-      fullPath: '/tools/nano-banana'
-      preLoaderRoute: typeof ToolsNanoBananaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/tools/audio-generation': {
       id: '/tools/audio-generation'
       path: '/tools/audio-generation'
@@ -517,7 +497,6 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsSlugRoute: ToolsSlugRoute,
   ToolsAgentsRoute: ToolsAgentsRoute,
   ToolsAudioGenerationRoute: ToolsAudioGenerationRoute,
-  ToolsNanoBananaRoute: ToolsNanoBananaRoute,
   ToolsTextGenerationRoute: ToolsTextGenerationRoute,
 }
 export const routeTree = rootRouteImport

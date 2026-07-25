@@ -26,13 +26,13 @@ const TOOLS = [
     Icon: MessageSquare,
     title: "Текстовые нейросети",
     desc: "ChatGPT, Claude, Gemini и Grok с диалогом и поиском",
-    to: "/tools/text-generation",
+    to: "/ai/text",
   },
   {
     Icon: AudioLines,
     title: "Аудио и музыка",
     desc: "ElevenLabs, Suno и другие модели для голоса и треков",
-    to: "/tools/audio-generation",
+    to: "/ai/audio",
   },
   {
     Icon: Sparkles,
@@ -44,7 +44,7 @@ const TOOLS = [
     Icon: Bot,
     title: "ИИ-агенты",
     desc: "Готовые ассистенты: маркетолог, программист, копирайтер",
-    to: "/tools/agents",
+    to: "/ai/agents",
   },
 ] as const;
 

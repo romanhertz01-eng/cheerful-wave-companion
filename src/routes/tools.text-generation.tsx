@@ -1,12 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-import TextGenerationPage from "@/pages/TextGenerationPage";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/tools/text-generation")({
-  component: TextGenerationPage,
-  head: () => ({
-    meta: [
-      { title: "Генерация текста — ИИ нейросети | ERA2.ai" },
-      { name: "description", content: "ChatGPT, Claude, Gemini, DeepSeek и другие текстовые нейросети. Генерация текста, переводы, анализ документов в одном месте." },
-    ],
-  }),
+  beforeLoad: () => {
+    throw redirect({ to: "/ai/text", statusCode: 301 });
+  },
+  component: () => null,
 });
