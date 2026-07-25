@@ -13,7 +13,7 @@ export const Route = createFileRoute('/guides/$slug')({
   head: ({ params }) => {
     const guide = guides[params.slug];
     if (!guide) return {};
-    const canonical = `https://era2.ai/guides/${params.slug}`;
+    const canonical = `https://cheerful-wave-companion.lovable.app/guides/${params.slug}`;
     return {
       meta: [
         { title: guide.seo.title },

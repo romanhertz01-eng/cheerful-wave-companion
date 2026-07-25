@@ -13,7 +13,7 @@ export const Route = createFileRoute("/tools/$slug")({
     const data = getToolPageData(params.slug);
     if (!data) return {};
     const title = `${data.heroTitle} онлайн — нейросеть | ERA2.ai`;
-    const canonical = `https://era2.ai/tools/${params.slug}`;
+    const canonical = `https://cheerful-wave-companion.lovable.app/tools/${params.slug}`;
     const robots = data.status === 'draft' ? 'noindex, follow' : 'index, follow';
     return {
       meta: [
@@ -23,7 +23,7 @@ export const Route = createFileRoute("/tools/$slug")({
         { property: "og:title", content: title },
         { property: "og:description", content: data.heroDescription },
         { property: "og:url", content: canonical },
-        { property: "og:image", content: "https://era2.ai/og-image.png" },
+        { property: "og:image", content: "https://cheerful-wave-companion.lovable.app/og-image.png" },
       ],
       links: [{ rel: "canonical", href: canonical }],
     };

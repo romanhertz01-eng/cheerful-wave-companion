@@ -13,7 +13,7 @@ export const homePage: SeoPage = {
     title: 'ERA2.ai — 90+ нейросетей в одной подписке | Оплата в рублях, без VPN',
     description:
       'ChatGPT, Claude, Midjourney, Seedance, ElevenLabs и 90+ нейросетей в одном окне. Тексты, изображения, видео и озвучка по единой подписке. Оплата российскими картами, VPN не нужен.',
-    canonical: 'https://era2.ai/',
+    canonical: 'https://cheerful-wave-companion.lovable.app/',
     robots: 'index, follow',
   },
   breadcrumbs: [],

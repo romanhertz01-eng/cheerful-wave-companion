@@ -13,7 +13,7 @@ export const aiAudioPage: SeoPage = {
     title: 'Нейросети для аудио — озвучка, музыка, клон голоса | ERA2.ai',
     description:
       'Озвучка текста ElevenLabs, песни Suno, клонирование голоса и транскрибация. Единая подписка, оплата в рублях, без VPN.',
-    canonical: 'https://era2.ai/ai/audio',
+    canonical: 'https://cheerful-wave-companion.lovable.app/ai/audio',
     robots: 'index,follow',
   },
   breadcrumbs: [

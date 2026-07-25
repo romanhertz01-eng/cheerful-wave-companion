@@ -7,7 +7,7 @@ const isEmpty = Object.keys(guides).length === 0;
 const TITLE = 'Гайды по нейросетям — инструкции ЭРА2 | ERA2.ai';
 const DESCRIPTION =
   'Пошаговые гайды и инструкции по нейросетям: как создавать изображения, видео, тексты и аудио в ЭРА2.';
-const CANONICAL = 'https://era2.ai/guides';
+const CANONICAL = 'https://cheerful-wave-companion.lovable.app/guides';
 
 export const Route = createFileRoute('/guides/')({
   component: GuidesHub,
@@ -19,7 +19,7 @@ export const Route = createFileRoute('/guides/')({
       { property: 'og:title', content: TITLE },
       { property: 'og:description', content: DESCRIPTION },
       { property: 'og:url', content: CANONICAL },
-      { property: 'og:image', content: 'https://era2.ai/og-image.png' },
+      { property: 'og:image', content: 'https://cheerful-wave-companion.lovable.app/og-image.png' },
     ],
     links: [{ rel: 'canonical', href: CANONICAL }],
   }),

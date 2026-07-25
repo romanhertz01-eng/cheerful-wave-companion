@@ -28,7 +28,7 @@ const NEXT_BILLING = "22 августа 2026";
 const PRICE = "1 490 ₽";
 const EMAIL = "roman2024gerts@gmail.com";
 const DISPLAY_NAME = "Роман Г.";
-const REF_LINK = "https://era2.ai/?ref=USER123";
+const REF_LINK = "https://cheerful-wave-companion.lovable.app/?ref=USER123";
 
 const HISTORY = [
   { date: "22.07.2026", desc: "Списание за подписку «Про»", amount: "−1 490 ₽" },

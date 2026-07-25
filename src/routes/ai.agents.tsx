@@ -13,7 +13,7 @@ export const Route = createFileRoute('/ai/agents')({
       { property: 'og:title', content: aiAgentsPage.seo.title },
       { property: 'og:description', content: aiAgentsPage.seo.description },
       { property: 'og:url', content: aiAgentsPage.seo.canonical },
-      { property: 'og:image', content: 'https://era2.ai/og-image.png' },
+      { property: 'og:image', content: 'https://cheerful-wave-companion.lovable.app/og-image.png' },
     ],
     links: [{ rel: 'canonical', href: aiAgentsPage.seo.canonical }],
   }),

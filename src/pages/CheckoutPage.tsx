@@ -71,7 +71,7 @@ export default function CheckoutPage() {
     if (!agreed) return;
     if (isGift) {
       const code = Math.random().toString(36).slice(2, 6).toUpperCase();
-      setGiftModal({ link: `https://era2.ai/gift/DEMO-${code}` });
+      setGiftModal({ link: `https://cheerful-wave-companion.lovable.app/gift/DEMO-${code}` });
       return;
     }
     toast("Переход к оплате", { description: `${plan.name} · ${selected.label} · ${fmtRub(selected.total)}` });

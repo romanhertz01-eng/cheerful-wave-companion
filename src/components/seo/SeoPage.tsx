@@ -22,7 +22,7 @@ export function SeoRenderer({ def }: { def: SeoPage }) {
           '@type': 'ListItem',
           position: i + 1,
           name: c.label,
-          item: `https://era2.ai${c.href}`,
+          item: `https://cheerful-wave-companion.lovable.app${c.href}`,
         })),
       }
     : null;

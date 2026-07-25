@@ -13,7 +13,7 @@ export const aiTextPage: SeoPage = {
     title: 'Нейросети для текста — ChatGPT, Claude, Gemini на русском | ERA2.ai',
     description:
       'Пишите статьи, переводите и генерируйте код с ChatGPT, Claude, Gemini, DeepSeek. Единая подписка, оплата в рублях, без VPN.',
-    canonical: 'https://era2.ai/ai/text',
+    canonical: 'https://cheerful-wave-companion.lovable.app/ai/text',
     robots: 'index,follow',
   },
   breadcrumbs: [

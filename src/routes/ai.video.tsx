@@ -13,7 +13,7 @@ export const Route = createFileRoute('/ai/video')({
       { property: 'og:title', content: aiVideoPage.seo.title },
       { property: 'og:description', content: aiVideoPage.seo.description },
       { property: 'og:url', content: aiVideoPage.seo.canonical },
-      { property: 'og:image', content: 'https://era2.ai/og-image.png' },
+      { property: 'og:image', content: 'https://cheerful-wave-companion.lovable.app/og-image.png' },
     ],
     links: [{ rel: 'canonical', href: aiVideoPage.seo.canonical }],
   }),

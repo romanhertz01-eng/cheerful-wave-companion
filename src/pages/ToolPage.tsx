@@ -51,9 +51,9 @@ const ToolPage = () => {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Главная", item: "https://era2.ai/" },
-      { "@type": "ListItem", position: 2, name: "Инструменты", item: "https://era2.ai/studios" },
-      { "@type": "ListItem", position: 3, name: data.heroTitle, item: `https://era2.ai/tools/${data.slug}` },
+      { "@type": "ListItem", position: 1, name: "Главная", item: "https://cheerful-wave-companion.lovable.app/" },
+      { "@type": "ListItem", position: 2, name: "Инструменты", item: "https://cheerful-wave-companion.lovable.app/studios" },
+      { "@type": "ListItem", position: 3, name: data.heroTitle, item: `https://cheerful-wave-companion.lovable.app/tools/${data.slug}` },
     ],
   };
   const related = getRelatedTools(data.slug);
@@ -71,7 +71,7 @@ const ToolPage = () => {
         name: `${data.modelName} в ERA2`,
         applicationCategory: "MultimediaApplication",
         operatingSystem: "Web",
-        url: `https://era2.ai/tools/${data.slug}`,
+        url: `https://cheerful-wave-companion.lovable.app/tools/${data.slug}`,
         offers: {
           "@type": "Offer",
           price: minPaidPrice,
