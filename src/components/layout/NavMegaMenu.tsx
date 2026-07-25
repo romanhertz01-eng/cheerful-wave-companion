@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   MessageSquare, PenLine, Globe, FileSearch, Languages, Code, Lightbulb,
@@ -16,11 +16,13 @@ interface FeatureItem {
   icon: LucideIcon;
   title: string;
   desc: string;
+  publicHref?: string;
 }
 interface ModelItem {
   name: string;
   desc: string;
   badge?: string;
+  publicHref?: string;
 }
 interface TabConfig {
   key: string;
@@ -57,17 +59,17 @@ const TABS: TabConfig[] = [
   {
     key: "design", label: "Дизайн", route: "/design", publicRoute: "/ai/image",
     features: [
-      { icon: ImageIcon, title: "Создать изображение", desc: "Генерация по тексту" },
+      { icon: ImageIcon, title: "Создать изображение", desc: "Генерация по тексту", publicHref: "/tools/image-generation" },
       { icon: Camera, title: "Сделать ИИ-фото", desc: "Реалистичные фото людей" },
       { icon: Paintbrush, title: "Редактор фото", desc: "Изменение и доработка" },
-      { icon: Eraser, title: "Удалить фон", desc: "Удаление и замена фона" },
+      { icon: Eraser, title: "Удалить фон", desc: "Удаление и замена фона", publicHref: "/tools/remove-background" },
       { icon: Scissors, title: "Удалить объект", desc: "Удаление людей и предметов" },
-      { icon: ZoomIn, title: "Улучшить качество", desc: "Повышение чёткости и деталей" },
+      { icon: ZoomIn, title: "Улучшить качество", desc: "Повышение чёткости и деталей", publicHref: "/tools/image-upscaler" },
       { icon: RefreshCw, title: "Замена лица", desc: "Face Swap на фото" },
     ],
     models: [
-      { name: "Nano Banana", desc: "Быстрая генерация" },
-      { name: "MidJourney", desc: "Художественный стиль" },
+      { name: "Nano Banana", desc: "Быстрая генерация", publicHref: "/tools/nano-banana" },
+      { name: "MidJourney", desc: "Художественный стиль", publicHref: "/tools/midjourney" },
       { name: "Seedream", desc: "От ByteDance" },
       { name: "GPT Image", desc: "От OpenAI" },
       { name: "Flux", desc: "Фотореализм" },
@@ -78,20 +80,20 @@ const TABS: TabConfig[] = [
   {
     key: "video", label: "Видео", route: "/video", publicRoute: "/ai/video",
     features: [
-      { icon: Video, title: "Создать видео", desc: "Генерация из текста" },
-      { icon: Sparkles, title: "Оживить фото", desc: "Анимация изображений" },
+      { icon: Video, title: "Создать видео", desc: "Генерация из текста", publicHref: "/tools/video-generation" },
+      { icon: Sparkles, title: "Оживить фото", desc: "Анимация изображений", publicHref: "/tools/ozhivit-foto" },
       { icon: Film, title: "Видео редактор", desc: "Изменение видео" },
-      { icon: User, title: "ИИ Аватар", desc: "Говорящие аватары" },
+      { icon: User, title: "ИИ Аватар", desc: "Говорящие аватары", publicHref: "/tools/talking-avatar" },
       { icon: TrendingUp, title: "Улучшить качество", desc: "Апскейл видео" },
     ],
     models: [
       { name: "Kling", desc: "Реалистичное видео" },
-      { name: "Veo", desc: "От Google" },
+      { name: "Veo", desc: "От Google", publicHref: "/tools/veo" },
       { name: "Runway", desc: "Профессиональный" },
-      { name: "Seedance", desc: "От ByteDance" },
+      { name: "Seedance", desc: "От ByteDance", publicHref: "/tools/seedance" },
       { name: "Hailuo", desc: "Minimax" },
       { name: "Wan", desc: "Alibaba" },
-      { name: "Sora", desc: "От OpenAI" },
+      { name: "Sora", desc: "От OpenAI", publicHref: "/tools/sora" },
       { name: "HeyGen", desc: "AI аватары" },
       { name: "Hedra", desc: "Говорящие персонажи" },
     ],
@@ -100,8 +102,8 @@ const TABS: TabConfig[] = [
     key: "audio", label: "Аудио", route: "/audio", publicRoute: "/ai/audio",
     features: [
       { icon: Music, title: "Создать песню", desc: "Генерация музыки и вокала" },
-      { icon: AudioLines, title: "Озвучка текста", desc: "Текст в речь" },
-      { icon: Mic, title: "Клон голоса", desc: "Копирование голоса" },
+      { icon: AudioLines, title: "Озвучка текста", desc: "Текст в речь", publicHref: "/tools/text-to-speech" },
+      { icon: Mic, title: "Клон голоса", desc: "Копирование голоса", publicHref: "/tools/voice-cloning" },
       { icon: Volume2, title: "Смена голоса", desc: "Изменение тембра" },
       { icon: Activity, title: "Создание звуков", desc: "Генерация эффектов" },
       { icon: VolumeX, title: "Удаление шума", desc: "Очистка и улучшение" },
