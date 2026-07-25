@@ -13,6 +13,7 @@ import { Route as VideoRouteImport } from './routes/video'
 import { Route as ToolkitRouteImport } from './routes/toolkit'
 import { Route as TextRouteImport } from './routes/text'
 import { Route as StudiosRouteImport } from './routes/studios'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as HistoryRouteImport } from './routes/history'
 import { Route as DesignRouteImport } from './routes/design'
@@ -52,6 +53,11 @@ const TextRoute = TextRouteImport.update({
 const StudiosRoute = StudiosRouteImport.update({
   id: '/studios',
   path: '/studios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PricingRoute = PricingRouteImport.update({
@@ -165,6 +171,7 @@ export interface FileRoutesByFullPath {
   '/design': typeof DesignRoute
   '/history': typeof HistoryRoute
   '/pricing': typeof PricingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/studios': typeof StudiosRoute
   '/text': typeof TextRoute
   '/toolkit': typeof ToolkitRoute
@@ -191,6 +198,7 @@ export interface FileRoutesByTo {
   '/design': typeof DesignRoute
   '/history': typeof HistoryRoute
   '/pricing': typeof PricingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/studios': typeof StudiosRoute
   '/text': typeof TextRoute
   '/toolkit': typeof ToolkitRoute
@@ -218,6 +226,7 @@ export interface FileRoutesById {
   '/design': typeof DesignRoute
   '/history': typeof HistoryRoute
   '/pricing': typeof PricingRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/studios': typeof StudiosRoute
   '/text': typeof TextRoute
   '/toolkit': typeof ToolkitRoute
@@ -246,6 +255,7 @@ export interface FileRouteTypes {
     | '/design'
     | '/history'
     | '/pricing'
+    | '/sitemap.xml'
     | '/studios'
     | '/text'
     | '/toolkit'
@@ -272,6 +282,7 @@ export interface FileRouteTypes {
     | '/design'
     | '/history'
     | '/pricing'
+    | '/sitemap.xml'
     | '/studios'
     | '/text'
     | '/toolkit'
@@ -298,6 +309,7 @@ export interface FileRouteTypes {
     | '/design'
     | '/history'
     | '/pricing'
+    | '/sitemap.xml'
     | '/studios'
     | '/text'
     | '/toolkit'
@@ -325,6 +337,7 @@ export interface RootRouteChildren {
   DesignRoute: typeof DesignRoute
   HistoryRoute: typeof HistoryRoute
   PricingRoute: typeof PricingRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   StudiosRoute: typeof StudiosRoute
   TextRoute: typeof TextRoute
   ToolkitRoute: typeof ToolkitRoute
@@ -370,6 +383,13 @@ declare module '@tanstack/react-router' {
       path: '/studios'
       fullPath: '/studios'
       preLoaderRoute: typeof StudiosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pricing': {
@@ -525,6 +545,7 @@ const rootRouteChildren: RootRouteChildren = {
   DesignRoute: DesignRoute,
   HistoryRoute: HistoryRoute,
   PricingRoute: PricingRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   StudiosRoute: StudiosRoute,
   TextRoute: TextRoute,
   ToolkitRoute: ToolkitRoute,

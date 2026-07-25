@@ -5,6 +5,7 @@ export const aiAudioPage: SeoPage = {
   slug: '/ai/audio',
   pageKind: 'category',
   status: 'published',
+  updatedAt: '2026-07-26',
   uniqueValue:
     'Обзор аудио-нейросетей ЭРА2: озвучка текста, создание музыки, клонирование голоса, транскрибация — модели и инструменты в одном месте.',
   searchIntent: 'commercial',

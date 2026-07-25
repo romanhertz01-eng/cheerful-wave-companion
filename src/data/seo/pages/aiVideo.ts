@@ -5,6 +5,7 @@ export const aiVideoPage: SeoPage = {
   slug: '/ai/video',
   pageKind: 'category',
   status: 'published',
+  updatedAt: '2026-07-26',
   uniqueValue:
     'Обзор всех видео-нейросетей ЭРА2 в одном месте: какие задачи решают, какие модели доступны, как выбрать.',
   searchIntent: 'commercial',

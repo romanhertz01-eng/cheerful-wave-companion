@@ -97,9 +97,27 @@ export function SeoRenderer({ def }: { def: SeoPage }) {
         </Breadcrumb>
         </div>
       )}
-      {blocks.map((b) => {
+      {blocks.map((b, idx) => {
         const C = blockRegistry[b.type];
-        return <C key={b.order} type={b.type} {...(b.data || {})} />;
+        const el = <C key={b.order} type={b.type} {...(b.data || {})} />;
+        if (
+          def.pageKind === 'guide' &&
+          b.type === 'hero' &&
+          def.updatedAt
+        ) {
+          const [y, m, d] = def.updatedAt.split('-');
+          const formatted = `${d}.${m}.${y}`;
+          return (
+            <span key={b.order} className="contents">
+              {el}
+              <div className="max-w-3xl mx-auto px-4 -mt-4 mb-6 text-center text-sm text-muted-foreground">
+                Обновлено {formatted}
+                {def.readingTime ? ` · ${def.readingTime}` : ''}
+              </div>
+            </span>
+          );
+        }
+        return el;
       })}
       <Footer />
     </>
