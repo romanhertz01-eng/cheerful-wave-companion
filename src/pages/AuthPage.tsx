@@ -3,10 +3,15 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate } from "@tanstack/react-router";
 import { Mail, Lock, User, ArrowRight, Eye, EyeOff } from "lucide-react";
 import { SiTelegram, SiGoogle, SiVk } from "@icons-pack/react-simple-icons";
+import { readSafeNext } from "@/lib/authRedirect";
 
 const AuthPage = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
+  const getNext = () => {
+    if (typeof window === "undefined") return "/";
+    return readSafeNext(window.location.search) ?? "/";
+  };
   const [mode, setMode] = useState<"login" | "register">("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -39,12 +44,12 @@ const AuthPage = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     login();
-    navigate({ to: "/" });
+    navigate({ to: getNext() });
   };
 
   const handleSocial = () => {
     login();
-    navigate({ to: "/" });
+    navigate({ to: getNext() });
   };
 
   const SocialButton = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
