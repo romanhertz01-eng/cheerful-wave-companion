@@ -3,11 +3,11 @@ import { Send, Youtube, Twitter } from "lucide-react";
 
 const productLinks = [
   { label: "Главная", to: "/" },
-  { label: "Текст", to: "/tools/text-generation" },
-  { label: "Изображения", to: "/tools/image-generation" },
-  { label: "Видео", to: "/tools/video-generation" },
-  { label: "Аудио", to: "/tools/audio-generation" },
-  { label: "Агенты", to: "/tools/agents" },
+  { label: "Текст", to: "/ai/text" },
+  { label: "Изображения", to: "/ai/image" },
+  { label: "Видео", to: "/ai/video" },
+  { label: "Аудио", to: "/ai/audio" },
+  { label: "Агенты", to: "/ai/agents" },
   { label: "Тарифы", to: "/pricing" },
 ];
 

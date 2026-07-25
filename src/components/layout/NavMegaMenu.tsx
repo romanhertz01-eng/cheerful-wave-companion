@@ -10,6 +10,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
+import { useAuth } from "@/contexts/AuthContext";
 
 interface FeatureItem {
   icon: LucideIcon;
@@ -25,6 +26,7 @@ interface TabConfig {
   key: string;
   label: string;
   route: string;
+  publicRoute: string;
   features?: FeatureItem[];
   models?: ModelItem[];
   modelsTitle?: string;
@@ -32,7 +34,7 @@ interface TabConfig {
 
 const TABS: TabConfig[] = [
   {
-    key: "text", label: "Текст", route: "/text",
+    key: "text", label: "Текст", route: "/text", publicRoute: "/ai/text",
     features: [
       { icon: MessageSquare, title: "Чат с ИИ", desc: "Ответы на любые вопросы" },
       { icon: PenLine, title: "Написать текст", desc: "Статьи, посты, тексты" },
@@ -53,7 +55,7 @@ const TABS: TabConfig[] = [
     ],
   },
   {
-    key: "design", label: "Дизайн", route: "/design",
+    key: "design", label: "Дизайн", route: "/design", publicRoute: "/ai/image",
     features: [
       { icon: ImageIcon, title: "Создать изображение", desc: "Генерация по тексту" },
       { icon: Camera, title: "Сделать ИИ-фото", desc: "Реалистичные фото людей" },
@@ -74,7 +76,7 @@ const TABS: TabConfig[] = [
     ],
   },
   {
-    key: "video", label: "Видео", route: "/video",
+    key: "video", label: "Видео", route: "/video", publicRoute: "/ai/video",
     features: [
       { icon: Video, title: "Создать видео", desc: "Генерация из текста" },
       { icon: Sparkles, title: "Оживить фото", desc: "Анимация изображений" },
@@ -95,7 +97,7 @@ const TABS: TabConfig[] = [
     ],
   },
   {
-    key: "audio", label: "Аудио", route: "/audio",
+    key: "audio", label: "Аудио", route: "/audio", publicRoute: "/ai/audio",
     features: [
       { icon: Music, title: "Создать песню", desc: "Генерация музыки и вокала" },
       { icon: AudioLines, title: "Озвучка текста", desc: "Текст в речь" },
@@ -110,7 +112,7 @@ const TABS: TabConfig[] = [
     ],
   },
   {
-    key: "agents", label: "Агенты", route: "/agents",
+    key: "agents", label: "Агенты", route: "/agents", publicRoute: "/ai/agents",
     modelsTitle: "РАБОТАЮТ НА",
     features: [
       { icon: TrendingUp, title: "Маркетолог", desc: "Стратегия и продвижение" },
@@ -132,6 +134,7 @@ const TABS: TabConfig[] = [
 export function NavMegaMenu() {
   const [active, setActive] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { isAuthed } = useAuth();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const open = (key: string) => {
@@ -153,6 +156,7 @@ export function NavMegaMenu() {
     <div className="relative flex items-center gap-1" onMouseLeave={scheduleClose}>
       {TABS.map((tab) => {
         const isHot = active === tab.key && tab.features;
+        const targetRoute = isAuthed ? tab.route : tab.publicRoute;
         const handleEnter = () => {
           if (tab.features) {
             if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -165,7 +169,7 @@ export function NavMegaMenu() {
         return (
           <Link
             key={tab.key}
-            to={tab.route}
+            to={targetRoute}
             onMouseEnter={handleEnter}
             onClick={() => setActive(null)}
             className="px-3 h-9 inline-flex items-center rounded-full text-sm font-medium transition-colors"
