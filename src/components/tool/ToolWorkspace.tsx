@@ -62,7 +62,7 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
         {/* LEFT PANEL */}
         <div className="rounded-2xl border border-border bg-background/60 p-3 flex flex-col gap-2.5">
           <div className="flex items-center gap-2">
-            <Link to="/toolkit" className="p-1.5 rounded-md hover:bg-muted transition-colors">
+            <Link to={isAuthed ? "/toolkit" : "/studios"} className="p-1.5 rounded-md hover:bg-muted transition-colors">
               <ArrowLeft size={16} />
             </Link>
             <span className="font-semibold text-sm">{data.heroTitle}</span>
