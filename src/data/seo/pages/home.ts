@@ -64,9 +64,9 @@ export const homePage: SeoPage = {
       data: {
         heading: 'Модели внутри подписки',
         items: [
-          { name: 'Nano Banana 2', badge: 'NEW', desc: 'Генерация и точное редактирование изображений', image: '/models/01.jpg' },
-          { name: 'Midjourney', badge: 'TOP', desc: 'Художественная эстетика и детализация', image: '/models/02.jpg' },
-          { name: 'Seedance 2.0', badge: 'NEW', desc: 'Видео из текста и изображений', image: '/models/03.jpg' },
+          { name: 'Nano Banana 2', badge: 'NEW', desc: 'Генерация и точное редактирование изображений', image: '/models/01.jpg', href: '/tools/nano-banana' },
+          { name: 'Midjourney', badge: 'TOP', desc: 'Художественная эстетика и детализация', image: '/models/02.jpg', href: '/tools/midjourney' },
+          { name: 'Seedance 2.0', badge: 'NEW', desc: 'Видео из текста и изображений', image: '/models/03.jpg', href: '/tools/seedance' },
           { name: 'GPT-5', desc: 'Тексты, код и анализ документов', image: '/models/04.jpg' },
           { name: 'Claude', desc: 'Длинные тексты и работа с данными', image: '/models/05.jpg' },
           { name: 'ElevenLabs', desc: 'Озвучка и клонирование голоса', image: '/models/06.jpg' },

@@ -39,10 +39,10 @@ export const aiAudioPage: SeoPage = {
       data: {
         heading: 'Аудио-инструменты',
         items: [
-          { title: 'Озвучка текста', desc: 'Текст в речь', href: '/audio', icon: '🎙️' },
+          { title: 'Озвучка текста', desc: 'Текст в речь', href: '/tools/text-to-speech', icon: '🎙️' },
           { title: 'Создать песню', desc: 'Музыка по описанию', href: '/audio', icon: '🎵' },
-          { title: 'Клон голоса', desc: 'Свой голос по образцу', href: '/audio', icon: '🗣️' },
-          { title: 'Транскрибация', desc: 'Аудио в текст', href: '/audio', icon: '📝' },
+          { title: 'Клон голоса', desc: 'Свой голос по образцу', href: '/tools/voice-cloning', icon: '🗣️' },
+          { title: 'Транскрибация', desc: 'Аудио в текст', href: '/tools/transcribe', icon: '📝' },
         ],
       },
     },
