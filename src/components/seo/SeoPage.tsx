@@ -12,8 +12,43 @@ import { blockRegistry } from './blocks/registry';
 export function SeoRenderer({ def }: { def: SeoPage }) {
   const blocks = def.blocks.filter((b) => b.enabled).sort((a, b) => a.order - b.order);
 
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: def.breadcrumbs.map((c, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: c.label,
+      item: `https://era2.ai${c.href}`,
+    })),
+  };
+
+  const faqBlock = def.blocks.find((b) => b.type === 'faq' && b.enabled);
+  const faqItems = (faqBlock?.data as { items?: { q: string; a: string }[] } | undefined)?.items;
+  const faqLd = faqItems && faqItems.length
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqItems.map((it) => ({
+          '@type': 'Question',
+          name: it.q,
+          acceptedAnswer: { '@type': 'Answer', text: it.a },
+        })),
+      }
+    : null;
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
+      {faqLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+        />
+      )}
       <div className="max-w-5xl mx-auto px-4 pt-6">
         <Breadcrumb>
           <BreadcrumbList>
