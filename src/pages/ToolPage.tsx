@@ -105,6 +105,14 @@ const ToolPage = () => {
 
       {data.tool && <ToolWorkspace data={data} />}
 
+      {/* Intro (tool pages) */}
+      {data.tool && data.intro && (
+        <section className="max-w-3xl mx-auto px-4 py-12 text-center">
+          <h2 className="text-2xl md:text-[32px] font-bold mb-4">{data.intro.heading}</h2>
+          <p className="text-muted-foreground leading-relaxed">{data.intro.text}</p>
+        </section>
+      )}
+
       {/* Community gallery */}
       <section className="max-w-6xl mx-auto px-4 py-12">
         <h2 className="text-xl md:text-2xl font-bold mb-6">Изучите другие источники вдохновения от сообщества ERA2</h2>
@@ -160,6 +168,24 @@ const ToolPage = () => {
         </section>
       )}
 
+      {/* Use cases (tool pages) */}
+      {data.tool && data.useCases && (
+        <section className="max-w-5xl mx-auto px-4 py-12">
+          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.useCases.heading}</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            {data.useCases.items.map((it, i) => (
+              <div
+                key={i}
+                className="rounded-xl border border-white/10 bg-white/[0.04] shadow-sm p-5 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
+              >
+                <h4 className="font-semibold mb-1">{it.title}</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">{it.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* How it works */}
       {data.tool && data.howItWorks && (
         <section className="max-w-5xl mx-auto px-4 py-12">
@@ -186,6 +212,21 @@ const ToolPage = () => {
             >
               {data.howItWorks.cta ?? data.finalCta?.button ?? "Попробовать"}
             </button>
+          </div>
+        </section>
+      )}
+
+      {/* Specs (tool pages) */}
+      {data.tool && data.specs && (
+        <section className="max-w-3xl mx-auto px-4 py-12">
+          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.specs.heading}</h2>
+          <div className="flex flex-col">
+            {data.specs.items.map((it, i) => (
+              <div key={i} className="flex justify-between py-3 border-b border-border/60 gap-4">
+                <span className="text-muted-foreground">{it.label}</span>
+                <span className="font-medium text-right">{it.value}</span>
+              </div>
+            ))}
           </div>
         </section>
       )}
@@ -308,6 +349,24 @@ const ToolPage = () => {
         </Link>
         <div className="mt-8 max-w-[400px] mx-auto aspect-[4/3] rounded-xl border border-border" style={{ background: "linear-gradient(135deg, #1a1030, #0f1a2e)" }} />
       </section>
+      )}
+
+      {/* Tips (tool pages) */}
+      {data.tool && data.tips && (
+        <section className="max-w-5xl mx-auto px-4 py-12">
+          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.tips.heading}</h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            {data.tips.items.map((it, i) => (
+              <div
+                key={i}
+                className="rounded-xl border border-white/10 bg-white/[0.04] shadow-sm p-5 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
+              >
+                <h4 className="font-semibold mb-1">{it.title}</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">{it.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
       )}
 
       <FAQ items={data.faqItems ?? toolPageItems} />
