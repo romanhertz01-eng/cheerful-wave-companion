@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useAuth } from "@/contexts/AuthContext";
+import { buildAuthHref } from "@/lib/authRedirect";
 
 interface AuthCTALinkProps {
   to: string;
@@ -12,8 +13,12 @@ interface AuthCTALinkProps {
 /** Link that redirects to /auth for guests, or to `to` for authed users */
 export function AuthCTALink({ to, children, className, style, onClick }: AuthCTALinkProps) {
   const { isAuthed } = useAuth();
+  const guestHref =
+    typeof window !== "undefined"
+      ? buildAuthHref(window.location.pathname + window.location.search)
+      : "/auth";
   return (
-    <Link to={isAuthed ? to : "/auth"} className={className} style={style} onClick={onClick}>
+    <Link to={isAuthed ? to : guestHref} className={className} style={style} onClick={onClick}>
       {children}
     </Link>
   );
