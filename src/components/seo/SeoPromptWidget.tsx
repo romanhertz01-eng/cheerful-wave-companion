@@ -1,5 +1,7 @@
 import { useNavigate } from "@tanstack/react-router";
 import { ChevronDown, Zap } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { buildAuthHref } from "@/lib/authRedirect";
 
 type Mode = "image" | "video" | "text" | "audio" | "agents";
 
@@ -21,9 +23,15 @@ const modePills: Record<Mode, (modelName: string) => string[]> = {
 
 export function SeoPromptWidget({ mode, placeholder, modelName, credits, redirectTo }: SeoPromptWidgetProps) {
   const navigate = useNavigate();
+  const { isAuthed } = useAuth();
 
   const handleClick = () => {
-    navigate({ to: redirectTo });
+    if (isAuthed) {
+      navigate({ to: redirectTo });
+    } else {
+      const next = typeof window !== "undefined" ? window.location.pathname + window.location.search : undefined;
+      navigate({ to: buildAuthHref(next) });
+    }
   };
 
   const pills = modePills[mode](modelName);
