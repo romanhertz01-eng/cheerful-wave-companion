@@ -73,7 +73,7 @@ const ToolPage = () => {
             <ChevronRight className="w-3 h-3" />
             <Link to="/toolkit" className="hover:text-foreground transition-colors">Инструменты</Link>
             <ChevronRight className="w-3 h-3" />
-            <span className="text-foreground/70">{data.modelName}</span>
+            <span className="text-foreground/70">{data.heroTitle}</span>
           </nav>
 
           {!data.tool && (
