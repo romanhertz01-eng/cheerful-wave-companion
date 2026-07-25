@@ -13,6 +13,9 @@ import { FinalCtaBlock } from './FinalCtaBlock';
 import { ToolGridBlock } from './ToolGridBlock';
 import { ModelGridBlock } from './ModelGridBlock';
 import { RelatedLinksBlock } from './RelatedLinksBlock';
+import { TldrBlock } from './TldrBlock';
+import { TocBlock } from './TocBlock';
+import { StepsBlock } from './StepsBlock';
 
 const P: ComponentType<any> = BlockPlaceholder;
 
@@ -35,4 +38,7 @@ export const blockRegistry: Record<BlockType, ComponentType<any>> = {
   relatedLinks: RelatedLinksBlock,
   breadcrumbs: P,
   finalCta: FinalCtaBlock,
+  tldr: TldrBlock,
+  toc: TocBlock,
+  steps: StepsBlock,
 };
