@@ -310,7 +310,7 @@ const ToolPage = () => {
       </section>
       )}
 
-      <FAQ items={toolPageItems} />
+      <FAQ items={data.faqItems ?? toolPageItems} />
 
       {/* Final CTA (tool pages) */}
       {data.tool && data.finalCta && (
