@@ -5,6 +5,9 @@ import ToolkitPage from "@/pages/ToolkitPage";
 export const Route = createFileRoute("/toolkit")({
   component: () => <RequireAuth><ToolkitPage /></RequireAuth>,
   head: () => ({
-    meta: [{ title: "ERA2 — Все нейросети" }],
+    meta: [
+      { title: "ERA2 — Все нейросети" },
+      { name: "robots", content: "noindex,follow" },
+    ],
   }),
 });

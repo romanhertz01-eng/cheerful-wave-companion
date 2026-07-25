@@ -12,6 +12,7 @@ export const Route = createFileRoute("/account")({
     meta: [
       { title: "ERA2 — Аккаунт" },
       { name: "description", content: "Управление подпиской, картой и историей платежей ERA2.ai" },
+      { name: "robots", content: "noindex,follow" },
       { property: "og:title", content: "ERA2 — Аккаунт" },
       { property: "og:description", content: "Управление подпиской, картой и историей платежей ERA2.ai" },
     ],

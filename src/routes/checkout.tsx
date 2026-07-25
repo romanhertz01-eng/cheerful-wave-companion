@@ -16,6 +16,7 @@ export const Route = createFileRoute("/checkout")({
     meta: [
       { title: "ERA2 — Оформление подписки" },
       { name: "description", content: "Оформление подписки на ERA2.ai: выбор периода и способа оплаты." },
+      { name: "robots", content: "noindex,follow" },
       { property: "og:title", content: "ERA2 — Оформление подписки" },
       { property: "og:description", content: "Оформление подписки на ERA2.ai: выбор периода и способа оплаты." },
     ],
