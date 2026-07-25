@@ -83,7 +83,8 @@ export const aiVideoPage: SeoPage = {
       enabled: true,
       order: 5,
       data: {
-        title: 'Работы сообщества',
+        title: 'Примеры работ нейросетей',
+        showMeta: false,
         items: [
           { author: 'Алексей', image: '/community/01.jpg', likes: 234, views: 1200 },
           { author: 'Мария',   image: '/community/02.jpg', likes: 187, views: 890 },

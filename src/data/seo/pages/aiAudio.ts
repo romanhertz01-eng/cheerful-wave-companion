@@ -79,7 +79,7 @@ export const aiAudioPage: SeoPage = {
     },
     {
       type: 'gallery',
-      enabled: true,
+      enabled: false,
       order: 5,
       data: {
         title: 'Работы сообщества',
