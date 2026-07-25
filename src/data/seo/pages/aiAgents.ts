@@ -4,7 +4,7 @@ export const aiAgentsPage: SeoPage = {
   id: 'ai-agents',
   slug: '/ai/agents',
   pageKind: 'category',
-  status: 'draft',
+  status: 'published',
   uniqueValue:
     'Обзор ИИ-агентов ЭРА2: готовые ассистенты под роли — маркетолог, копирайтер, программист, юрист — вместо настройки промптов вручную.',
   searchIntent: 'commercial',

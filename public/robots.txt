@@ -1,8 +1,14 @@
 User-agent: *
 Allow: /
-Disallow: /auth
-Disallow: /history
-Disallow: /account
-Disallow: /checkout
+Disallow: /*?utm_
+Disallow: /*?fbclid
+Disallow: /*?gclid
+
+User-agent: Yandex
+Allow: /
+Clean-param: next&plan&period&model&utm_source&utm_medium&utm_campaign&utm_content&utm_term
+
+User-agent: MJ12bot
+Disallow: /
 
 Sitemap: https://era2.ai/sitemap.xml
