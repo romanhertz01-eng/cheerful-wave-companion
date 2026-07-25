@@ -26,6 +26,7 @@ export interface ToolPageData {
     uploadHint?: string;
     uploadAccept?: string;
     legalNote?: string;
+    uploadHints?: string[];
     resultType?: "audio" | "images" | "video";
   };
   howItWorks?: {
