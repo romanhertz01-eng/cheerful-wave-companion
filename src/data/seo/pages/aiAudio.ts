@@ -77,24 +77,6 @@ export const aiAudioPage: SeoPage = {
         ],
       },
     },
-    {
-      type: 'gallery',
-      enabled: false,
-      order: 5,
-      data: {
-        title: 'Работы сообщества',
-        items: [
-          { author: 'Алексей', image: '/community/01.jpg', likes: 234, views: 1200 },
-          { author: 'Мария',   image: '/community/02.jpg', likes: 187, views: 890 },
-          { author: 'Дмитрий', image: '/community/03.jpg', likes: 312, views: 1500 },
-          { author: 'Анна',    image: '/community/04.jpg', likes: 156, views: 720 },
-          { author: 'Иван',    image: '/community/05.jpg', likes: 278, views: 1100 },
-          { author: 'Ольга',   image: '/community/06.jpg', likes: 198, views: 950 },
-          { author: 'Сергей',  image: '/community/07.jpg', likes: 342, views: 1800 },
-          { author: 'Елена',   image: '/community/08.jpg', likes: 145, views: 670 },
-        ],
-      },
-    },
     { type: 'howItWorks', enabled: true, order: 6 },
     {
       type: 'editorial',
