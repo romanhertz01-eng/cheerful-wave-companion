@@ -218,13 +218,15 @@ const ToolPage = () => {
               key={i}
               className={cn(
                 "flex flex-col gap-6 md:gap-12 items-center",
-                i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                b.image && (i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse")
               )}
             >
-              <div className="md:w-1/2 w-full rounded-2xl border border-border overflow-hidden aspect-[4/3]">
-                <img src={b.image} alt={b.title} loading="lazy" className="w-full h-full object-cover" />
-              </div>
-              <div className="md:w-1/2 w-full">
+              {b.image && (
+                <div className="md:w-1/2 w-full rounded-2xl border border-border overflow-hidden aspect-[4/3]">
+                  <img src={b.image} alt={b.title} loading="lazy" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className={cn("w-full", b.image ? "md:w-1/2" : "max-w-3xl text-center mx-auto")}>
                 <h3 className="text-2xl md:text-[28px] font-bold mb-3">{b.title}</h3>
                 <p className="text-muted-foreground mb-5 leading-relaxed">{b.desc}</p>
                 <button
