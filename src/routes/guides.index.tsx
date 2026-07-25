@@ -8,7 +8,7 @@ const DESCRIPTION =
   'Пошаговые гайды и инструкции по нейросетям: как создавать изображения, видео, тексты и аудио в ЭРА2.';
 const CANONICAL = 'https://era2.ai/guides';
 
-export const Route = createFileRoute('/guides')({
+export const Route = createFileRoute('/guides/')({
   component: GuidesHub,
   head: () => ({
     meta: [

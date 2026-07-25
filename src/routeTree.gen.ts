@@ -22,10 +22,12 @@ import { Route as AudioRouteImport } from './routes/audio'
 import { Route as AgentsRouteImport } from './routes/agents'
 import { Route as AccountRouteImport } from './routes/account'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GuidesIndexRouteImport } from './routes/guides.index'
 import { Route as ToolsTextGenerationRouteImport } from './routes/tools.text-generation'
 import { Route as ToolsAudioGenerationRouteImport } from './routes/tools.audio-generation'
 import { Route as ToolsAgentsRouteImport } from './routes/tools.agents'
 import { Route as ToolsSlugRouteImport } from './routes/tools.$slug'
+import { Route as GuidesSlugRouteImport } from './routes/guides.$slug'
 import { Route as AiVideoRouteImport } from './routes/ai.video'
 import { Route as AiTextRouteImport } from './routes/ai.text'
 import { Route as AiImageRouteImport } from './routes/ai.image'
@@ -97,6 +99,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuidesIndexRoute = GuidesIndexRouteImport.update({
+  id: '/guides/',
+  path: '/guides/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ToolsTextGenerationRoute = ToolsTextGenerationRouteImport.update({
   id: '/tools/text-generation',
   path: '/tools/text-generation',
@@ -115,6 +122,11 @@ const ToolsAgentsRoute = ToolsAgentsRouteImport.update({
 const ToolsSlugRoute = ToolsSlugRouteImport.update({
   id: '/tools/$slug',
   path: '/tools/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesSlugRoute = GuidesSlugRouteImport.update({
+  id: '/guides/$slug',
+  path: '/guides/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AiVideoRoute = AiVideoRouteImport.update({
@@ -162,10 +174,12 @@ export interface FileRoutesByFullPath {
   '/ai/image': typeof AiImageRoute
   '/ai/text': typeof AiTextRoute
   '/ai/video': typeof AiVideoRoute
+  '/guides/$slug': typeof GuidesSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
   '/tools/agents': typeof ToolsAgentsRoute
   '/tools/audio-generation': typeof ToolsAudioGenerationRoute
   '/tools/text-generation': typeof ToolsTextGenerationRoute
+  '/guides/': typeof GuidesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -186,10 +200,12 @@ export interface FileRoutesByTo {
   '/ai/image': typeof AiImageRoute
   '/ai/text': typeof AiTextRoute
   '/ai/video': typeof AiVideoRoute
+  '/guides/$slug': typeof GuidesSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
   '/tools/agents': typeof ToolsAgentsRoute
   '/tools/audio-generation': typeof ToolsAudioGenerationRoute
   '/tools/text-generation': typeof ToolsTextGenerationRoute
+  '/guides': typeof GuidesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -211,10 +227,12 @@ export interface FileRoutesById {
   '/ai/image': typeof AiImageRoute
   '/ai/text': typeof AiTextRoute
   '/ai/video': typeof AiVideoRoute
+  '/guides/$slug': typeof GuidesSlugRoute
   '/tools/$slug': typeof ToolsSlugRoute
   '/tools/agents': typeof ToolsAgentsRoute
   '/tools/audio-generation': typeof ToolsAudioGenerationRoute
   '/tools/text-generation': typeof ToolsTextGenerationRoute
+  '/guides/': typeof GuidesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -237,10 +255,12 @@ export interface FileRouteTypes {
     | '/ai/image'
     | '/ai/text'
     | '/ai/video'
+    | '/guides/$slug'
     | '/tools/$slug'
     | '/tools/agents'
     | '/tools/audio-generation'
     | '/tools/text-generation'
+    | '/guides/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -261,10 +281,12 @@ export interface FileRouteTypes {
     | '/ai/image'
     | '/ai/text'
     | '/ai/video'
+    | '/guides/$slug'
     | '/tools/$slug'
     | '/tools/agents'
     | '/tools/audio-generation'
     | '/tools/text-generation'
+    | '/guides'
   id:
     | '__root__'
     | '/'
@@ -285,10 +307,12 @@ export interface FileRouteTypes {
     | '/ai/image'
     | '/ai/text'
     | '/ai/video'
+    | '/guides/$slug'
     | '/tools/$slug'
     | '/tools/agents'
     | '/tools/audio-generation'
     | '/tools/text-generation'
+    | '/guides/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -310,10 +334,12 @@ export interface RootRouteChildren {
   AiImageRoute: typeof AiImageRoute
   AiTextRoute: typeof AiTextRoute
   AiVideoRoute: typeof AiVideoRoute
+  GuidesSlugRoute: typeof GuidesSlugRoute
   ToolsSlugRoute: typeof ToolsSlugRoute
   ToolsAgentsRoute: typeof ToolsAgentsRoute
   ToolsAudioGenerationRoute: typeof ToolsAudioGenerationRoute
   ToolsTextGenerationRoute: typeof ToolsTextGenerationRoute
+  GuidesIndexRoute: typeof GuidesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -409,6 +435,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/': {
+      id: '/guides/'
+      path: '/guides'
+      fullPath: '/guides/'
+      preLoaderRoute: typeof GuidesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tools/text-generation': {
       id: '/tools/text-generation'
       path: '/tools/text-generation'
@@ -435,6 +468,13 @@ declare module '@tanstack/react-router' {
       path: '/tools/$slug'
       fullPath: '/tools/$slug'
       preLoaderRoute: typeof ToolsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/$slug': {
+      id: '/guides/$slug'
+      path: '/guides/$slug'
+      fullPath: '/guides/$slug'
+      preLoaderRoute: typeof GuidesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ai/video': {
@@ -494,10 +534,12 @@ const rootRouteChildren: RootRouteChildren = {
   AiImageRoute: AiImageRoute,
   AiTextRoute: AiTextRoute,
   AiVideoRoute: AiVideoRoute,
+  GuidesSlugRoute: GuidesSlugRoute,
   ToolsSlugRoute: ToolsSlugRoute,
   ToolsAgentsRoute: ToolsAgentsRoute,
   ToolsAudioGenerationRoute: ToolsAudioGenerationRoute,
   ToolsTextGenerationRoute: ToolsTextGenerationRoute,
+  GuidesIndexRoute: GuidesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
