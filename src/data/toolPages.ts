@@ -1104,9 +1104,6 @@ export const toolPages: ToolPageData[] = [
   },
 ];
 
-// legacy trailer removed by intentional replacement
-];
-
 export function getToolPageData(slug: string): ToolPageData | undefined {
   return toolPages.find((t) => t.slug === slug);
 }
