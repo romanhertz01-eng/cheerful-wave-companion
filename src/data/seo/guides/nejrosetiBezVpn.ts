@@ -8,6 +8,7 @@ export const nejrosetiBezVpnGuide: SeoPage = {
   searchIntent: 'informational',
   updatedAt: '2026-07-25',
   readingTime: '7 минут',
+  cardTitle: 'Нейросети без VPN: доступ из России',
   uniqueValue: 'Единственная страница, которая честно сравнивает три способа доступа к нейросетям из России (VPN+зарубежная карта, боты-посредники, агрегаторы) и даёт готовый путь для каждой топ-модели — от ChatGPT до Sora.',
   seo: {
     title: 'Нейросети без VPN: как пользоваться из России в 2026 | ERA2.ai',
