@@ -1947,3 +1947,13 @@ export const toolPages: ToolPageData[] = [
 export function getToolPageData(slug: string): ToolPageData | undefined {
   return toolPages.find((t) => t.slug === slug);
 }
+
+export function getRelatedTools(slug: string, limit = 6): ToolPageData[] {
+  const current = toolPages.find((t) => t.slug === slug);
+  if (!current) return [];
+  const withTool = toolPages.filter((t) => t.slug !== slug && t.tool);
+  const sameCat = withTool.filter((t) => t.category === current.category);
+  const rest = withTool.filter((t) => t.category !== current.category);
+  const combined = sameCat.length >= 3 ? sameCat : [...sameCat, ...rest];
+  return combined.slice(0, limit);
+}

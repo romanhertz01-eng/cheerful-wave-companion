@@ -2,7 +2,7 @@
 import { useParams, Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronRight, Play, Heart, Eye, ZoomIn, Scissors, Wand2, Package, Eraser, RefreshCw, Brush, type LucideIcon } from "lucide-react";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
-import { getToolPageData } from "@/data/toolPages";
+import { getToolPageData, getRelatedTools } from "@/data/toolPages";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
 import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
@@ -63,8 +63,38 @@ const ToolPage = () => {
 
   const targetPage = data.category === "video" ? "/video" : data.category === "audio" ? "/audio" : "/design";
 
+  const faqForLd = data.faqItems ?? toolPageItems;
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqForLd.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  };
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Главная", item: "https://era2.ai/" },
+      { "@type": "ListItem", position: 2, name: "Инструменты", item: "https://era2.ai/studios" },
+      { "@type": "ListItem", position: 3, name: data.heroTitle, item: `https://era2.ai/tools/${data.slug}` },
+    ],
+  };
+  const related = getRelatedTools(data.slug);
+  const showRelated = related.length >= 3;
+
   return (
     <div className="min-w-0">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       {/* Hero with prompt bar */}
       <section className="relative overflow-hidden" style={{ background: "linear-gradient(to bottom, hsl(var(--background)), hsl(var(--card)))" }}>
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(232,84,32,0.15) 0%, rgba(255,122,61,0.05) 40%, transparent 70%)" }} />
@@ -72,7 +102,7 @@ const ToolPage = () => {
           <nav className={cn("flex items-center gap-1.5 text-[13px] text-muted-foreground", data.tool ? "mb-0" : "mb-8")}>
             <Link to="/" className="hover:text-foreground transition-colors">Главная</Link>
             <ChevronRight className="w-3 h-3" />
-            <Link to="/toolkit" className="hover:text-foreground transition-colors">Инструменты</Link>
+            <Link to="/studios" className="hover:text-foreground transition-colors">Инструменты</Link>
             <ChevronRight className="w-3 h-3" />
             <span className="text-foreground/70">{data.heroTitle}</span>
           </nav>
@@ -360,7 +390,7 @@ const ToolPage = () => {
       <section className="max-w-6xl mx-auto px-4 py-12">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold">Инструменты изображения</h2>
-          <Link to="/toolkit" className="text-sm text-primary hover:underline">Создавайте больше →</Link>
+          <Link to="/studios" className="text-sm text-primary hover:underline">Создавайте больше →</Link>
         </div>
         <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
           {imageTools.map((t) => (
@@ -427,6 +457,27 @@ const ToolPage = () => {
               {data.bigStat.button}
             </AuthCTALink>
           )}
+        </section>
+      )}
+
+      {showRelated && (
+        <section className="max-w-5xl mx-auto px-4 py-12">
+          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">Похожие инструменты</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {related.map((r) => (
+              <Link
+                key={r.slug}
+                to="/tools/$slug"
+                params={{ slug: r.slug }}
+                className="rounded-xl border border-white/10 bg-white/[0.04] shadow-sm p-5 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
+              >
+                <h3 className="font-semibold mb-1">{r.heroTitle}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {r.heroDescription.length > 90 ? `${r.heroDescription.slice(0, 90).trimEnd()}…` : r.heroDescription}
+                </p>
+              </Link>
+            ))}
+          </div>
         </section>
       )}
 
