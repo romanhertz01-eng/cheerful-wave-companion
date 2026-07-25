@@ -239,7 +239,7 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
         {/* RIGHT PREVIEW */}
         <div className="flex flex-col gap-3">
           <div className="shrink-0">
-            <h2 className="text-xl md:text-2xl font-bold leading-tight">{data.heroTitle}</h2>
+            <h1 className="text-xl md:text-2xl font-bold leading-tight">{data.heroTitle}</h1>
             <p className="text-sm text-muted-foreground mt-1.5">{data.heroDescription}</p>
           </div>
 
@@ -316,7 +316,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
             <Link to="/toolkit" className="p-1.5 rounded-md hover:bg-muted transition-colors">
               <ArrowLeft size={16} />
             </Link>
-            <span className="font-semibold">{data.heroTitle}</span>
+            <h1 className="font-semibold text-lg">{data.heroTitle}</h1>
           </div>
 
           {voices.length > 0 && (
