@@ -373,7 +373,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
               <input
                 ref={sampleRef}
                 type="file"
-                accept="audio/*"
+                accept={tool.sampleUpload.accept ?? "audio/*"}
                 className="hidden"
                 onChange={(e) => setSampleFile(e.target.files?.[0] ?? null)}
               />
