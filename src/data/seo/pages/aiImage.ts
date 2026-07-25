@@ -55,8 +55,8 @@ export const aiImagePage: SeoPage = {
         items: [
           { name: 'Nano Banana 2', badge: 'NEW', desc: 'Быстрая генерация и точное редактирование', image: '/models/01.jpg', href: '/tools/nano-banana' },
           { name: 'Midjourney', desc: 'Художественная эстетика и детализация', image: '/models/02.jpg', href: '/tools/midjourney' },
-          { name: 'Flux', desc: 'Реализм и контроль композиции', image: '/models/03.jpg' },
-          { name: 'Seedream', desc: 'Качество и скорость для повседневных задач', image: '/models/04.jpg' },
+          { name: 'Flux', desc: 'Реализм и контроль композиции', image: '/models/03.jpg', href: '/tools/flux' },
+          { name: 'Seedream', desc: 'Качество и скорость для повседневных задач', image: '/models/04.jpg', href: '/tools/seedream' },
           { name: 'GPT Image', desc: 'Понимание сложных промптов', image: '/models/05.jpg' },
           { name: 'Imagen 4', desc: 'Фотореализм от Google', image: '/models/06.jpg' },
         ],
