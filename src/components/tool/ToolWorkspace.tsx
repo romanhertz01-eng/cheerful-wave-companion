@@ -1,8 +1,10 @@
 import { useRef, useState, useEffect } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Upload, Play, Loader2, ChevronDown, Check, Play as PlayIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ToolPageData } from "@/data/toolPages";
+import { useAuth } from "@/contexts/AuthContext";
+import { buildAuthHref } from "@/lib/authRedirect";
 
 type Status = "idle" | "loading" | "done";
 
@@ -14,6 +16,8 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
   const demoImage = tool.demoImage ?? "/examples/ozhivit-preview.jpg";
   const demoCaption = tool.demoCaption ?? "Пример результата";
   const isVideo = data.category === "video";
+  const { isAuthed } = useAuth();
+  const navigate = useNavigate();
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [motion, setMotion] = useState(50);
@@ -42,6 +46,11 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
   };
 
   const onGenerate = () => {
+    if (!isAuthed) {
+      const next = typeof window !== "undefined" ? window.location.pathname + window.location.search : undefined;
+      navigate({ to: buildAuthHref(next) });
+      return;
+    }
     if (!file) return;
     setStatus("loading");
     setTimeout(() => setStatus("done"), 1800);
@@ -219,7 +228,7 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
               </p>
               <button
                 type="button"
-                disabled={!file || status === "loading"}
+                disabled={isAuthed && (!file || status === "loading")}
                 onClick={onGenerate}
                 className="w-full h-10 rounded-lg font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2"
                 style={{ background: "#E85420" }}
@@ -288,6 +297,8 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
   const tool = data.tool!;
   const voices = tool.voices ?? [];
   const maxChars = tool.maxChars ?? 2000;
+  const { isAuthed } = useAuth();
+  const navigate = useNavigate();
   const [voice, setVoice] = useState(voices[0] ?? "");
   const [voiceOpen, setVoiceOpen] = useState(false);
   const [text, setText] = useState("");
@@ -301,6 +312,11 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
   const resultType = tool.resultType ?? "audio";
 
   const onGenerate = () => {
+    if (!isAuthed) {
+      const next = typeof window !== "undefined" ? window.location.pathname + window.location.search : undefined;
+      navigate({ to: buildAuthHref(next) });
+      return;
+    }
     if (!text.trim()) return;
     setStatus("loading");
     setTimeout(() => setStatus("done"), 1800);
@@ -431,7 +447,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
             </div>
             <button
               type="button"
-              disabled={!value.trim() || status === "loading"}
+              disabled={isAuthed && (!value.trim() || status === "loading")}
               onClick={onGenerate}
               className="h-10 px-5 rounded-lg font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2"
               style={{ background: "#E85420" }}

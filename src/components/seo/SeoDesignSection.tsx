@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
-import { useAuth } from "@/contexts/AuthContext";
+import { AuthCTALink } from "@/components/auth/AuthCTALink";
 
 const photoModels = [
   { name: "Midjourney", desc: "Лидер для арт-стилистики, иллюстраций и концепт-арта мирового уровня." },
@@ -27,9 +26,7 @@ interface SeoDesignSectionProps {
 export function SeoDesignSection({ tab }: SeoDesignSectionProps) {
   const models = tab === "photo" ? photoModels : videoModels;
   const [active, setActive] = useState(0);
-  const { isAuthed } = useAuth();
   const link = tab === "photo" ? "/design" : "/video";
-  const cta = isAuthed ? link : "/auth";
   const model = models[active];
 
   return (
@@ -67,12 +64,12 @@ export function SeoDesignSection({ tab }: SeoDesignSectionProps) {
           <div className="flex flex-col justify-center" style={{ padding: 40, flex: "0 0 40%" }}>
             <h3 style={{ fontSize: 48, fontWeight: 800, fontStyle: "italic", color: "var(--seo-heading)" }}>{model.name}</h3>
             <p style={{ fontSize: 14, color: "var(--seo-text)", marginTop: 16, marginBottom: 24 }}>{model.desc}</p>
-            <Link
-              to={cta}
+            <AuthCTALink
+              to={link}
               style={{ background: "linear-gradient(135deg, hsl(var(--primary)), #ff7a3d)", color: "#fff", padding: "12px 24px", borderRadius: 10, fontSize: 14, fontWeight: 600, width: "fit-content", textDecoration: "none" }}
             >
               Начать создавать
-            </Link>
+            </AuthCTALink>
           </div>
           <div className="grid grid-cols-3 grid-rows-2 gap-3" style={{ padding: 24, flex: "1 1 60%" }}>
             {[0, 1, 2, 3, 4, 5].map((i) => (
