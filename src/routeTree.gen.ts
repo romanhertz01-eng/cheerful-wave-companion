@@ -25,7 +25,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ToolsVideoGenerationRouteImport } from './routes/tools.video-generation'
 import { Route as ToolsTextGenerationRouteImport } from './routes/tools.text-generation'
 import { Route as ToolsNanoBananaRouteImport } from './routes/tools.nano-banana'
-import { Route as ToolsImageGenerationRouteImport } from './routes/tools.image-generation'
 import { Route as ToolsAudioGenerationRouteImport } from './routes/tools.audio-generation'
 import { Route as ToolsAgentsRouteImport } from './routes/tools.agents'
 import { Route as ToolsSlugRouteImport } from './routes/tools.$slug'
@@ -115,11 +114,6 @@ const ToolsNanoBananaRoute = ToolsNanoBananaRouteImport.update({
   path: '/tools/nano-banana',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ToolsImageGenerationRoute = ToolsImageGenerationRouteImport.update({
-  id: '/tools/image-generation',
-  path: '/tools/image-generation',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ToolsAudioGenerationRoute = ToolsAudioGenerationRouteImport.update({
   id: '/tools/audio-generation',
   path: '/tools/audio-generation',
@@ -183,7 +177,6 @@ export interface FileRoutesByFullPath {
   '/tools/$slug': typeof ToolsSlugRoute
   '/tools/agents': typeof ToolsAgentsRoute
   '/tools/audio-generation': typeof ToolsAudioGenerationRoute
-  '/tools/image-generation': typeof ToolsImageGenerationRoute
   '/tools/nano-banana': typeof ToolsNanoBananaRoute
   '/tools/text-generation': typeof ToolsTextGenerationRoute
   '/tools/video-generation': typeof ToolsVideoGenerationRoute
@@ -210,7 +203,6 @@ export interface FileRoutesByTo {
   '/tools/$slug': typeof ToolsSlugRoute
   '/tools/agents': typeof ToolsAgentsRoute
   '/tools/audio-generation': typeof ToolsAudioGenerationRoute
-  '/tools/image-generation': typeof ToolsImageGenerationRoute
   '/tools/nano-banana': typeof ToolsNanoBananaRoute
   '/tools/text-generation': typeof ToolsTextGenerationRoute
   '/tools/video-generation': typeof ToolsVideoGenerationRoute
@@ -238,7 +230,6 @@ export interface FileRoutesById {
   '/tools/$slug': typeof ToolsSlugRoute
   '/tools/agents': typeof ToolsAgentsRoute
   '/tools/audio-generation': typeof ToolsAudioGenerationRoute
-  '/tools/image-generation': typeof ToolsImageGenerationRoute
   '/tools/nano-banana': typeof ToolsNanoBananaRoute
   '/tools/text-generation': typeof ToolsTextGenerationRoute
   '/tools/video-generation': typeof ToolsVideoGenerationRoute
@@ -267,7 +258,6 @@ export interface FileRouteTypes {
     | '/tools/$slug'
     | '/tools/agents'
     | '/tools/audio-generation'
-    | '/tools/image-generation'
     | '/tools/nano-banana'
     | '/tools/text-generation'
     | '/tools/video-generation'
@@ -294,7 +284,6 @@ export interface FileRouteTypes {
     | '/tools/$slug'
     | '/tools/agents'
     | '/tools/audio-generation'
-    | '/tools/image-generation'
     | '/tools/nano-banana'
     | '/tools/text-generation'
     | '/tools/video-generation'
@@ -321,7 +310,6 @@ export interface FileRouteTypes {
     | '/tools/$slug'
     | '/tools/agents'
     | '/tools/audio-generation'
-    | '/tools/image-generation'
     | '/tools/nano-banana'
     | '/tools/text-generation'
     | '/tools/video-generation'
@@ -349,7 +337,6 @@ export interface RootRouteChildren {
   ToolsSlugRoute: typeof ToolsSlugRoute
   ToolsAgentsRoute: typeof ToolsAgentsRoute
   ToolsAudioGenerationRoute: typeof ToolsAudioGenerationRoute
-  ToolsImageGenerationRoute: typeof ToolsImageGenerationRoute
   ToolsNanoBananaRoute: typeof ToolsNanoBananaRoute
   ToolsTextGenerationRoute: typeof ToolsTextGenerationRoute
   ToolsVideoGenerationRoute: typeof ToolsVideoGenerationRoute
@@ -469,13 +456,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsNanoBananaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/tools/image-generation': {
-      id: '/tools/image-generation'
-      path: '/tools/image-generation'
-      fullPath: '/tools/image-generation'
-      preLoaderRoute: typeof ToolsImageGenerationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/tools/audio-generation': {
       id: '/tools/audio-generation'
       path: '/tools/audio-generation'
@@ -557,7 +537,6 @@ const rootRouteChildren: RootRouteChildren = {
   ToolsSlugRoute: ToolsSlugRoute,
   ToolsAgentsRoute: ToolsAgentsRoute,
   ToolsAudioGenerationRoute: ToolsAudioGenerationRoute,
-  ToolsImageGenerationRoute: ToolsImageGenerationRoute,
   ToolsNanoBananaRoute: ToolsNanoBananaRoute,
   ToolsTextGenerationRoute: ToolsTextGenerationRoute,
   ToolsVideoGenerationRoute: ToolsVideoGenerationRoute,
