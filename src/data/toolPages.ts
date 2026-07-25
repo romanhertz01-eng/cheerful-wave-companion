@@ -34,7 +34,7 @@ export interface ToolPageData {
     cta?: string;
     steps: { title: string; desc: string }[];
   };
-  featureBlocks?: { title: string; desc: string; image: string; cta: string }[];
+  featureBlocks?: { title: string; desc: string; image?: string; cta: string }[];
   finalCta?: { title: string; subtitle: string; button: string };
   faqItems?: { q: string; a: string }[];
   intro?: { heading: string; text: string };
