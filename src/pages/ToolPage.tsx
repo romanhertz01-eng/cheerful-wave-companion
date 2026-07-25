@@ -465,6 +465,7 @@ const ToolPage = () => {
       {showRelated && (
         <section className="max-w-5xl mx-auto px-4 py-12">
           <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">Похожие инструменты</h2>
+          {/* comparison table rendered above via separate section */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {related.map((r) => (
               <Link
