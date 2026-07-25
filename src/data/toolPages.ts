@@ -61,6 +61,7 @@ export const toolPages: ToolPageData[] = [
     },
     howItWorks: {
       title: "Как оживить фото за 3 шага",
+      cta: "Оживить фото",
       steps: [
         { title: "Загрузите фото", desc: "Перетащите изображение или выберите файл — JPEG, PNG или WEBP." },
         { title: "ИИ оживляет кадр", desc: "Kling анализирует фото и достраивает естественное движение примерно за минуту." },
@@ -110,6 +111,7 @@ export const toolPages: ToolPageData[] = [
       credits: 10,
       bricks: ["upload-1", "generate"],
     },
+    tool_placeholder: undefined as never,
     howItWorks: {
       title: "Как удалить фон за 3 шага",
       steps: [
