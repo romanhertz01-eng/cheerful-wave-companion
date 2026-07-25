@@ -1,5 +1,3 @@
-import { Link } from "@tanstack/react-router";
-
 const modelTags = [
   "ChatGPT", "Claude", "Gemini", "DeepSeek", "Grok", "Perplexity",
   "Midjourney", "Nano Banana 2", "Nano Banana Pro", "Seedream 5 Lite",
@@ -17,10 +15,9 @@ export function ModelTagsCloud() {
         style={{ maxWidth: 900 }}
       >
         {modelTags.map((tag) => (
-          <a
+          <span
             key={tag}
-            href="#"
-            className="transition-all duration-200 hover:text-[hsl(var(--primary))] hover:bg-[rgba(232, 84, 32,0.1)] hover:border-[rgba(232, 84, 32,0.3)]"
+            className="transition-all duration-200"
             style={{
               padding: "8px 16px",
               borderRadius: 8,
@@ -31,7 +28,7 @@ export function ModelTagsCloud() {
             }}
           >
             {tag}
-          </a>
+          </span>
         ))}
       </div>
     </section>
