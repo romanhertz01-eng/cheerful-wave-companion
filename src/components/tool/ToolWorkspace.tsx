@@ -85,7 +85,7 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
 
           {has("upload-1") && (
             <div>
-              <label className="text-xs text-muted-foreground mb-1 block">Изображение</label>
+              <label className="text-xs text-muted-foreground mb-1 block">{tool.uploadLabel ?? "Изображение"}</label>
               <button
                 type="button"
                 onClick={() => inputRef.current?.click()}
@@ -96,24 +96,29 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
                 }}
                 className="w-full h-[120px] rounded-xl border-2 border-dashed border-border hover:border-primary/50 transition-colors flex flex-col items-center justify-center gap-1.5 text-center px-3 overflow-hidden relative"
               >
-                {preview ? (
+                {preview && (tool.uploadAccept ?? "image/").startsWith("image/") ? (
                   <img src={preview} alt="preview" className="absolute inset-0 w-full h-full object-cover" />
+                ) : file ? (
+                  <>
+                    <Upload size={20} className="text-muted-foreground" />
+                    <span className="text-sm truncate max-w-full px-2">{file.name}</span>
+                    <span className="text-[11px] text-muted-foreground">{tool.uploadHint ?? "JPEG, PNG, WEBP"}</span>
+                  </>
                 ) : (
                   <>
                     <Upload size={20} className="text-muted-foreground" />
-                    <span className="text-sm">Загрузите фото или перетащите сюда</span>
-                    <span className="text-[11px] text-muted-foreground">JPEG, PNG, WEBP</span>
+                    <span className="text-sm">Загрузите файл или перетащите сюда</span>
+                    <span className="text-[11px] text-muted-foreground">{tool.uploadHint ?? "JPEG, PNG, WEBP"}</span>
                   </>
                 )}
               </button>
               <input
                 ref={inputRef}
                 type="file"
-                accept="image/jpeg,image/png,image/webp"
+                accept={tool.uploadAccept ?? "image/jpeg,image/png,image/webp"}
                 className="hidden"
                 onChange={(e) => onFile(e.target.files?.[0] ?? null)}
               />
-              <p className="text-[11px] text-muted-foreground mt-1.5">Загрузите одно фото с одним или несколькими людьми — крупный план лиц, чёткое изображение.</p>
             </div>
           )}
 
@@ -287,6 +292,8 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
   const [voiceOpen, setVoiceOpen] = useState(false);
   const [text, setText] = useState("");
   const [status, setStatus] = useState<Status>("idle");
+  const [sampleFile, setSampleFile] = useState<File | null>(null);
+  const sampleRef = useRef<HTMLInputElement>(null);
 
   const onGenerate = () => {
     if (!text.trim()) return;
@@ -339,6 +346,34 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
             </div>
           )}
 
+          {tool.sampleUpload && (
+            <div>
+              <label className="text-xs text-muted-foreground mb-1 block">{tool.sampleUpload.label}</label>
+              <button
+                type="button"
+                onClick={() => sampleRef.current?.click()}
+                onDragOver={(e) => e.preventDefault()}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  const f = e.dataTransfer.files?.[0] ?? null;
+                  if (f) setSampleFile(f);
+                }}
+                className="w-full h-[88px] rounded-xl border-2 border-dashed border-border hover:border-primary/50 transition-colors flex flex-col items-center justify-center gap-1 text-center px-3"
+              >
+                <Upload size={18} className="text-muted-foreground" />
+                <span className="text-sm truncate max-w-full">{sampleFile ? sampleFile.name : "Загрузите файл или перетащите сюда"}</span>
+                <span className="text-[11px] text-muted-foreground">{tool.sampleUpload.hint}</span>
+              </button>
+              <input
+                ref={sampleRef}
+                type="file"
+                accept="audio/*"
+                className="hidden"
+                onChange={(e) => setSampleFile(e.target.files?.[0] ?? null)}
+              />
+            </div>
+          )}
+
           <div className="relative">
             <textarea
               rows={5}
@@ -373,6 +408,13 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
               )}
             </button>
           </div>
+
+          {tool.legalNote && (
+            <p className="text-[11px] text-muted-foreground flex items-start gap-1.5">
+              <span aria-hidden>⚠️</span>
+              <span>{tool.legalNote}</span>
+            </p>
+          )}
         </div>
 
         {status === "done" && (
