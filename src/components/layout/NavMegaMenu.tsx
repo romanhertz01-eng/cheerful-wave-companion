@@ -47,8 +47,8 @@ const TABS: TabConfig[] = [
       { icon: Lightbulb, title: "Генерация идей", desc: "Концепции, названия, слоганы" },
     ],
     models: [
-      { name: "ChatGPT", desc: "GPT от OpenAI" },
-      { name: "Claude", desc: "От Anthropic" },
+      { name: "ChatGPT", desc: "GPT от OpenAI", publicHref: "/tools/chatgpt" },
+      { name: "Claude", desc: "От Anthropic", publicHref: "/tools/claude" },
       { name: "Gemini", desc: "От Google" },
       { name: "Perplexity", desc: "Поиск с ИИ" },
       { name: "Grok", desc: "От xAI" },
