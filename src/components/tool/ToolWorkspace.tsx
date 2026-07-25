@@ -311,12 +311,13 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
   return (
     <section className="border-y border-border" style={{ background: "hsl(var(--card))" }}>
       <div className="max-w-3xl mx-auto px-4 py-8">
+        <h1 className="text-[28px] md:text-[44px] font-bold leading-[1.1] tracking-tight text-center mb-3">{data.heroTitle}</h1>
+        <p className="text-muted-foreground text-center max-w-[640px] mx-auto mb-8">{data.heroDescription}</p>
         <div className="rounded-2xl border border-border bg-background/60 p-5 flex flex-col gap-4">
           <div className="flex items-center gap-2">
             <Link to="/toolkit" className="p-1.5 rounded-md hover:bg-muted transition-colors">
               <ArrowLeft size={16} />
             </Link>
-            <h1 className="font-semibold text-lg">{data.heroTitle}</h1>
           </div>
 
           {voices.length > 0 && (

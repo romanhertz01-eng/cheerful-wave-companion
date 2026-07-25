@@ -13,9 +13,10 @@ interface GalleryBlockProps {
   count?: number;
   type?: "image" | "video";
   items?: GalleryItem[];
+  showMeta?: boolean;
 }
 
-export function GalleryBlock({ title = "Работы сообщества", count, type, items }: GalleryBlockProps) {
+export function GalleryBlock({ title = "Работы сообщества", count, type, items, showMeta = true }: GalleryBlockProps) {
   if (!items || items.length === 0) {
     return <CommunityGallery title={title} count={count} type={type} />;
   }
@@ -30,6 +31,7 @@ export function GalleryBlock({ title = "Работы сообщества", coun
             className="break-inside-avoid rounded-xl border border-border bg-card shadow-sm relative overflow-hidden cursor-pointer hover:scale-[1.02] hover:border-primary/40 hover:bg-muted/50 transition-all group"
           >
             <img src={w.image} alt={w.author} loading="lazy" className="w-full h-auto block object-cover" />
+            {showMeta && (
             <div className="absolute bottom-0 left-0 right-0 p-2.5 bg-gradient-to-t from-black/60 to-transparent flex items-center justify-between">
               <span className="text-white text-[11px]">{w.author}</span>
               <div className="flex items-center gap-2 text-white/70 text-[10px]">
@@ -41,6 +43,7 @@ export function GalleryBlock({ title = "Работы сообщества", coun
                 )}
               </div>
             </div>
+            )}
           </div>
         ))}
       </div>
