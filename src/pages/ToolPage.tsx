@@ -1,6 +1,7 @@
 
 import { useParams, Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronRight, Play, Heart, Eye, ZoomIn, Scissors, Wand2, Package, Eraser, RefreshCw, Brush, type LucideIcon } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { getToolPageData, getRelatedTools } from "@/data/toolPages";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
@@ -48,6 +49,24 @@ const modelCards = [
 const ToolPage = () => {
   const { slug } = useParams({ strict: false }) as { slug?: string };
   const data = slug ? getToolPageData(slug) : undefined;
+  const workspaceRef = useRef<HTMLDivElement | null>(null);
+  const [showFloatingBar, setShowFloatingBar] = useState(false);
+
+  useEffect(() => {
+    if (!data?.tool) return;
+    const el = workspaceRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setShowFloatingBar(!entry.isIntersecting),
+      { threshold: 0, rootMargin: "0px 0px -80% 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [data?.tool, data?.slug]);
+
+  const scrollToWorkspace = () => {
+    workspaceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   if (!data) {
     return (
@@ -134,7 +153,11 @@ const ToolPage = () => {
         </div>
       </section>
 
-      {data.tool && <ToolWorkspace data={data} />}
+      {data.tool && (
+        <div ref={workspaceRef}>
+          <ToolWorkspace data={data} />
+        </div>
+      )}
 
       {/* Intro (tool pages) */}
       {data.tool && data.intro && (
