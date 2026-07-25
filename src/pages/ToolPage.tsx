@@ -460,6 +460,27 @@ const ToolPage = () => {
         </section>
       )}
 
+      {showRelated && (
+        <section className="max-w-5xl mx-auto px-4 py-12">
+          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">Похожие инструменты</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {related.map((r) => (
+              <Link
+                key={r.slug}
+                to="/tools/$slug"
+                params={{ slug: r.slug }}
+                className="rounded-xl border border-white/10 bg-white/[0.04] shadow-sm p-5 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
+              >
+                <h3 className="font-semibold mb-1">{r.heroTitle}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {r.heroDescription.length > 90 ? `${r.heroDescription.slice(0, 90).trimEnd()}…` : r.heroDescription}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       <FAQ items={data.faqItems ?? toolPageItems} />
 
       {/* Final CTA (tool pages) */}
