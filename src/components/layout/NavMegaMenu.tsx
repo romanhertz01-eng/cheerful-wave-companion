@@ -71,9 +71,9 @@ const TABS: TabConfig[] = [
     models: [
       { name: "Nano Banana", desc: "Быстрая генерация", publicHref: "/tools/nano-banana" },
       { name: "MidJourney", desc: "Художественный стиль", publicHref: "/tools/midjourney" },
-      { name: "Seedream", desc: "От ByteDance" },
+      { name: "Seedream", desc: "От ByteDance", publicHref: "/tools/seedream" },
       { name: "GPT Image", desc: "От OpenAI" },
-      { name: "Flux", desc: "Фотореализм" },
+      { name: "Flux", desc: "Фотореализм", publicHref: "/tools/flux" },
       { name: "Imagen", desc: "От Google" },
       { name: "Higgsfield", desc: "Soul / Speak" },
     ],
