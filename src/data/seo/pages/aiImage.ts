@@ -40,8 +40,8 @@ export const aiImagePage: SeoPage = {
         heading: 'Инструменты для изображений',
         items: [
           { title: 'Создать изображение', desc: 'Картинка из текста', href: '/tools/image-generation', icon: '🎨' },
-          { title: 'Удалить фон', desc: 'В один клик', href: '/design', icon: '✂️' },
-          { title: 'Апскейл', desc: 'Улучшить качество', href: '/design', icon: '🔍' },
+          { title: 'Удалить фон', desc: 'В один клик', href: '/tools/remove-background', icon: '✂️' },
+          { title: 'Апскейл', desc: 'Улучшить качество', href: '/tools/image-upscaler', icon: '🔍' },
           { title: 'Редактор фото', desc: 'Правки и ретушь', href: '/design', icon: '🖌️' },
         ],
       },
@@ -53,8 +53,8 @@ export const aiImagePage: SeoPage = {
       data: {
         heading: 'Модели для изображений',
         items: [
-          { name: 'Nano Banana 2', badge: 'NEW', desc: 'Быстрая генерация и точное редактирование', image: '/models/01.jpg' },
-          { name: 'Midjourney', desc: 'Художественная эстетика и детализация', image: '/models/02.jpg' },
+          { name: 'Nano Banana 2', badge: 'NEW', desc: 'Быстрая генерация и точное редактирование', image: '/models/01.jpg', href: '/tools/nano-banana' },
+          { name: 'Midjourney', desc: 'Художественная эстетика и детализация', image: '/models/02.jpg', href: '/tools/midjourney' },
           { name: 'Flux', desc: 'Реализм и контроль композиции', image: '/models/03.jpg' },
           { name: 'Seedream', desc: 'Качество и скорость для повседневных задач', image: '/models/04.jpg' },
           { name: 'GPT Image', desc: 'Понимание сложных промптов', image: '/models/05.jpg' },
