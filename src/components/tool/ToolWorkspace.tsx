@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, Upload, Play, Loader2, ChevronDown } from "lucide-react";
+import { ArrowLeft, Upload, Play, Loader2, ChevronDown, Check, Play as PlayIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ToolPageData } from "@/data/toolPages";
 
@@ -8,6 +8,9 @@ type Status = "idle" | "loading" | "done";
 
 export function ToolWorkspace({ data }: { data: ToolPageData }) {
   const tool = data.tool!;
+  if (tool.layout === "row") {
+    return <RowWorkspace data={data} />;
+  }
   const demoImage = tool.demoImage ?? "/examples/ozhivit-preview.jpg";
   const demoCaption = tool.demoCaption ?? "Пример результата";
   const isVideo = data.category === "video";
@@ -275,3 +278,115 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
 }
 
 export default ToolWorkspace;
+
+function RowWorkspace({ data }: { data: ToolPageData }) {
+  const tool = data.tool!;
+  const voices = tool.voices ?? [];
+  const maxChars = tool.maxChars ?? 2000;
+  const [voice, setVoice] = useState(voices[0] ?? "");
+  const [voiceOpen, setVoiceOpen] = useState(false);
+  const [text, setText] = useState("");
+  const [status, setStatus] = useState<Status>("idle");
+
+  const onGenerate = () => {
+    if (!text.trim()) return;
+    setStatus("loading");
+    setTimeout(() => setStatus("done"), 1800);
+  };
+
+  const value = text.slice(0, maxChars);
+
+  return (
+    <section className="border-y border-border" style={{ background: "hsl(var(--card))" }}>
+      <div className="max-w-3xl mx-auto px-4 py-8">
+        <div className="rounded-2xl border border-border bg-background/60 p-5 flex flex-col gap-4">
+          <div className="flex items-center gap-2">
+            <Link to="/toolkit" className="p-1.5 rounded-md hover:bg-muted transition-colors">
+              <ArrowLeft size={16} />
+            </Link>
+            <span className="font-semibold">{data.heroTitle}</span>
+          </div>
+
+          {voices.length > 0 && (
+            <div className="relative">
+              <label className="text-xs text-muted-foreground mb-1 block">Голос</label>
+              <button
+                type="button"
+                onClick={() => setVoiceOpen((v) => !v)}
+                className="w-full flex items-center justify-between px-3 py-2 rounded-lg border border-border bg-muted/40 text-sm"
+              >
+                <span className="font-medium">{voice}</span>
+                <ChevronDown size={14} className="text-muted-foreground" />
+              </button>
+              {voiceOpen && (
+                <div className="absolute z-10 mt-1 w-full rounded-lg border border-border bg-background shadow-lg overflow-hidden">
+                  {voices.map((v) => (
+                    <button
+                      key={v}
+                      type="button"
+                      onClick={() => {
+                        setVoice(v);
+                        setVoiceOpen(false);
+                      }}
+                      className="w-full flex items-center justify-between px-3 py-2 text-sm text-left hover:bg-muted transition-colors"
+                    >
+                      <span>{v}</span>
+                      {v === voice && <Check size={14} className="text-primary" />}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="relative">
+            <textarea
+              rows={5}
+              value={value}
+              onChange={(e) => setText(e.target.value.slice(0, maxChars))}
+              placeholder={tool.textPlaceholder}
+              className="w-full resize-none rounded-lg border border-border bg-background/80 px-3 py-2.5 text-sm outline-none focus:border-primary/60 transition-colors"
+            />
+            <div className="absolute bottom-2 right-3 text-[11px] text-muted-foreground">
+              {value.length} / {maxChars}
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between gap-3 pt-2 border-t border-border">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="border border-border rounded-full px-3 py-1 text-xs">{tool.modelName}</span>
+              <span className="text-[11px] text-muted-foreground">{tool.credits} кредитов</span>
+            </div>
+            <button
+              type="button"
+              disabled={!value.trim() || status === "loading"}
+              onClick={onGenerate}
+              className="h-10 px-5 rounded-lg font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2"
+              style={{ background: "#E85420" }}
+            >
+              {status === "loading" ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" /> Генерация...
+                </>
+              ) : (
+                "Генерировать"
+              )}
+            </button>
+          </div>
+        </div>
+
+        {status === "done" && (
+          <div className="mt-4 rounded-xl border border-border p-4 flex items-center gap-3 bg-background/60">
+            <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "#E85420" }}>
+              <PlayIcon size={18} className="ml-0.5 text-white" fill="white" />
+            </div>
+            <div className="flex-1">
+              <div className="text-sm font-semibold">Аудио готово</div>
+              <div className="text-[11px] text-muted-foreground">{voice} · MP3</div>
+            </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
