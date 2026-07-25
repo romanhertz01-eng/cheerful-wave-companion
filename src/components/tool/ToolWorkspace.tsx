@@ -487,7 +487,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                 <img
                   key={src}
                   src={src}
-                  alt="Результат"
+                  alt="Пример результата"
                   className="w-full aspect-square object-cover rounded-xl border border-white/10"
                 />
               ))}
@@ -505,7 +505,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                 </div>
               </div>
               <div className="absolute bottom-2 left-3 text-[11px] text-white/90 bg-black/40 backdrop-blur px-2 py-1 rounded">
-                Видео готово · MP4
+                Пример результата
               </div>
             </div>
           ) : resultType === "text" ? (
