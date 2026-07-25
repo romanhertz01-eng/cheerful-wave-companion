@@ -6,6 +6,7 @@ import {
   Image as ImageIcon, Camera, Paintbrush, Eraser, Scissors, ZoomIn, RefreshCw,
   Video, Sparkles, Film, User, TrendingUp,
   Music, AudioLines, Mic, Volume2, Activity, VolumeX,
+  FileText,
   ArrowRight,
   type LucideIcon,
 } from "lucide-react";
@@ -47,8 +48,8 @@ const TABS: TabConfig[] = [
       { icon: Lightbulb, title: "Генерация идей", desc: "Концепции, названия, слоганы" },
     ],
     models: [
-      { name: "ChatGPT", desc: "GPT от OpenAI" },
-      { name: "Claude", desc: "От Anthropic" },
+      { name: "ChatGPT", desc: "GPT от OpenAI", publicHref: "/tools/chatgpt" },
+      { name: "Claude", desc: "От Anthropic", publicHref: "/tools/claude" },
       { name: "Gemini", desc: "От Google" },
       { name: "Perplexity", desc: "Поиск с ИИ" },
       { name: "Grok", desc: "От xAI" },
@@ -106,6 +107,7 @@ const TABS: TabConfig[] = [
       { icon: Mic, title: "Клон голоса", desc: "Копирование голоса", publicHref: "/tools/voice-cloning" },
       { icon: Volume2, title: "Смена голоса", desc: "Изменение тембра" },
       { icon: Activity, title: "Создание звуков", desc: "Генерация эффектов" },
+      { icon: FileText, title: "Транскрибация", desc: "Речь в текст", publicHref: "/tools/transcribe" },
       { icon: VolumeX, title: "Удаление шума", desc: "Очистка и улучшение" },
     ],
     models: [

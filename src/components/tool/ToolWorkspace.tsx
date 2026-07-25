@@ -508,6 +508,16 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                 Видео готово · MP4
               </div>
             </div>
+          ) : resultType === "text" ? (
+            <div className="mt-4 rounded-xl border border-white/10 bg-background/60 p-5">
+              <div className="space-y-3">
+                <div className="h-3 rounded bg-white/10" style={{ width: "100%" }} />
+                <div className="h-3 rounded bg-white/10" style={{ width: "92%" }} />
+                <div className="h-3 rounded bg-white/10" style={{ width: "96%" }} />
+                <div className="h-3 rounded bg-white/10" style={{ width: "60%" }} />
+              </div>
+              <p className="text-xs text-muted-foreground mt-3">Ответ модели появится здесь</p>
+            </div>
           ) : (
           <div className="mt-4 rounded-xl border border-border p-4 flex items-center gap-3 bg-background/60">
             <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "#E85420" }}>
