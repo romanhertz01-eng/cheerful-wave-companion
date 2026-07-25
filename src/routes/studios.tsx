@@ -12,6 +12,7 @@ import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { textProviders } from "@/data/textModels";
 import { imageProviders } from "@/data/imageModels";
 import { videoProviders } from "@/data/videoModels";
+import { useAuth } from "@/contexts/AuthContext";
 
 const STUDIOS_TITLE = "Все нейросети — каталог из 90+ ИИ-моделей | ERA2.ai";
 const STUDIOS_DESCRIPTION =
@@ -34,40 +35,30 @@ export const Route = createFileRoute("/studios")({
   component: ToolsAndModelsPage,
 });
 
-interface Tool { Icon: LucideIcon; title: string; category: string }
+interface Tool { Icon: LucideIcon; title: string; category: string; slug: string }
 
+// Every entry MUST map to an existing slug in src/data/toolPages.ts. Cards without
+// a landing page are removed (guests must not land on /auth).
 const tools: Tool[] = [
-  { Icon: MessageSquare, title: "Чат с ИИ", category: "text" },
-  { Icon: Sparkles, title: "Нейросеть Бесплатно", category: "text" },
-  { Icon: Languages, title: "Перевод текста", category: "text" },
-  { Icon: FileText, title: "Анализ документов", category: "text" },
-  { Icon: Globe, title: "Поиск в интернете", category: "text" },
-  { Icon: Pencil, title: "Написать текст", category: "text" },
-  { Icon: Sparkles, title: "Улучшение промпта", category: "text" },
-  { Icon: ImageIcon, title: "Промпт по фото", category: "text" },
-  { Icon: FileText, title: "Создать презентацию", category: "text" },
+  // image
+  { Icon: ImageIcon, title: "Создать изображение", category: "image", slug: "image-generation" },
+  { Icon: XCircle,   title: "Удалить фон",          category: "image", slug: "remove-background" },
+  { Icon: ZoomIn,    title: "Улучшить качество фото", category: "image", slug: "image-upscaler" },
+  { Icon: Scissors,  title: "Удалить объект",       category: "image", slug: "object-remover" },
+  { Icon: Sparkles,  title: "Убрать водяной знак",  category: "image", slug: "watermark-remover" },
+  { Icon: Palette,   title: "Раскрасить ч/б фото",  category: "image", slug: "colorize-photo" },
+  { Icon: Camera,    title: "Реставрация фото",     category: "image", slug: "photo-restoration" },
 
-  { Icon: Camera, title: "Сделать ИИ-Фото", category: "image" },
-  { Icon: ImageIcon, title: "Создать изображение", category: "image" },
-  { Icon: Palette, title: "Редактор фото", category: "image" },
-  { Icon: Scissors, title: "Удалить объект", category: "image" },
-  { Icon: UserRound, title: "Замена лица", category: "image" },
-  { Icon: XCircle, title: "Удалить фон", category: "image" },
-  { Icon: ZoomIn, title: "Улучшить качество фото", category: "image" },
+  // video
+  { Icon: Video,     title: "Создать видео",        category: "video", slug: "video-generation" },
+  { Icon: User,      title: "ИИ Аватар",            category: "video", slug: "talking-avatar" },
+  { Icon: Film,      title: "Оживить фото",         category: "video", slug: "ozhivit-foto" },
+  { Icon: ArrowUpCircle, title: "Видео для карточки Ozon", category: "video", slug: "ozon-product-video" },
 
-  { Icon: Video, title: "Создать видео", category: "video" },
-  { Icon: Film, title: "Видео редактор", category: "video" },
-  { Icon: User, title: "ИИ Аватар", category: "video" },
-  { Icon: Music2, title: "ИИ Танцы", category: "video" },
-  { Icon: ImageIcon, title: "Оживить фото", category: "video" },
-  { Icon: ArrowUpCircle, title: "Улучшить качество видео", category: "video" },
-
-  { Icon: Music, title: "Создать песню", category: "audio" },
-  { Icon: Mic, title: "Озвучка текста", category: "audio" },
-  { Icon: Volume2, title: "Создание звуков", category: "audio" },
-  { Icon: AudioLines, title: "Смена голоса", category: "audio" },
-  { Icon: Mic, title: "Клон голоса", category: "audio" },
-  { Icon: VolumeX, title: "Удаление шума", category: "audio" },
+  // audio
+  { Icon: AudioLines, title: "Озвучка текста",       category: "audio", slug: "text-to-speech" },
+  { Icon: Mic,        title: "Клон голоса",          category: "audio", slug: "voice-cloning" },
+  { Icon: VolumeX,    title: "Транскрибация",        category: "audio", slug: "transcribe" },
 ];
 
 const categoryLabels: Record<string, string> = {
@@ -84,12 +75,26 @@ const modelCategoryLabels: Record<string, string> = {
   audio: "АУДИО МОДЕЛИ",
 };
 
-const categoryLinks: Record<string, string> = {
+const categoryLinksAuthed: Record<string, string> = {
   text: "/text",
   image: "/design",
   video: "/video",
   audio: "/audio",
 };
+const categoryLinksGuest: Record<string, string> = {
+  text: "/ai/text",
+  image: "/ai/image",
+  video: "/ai/video",
+  audio: "/ai/audio",
+};
+
+// Provider ids that also exist as /tools/<slug> landing pages.
+const PROVIDER_SLUGS = new Set<string>([
+  "chatgpt", "claude", "gemini", "grok", "deepseek", "perplexity",
+  "nano-banana", "midjourney", "seedream", "gpt-image", "flux", "imagen",
+  "sora", "veo", "kling", "seedance", "hailuo",
+  "elevenlabs", "suno",
+]);
 
 const filters: { id: string; label: string; Icon?: LucideIcon }[] = [
   { id: "all", label: "Все" },
@@ -134,6 +139,13 @@ function ToolsAndModelsPage() {
   useEffect(() => { document.title = "ERA2 — Инструменты и Модели"; }, []);
   const [tab, setTab] = useState<"tools" | "models">("tools");
   const [filter, setFilter] = useState("all");
+  const { isAuthed } = useAuth();
+
+  const catLink = (cat: string) => (isAuthed ? categoryLinksAuthed[cat] : categoryLinksGuest[cat]);
+  const providerHref = (providerId: string, cat: string) => {
+    if (isAuthed) return categoryLinksAuthed[cat];
+    return PROVIDER_SLUGS.has(providerId) ? `/tools/${providerId}` : categoryLinksGuest[cat];
+  };
 
   const visibleCategories = filter === "all" ? allCategories : [filter];
 
@@ -176,7 +188,7 @@ function ToolsAndModelsPage() {
                 {catTools.map(t => (
                   <Link
                     key={`${cat}-${t.title}`}
-                    to={categoryLinks[cat] as any}
+                    to={isAuthed ? (categoryLinksAuthed[cat] as any) : (`/tools/${t.slug}` as any)}
                     className="rounded-2xl p-4 flex flex-col items-start gap-3 transition-colors hover:brightness-110"
                     style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)" }}
                   >
@@ -208,7 +220,7 @@ function ToolsAndModelsPage() {
                     p.subModels.map(s => (
                       <Link
                         key={`text-${p.id}-${s.id}`}
-                        to="/text"
+                        to={providerHref(p.id, "text") as any}
                         className="rounded-2xl p-4 flex items-center gap-3 transition-colors hover:brightness-110"
                         style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)" }}
                       >
@@ -233,7 +245,7 @@ function ToolsAndModelsPage() {
                     p.subModels.map(s => (
                       <Link
                         key={`img-${p.id}-${s.id}`}
-                        to="/design"
+                        to={providerHref(p.id, "image") as any}
                         className="rounded-2xl p-4 flex items-center gap-3 transition-colors hover:brightness-110"
                         style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)" }}
                       >
@@ -258,7 +270,7 @@ function ToolsAndModelsPage() {
                     p.subModels.map(s => (
                       <Link
                         key={`vid-${p.id}-${s.id}`}
-                        to="/video"
+                        to={providerHref(p.id, "video") as any}
                         className="rounded-2xl p-4 flex items-center gap-3 transition-colors hover:brightness-110"
                         style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)" }}
                       >
@@ -283,7 +295,7 @@ function ToolsAndModelsPage() {
                     p.models.map(m => (
                       <Link
                         key={`audio-${p.provider}-${m}`}
-                        to="/audio"
+                        to={providerHref(p.provider.toLowerCase(), "audio") as any}
                         className="rounded-2xl p-4 flex items-center gap-3 transition-colors hover:brightness-110"
                         style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)" }}
                       >
