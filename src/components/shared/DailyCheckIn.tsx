@@ -4,6 +4,7 @@ import { X, Gift, Check, Flame } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useCopyToast } from "@/components/shared/CopyToast";
 import { useCredits } from "@/hooks/useCredits";
+import { useAuth } from "@/contexts/AuthContext";
 
 export const DAYS = [
   { day: 1, credits: 5 },
@@ -64,6 +65,7 @@ export function DailyCheckIn() {
   const toast = useCopyToast();
   const { addCredits } = useCredits();
   const location = useLocation();
+  const { isAuthed } = useAuth();
   const shownThisSession = useRef(false);
 
   // Умный показ: везде кроме /tools и /checkout, задержка 3с,
@@ -72,14 +74,12 @@ export function DailyCheckIn() {
   // TODO: серверный стрик — считать по времени сервера
   useEffect(() => {
     if (typeof window === "undefined") return;
-    // Страницы, где поп-ап неуместен:
-    //   /tools    — человек генерирует, не мешаем работе
-    //   /checkout — оплачивает, не отвлекаем от платежа
-    //   /pricing  — выбирает тариф; «получите бесплатно» бьёт по решению купить
-    //   /auth     — регистрируется, начислять некому
-    //   /account  — управляет подпиской, часто пришёл с проблемой
-    const BLOCKED = ["/tools", "/checkout", "/pricing", "/auth", "/account"];
-    if (BLOCKED.some((p) => location.pathname.startsWith(p))) return;
+    // Только для залогиненных — гостям бонус начислять некому.
+    if (!isAuthed) return;
+    // Разрешённые рабочие разделы. Публичные SEO-посадочные (/, /ai/*, /tools/*,
+    // /pricing, /studios, /auth) и потоки покупки/аккаунта — исключены.
+    const ALLOWED = ["/text", "/design", "/video", "/audio", "/agents", "/history", "/toolkit", "/create"];
+    if (!ALLOWED.some((p) => location.pathname === p || location.pathname.startsWith(p + "/"))) return;
     if (shownThisSession.current) return;
 
     const debug = localStorage.getItem("era2_debug_checkin") === "1";
@@ -98,7 +98,7 @@ export function DailyCheckIn() {
     }
 
     let cancelled = false;
-    const delay = debug ? 500 : 3000;
+    const delay = debug ? 500 : 1800;
     const timer = window.setTimeout(() => {
       if (cancelled) return;
       shownThisSession.current = true;
@@ -125,7 +125,7 @@ export function DailyCheckIn() {
       window.clearTimeout(timer);
       cleanup();
     };
-  }, [location.pathname, claimedToday]);
+  }, [location.pathname, claimedToday, isAuthed]);
 
   useEffect(() => {
     if (!open) return;
