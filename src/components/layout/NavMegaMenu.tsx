@@ -135,7 +135,6 @@ const TABS: TabConfig[] = [
 
 export function NavMegaMenu() {
   const [active, setActive] = useState<string | null>(null);
-  const navigate = useNavigate();
   const { isAuthed } = useAuth();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -212,10 +211,13 @@ export function NavMegaMenu() {
                   Возможности
                 </div>
                 <div className="flex flex-col gap-0.5">
-                  {activeTab.features!.map((f) => (
-                    <button
+                  {activeTab.features!.map((f) => {
+                    const href = isAuthed ? activeTab.route : (f.publicHref ?? activeTab.publicRoute);
+                    return (
+                    <Link
                       key={f.title}
-                      onClick={() => { setActive(null); navigate({ to: activeTab.route }); }}
+                      to={href}
+                      onClick={() => setActive(null)}
                       className="flex items-center gap-3 px-3 py-2 rounded-[8px] text-left transition-colors hover:bg-[var(--c-bg-2)]"
                     >
                       <span
@@ -228,8 +230,9 @@ export function NavMegaMenu() {
                         <span className="text-[14px] font-medium leading-tight truncate" style={{ color: "var(--c-fg)" }}>{f.title}</span>
                         <span className="text-[12px] truncate" style={{ color: "var(--c-fg-mute)" }}>{f.desc}</span>
                       </span>
-                    </button>
-                  ))}
+                    </Link>
+                    );
+                  })}
                 </div>
                 <Link
                   to={activeTab.route}
@@ -247,10 +250,13 @@ export function NavMegaMenu() {
                   {activeTab.modelsTitle || "Модели"}
                 </div>
                 <div className="flex flex-col gap-0.5">
-                  {activeTab.models!.map((m) => (
-                    <button
+                  {activeTab.models!.map((m) => {
+                    const href = isAuthed ? activeTab.route : (m.publicHref ?? activeTab.publicRoute);
+                    return (
+                    <Link
                       key={m.name}
-                      onClick={() => { setActive(null); navigate({ to: activeTab.route }); }}
+                      to={href}
+                      onClick={() => setActive(null)}
                       className="flex items-center gap-3 px-3 py-2 rounded-[8px] text-left transition-colors hover:bg-[var(--c-bg-2)]"
                     >
                       <ModelGlyph name={m.name} size={32} />
@@ -261,8 +267,9 @@ export function NavMegaMenu() {
                         </span>
                         <span className="text-[12px] truncate" style={{ color: "var(--c-fg-mute)" }}>{m.desc}</span>
                       </span>
-                    </button>
-                  ))}
+                    </Link>
+                    );
+                  })}
                 </div>
                 <Link
                   to="/toolkit"
