@@ -15,6 +15,7 @@ export interface ToolPageData {
     credits: number;
     bricks: string[];
     types?: { id: string; label: string; credits: number; image: string }[];
+    selects?: { label: string; options: string[]; defaultIndex?: number }[];
   };
   howItWorks?: {
     title: string;
@@ -22,6 +23,7 @@ export interface ToolPageData {
   };
   featureBlocks?: { title: string; desc: string; image: string; cta: string }[];
   finalCta?: { title: string; subtitle: string; button: string };
+  faqItems?: { q: string; a: string }[];
 }
 
 export const toolPages: ToolPageData[] = [
