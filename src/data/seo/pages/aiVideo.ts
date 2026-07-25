@@ -82,7 +82,19 @@ export const aiVideoPage: SeoPage = {
       type: 'gallery',
       enabled: true,
       order: 5,
-      data: { title: 'Работы сообщества', type: 'video', count: 8 },
+      data: {
+        title: 'Работы сообщества',
+        items: [
+          { author: 'Алексей', image: '/community/01.jpg', likes: 234, views: 1200 },
+          { author: 'Мария',   image: '/community/02.jpg', likes: 187, views: 890 },
+          { author: 'Дмитрий', image: '/community/03.jpg', likes: 312, views: 1500 },
+          { author: 'Анна',    image: '/community/04.jpg', likes: 156, views: 720 },
+          { author: 'Иван',    image: '/community/05.jpg', likes: 278, views: 1100 },
+          { author: 'Ольга',   image: '/community/06.jpg', likes: 198, views: 950 },
+          { author: 'Сергей',  image: '/community/07.jpg', likes: 342, views: 1800 },
+          { author: 'Елена',   image: '/community/08.jpg', likes: 145, views: 670 },
+        ],
+      },
     },
     { type: 'howItWorks', enabled: true, order: 6 },
     {
@@ -94,7 +106,20 @@ export const aiVideoPage: SeoPage = {
         text: 'ЭРА2 объединяет лучшие модели генерации видео в одном сервисе: Kling, Veo, Sora, Seedance, Hailuo и другие. Не нужно регистрироваться в десяти сервисах и платить в валюте — одна подписка в рублях открывает все инструменты: от оживления фото до готовых роликов для маркетплейсов.',
       },
     },
-    { type: 'faq', enabled: true, order: 8 },
+    {
+      type: 'faq',
+      enabled: true,
+      order: 8,
+      data: {
+        items: [
+          { q: 'Какие нейросети для видео доступны в ЭРА2?', a: 'Kling, Veo, Sora, Seedance, Hailuo, Wan и другие — в одной подписке, без VPN и зарубежных карт.' },
+          { q: 'Можно ли создать видео из фотографии?', a: 'Да — инструмент "Оживить фото" превращает снимок в короткое живое видео за минуту.' },
+          { q: 'Сколько стоит генерация видео?', a: 'Списываются кредиты по тарифу; стоимость зависит от модели, длительности и разрешения. Начать можно бесплатно.' },
+          { q: 'На каком языке писать промпт?', a: 'На русском — модели корректно понимают русскоязычные описания.' },
+          { q: 'Где хранятся мои видео?', a: 'Все результаты сохраняются в вашей истории генераций и доступны для скачивания.' },
+        ],
+      },
+    },
     {
       type: 'relatedLinks',
       enabled: true,
