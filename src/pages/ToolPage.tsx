@@ -184,7 +184,7 @@ const ToolPage = () => {
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="gradient-accent text-white rounded-full px-8 py-3 font-semibold hover:opacity-90 transition-opacity"
             >
-              Оживить фото
+              {data.howItWorks.cta ?? data.finalCta?.button ?? "Попробовать"}
             </button>
           </div>
         </section>

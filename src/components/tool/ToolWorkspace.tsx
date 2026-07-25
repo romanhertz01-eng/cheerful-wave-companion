@@ -6,10 +6,11 @@ import type { ToolPageData } from "@/data/toolPages";
 
 type Status = "idle" | "loading" | "done";
 
-const DEMO_PREVIEW = "/examples/ozhivit-preview.jpg";
-
 export function ToolWorkspace({ data }: { data: ToolPageData }) {
   const tool = data.tool!;
+  const demoImage = tool.demoImage ?? "/examples/ozhivit-preview.jpg";
+  const demoCaption = tool.demoCaption ?? "Пример результата";
+  const isVideo = data.category === "video";
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [motion, setMotion] = useState(50);
@@ -45,9 +46,9 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
 
   return (
     <section className="border-y border-border" style={{ background: "hsl(var(--card))" }}>
-      <div className="max-w-6xl mx-auto px-4 py-8 grid gap-5 md:grid-cols-[320px_1fr] md:grid-rows-[min-content]">
+      <div className="max-w-6xl mx-auto px-4 py-8 grid gap-5 md:grid-cols-[320px_1fr] md:grid-rows-[min-content] items-start">
         {/* LEFT PANEL */}
-        <div className="rounded-2xl border border-border bg-background/60 p-3 flex flex-col gap-2.5 h-full">
+        <div className="rounded-2xl border border-border bg-background/60 p-3 flex flex-col gap-2.5">
           <div className="flex items-center gap-2">
             <Link to="/toolkit" className="p-1.5 rounded-md hover:bg-muted transition-colors">
               <ArrowLeft size={16} />
@@ -228,13 +229,13 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
         </div>
 
         {/* RIGHT PREVIEW */}
-        <div className="flex flex-col gap-3 h-full min-h-0 overflow-hidden">
+        <div className="flex flex-col gap-3">
           <div className="shrink-0">
             <h2 className="text-xl md:text-2xl font-bold leading-tight">{data.heroTitle}</h2>
             <p className="text-sm text-muted-foreground mt-1.5">{data.heroDescription}</p>
           </div>
 
-          <div className="flex-1 min-h-0 rounded-2xl border border-border bg-background/60 overflow-hidden relative flex items-center justify-center">
+          <div className="w-full aspect-[4/3] rounded-2xl border border-border bg-background/60 overflow-hidden relative flex items-center justify-center">
             {status === "loading" && (
               <div className="absolute inset-0 animate-pulse bg-muted/40 flex items-center justify-center z-20">
                 <Loader2 size={32} className="animate-spin text-primary" />
@@ -242,12 +243,12 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
             )}
 
             <img
-              src={preview || DEMO_PREVIEW}
+              src={preview || demoImage}
               alt="result"
               className="absolute inset-0 w-full h-full object-cover"
             />
 
-            {status === "done" && (
+            {status === "done" && isVideo && (
               <div className="absolute inset-0 flex items-center justify-center bg-black/30 z-10">
                 <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center">
                   <Play size={26} className="ml-1 text-black" fill="black" />
@@ -257,35 +258,15 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
 
             {status === "idle" && !preview && (
               <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/25 z-10">
-                <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center">
-                  <Play size={22} className="ml-0.5 text-black" fill="black" />
-                </div>
-                <span className="text-xs text-white/90 font-medium">Пример результата</span>
-                <span className="text-[10px] text-white/70">фото → видео</span>
+                {isVideo && (
+                  <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center">
+                    <Play size={22} className="ml-0.5 text-black" fill="black" />
+                  </div>
+                )}
+                <span className="text-xs text-white/90 font-medium">{isVideo ? "Пример результата" : demoCaption}</span>
+                {isVideo && <span className="text-[10px] text-white/70">фото → видео</span>}
               </div>
             )}
-          </div>
-
-          <div className="shrink-0">
-            <p className="text-xs text-muted-foreground mb-1.5">История</p>
-            <div className="grid grid-cols-3 gap-2">
-              {[
-                "/community/01.jpg",
-                "/community/02.jpg",
-                "/community/03.jpg",
-              ].map((src, i) => (
-                <div
-                  key={i}
-                  className="h-16 rounded-lg border border-white/10 overflow-hidden hover:border-primary/40 transition-colors"
-                >
-                  <img
-                    src={src}
-                    alt={`history ${i + 1}`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>
