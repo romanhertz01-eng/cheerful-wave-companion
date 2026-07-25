@@ -21,6 +21,11 @@ export interface ToolPageData {
     voices?: string[];
     textPlaceholder?: string;
     maxChars?: number;
+    sampleUpload?: { label: string; hint: string };
+    uploadLabel?: string;
+    uploadHint?: string;
+    uploadAccept?: string;
+    legalNote?: string;
   };
   howItWorks?: {
     title: string;
