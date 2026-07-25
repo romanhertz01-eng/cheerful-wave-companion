@@ -2,7 +2,7 @@
 import { useParams, Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronRight, Play, Heart, Eye, ZoomIn, Scissors, Wand2, Package, Eraser, RefreshCw, Brush, type LucideIcon } from "lucide-react";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
-import { getToolPageData } from "@/data/toolPages";
+import { getToolPageData, getRelatedTools } from "@/data/toolPages";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
 import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
@@ -63,8 +63,38 @@ const ToolPage = () => {
 
   const targetPage = data.category === "video" ? "/video" : data.category === "audio" ? "/audio" : "/design";
 
+  const faqForLd = data.faqItems ?? toolPageItems;
+  const faqLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqForLd.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  };
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Главная", item: "https://era2.ai/" },
+      { "@type": "ListItem", position: 2, name: "Инструменты", item: "https://era2.ai/studios" },
+      { "@type": "ListItem", position: 3, name: data.heroTitle, item: `https://era2.ai/tools/${data.slug}` },
+    ],
+  };
+  const related = getRelatedTools(data.slug);
+  const showRelated = related.length >= 3;
+
   return (
     <div className="min-w-0">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
+      />
       {/* Hero with prompt bar */}
       <section className="relative overflow-hidden" style={{ background: "linear-gradient(to bottom, hsl(var(--background)), hsl(var(--card)))" }}>
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(232,84,32,0.15) 0%, rgba(255,122,61,0.05) 40%, transparent 70%)" }} />
