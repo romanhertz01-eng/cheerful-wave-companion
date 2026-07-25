@@ -53,12 +53,12 @@ export const aiTextPage: SeoPage = {
       data: {
         heading: 'Модели для текста',
         items: [
-          { name: 'ChatGPT', desc: 'Универсальный лидер для любых задач', image: '/models/01.jpg' },
-          { name: 'Claude', desc: 'Длинные тексты и вдумчивый анализ', image: '/models/02.jpg' },
-          { name: 'Gemini', desc: 'Мультимодальность и работа с данными', image: '/models/03.jpg' },
-          { name: 'Grok', desc: 'Актуальные ответы и смелый стиль', image: '/models/04.jpg' },
-          { name: 'DeepSeek', desc: 'Сильная логика и код', image: '/models/05.jpg' },
-          { name: 'Perplexity', desc: 'Поиск в интернете с источниками', image: '/models/06.jpg' },
+          { name: 'ChatGPT', desc: 'Универсальный лидер для любых задач', image: '/models/01.jpg', href: '/tools/chatgpt' },
+          { name: 'Claude', desc: 'Длинные тексты и вдумчивый анализ', image: '/models/02.jpg', href: '/tools/claude' },
+          { name: 'Gemini', desc: 'Мультимодальность и работа с данными', image: '/models/03.jpg', href: '/tools/gemini' },
+          { name: 'Grok', desc: 'Актуальные ответы и смелый стиль', image: '/models/04.jpg', href: '/tools/grok' },
+          { name: 'DeepSeek', desc: 'Сильная логика и код', image: '/models/05.jpg', href: '/tools/deepseek' },
+          { name: 'Perplexity', desc: 'Поиск в интернете с источниками', image: '/models/06.jpg', href: '/tools/perplexity' },
         ],
       },
     },

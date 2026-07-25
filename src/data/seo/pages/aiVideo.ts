@@ -52,7 +52,7 @@ export const aiVideoPage: SeoPage = {
       data: {
         heading: 'Модели для видео',
         items: [
-          { name: 'Kling 3.0', badge: 'NEW', desc: 'Целостные раскадровки с ультрадетализированной динамикой', image: '/models/05.jpg' },
+          { name: 'Kling 3.0', badge: 'NEW', desc: 'Целостные раскадровки с ультрадетализированной динамикой', image: '/models/05.jpg', href: '/tools/kling' },
           { name: 'Veo 3', desc: 'Кинематографичное видео со звуком', image: '/models/02.jpg', href: '/tools/veo' },
           { name: 'Sora 2', desc: 'Сложные сцены и длинные планы', image: '/models/03.jpg', href: '/tools/sora' },
           { name: 'Seedance 2.0', desc: 'Танцы и динамичные движения', image: '/models/04.jpg', href: '/tools/seedance' },
