@@ -16,6 +16,9 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
   const [duration, setDuration] = useState<5 | 10>(5);
   const [status, setStatus] = useState<Status>("idle");
   const [selectedType, setSelectedType] = useState(0);
+  const [selectIdx, setSelectIdx] = useState<number[]>(
+    () => tool.selects?.map((s) => s.defaultIndex ?? 0) ?? []
+  );
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -159,6 +162,42 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
                   </button>
                 ))}
               </div>
+            </div>
+          )}
+
+          {has("select") && tool.selects && tool.selects.length > 0 && (
+            <div className="flex flex-col gap-3">
+              {tool.selects.map((sel, si) => (
+                <div key={si}>
+                  <label className="text-xs text-muted-foreground mb-1 block">{sel.label}</label>
+                  <div className="grid grid-cols-3 gap-2">
+                    {sel.options.map((opt, oi) => {
+                      const active = (selectIdx[si] ?? sel.defaultIndex ?? 0) === oi;
+                      return (
+                        <button
+                          key={opt}
+                          type="button"
+                          onClick={() =>
+                            setSelectIdx((prev) => {
+                              const next = [...prev];
+                              next[si] = oi;
+                              return next;
+                            })
+                          }
+                          className={cn(
+                            "px-3 py-2 rounded-lg text-sm font-medium border transition-colors",
+                            active
+                              ? "border-primary bg-primary/10 text-foreground"
+                              : "border-border text-muted-foreground hover:text-foreground"
+                          )}
+                        >
+                          {opt}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
             </div>
           )}
 
