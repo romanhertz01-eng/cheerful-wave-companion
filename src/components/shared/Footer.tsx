@@ -49,7 +49,7 @@ function FooterColumn({ title, links }: { title: string; links: { label: string;
 export function Footer() {
   return (
     <footer className="border-t border-[hsl(var(--border))] bg-[hsl(var(--card))] mt-20">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-12">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr] gap-12">
         {/* Brand */}
         <div>
           <Link to="/" className="flex items-center gap-2.5 shrink-0">
@@ -77,6 +77,7 @@ export function Footer() {
         </div>
 
         <FooterColumn title="Продукт" links={productLinks} />
+        <FooterColumn title="Инструменты" links={toolsLinks} />
       </div>
 
       <div className="border-t border-[hsl(var(--border))]">
