@@ -5,7 +5,7 @@ export const nejrosetiBezVpnGuide: SeoPage = {
   slug: '/guides/nejroseti-bez-vpn',
   pageKind: 'guide',
   status: 'published',
-  searchIntent: 'commercial',
+  searchIntent: 'informational',
   updatedAt: '2026-07-25',
   readingTime: '7 минут',
   uniqueValue: 'Единственная страница, которая честно сравнивает три способа доступа к нейросетям из России (VPN+зарубежная карта, боты-посредники, агрегаторы) и даёт готовый путь для каждой топ-модели — от ChatGPT до Sora.',
