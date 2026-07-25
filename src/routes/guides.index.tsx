@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
+import { ChevronRight } from 'lucide-react';
 import { guides } from '@/data/seo/guides';
 import { Footer } from '@/components/shared/Footer';
 
@@ -18,6 +19,7 @@ export const Route = createFileRoute('/guides/')({
       { property: 'og:title', content: TITLE },
       { property: 'og:description', content: DESCRIPTION },
       { property: 'og:url', content: CANONICAL },
+      { property: 'og:image', content: 'https://era2.ai/og-image.png' },
     ],
     links: [{ rel: 'canonical', href: CANONICAL }],
   }),
@@ -28,6 +30,11 @@ function GuidesHub() {
   return (
     <>
       <section className="max-w-5xl mx-auto px-4 pt-16 pb-10">
+        <nav className="flex items-center gap-1.5 text-[13px] text-muted-foreground mb-6">
+          <Link to="/" className="hover:text-foreground transition-colors">Главная</Link>
+          <ChevronRight className="w-3 h-3" />
+          <span className="text-foreground/70">Гайды</span>
+        </nav>
         <h1 className="text-3xl md:text-[40px] font-bold leading-tight" style={{ color: 'var(--seo-heading)' }}>
           Гайды по нейросетям
         </h1>
@@ -50,7 +57,7 @@ function GuidesHub() {
                 className="block rounded-2xl border border-border bg-[hsl(var(--card))] p-6 hover:border-[hsl(var(--primary))] transition-colors"
               >
                 <h2 className="text-lg font-semibold mb-2" style={{ color: 'var(--seo-heading)' }}>
-                  {g.seo.title}
+                  {g.cardTitle ?? g.seo.title}
                 </h2>
                 <p className="text-sm text-[hsl(var(--muted-foreground))] line-clamp-2">
                   {g.seo.description}

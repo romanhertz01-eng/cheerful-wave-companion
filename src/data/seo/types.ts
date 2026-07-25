@@ -37,6 +37,7 @@ export type SeoPage = {
   searchIntent: 'informational' | 'commercial' | 'transactional' | 'navigational';
   updatedAt?: string;
   readingTime?: string;
+  cardTitle?: string;
   seo: {
     title: string;
     description: string;

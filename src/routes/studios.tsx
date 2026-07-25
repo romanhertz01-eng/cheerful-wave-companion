@@ -1,10 +1,11 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
   MessageSquare, Globe, Languages, FileText, Pencil, Sparkles,
   Image as ImageIcon, Camera, Palette, Scissors, UserRound, XCircle, ZoomIn,
   Video, Film, User, Music2, ArrowUpCircle,
   Music, Mic, Volume2, VolumeX, AudioLines,
+  Search,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -20,6 +21,9 @@ const STUDIOS_DESCRIPTION =
 const STUDIOS_CANONICAL = "https://era2.ai/studios";
 
 export const Route = createFileRoute("/studios")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    q: typeof search.q === "string" ? search.q : "",
+  }),
   head: () => ({
     meta: [
       { title: STUDIOS_TITLE },
@@ -140,6 +144,10 @@ function ToolsAndModelsPage() {
   const [tab, setTab] = useState<"tools" | "models">("tools");
   const [filter, setFilter] = useState("all");
   const { isAuthed } = useAuth();
+  const { q } = Route.useSearch();
+  const navigate = useNavigate({ from: "/studios" });
+  const query = q.trim().toLowerCase();
+  const matches = (s: string) => !query || s.toLowerCase().includes(query);
 
   const catLink = (cat: string) => (isAuthed ? categoryLinksAuthed[cat] : categoryLinksGuest[cat]);
   const providerHref = (providerId: string, cat: string) => {
@@ -155,6 +163,20 @@ function ToolsAndModelsPage() {
         <h1 className="text-4xl md:text-5xl font-semibold tracking-tight mb-6 text-center" style={{ color: "var(--text-primary)" }}>
           Инструменты и Модели
         </h1>
+
+        <div className="max-w-xl mx-auto mb-6 relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <input
+            type="search"
+            value={q}
+            onChange={(e) =>
+              navigate({ search: (prev: { q: string }) => ({ ...prev, q: e.target.value }), replace: true })
+            }
+            placeholder="Поиск: midjourney, sora, аватар…"
+            className="w-full rounded-xl pl-9 pr-3 py-2.5 text-sm outline-none focus:border-[hsl(var(--primary))]"
+            style={{ background: "var(--bg-card)", border: "1px solid var(--border-primary)", color: "var(--text-primary)" }}
+          />
+        </div>
 
         <div className="flex justify-center gap-2 mb-6">
           {(["tools", "models"] as const).map(t => (
@@ -177,7 +199,7 @@ function ToolsAndModelsPage() {
         <FilterPills filter={filter} setFilter={setFilter} />
 
         {tab === "tools" && visibleCategories.map(cat => {
-          const catTools = tools.filter(t => t.category === cat);
+          const catTools = tools.filter(t => t.category === cat && matches(t.title));
           if (!catTools.length) return null;
           return (
             <div key={cat} className="mb-10">
@@ -217,7 +239,7 @@ function ToolsAndModelsPage() {
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
                   {textProviders.flatMap(p =>
-                    p.subModels.map(s => (
+                    p.subModels.filter(s => matches(s.name) || matches(p.name)).map(s => (
                       <Link
                         key={`text-${p.id}-${s.id}`}
                         to={providerHref(p.id, "text") as any}
@@ -242,7 +264,7 @@ function ToolsAndModelsPage() {
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
                   {imageProviders.flatMap(p =>
-                    p.subModels.map(s => (
+                    p.subModels.filter(s => matches(s.name) || matches(p.name)).map(s => (
                       <Link
                         key={`img-${p.id}-${s.id}`}
                         to={providerHref(p.id, "image") as any}
@@ -267,7 +289,7 @@ function ToolsAndModelsPage() {
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
                   {videoProviders.flatMap(p =>
-                    p.subModels.map(s => (
+                    p.subModels.filter(s => matches(s.name) || matches(p.name)).map(s => (
                       <Link
                         key={`vid-${p.id}-${s.id}`}
                         to={providerHref(p.id, "video") as any}
@@ -292,7 +314,7 @@ function ToolsAndModelsPage() {
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
                   {audioModels.flatMap(p =>
-                    p.models.map(m => (
+                    p.models.filter(m => matches(m) || matches(p.provider)).map(m => (
                       <Link
                         key={`audio-${p.provider}-${m}`}
                         to={providerHref(p.provider.toLowerCase(), "audio") as any}

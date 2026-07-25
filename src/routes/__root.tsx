@@ -80,6 +80,15 @@ function RootShell({ children }: { children: React.ReactNode }) {
       "@type": "WebSite",
       name: "ERA2.ai",
       url: "https://era2.ai",
+      inLanguage: "ru-RU",
+      potentialAction: {
+        "@type": "SearchAction",
+        target: {
+          "@type": "EntryPoint",
+          urlTemplate: "https://era2.ai/studios?q={search_term_string}",
+        },
+        "query-input": "required name=search_term_string",
+      },
     },
   ]);
   return (

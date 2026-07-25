@@ -1,9 +1,9 @@
 
-import { useParams, Link } from "@tanstack/react-router";
+import { Link, getRouteApi } from "@tanstack/react-router";
 import { ArrowRight, ChevronRight, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
-import { getToolPageData, getRelatedTools } from "@/data/toolPages";
+import { getRelatedTools, type ToolPageData } from "@/data/toolPages";
 import { plans } from "@/data/plans";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
@@ -12,14 +12,15 @@ import { AuthCTALink } from "@/components/auth/AuthCTALink";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
+const toolRouteApi = getRouteApi("/tools/$slug");
+
 const ToolPage = () => {
-  const { slug } = useParams({ strict: false }) as { slug?: string };
-  const data = slug ? getToolPageData(slug) : undefined;
+  const { data } = toolRouteApi.useLoaderData() as { data: ToolPageData };
   const workspaceRef = useRef<HTMLDivElement | null>(null);
   const [showFloatingBar, setShowFloatingBar] = useState(false);
 
   useEffect(() => {
-    if (!data?.tool) return;
+    if (!data.tool) return;
     const el = workspaceRef.current;
     if (!el) return;
     const io = new IntersectionObserver(
@@ -28,23 +29,11 @@ const ToolPage = () => {
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [data?.tool, data?.slug]);
+  }, [data.tool, data.slug]);
 
   const scrollToWorkspace = () => {
     workspaceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-
-  if (!data) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] gap-4 px-4">
-        <h1 className="text-3xl font-bold">Модель не найдена</h1>
-        <p className="text-muted-foreground">Запрашиваемая модель не существует в каталоге</p>
-        <Link to="/" className="px-6 py-3 rounded-button gradient-accent text-white font-semibold hover:opacity-90 transition-opacity">
-          На главную
-        </Link>
-      </div>
-    );
-  }
 
   const targetPage = data.category === "video" ? "/video" : data.category === "audio" ? "/audio" : "/design";
 

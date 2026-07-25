@@ -8,6 +8,7 @@ export const kakOzhivitStaroeFotoGuide: SeoPage = {
   searchIntent: 'informational',
   updatedAt: '2026-07-25',
   readingTime: '6 минут',
+  cardTitle: 'Как оживить старое фото нейросетью',
   uniqueValue:
     'Единственная страница, дающая полный путь: какие снимки оживают лучше, как подготовить повреждённое фото (реставрация → колоризация → оживление) и пошаговая инструкция в ЭРА2 с типичными ошибками.',
   seo: {

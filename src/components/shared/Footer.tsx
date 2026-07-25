@@ -11,6 +11,19 @@ const productLinks = [
   { label: "Тарифы", to: "/pricing" },
 ];
 
+const toolsLinks = [
+  { label: "Оживить фото", to: "/tools/ozhivit-foto" },
+  { label: "Генератор изображений", to: "/tools/image-generation" },
+  { label: "Создать видео", to: "/tools/video-generation" },
+  { label: "Удалить фон", to: "/tools/remove-background" },
+  { label: "Апскейл", to: "/tools/image-upscaler" },
+  { label: "Реставрация фото", to: "/tools/photo-restoration" },
+  { label: "Озвучка текста", to: "/tools/text-to-speech" },
+  { label: "ChatGPT", to: "/tools/chatgpt" },
+  { label: "Midjourney", to: "/tools/midjourney" },
+  { label: "Sora", to: "/tools/sora" },
+];
+
 function FooterColumn({ title, links }: { title: string; links: { label: string; to: string }[] }) {
   return (
     <div>
@@ -36,7 +49,7 @@ function FooterColumn({ title, links }: { title: string; links: { label: string;
 export function Footer() {
   return (
     <footer className="border-t border-[hsl(var(--border))] bg-[hsl(var(--card))] mt-20">
-      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-12">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-[1.6fr_1fr_1fr] gap-12">
         {/* Brand */}
         <div>
           <Link to="/" className="flex items-center gap-2.5 shrink-0">
@@ -64,6 +77,7 @@ export function Footer() {
         </div>
 
         <FooterColumn title="Продукт" links={productLinks} />
+        <FooterColumn title="Инструменты" links={toolsLinks} />
       </div>
 
       <div className="border-t border-[hsl(var(--border))]">
