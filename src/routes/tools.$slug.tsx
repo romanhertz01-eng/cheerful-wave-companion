@@ -1,6 +1,24 @@
 import { createFileRoute } from "@tanstack/react-router";
 import ToolPage from "@/pages/ToolPage";
+import { getToolPageData } from "@/data/toolPages";
 
 export const Route = createFileRoute("/tools/$slug")({
   component: ToolPage,
+  head: ({ params }) => {
+    const data = getToolPageData(params.slug);
+    if (!data) return {};
+    const title = `${data.heroTitle} онлайн — нейросеть | ERA2.ai`;
+    const canonical = `https://era2.ai/tools/${params.slug}`;
+    return {
+      meta: [
+        { title },
+        { name: "description", content: data.heroDescription },
+        { name: "robots", content: "index,follow" },
+        { property: "og:title", content: title },
+        { property: "og:description", content: data.heroDescription },
+        { property: "og:url", content: canonical },
+      ],
+      links: [{ rel: "canonical", href: canonical }],
+    };
+  },
 });

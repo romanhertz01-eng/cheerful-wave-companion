@@ -5,6 +5,9 @@ import TextPage from "@/pages/TextPage";
 export const Route = createFileRoute("/text")({
   component: () => <RequireAuth><TextPage /></RequireAuth>,
   head: () => ({
-    meta: [{ title: "ERA2 — Текст" }],
+    meta: [
+      { title: "ERA2 — Текст" },
+      { name: "robots", content: "noindex,follow" },
+    ],
   }),
 });
