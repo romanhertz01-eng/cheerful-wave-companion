@@ -261,11 +261,9 @@ export default function CheckoutPage() {
                   onChange={(e) => setAgreed(e.target.checked)}
                   className="mt-0.5 h-4 w-4 shrink-0 rounded border-border bg-card accent-primary"
                 />
+                {/* TODO: вернуть ссылки при появлении /legal/* */}
                 <span>
-                  Я принимаю условия{" "}
-                  <a href="#" className="text-foreground underline underline-offset-2">оферты</a>
-                  {" "}и{" "}
-                  <a href="#" className="text-foreground underline underline-offset-2">политики конфиденциальности</a>
+                  Я принимаю условия оферты и политики конфиденциальности
                   {isGift
                     ? `. Это разовый платёж ${fmtRub(selected.total)} за подарочную подписку «${plan.name}» на ${selected.label.toLowerCase()}. Автопродление не подключается.`
                     : ` и разрешаю ${LEGAL} списывать ${fmtRub(selected.total)} раз в ${periodWord} с привязанной карты в счёт подписки «${plan.name}». Отменить автопродление можно в любой момент в разделе Аккаунт.`}
