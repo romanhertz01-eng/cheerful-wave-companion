@@ -35,6 +35,10 @@ export interface ToolPageData {
   featureBlocks?: { title: string; desc: string; image: string; cta: string }[];
   finalCta?: { title: string; subtitle: string; button: string };
   faqItems?: { q: string; a: string }[];
+  intro?: { heading: string; text: string };
+  useCases?: { heading: string; items: { title: string; desc: string }[] };
+  tips?: { heading: string; items: { title: string; desc: string }[] };
+  specs?: { heading: string; items: { label: string; value: string }[] };
 }
 
 export const toolPages: ToolPageData[] = [
