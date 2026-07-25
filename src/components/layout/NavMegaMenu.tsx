@@ -51,10 +51,10 @@ const TABS: TabConfig[] = [
       { name: "ChatGPT", desc: "GPT от OpenAI", publicHref: "/tools/chatgpt" },
       { name: "Claude", desc: "От Anthropic", publicHref: "/tools/claude" },
       { name: "Gemini", desc: "От Google", publicHref: "/tools/gemini" },
-      { name: "Perplexity", desc: "Поиск с ИИ" },
+      { name: "Perplexity", desc: "Поиск с ИИ", publicHref: "/tools/perplexity" },
       { name: "Grok", desc: "От xAI", publicHref: "/tools/grok" },
       { name: "Qwen", desc: "От Alibaba" },
-      { name: "DeepSeek", desc: "Reasoning модель" },
+      { name: "DeepSeek", desc: "Reasoning модель", publicHref: "/tools/deepseek" },
     ],
   },
   {
