@@ -4,7 +4,7 @@ export const aiAudioPage: SeoPage = {
   id: 'ai-audio',
   slug: '/ai/audio',
   pageKind: 'category',
-  status: 'draft',
+  status: 'published',
   uniqueValue:
     'Обзор аудио-нейросетей ЭРА2: озвучка текста, создание музыки, клонирование голоса, транскрибация — модели и инструменты в одном месте.',
   searchIntent: 'commercial',

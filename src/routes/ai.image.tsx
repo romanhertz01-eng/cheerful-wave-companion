@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { SeoRenderer } from '@/components/seo/SeoPage';
+import { resolveRobots } from '@/data/seo/robots';
 import { aiImagePage } from '@/data/seo/pages/aiImage';
 
 export const Route = createFileRoute('/ai/image')({
@@ -8,7 +9,7 @@ export const Route = createFileRoute('/ai/image')({
     meta: [
       { title: aiImagePage.seo.title },
       { name: 'description', content: aiImagePage.seo.description },
-      { name: 'robots', content: aiImagePage.seo.robots },
+      { name: 'robots', content: resolveRobots(aiImagePage) },
       { property: 'og:title', content: aiImagePage.seo.title },
       { property: 'og:description', content: aiImagePage.seo.description },
       { property: 'og:url', content: aiImagePage.seo.canonical },

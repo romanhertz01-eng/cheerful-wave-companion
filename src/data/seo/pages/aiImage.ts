@@ -4,7 +4,7 @@ export const aiImagePage: SeoPage = {
   id: 'ai-image',
   slug: '/ai/image',
   pageKind: 'category',
-  status: 'draft',
+  status: 'published',
   uniqueValue:
     'Обзор нейросетей для изображений ЭРА2: генерация, редактирование, удаление фона, апскейл — модели и инструменты в одном месте.',
   searchIntent: 'commercial',
