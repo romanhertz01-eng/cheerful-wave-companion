@@ -1,4 +1,4 @@
-import { AuthCTALink } from "@/components/shared/AuthCTALink";
+import { AuthCTALink } from "@/components/auth/AuthCTALink";
 
 interface HeroBlockProps {
   h1: string;
