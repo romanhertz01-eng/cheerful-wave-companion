@@ -71,6 +71,9 @@ function RootShell({ children }: { children: React.ReactNode }) {
       name: "ERA2",
       url: "https://era2.ai",
       logo: "https://era2.ai/favicon.svg",
+      alternateName: ["ЭРА2", "era2", "ERA2.ai"],
+      description:
+        "Агрегатор нейросетей: 90+ ИИ-моделей по единой подписке с оплатой в рублях",
     },
     {
       "@context": "https://schema.org",
