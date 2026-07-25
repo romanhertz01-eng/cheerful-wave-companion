@@ -297,6 +297,8 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
   const tool = data.tool!;
   const voices = tool.voices ?? [];
   const maxChars = tool.maxChars ?? 2000;
+  const { isAuthed } = useAuth();
+  const navigate = useNavigate();
   const [voice, setVoice] = useState(voices[0] ?? "");
   const [voiceOpen, setVoiceOpen] = useState(false);
   const [text, setText] = useState("");
@@ -310,6 +312,11 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
   const resultType = tool.resultType ?? "audio";
 
   const onGenerate = () => {
+    if (!isAuthed) {
+      const next = typeof window !== "undefined" ? window.location.pathname + window.location.search : undefined;
+      navigate({ to: buildAuthHref(next) });
+      return;
+    }
     if (!text.trim()) return;
     setStatus("loading");
     setTimeout(() => setStatus("done"), 1800);
@@ -440,7 +447,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
             </div>
             <button
               type="button"
-              disabled={!value.trim() || status === "loading"}
+              disabled={isAuthed && (!value.trim() || status === "loading")}
               onClick={onGenerate}
               className="h-10 px-5 rounded-lg font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2"
               style={{ background: "#E85420" }}
