@@ -3,7 +3,7 @@ import { Link, getRouteApi } from "@tanstack/react-router";
 import { ArrowRight, ChevronRight, Play } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
-import { getRelatedTools } from "@/data/toolPages";
+import { getRelatedTools, type ToolPageData } from "@/data/toolPages";
 import { plans } from "@/data/plans";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
@@ -15,7 +15,7 @@ import { motion } from "framer-motion";
 const toolRouteApi = getRouteApi("/tools/$slug");
 
 const ToolPage = () => {
-  const { data } = toolRouteApi.useLoaderData();
+  const { data } = toolRouteApi.useLoaderData() as { data: ToolPageData };
   const workspaceRef = useRef<HTMLDivElement | null>(null);
   const [showFloatingBar, setShowFloatingBar] = useState(false);
 
