@@ -8,6 +8,7 @@ import {
 } from '@/components/ui/breadcrumb';
 import type { SeoPage } from '@/data/seo/types';
 import { blockRegistry } from './blocks/registry';
+import { Footer } from '@/components/shared/Footer';
 
 export function SeoRenderer({ def }: { def: SeoPage }) {
   const blocks = def.blocks.filter((b) => b.enabled).sort((a, b) => a.order - b.order);
@@ -81,6 +82,7 @@ export function SeoRenderer({ def }: { def: SeoPage }) {
         const C = blockRegistry[b.type];
         return <C key={b.order} type={b.type} {...(b.data || {})} />;
       })}
+      <Footer />
     </>
   );
 }
