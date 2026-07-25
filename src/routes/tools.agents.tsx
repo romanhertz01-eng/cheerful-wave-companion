@@ -1,12 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
-import AgentsLandingPage from "@/pages/AgentsLandingPage";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/tools/agents")({
-  component: AgentsLandingPage,
-  head: () => ({
-    meta: [
-      { title: "ИИ-агенты и ассистенты | ERA2.ai" },
-      { name: "description", content: "44 ИИ-ассистента для образования, бизнеса, маркетинга, разработки, здоровья." },
-    ],
-  }),
+  beforeLoad: () => {
+    throw redirect({ to: "/ai/agents", statusCode: 301 });
+  },
+  component: () => null,
 });
