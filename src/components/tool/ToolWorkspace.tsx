@@ -294,6 +294,11 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
   const [status, setStatus] = useState<Status>("idle");
   const [sampleFile, setSampleFile] = useState<File | null>(null);
   const sampleRef = useRef<HTMLInputElement>(null);
+  const selects = tool.selects ?? [];
+  const [selectIdx, setSelectIdx] = useState<number[]>(
+    () => selects.map((s) => s.defaultIndex ?? 0)
+  );
+  const resultType = tool.resultType ?? "audio";
 
   const onGenerate = () => {
     if (!text.trim()) return;
@@ -390,6 +395,37 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
           <div className="flex items-center justify-between gap-3 pt-2 border-t border-border">
             <div className="flex items-center gap-2 flex-wrap">
               <span className="border border-border rounded-full px-3 py-1 text-xs">{tool.modelName}</span>
+              {selects.map((sel, si) => (
+                <div key={si} className="flex items-center gap-1">
+                  <span className="text-[11px] text-muted-foreground">{sel.label}:</span>
+                  <div className="flex items-center gap-1 rounded-lg border border-border p-0.5">
+                    {sel.options.map((opt, oi) => {
+                      const active = (selectIdx[si] ?? 0) === oi;
+                      return (
+                        <button
+                          key={opt}
+                          type="button"
+                          onClick={() =>
+                            setSelectIdx((prev) => {
+                              const next = [...prev];
+                              next[si] = oi;
+                              return next;
+                            })
+                          }
+                          className={cn(
+                            "text-xs px-2.5 py-1.5 rounded-md font-medium transition-colors",
+                            active
+                              ? "bg-primary/15 text-foreground"
+                              : "text-muted-foreground hover:text-foreground"
+                          )}
+                        >
+                          {opt}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
               <span className="text-[11px] text-muted-foreground">{tool.credits} кредитов</span>
             </div>
             <button
@@ -418,6 +454,18 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
         </div>
 
         {status === "done" && (
+          resultType === "images" ? (
+            <div className="mt-4 grid grid-cols-2 md:grid-cols-4 gap-2">
+              {["/community/01.jpg", "/community/02.jpg", "/community/03.jpg", "/community/04.jpg"].map((src) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt="Результат"
+                  className="w-full aspect-square object-cover rounded-xl border border-white/10"
+                />
+              ))}
+            </div>
+          ) : (
           <div className="mt-4 rounded-xl border border-border p-4 flex items-center gap-3 bg-background/60">
             <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "#E85420" }}>
               <PlayIcon size={18} className="ml-0.5 text-white" fill="white" />
@@ -427,6 +475,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
               <div className="text-[11px] text-muted-foreground">{voice} · MP3</div>
             </div>
           </div>
+          )
         )}
       </div>
     </section>
