@@ -41,12 +41,12 @@ export const Route = createRootRoute({
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "ERA2.ai" },
       { property: "og:locale", content: "ru_RU" },
-      { property: "og:image", content: "/og-image.png" },
+      { property: "og:image", content: "https://era2.ai/og-image.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { name: "twitter:title", content: "ERA2.ai — Агрегатор нейросетей" },
       { name: "twitter:description", content: "Единая подписка на ChatGPT, Claude, Midjourney, Sora, ElevenLabs и 90+ других нейросетей. Без VPN, оплата в рублях." },
-      { name: "twitter:image", content: "/og-image.png" },
+      { name: "twitter:image", content: "https://era2.ai/og-image.png" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#E85420" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
@@ -64,10 +64,29 @@ export const Route = createRootRoute({
 });
 
 function RootShell({ children }: { children: React.ReactNode }) {
+  const orgWebsiteLd = JSON.stringify([
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "ERA2",
+      url: "https://era2.ai",
+      logo: "https://era2.ai/favicon.svg",
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: "ERA2.ai",
+      url: "https://era2.ai",
+    },
+  ]);
   return (
     <html lang="ru">
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: orgWebsiteLd }}
+        />
       </head>
       <body>
         {children}
