@@ -4,6 +4,7 @@ import { ArrowRight, ChevronRight, Play, Heart, Eye, ZoomIn, Scissors, Wand2, Pa
 import { useEffect, useRef, useState } from "react";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { getToolPageData, getRelatedTools } from "@/data/toolPages";
+import { plans } from "@/data/plans";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
 import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
@@ -104,6 +105,41 @@ const ToolPage = () => {
   const related = getRelatedTools(data.slug);
   const showRelated = related.length >= 3;
 
+  const minPaidPrice = Math.min(
+    ...plans
+      .map((p) => p.monthPrice)
+      .filter((v): v is number => typeof v === "number" && v > 0)
+  );
+  const softwareAppLd = data.tool
+    ? {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        name: `${data.modelName} в ERA2`,
+        applicationCategory: "MultimediaApplication",
+        operatingSystem: "Web",
+        url: `https://era2.ai/tools/${data.slug}`,
+        offers: {
+          "@type": "Offer",
+          price: minPaidPrice,
+          priceCurrency: "RUB",
+          description: "Доступ в составе подписки ERA2",
+        },
+      }
+    : null;
+  const howToLd = data.tool && data.howItWorks
+    ? {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: data.howItWorks.title,
+        step: data.howItWorks.steps.map((s, i) => ({
+          "@type": "HowToStep",
+          position: i + 1,
+          name: s.title,
+          text: s.desc,
+        })),
+      }
+    : null;
+
   return (
     <div className="min-w-0">
       <script
@@ -114,6 +150,18 @@ const ToolPage = () => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
       />
+      {softwareAppLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppLd) }}
+        />
+      )}
+      {howToLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(howToLd) }}
+        />
+      )}
       {/* Hero with prompt bar */}
       <section className="relative overflow-hidden" style={{ background: "linear-gradient(to bottom, hsl(var(--background)), hsl(var(--card)))" }}>
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse 80% 100% at 50% 0%, rgba(232,84,32,0.15) 0%, rgba(255,122,61,0.05) 40%, transparent 70%)" }} />
