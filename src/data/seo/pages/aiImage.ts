@@ -1,0 +1,150 @@
+import type { SeoPage } from '../types';
+
+export const aiImagePage: SeoPage = {
+  id: 'ai-image',
+  slug: '/ai/image',
+  pageKind: 'category',
+  status: 'draft',
+  uniqueValue:
+    'Обзор нейросетей для изображений ЭРА2: генерация, редактирование, удаление фона, апскейл — модели и инструменты в одном месте.',
+  searchIntent: 'commercial',
+  seo: {
+    title: 'Нейросети для изображений — генерация картинок онлайн | ERA2.ai',
+    description:
+      'Создавайте изображения из текста, удаляйте фон и улучшайте фото: Nano Banana, Midjourney, Flux. Единая подписка, оплата в рублях, без VPN.',
+    canonical: 'https://era2.ai/ai/image',
+    robots: 'index,follow',
+  },
+  breadcrumbs: [
+    { label: 'Главная', href: '/' },
+    { label: 'Изображения', href: '/ai/image' },
+  ],
+  blocks: [
+    {
+      type: 'hero',
+      enabled: true,
+      order: 1,
+      data: {
+        h1: 'Нейросети для изображений',
+        subtitle:
+          'Создавайте картинки из текста, редактируйте фото, удаляйте фон и улучшайте качество — Nano Banana, Midjourney, Flux, Seedream и другие модели в единой подписке, оплата в рублях.',
+        primaryCta: 'Создать изображение',
+        ctaHref: '/design',
+      },
+    },
+    {
+      type: 'toolGrid',
+      enabled: true,
+      order: 2,
+      data: {
+        heading: 'Инструменты для изображений',
+        items: [
+          { title: 'Создать изображение', desc: 'Картинка из текста', href: '/tools/image-generation', icon: '🎨' },
+          { title: 'Удалить фон', desc: 'В один клик', href: '/design', icon: '✂️' },
+          { title: 'Апскейл', desc: 'Улучшить качество', href: '/design', icon: '🔍' },
+          { title: 'Редактор фото', desc: 'Правки и ретушь', href: '/design', icon: '🖌️' },
+        ],
+      },
+    },
+    {
+      type: 'modelGrid',
+      enabled: true,
+      order: 3,
+      data: {
+        heading: 'Модели для изображений',
+        items: [
+          { name: 'Nano Banana 2', badge: 'NEW', desc: 'Быстрая генерация и точное редактирование', image: '/models/01.jpg' },
+          { name: 'Midjourney', desc: 'Художественная эстетика и детализация', image: '/models/02.jpg' },
+          { name: 'Flux', desc: 'Реализм и контроль композиции', image: '/models/03.jpg' },
+          { name: 'Seedream', desc: 'Качество и скорость для повседневных задач', image: '/models/04.jpg' },
+          { name: 'GPT Image', desc: 'Понимание сложных промптов', image: '/models/05.jpg' },
+          { name: 'Imagen 4', desc: 'Фотореализм от Google', image: '/models/06.jpg' },
+        ],
+      },
+    },
+    {
+      type: 'scenarioChips',
+      enabled: true,
+      order: 4,
+      data: {
+        heading: 'Что можно сделать',
+        items: [
+          { title: 'Портрет по фото' },
+          { title: 'Логотип' },
+          { title: 'Контент для соцсетей' },
+          { title: 'Удалить фон' },
+          { title: 'Улучшить качество' },
+          { title: 'Фото товара' },
+          { title: 'Аватарка' },
+        ],
+      },
+    },
+    {
+      type: 'gallery',
+      enabled: true,
+      order: 5,
+      data: {
+        title: 'Работы сообщества',
+        items: [
+          { author: 'Алексей', image: '/community/01.jpg', likes: 234, views: 1200 },
+          { author: 'Мария',   image: '/community/02.jpg', likes: 187, views: 890 },
+          { author: 'Дмитрий', image: '/community/03.jpg', likes: 312, views: 1500 },
+          { author: 'Анна',    image: '/community/04.jpg', likes: 156, views: 720 },
+          { author: 'Иван',    image: '/community/05.jpg', likes: 278, views: 1100 },
+          { author: 'Ольга',   image: '/community/06.jpg', likes: 198, views: 950 },
+          { author: 'Сергей',  image: '/community/07.jpg', likes: 342, views: 1800 },
+          { author: 'Елена',   image: '/community/08.jpg', likes: 145, views: 670 },
+        ],
+      },
+    },
+    { type: 'howItWorks', enabled: true, order: 6 },
+    {
+      type: 'editorial',
+      enabled: true,
+      order: 7,
+      data: {
+        heading: 'Генерация изображений без VPN и зарубежных карт',
+        text: 'В ЭРА2 собраны главные модели генерации и редактирования изображений: Nano Banana, Midjourney, Flux, Seedream, GPT Image. Пишите промпт на русском, выбирайте модель под задачу — от логотипа до фото товара — и платите одной подпиской в рублях.',
+      },
+    },
+    {
+      type: 'faq',
+      enabled: true,
+      order: 8,
+      data: {
+        items: [
+          { q: 'Какие модели для изображений доступны?', a: 'Nano Banana, Midjourney, Flux, Seedream, GPT Image, Imagen и другие.' },
+          { q: 'Можно ли редактировать свои фото?', a: 'Да — загрузите фото и меняйте фон, убирайте объекты, улучшайте качество.' },
+          { q: 'Понимают ли модели русский промпт?', a: 'Да, все инструменты работают с русскоязычными описаниями.' },
+          { q: 'Кому принадлежат созданные изображения?', a: 'Результаты генераций доступны вам для скачивания и использования.' },
+          { q: 'Есть ли бесплатные генерации?', a: 'Да, стартовые кредиты позволяют попробовать генерацию бесплатно.' },
+        ],
+      },
+    },
+    {
+      type: 'relatedLinks',
+      enabled: true,
+      order: 9,
+      data: {
+        heading: 'Смотрите также',
+        links: [
+          { label: 'Нейросети для видео', href: '/ai/video' },
+          { label: 'Нейросети для текста', href: '/ai/text' },
+          { label: 'Нейросети для аудио', href: '/ai/audio' },
+          { label: 'Тарифы', href: '/pricing' },
+        ],
+      },
+    },
+    {
+      type: 'finalCta',
+      enabled: true,
+      order: 10,
+      data: {
+        title: 'Попробуйте генерацию изображений в ЭРА2',
+        subtitle: 'Первая картинка — за минуту, без VPN, оплата в рублях.',
+        button: 'Начать бесплатно',
+        href: '/design',
+      },
+    },
+  ],
+};
