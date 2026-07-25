@@ -16,7 +16,10 @@ export type BlockType =
   | 'faq'
   | 'relatedLinks'
   | 'breadcrumbs'
-  | 'finalCta';
+  | 'finalCta'
+  | 'tldr'
+  | 'toc'
+  | 'steps';
 
 export type SeoBlock = {
   type: BlockType;
@@ -28,10 +31,12 @@ export type SeoBlock = {
 export type SeoPage = {
   id: string;
   slug: string;
-  pageKind: 'category' | 'generator' | 'tool' | 'model' | 'audience' | 'pricing';
+  pageKind: 'category' | 'generator' | 'tool' | 'model' | 'audience' | 'pricing' | 'guide';
   status: 'draft' | 'published' | 'noindex';
   uniqueValue: string;
   searchIntent: 'informational' | 'commercial' | 'transactional' | 'navigational';
+  updatedAt?: string;
+  readingTime?: string;
   seo: {
     title: string;
     description: string;
