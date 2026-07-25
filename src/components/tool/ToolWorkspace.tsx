@@ -8,6 +8,9 @@ type Status = "idle" | "loading" | "done";
 
 export function ToolWorkspace({ data }: { data: ToolPageData }) {
   const tool = data.tool!;
+  if (tool.layout === "row") {
+    return <RowWorkspace data={data} />;
+  }
   const demoImage = tool.demoImage ?? "/examples/ozhivit-preview.jpg";
   const demoCaption = tool.demoCaption ?? "Пример результата";
   const isVideo = data.category === "video";
