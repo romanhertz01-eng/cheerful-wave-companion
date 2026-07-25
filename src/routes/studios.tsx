@@ -92,13 +92,30 @@ const categoryLinksGuest: Record<string, string> = {
   audio: "/ai/audio",
 };
 
-// Provider ids that also exist as /tools/<slug> landing pages.
-const PROVIDER_SLUGS = new Set<string>([
-  "chatgpt", "claude", "gemini", "grok", "deepseek", "perplexity",
-  "nano-banana", "midjourney", "seedream", "gpt-image", "flux", "imagen",
-  "sora", "veo", "kling", "seedance", "hailuo",
-  "elevenlabs", "suno",
-]);
+// Provider id → { slug, category }: which /tools/<slug> lending page maps to
+// which category. Guards against collisions (например, kling существует и в
+// image, и в video, но /tools/kling — это видео-модель).
+const PROVIDER_LANDINGS: Record<string, { slug: string; category: string }> = {
+  chatgpt:      { slug: "chatgpt", category: "text" },
+  claude:       { slug: "claude", category: "text" },
+  gemini:       { slug: "gemini", category: "text" },
+  grok:         { slug: "grok", category: "text" },
+  deepseek:     { slug: "deepseek", category: "text" },
+  perplexity:   { slug: "perplexity", category: "text" },
+  "nano-banana": { slug: "nano-banana", category: "image" },
+  midjourney:   { slug: "midjourney", category: "image" },
+  seedream:     { slug: "seedream", category: "image" },
+  "gpt-image":  { slug: "gpt-image", category: "image" },
+  flux:         { slug: "flux", category: "image" },
+  imagen:       { slug: "imagen", category: "image" },
+  sora:         { slug: "sora", category: "video" },
+  veo:          { slug: "veo", category: "video" },
+  kling:        { slug: "kling", category: "video" },
+  seedance:     { slug: "seedance", category: "video" },
+  hailuo:       { slug: "hailuo", category: "video" },
+  elevenlabs:   { slug: "elevenlabs", category: "audio" },
+  suno:         { slug: "suno", category: "audio" },
+};
 
 const filters: { id: string; label: string; Icon?: LucideIcon }[] = [
   { id: "all", label: "Все" },
@@ -152,7 +169,8 @@ function ToolsAndModelsPage() {
   const catLink = (cat: string) => (isAuthed ? categoryLinksAuthed[cat] : categoryLinksGuest[cat]);
   const providerHref = (providerId: string, cat: string) => {
     if (isAuthed) return categoryLinksAuthed[cat];
-    return PROVIDER_SLUGS.has(providerId) ? `/tools/${providerId}` : categoryLinksGuest[cat];
+    const landing = PROVIDER_LANDINGS[providerId];
+    return landing && landing.category === cat ? `/tools/${landing.slug}` : categoryLinksGuest[cat];
   };
 
   const visibleCategories = filter === "all" ? allCategories : [filter];
