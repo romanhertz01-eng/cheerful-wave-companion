@@ -29,6 +29,7 @@ import { Route as ToolsImageGenerationRouteImport } from './routes/tools.image-g
 import { Route as ToolsAudioGenerationRouteImport } from './routes/tools.audio-generation'
 import { Route as ToolsAgentsRouteImport } from './routes/tools.agents'
 import { Route as ToolsSlugRouteImport } from './routes/tools.$slug'
+import { Route as AiVideoRouteImport } from './routes/ai.video'
 
 const VideoRoute = VideoRouteImport.update({
   id: '/video',
@@ -130,6 +131,11 @@ const ToolsSlugRoute = ToolsSlugRouteImport.update({
   path: '/tools/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AiVideoRoute = AiVideoRouteImport.update({
+  id: '/ai/video',
+  path: '/ai/video',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -145,6 +151,7 @@ export interface FileRoutesByFullPath {
   '/text': typeof TextRoute
   '/toolkit': typeof ToolkitRoute
   '/video': typeof VideoRoute
+  '/ai/video': typeof AiVideoRoute
   '/tools/$slug': typeof ToolsSlugRoute
   '/tools/agents': typeof ToolsAgentsRoute
   '/tools/audio-generation': typeof ToolsAudioGenerationRoute
@@ -167,6 +174,7 @@ export interface FileRoutesByTo {
   '/text': typeof TextRoute
   '/toolkit': typeof ToolkitRoute
   '/video': typeof VideoRoute
+  '/ai/video': typeof AiVideoRoute
   '/tools/$slug': typeof ToolsSlugRoute
   '/tools/agents': typeof ToolsAgentsRoute
   '/tools/audio-generation': typeof ToolsAudioGenerationRoute
@@ -190,6 +198,7 @@ export interface FileRoutesById {
   '/text': typeof TextRoute
   '/toolkit': typeof ToolkitRoute
   '/video': typeof VideoRoute
+  '/ai/video': typeof AiVideoRoute
   '/tools/$slug': typeof ToolsSlugRoute
   '/tools/agents': typeof ToolsAgentsRoute
   '/tools/audio-generation': typeof ToolsAudioGenerationRoute
@@ -214,6 +223,7 @@ export interface FileRouteTypes {
     | '/text'
     | '/toolkit'
     | '/video'
+    | '/ai/video'
     | '/tools/$slug'
     | '/tools/agents'
     | '/tools/audio-generation'
@@ -236,6 +246,7 @@ export interface FileRouteTypes {
     | '/text'
     | '/toolkit'
     | '/video'
+    | '/ai/video'
     | '/tools/$slug'
     | '/tools/agents'
     | '/tools/audio-generation'
@@ -258,6 +269,7 @@ export interface FileRouteTypes {
     | '/text'
     | '/toolkit'
     | '/video'
+    | '/ai/video'
     | '/tools/$slug'
     | '/tools/agents'
     | '/tools/audio-generation'
@@ -281,6 +293,7 @@ export interface RootRouteChildren {
   TextRoute: typeof TextRoute
   ToolkitRoute: typeof ToolkitRoute
   VideoRoute: typeof VideoRoute
+  AiVideoRoute: typeof AiVideoRoute
   ToolsSlugRoute: typeof ToolsSlugRoute
   ToolsAgentsRoute: typeof ToolsAgentsRoute
   ToolsAudioGenerationRoute: typeof ToolsAudioGenerationRoute
@@ -432,6 +445,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToolsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ai/video': {
+      id: '/ai/video'
+      path: '/ai/video'
+      fullPath: '/ai/video'
+      preLoaderRoute: typeof AiVideoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -449,6 +469,7 @@ const rootRouteChildren: RootRouteChildren = {
   TextRoute: TextRoute,
   ToolkitRoute: ToolkitRoute,
   VideoRoute: VideoRoute,
+  AiVideoRoute: AiVideoRoute,
   ToolsSlugRoute: ToolsSlugRoute,
   ToolsAgentsRoute: ToolsAgentsRoute,
   ToolsAudioGenerationRoute: ToolsAudioGenerationRoute,

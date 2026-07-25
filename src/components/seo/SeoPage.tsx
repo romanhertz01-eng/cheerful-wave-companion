@@ -1,4 +1,3 @@
-import { Link } from '@tanstack/react-router';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -26,9 +25,7 @@ export function SeoRenderer({ def }: { def: SeoPage }) {
                     {isLast ? (
                       <BreadcrumbPage>{crumb.label}</BreadcrumbPage>
                     ) : (
-                      <BreadcrumbLink asChild>
-                        <Link to={crumb.href}>{crumb.label}</Link>
-                      </BreadcrumbLink>
+                      <BreadcrumbLink href={crumb.href}>{crumb.label}</BreadcrumbLink>
                     )}
                   </BreadcrumbItem>
                   {!isLast && <BreadcrumbSeparator />}
