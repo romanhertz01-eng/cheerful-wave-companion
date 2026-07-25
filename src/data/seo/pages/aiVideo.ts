@@ -56,7 +56,7 @@ export const aiVideoPage: SeoPage = {
           { name: 'Veo 3', desc: 'Кинематографичное видео со звуком', image: '/models/02.jpg', href: '/tools/veo' },
           { name: 'Sora 2', desc: 'Сложные сцены и длинные планы', image: '/models/03.jpg', href: '/tools/sora' },
           { name: 'Seedance 2.0', desc: 'Танцы и динамичные движения', image: '/models/04.jpg', href: '/tools/seedance' },
-          { name: 'Hailuo', desc: 'Быстрая генерация коротких роликов', image: '/models/06.jpg' },
+          { name: 'Hailuo', desc: 'Быстрая генерация коротких роликов', image: '/models/06.jpg', href: '/tools/hailuo' },
           { name: 'Wan 2.7', desc: 'Стабильные персонажи и сцены', image: '/models/01.jpg' },
         ],
       },

@@ -92,7 +92,7 @@ const TABS: TabConfig[] = [
       { name: "Veo", desc: "От Google", publicHref: "/tools/veo" },
       { name: "Runway", desc: "Профессиональный" },
       { name: "Seedance", desc: "От ByteDance", publicHref: "/tools/seedance" },
-      { name: "Hailuo", desc: "Minimax" },
+      { name: "Hailuo", desc: "Minimax", publicHref: "/tools/hailuo" },
       { name: "Wan", desc: "Alibaba" },
       { name: "Sora", desc: "От OpenAI", publicHref: "/tools/sora" },
       { name: "HeyGen", desc: "AI аватары" },
@@ -111,8 +111,8 @@ const TABS: TabConfig[] = [
       { icon: VolumeX, title: "Удаление шума", desc: "Очистка и улучшение" },
     ],
     models: [
-      { name: "ElevenLabs", desc: "Озвучка и голос" },
-      { name: "Suno", desc: "Генерация музыки", badge: "TOP" },
+      { name: "ElevenLabs", desc: "Озвучка и голос", publicHref: "/tools/elevenlabs" },
+      { name: "Suno", desc: "Генерация музыки", badge: "TOP", publicHref: "/tools/suno" },
     ],
   },
   {

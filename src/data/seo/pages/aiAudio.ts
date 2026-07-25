@@ -53,8 +53,8 @@ export const aiAudioPage: SeoPage = {
       data: {
         heading: 'Модели для аудио',
         items: [
-          { name: 'ElevenLabs', desc: 'Реалистичная озвучка на десятках языков', image: '/models/01.jpg' },
-          { name: 'Suno', badge: 'TOP', desc: 'Полноценные песни по описанию', image: '/models/02.jpg' },
+          { name: 'ElevenLabs', desc: 'Реалистичная озвучка на десятках языков', image: '/models/01.jpg', href: '/tools/elevenlabs' },
+          { name: 'Suno', badge: 'TOP', desc: 'Полноценные песни по описанию', image: '/models/02.jpg', href: '/tools/suno' },
           { name: 'ElevenLabs Voice Clone', desc: 'Клонирование голоса по образцу', image: '/models/03.jpg' },
           { name: 'ElevenLabs STT', desc: 'Точная расшифровка аудио в текст', image: '/models/04.jpg' },
         ],
