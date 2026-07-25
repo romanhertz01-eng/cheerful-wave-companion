@@ -40,6 +40,8 @@ export interface ToolPageData {
   useCases?: { heading: string; items: { title: string; desc: string }[] };
   tips?: { heading: string; items: { title: string; desc: string }[] };
   specs?: { heading: string; items: { label: string; value: string }[] };
+  modelChips?: { heading: string; sub?: string; models: string[] };
+  bigStat?: { value: string; label: string; sub?: string; button?: string };
 }
 
 export const toolPages: ToolPageData[] = [
