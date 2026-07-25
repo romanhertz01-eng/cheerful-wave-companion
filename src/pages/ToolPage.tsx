@@ -462,6 +462,50 @@ const ToolPage = () => {
         </section>
       )}
 
+      {data.comparisonTable && (
+        <section className="max-w-5xl mx-auto px-4 py-12">
+          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.comparisonTable.heading}</h2>
+          <div className="overflow-x-auto -mx-4 px-4">
+            <table className="w-full min-w-[640px] text-sm">
+              <thead>
+                <tr>
+                  <th className="text-left py-3 pr-4 font-normal text-muted-foreground w-1/4"></th>
+                  {data.comparisonTable.columns.map((c, i) => (
+                    <th
+                      key={c}
+                      className={
+                        "text-left py-3 px-4 font-semibold " +
+                        (i === 0 ? "bg-white/[0.04] rounded-t-lg" : "")
+                      }
+                    >
+                      {c}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {data.comparisonTable.rows.map((row, ri) => (
+                  <tr key={ri} className="border-t border-border/60">
+                    <td className="py-3 pr-4 text-muted-foreground align-top">{row.label}</td>
+                    {row.values.map((v, vi) => (
+                      <td
+                        key={vi}
+                        className={
+                          "py-3 px-4 align-top " +
+                          (vi === 0 ? "bg-white/[0.04] font-medium" : "")
+                        }
+                      >
+                        {v}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
+
       {showRelated && (
         <section className="max-w-5xl mx-auto px-4 py-12">
           <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">Похожие инструменты</h2>
