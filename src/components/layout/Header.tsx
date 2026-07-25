@@ -84,14 +84,16 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
           <Search className="h-4 w-4" />
         </button>
 
-        {/* History (desktop) */}
-        <Link
-          to="/history"
-          className="hidden lg:inline-flex items-center gap-2 h-9 px-3 rounded-full text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
-        >
-          <Clock className="h-3.5 w-3.5" />
-          История
-        </Link>
+        {/* History (desktop, authed only) */}
+        {isAuthed && (
+          <Link
+            to="/history"
+            className="hidden lg:inline-flex items-center gap-2 h-9 px-3 rounded-full text-sm text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+          >
+            <Clock className="h-3.5 w-3.5" />
+            История
+          </Link>
+        )}
 
         {/* Promo (desktop only) */}
         {PROMO_ACTIVE && (
