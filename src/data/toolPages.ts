@@ -1,5 +1,7 @@
 export interface ToolPageData {
   slug: string;
+  status?: 'published' | 'draft';
+  updatedAt?: string;
   modelName: string;
   heroTitle: string;
   heroDescription: string;
