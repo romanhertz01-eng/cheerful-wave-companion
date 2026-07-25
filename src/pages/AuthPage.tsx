@@ -220,11 +220,9 @@ const AuthPage = () => {
         </p>
 
         {/* Footer */}
+        {/* TODO: вернуть ссылки при появлении /legal/* */}
         <p className="text-[11px] text-muted-foreground text-center mt-6 leading-relaxed">
-          Регистрируясь, вы соглашаетесь с{" "}
-          <a href="#" className="underline hover:text-foreground">обработкой персональных данных</a>{" "}
-          и{" "}
-          <a href="#" className="underline hover:text-foreground">условиями использования</a>.
+          Регистрируясь, вы соглашаетесь с обработкой персональных данных и условиями использования.
         </p>
       </div>
     </div>
