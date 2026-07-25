@@ -568,6 +568,33 @@ const ToolPage = () => {
       )}
 
       <Footer />
+
+      {data.tool && (
+        <div
+          className={cn(
+            "fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background/95 backdrop-blur transition-all duration-300",
+            showFloatingBar ? "translate-y-0 opacity-100" : "translate-y-full opacity-0 pointer-events-none"
+          )}
+          aria-hidden={!showFloatingBar}
+        >
+          <div className="max-w-4xl mx-auto px-4 py-3 flex items-center gap-3">
+            <span className="hidden md:block flex-1 truncate text-sm text-muted-foreground">
+              {data.tool.textPlaceholder ?? "Опишите задачу…"}
+            </span>
+            <span className="md:hidden flex-1" />
+            <span className="border border-border rounded-full px-3 py-1 text-xs text-muted-foreground whitespace-nowrap">
+              {data.modelName}
+            </span>
+            <button
+              type="button"
+              onClick={scrollToWorkspace}
+              className="gradient-accent text-white rounded-full px-4 py-2 text-sm font-semibold hover:opacity-90 transition-opacity whitespace-nowrap"
+            >
+              Генерировать
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
