@@ -16,9 +16,12 @@ export interface ToolPageData {
     bricks: string[];
     types?: { id: string; label: string; credits: number; image: string }[];
     selects?: { label: string; options: string[]; defaultIndex?: number }[];
+    demoImage?: string;
+    demoCaption?: string;
   };
   howItWorks?: {
     title: string;
+    cta?: string;
     steps: { title: string; desc: string }[];
   };
   featureBlocks?: { title: string; desc: string; image: string; cta: string }[];
