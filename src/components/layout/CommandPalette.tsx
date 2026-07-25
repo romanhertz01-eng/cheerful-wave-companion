@@ -1,5 +1,4 @@
 import { useNavigate } from "@tanstack/react-router";
-// no extra icons needed
 import {
   CommandDialog,
   CommandEmpty,
@@ -11,6 +10,7 @@ import {
 import { StatusBadge } from "@/components/ui/era/StatusBadge";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { useCommandPalette } from "@/hooks/useCommandPalette";
+import { useAuth } from "@/contexts/AuthContext";
 import { searchableModels, modelTypeToRoute, type SearchableModelType } from "@/config/searchableModels";
 
 const TYPE_LABEL: Record<SearchableModelType, string> = {
@@ -20,13 +20,52 @@ const TYPE_LABEL: Record<SearchableModelType, string> = {
   audio: "Аудио",
 };
 
+const PUBLIC_CATEGORY: Record<SearchableModelType, string> = {
+  text: "/ai/text",
+  image: "/ai/image",
+  video: "/ai/video",
+  audio: "/ai/audio",
+};
+
+// Map searchableModel id → existing /tools/<slug> landing (see src/data/toolPages.ts).
+const MODEL_ID_TO_TOOL_SLUG: Record<string, string> = {
+  chatgpt: "chatgpt",
+  claude: "claude",
+  gemini: "gemini",
+  grok: "grok",
+  deepseek: "deepseek",
+  perplexity: "perplexity",
+  "nano-banana-2": "nano-banana",
+  midjourney: "midjourney",
+  seedream: "seedream",
+  "gpt-image": "gpt-image",
+  "flux-kontext": "flux",
+  "kling-3": "kling",
+  "veo-3": "veo",
+  "sora-2": "sora",
+  "seedance-2": "seedance",
+  hailuo: "hailuo",
+  suno: "suno",
+  "eleven-labs": "elevenlabs",
+};
+
 export function CommandPalette() {
   const { open, setOpen } = useCommandPalette();
   const navigate = useNavigate();
+  const { isAuthed } = useAuth();
 
   const handleSelect = (id: string, type: SearchableModelType) => {
     setOpen(false);
-    navigate({ to: modelTypeToRoute[type], search: { model: id } as never });
+    if (isAuthed) {
+      navigate({ to: modelTypeToRoute[type], search: { model: id } as never });
+      return;
+    }
+    const slug = MODEL_ID_TO_TOOL_SLUG[id];
+    if (slug) {
+      navigate({ to: "/tools/$slug", params: { slug } });
+    } else {
+      navigate({ to: PUBLIC_CATEGORY[type] as never });
+    }
   };
 
   return (
