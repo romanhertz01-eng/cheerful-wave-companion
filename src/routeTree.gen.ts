@@ -33,6 +33,7 @@ import { Route as AiVideoRouteImport } from './routes/ai.video'
 import { Route as AiTextRouteImport } from './routes/ai.text'
 import { Route as AiImageRouteImport } from './routes/ai.image'
 import { Route as AiAudioRouteImport } from './routes/ai.audio'
+import { Route as AiAgentsRouteImport } from './routes/ai.agents'
 
 const VideoRoute = VideoRouteImport.update({
   id: '/video',
@@ -154,6 +155,11 @@ const AiAudioRoute = AiAudioRouteImport.update({
   path: '/ai/audio',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AiAgentsRoute = AiAgentsRouteImport.update({
+  id: '/ai/agents',
+  path: '/ai/agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -169,6 +175,7 @@ export interface FileRoutesByFullPath {
   '/text': typeof TextRoute
   '/toolkit': typeof ToolkitRoute
   '/video': typeof VideoRoute
+  '/ai/agents': typeof AiAgentsRoute
   '/ai/audio': typeof AiAudioRoute
   '/ai/image': typeof AiImageRoute
   '/ai/text': typeof AiTextRoute
@@ -195,6 +202,7 @@ export interface FileRoutesByTo {
   '/text': typeof TextRoute
   '/toolkit': typeof ToolkitRoute
   '/video': typeof VideoRoute
+  '/ai/agents': typeof AiAgentsRoute
   '/ai/audio': typeof AiAudioRoute
   '/ai/image': typeof AiImageRoute
   '/ai/text': typeof AiTextRoute
@@ -222,6 +230,7 @@ export interface FileRoutesById {
   '/text': typeof TextRoute
   '/toolkit': typeof ToolkitRoute
   '/video': typeof VideoRoute
+  '/ai/agents': typeof AiAgentsRoute
   '/ai/audio': typeof AiAudioRoute
   '/ai/image': typeof AiImageRoute
   '/ai/text': typeof AiTextRoute
@@ -250,6 +259,7 @@ export interface FileRouteTypes {
     | '/text'
     | '/toolkit'
     | '/video'
+    | '/ai/agents'
     | '/ai/audio'
     | '/ai/image'
     | '/ai/text'
@@ -276,6 +286,7 @@ export interface FileRouteTypes {
     | '/text'
     | '/toolkit'
     | '/video'
+    | '/ai/agents'
     | '/ai/audio'
     | '/ai/image'
     | '/ai/text'
@@ -302,6 +313,7 @@ export interface FileRouteTypes {
     | '/text'
     | '/toolkit'
     | '/video'
+    | '/ai/agents'
     | '/ai/audio'
     | '/ai/image'
     | '/ai/text'
@@ -329,6 +341,7 @@ export interface RootRouteChildren {
   TextRoute: typeof TextRoute
   ToolkitRoute: typeof ToolkitRoute
   VideoRoute: typeof VideoRoute
+  AiAgentsRoute: typeof AiAgentsRoute
   AiAudioRoute: typeof AiAudioRoute
   AiImageRoute: typeof AiImageRoute
   AiTextRoute: typeof AiTextRoute
@@ -512,6 +525,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AiAudioRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ai/agents': {
+      id: '/ai/agents'
+      path: '/ai/agents'
+      fullPath: '/ai/agents'
+      preLoaderRoute: typeof AiAgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -529,6 +549,7 @@ const rootRouteChildren: RootRouteChildren = {
   TextRoute: TextRoute,
   ToolkitRoute: ToolkitRoute,
   VideoRoute: VideoRoute,
+  AiAgentsRoute: AiAgentsRoute,
   AiAudioRoute: AiAudioRoute,
   AiImageRoute: AiImageRoute,
   AiTextRoute: AiTextRoute,
