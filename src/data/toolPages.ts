@@ -111,7 +111,6 @@ export const toolPages: ToolPageData[] = [
       credits: 10,
       bricks: ["upload-1", "generate"],
     },
-    tool_placeholder: undefined as never,
     howItWorks: {
       title: "Как удалить фон за 3 шага",
       steps: [
