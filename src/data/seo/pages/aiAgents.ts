@@ -53,10 +53,10 @@ export const aiAgentsPage: SeoPage = {
       data: {
         heading: 'Работают на моделях',
         items: [
-          { name: 'ChatGPT', desc: 'Универсальные задачи и диалог', image: '/models/01.jpg' },
-          { name: 'Claude', desc: 'Длинные документы и анализ', image: '/models/02.jpg' },
-          { name: 'Gemini', desc: 'Данные и мультимодальность', image: '/models/03.jpg' },
-          { name: 'DeepSeek', desc: 'Код и логика', image: '/models/04.jpg' },
+          { name: 'ChatGPT', desc: 'Универсальные задачи и диалог', image: '/models/01.jpg', href: '/tools/chatgpt' },
+          { name: 'Claude', desc: 'Длинные документы и анализ', image: '/models/02.jpg', href: '/tools/claude' },
+          { name: 'Gemini', desc: 'Данные и мультимодальность', image: '/models/03.jpg', href: '/tools/gemini' },
+          { name: 'DeepSeek', desc: 'Код и логика', image: '/models/04.jpg', href: '/tools/deepseek' },
         ],
       },
     },
