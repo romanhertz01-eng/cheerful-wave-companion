@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, Upload, Play, Loader2, ChevronDown } from "lucide-react";
+import { ArrowLeft, Upload, Play, Loader2, ChevronDown, Check, Play as PlayIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ToolPageData } from "@/data/toolPages";
 
