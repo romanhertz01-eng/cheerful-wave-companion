@@ -8,6 +8,9 @@ import { HowItWorksBlock } from './HowItWorksBlock';
 import { EditorialBlock } from './EditorialBlock';
 import { FaqBlock } from './FaqBlock';
 import { FinalCtaBlock } from './FinalCtaBlock';
+import { ToolGridBlock } from './ToolGridBlock';
+import { ModelGridBlock } from './ModelGridBlock';
+import { RelatedLinksBlock } from './RelatedLinksBlock';
 
 const P: ComponentType<any> = BlockPlaceholder;
 
@@ -16,8 +19,8 @@ export const blockRegistry: Record<BlockType, ComponentType<any>> = {
   interactiveDemo: P,
   beforeAfter: P,
   gallery: GalleryBlock,
-  modelGrid: P,
-  toolGrid: P,
+  modelGrid: ModelGridBlock,
+  toolGrid: ToolGridBlock,
   scenarioChips: ScenarioChipsBlock,
   howItWorks: HowItWorksBlock,
   capabilities: P,
@@ -26,7 +29,7 @@ export const blockRegistry: Record<BlockType, ComponentType<any>> = {
   comparisonTable: P,
   editorial: EditorialBlock,
   faq: FaqBlock,
-  relatedLinks: P,
+  relatedLinks: RelatedLinksBlock,
   breadcrumbs: P,
   finalCta: FinalCtaBlock,
 };

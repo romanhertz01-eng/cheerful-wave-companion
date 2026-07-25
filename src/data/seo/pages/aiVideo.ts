@@ -32,8 +32,36 @@ export const aiVideoPage: SeoPage = {
         ctaHref: '/video',
       },
     },
-    { type: 'toolGrid', enabled: true, order: 2 },
-    { type: 'modelGrid', enabled: true, order: 3 },
+    {
+      type: 'toolGrid',
+      enabled: true,
+      order: 2,
+      data: {
+        heading: 'Видео-инструменты',
+        items: [
+          { title: 'Оживить фото', desc: 'Фото → живое видео', href: '/tools/ozhivit-foto', icon: '🎬' },
+          { title: 'Создать видео', desc: 'Видео из текста', href: '/tools/video-generation', icon: '✨' },
+          { title: 'ИИ-аватар', desc: 'Говорящий персонаж', href: '/tools/video-generation', icon: '🧑' },
+          { title: 'Апскейл видео', desc: 'Улучшить качество', href: '/tools/video-generation', icon: '🔍' },
+        ],
+      },
+    },
+    {
+      type: 'modelGrid',
+      enabled: true,
+      order: 3,
+      data: {
+        heading: 'Модели для видео',
+        items: [
+          { name: 'Kling 3.0', badge: 'NEW', desc: 'Целостные раскадровки с ультрадетализированной динамикой', image: '/models/05.jpg' },
+          { name: 'Veo 3', desc: 'Кинематографичное видео со звуком', image: '/models/02.jpg' },
+          { name: 'Sora 2', desc: 'Сложные сцены и длинные планы', image: '/models/03.jpg' },
+          { name: 'Seedance 2.0', desc: 'Танцы и динамичные движения', image: '/models/04.jpg' },
+          { name: 'Hailuo', desc: 'Быстрая генерация коротких роликов', image: '/models/06.jpg' },
+          { name: 'Wan 2.7', desc: 'Стабильные персонажи и сцены', image: '/models/01.jpg' },
+        ],
+      },
+    },
     {
       type: 'scenarioChips',
       enabled: true,
@@ -67,7 +95,20 @@ export const aiVideoPage: SeoPage = {
       },
     },
     { type: 'faq', enabled: true, order: 8 },
-    { type: 'relatedLinks', enabled: true, order: 9 },
+    {
+      type: 'relatedLinks',
+      enabled: true,
+      order: 9,
+      data: {
+        heading: 'Смотрите также',
+        links: [
+          { label: 'Нейросети для изображений', href: '/design' },
+          { label: 'Нейросети для текста', href: '/text' },
+          { label: 'Нейросети для аудио', href: '/audio' },
+          { label: 'Тарифы', href: '/pricing' },
+        ],
+      },
+    },
     {
       type: 'finalCta',
       enabled: true,
