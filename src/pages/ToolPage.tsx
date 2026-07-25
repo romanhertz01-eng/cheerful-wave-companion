@@ -102,7 +102,7 @@ const ToolPage = () => {
           <nav className={cn("flex items-center gap-1.5 text-[13px] text-muted-foreground", data.tool ? "mb-0" : "mb-8")}>
             <Link to="/" className="hover:text-foreground transition-colors">Главная</Link>
             <ChevronRight className="w-3 h-3" />
-            <Link to="/toolkit" className="hover:text-foreground transition-colors">Инструменты</Link>
+            <Link to="/studios" className="hover:text-foreground transition-colors">Инструменты</Link>
             <ChevronRight className="w-3 h-3" />
             <span className="text-foreground/70">{data.heroTitle}</span>
           </nav>
@@ -390,7 +390,7 @@ const ToolPage = () => {
       <section className="max-w-6xl mx-auto px-4 py-12">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold">Инструменты изображения</h2>
-          <Link to="/toolkit" className="text-sm text-primary hover:underline">Создавайте больше →</Link>
+          <Link to="/studios" className="text-sm text-primary hover:underline">Создавайте больше →</Link>
         </div>
         <div className="flex gap-4 overflow-x-auto scrollbar-hide pb-2">
           {imageTools.map((t) => (
