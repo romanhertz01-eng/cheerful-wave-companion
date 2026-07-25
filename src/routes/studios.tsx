@@ -170,7 +170,7 @@ function ToolsAndModelsPage() {
             type="search"
             value={q}
             onChange={(e) =>
-              navigate({ search: (prev) => ({ ...prev, q: e.target.value }), replace: true })
+              navigate({ search: (prev: { q: string }) => ({ ...prev, q: e.target.value }), replace: true })
             }
             placeholder="Поиск: midjourney, sora, аватар…"
             className="w-full rounded-xl pl-9 pr-3 py-2.5 text-sm outline-none focus:border-[hsl(var(--primary))]"
