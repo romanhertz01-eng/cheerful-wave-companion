@@ -1,5 +1,6 @@
 export type BlockType =
   | 'hero'
+  | 'heroGenerator'
   | 'interactiveDemo'
   | 'beforeAfter'
   | 'gallery'
