@@ -5,6 +5,7 @@ export const aiTextPage: SeoPage = {
   slug: '/ai/text',
   pageKind: 'category',
   status: 'published',
+  updatedAt: '2026-07-26',
   uniqueValue:
     'Обзор текстовых нейросетей ЭРА2: чат, статьи, код, перевод, анализ документов — какие модели доступны и как выбрать.',
   searchIntent: 'commercial',
