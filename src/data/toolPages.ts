@@ -52,6 +52,7 @@ export interface ToolPageData {
 export const toolPages: ToolPageData[] = [
   {
     slug: "ozhivit-foto",
+    updatedAt: "2026-07-26",
     modelName: "Kling 3.0",
     heroTitle: "Оживить фото",
     heroDescription:
@@ -173,6 +174,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "remove-background",
+    updatedAt: "2026-07-26",
     modelName: "Recraft",
     heroTitle: "Удалить фон с фото",
     heroDescription: "Уберите фон с изображения в один клик — быстро и без потери качества.",
@@ -290,6 +292,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "image-upscaler",
+    updatedAt: "2026-07-26",
     modelName: "Topaz Upscale",
     heroTitle: "Улучшить качество фото",
     heroDescription: "Увеличьте разрешение до 8K и верните чёткость деталям.",
@@ -408,6 +411,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "photo-restoration",
+    updatedAt: "2026-07-26",
     modelName: "ERA2 Restore",
     heroTitle: "Реставрация старых фото",
     heroDescription:
@@ -526,6 +530,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "colorize-photo",
+    updatedAt: "2026-07-26",
     modelName: "ERA2 Colorize",
     heroTitle: "Раскрасить чёрно-белое фото",
     heroDescription: "Добавьте естественные цвета старым снимкам — история оживает в цвете.",
@@ -643,6 +648,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "text-to-speech",
+    updatedAt: "2026-07-26",
     modelName: "ElevenLabs",
     heroTitle: "Озвучка текста",
     heroDescription:
@@ -763,6 +769,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "voice-cloning",
+    updatedAt: "2026-07-26",
     modelName: "ElevenLabs Voice Clone",
     heroTitle: "Клонировать голос",
     heroDescription:
@@ -878,6 +885,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "transcribe",
+    updatedAt: "2026-07-26",
     modelName: "ERA2 Транскрибация",
     heroTitle: "Расшифровать аудио в текст",
     heroDescription:
@@ -993,6 +1001,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "nano-banana",
+    updatedAt: "2026-07-26",
     modelName: "Nano Banana",
     heroTitle: "Генератор изображений Nano Banana",
     heroDescription:
@@ -1077,6 +1086,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "midjourney",
+    updatedAt: "2026-07-26",
     modelName: "Midjourney",
     heroTitle: "Генератор изображений Midjourney",
     heroDescription:
@@ -1161,6 +1171,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "seedance",
+    updatedAt: "2026-07-26",
     modelName: "Seedance",
     heroTitle: "Генератор видео Seedance",
     heroDescription:
@@ -1258,6 +1269,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "image-generation",
+    updatedAt: "2026-07-26",
     modelName: "Nano Banana 2",
     heroTitle: "Создать изображение по описанию",
     heroDescription:
@@ -1388,6 +1400,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "video-generation",
+    updatedAt: "2026-07-26",
     modelName: "Kling 3.0",
     heroTitle: "Создать видео по описанию",
     heroDescription:
@@ -1518,6 +1531,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "object-remover",
+    updatedAt: "2026-07-26",
     modelName: "ERA2 Eraser",
     heroTitle: "Удалить объект с фото",
     heroDescription: "Уберите лишнее из кадра — людей, провода, мусор — без следов и Photoshop.",
@@ -1635,6 +1649,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "watermark-remover",
+    updatedAt: "2026-07-26",
     modelName: "ERA2 Eraser",
     heroTitle: "Удалить водяной знак с фото",
     heroDescription: "Уберите вотермарку или штамп с изображения, сохранив детали под ней.",
@@ -1751,6 +1766,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "talking-avatar",
+    updatedAt: "2026-07-26",
     modelName: "HeyGen",
     heroTitle: "Говорящий аватар по фото",
     heroDescription:
@@ -1883,6 +1899,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "ozon-product-video",
+    updatedAt: "2026-07-26",
     modelName: "Kling 3.0",
     heroTitle: "Видео для карточки Ozon",
     heroDescription:
@@ -2000,6 +2017,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "sora",
+    updatedAt: "2026-07-26",
     modelName: "Sora 2",
     heroTitle: "Sora — видеонейросеть OpenAI",
     heroDescription:
@@ -2095,6 +2113,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "veo",
+    updatedAt: "2026-07-26",
     modelName: "Veo 3",
     heroTitle: "Veo 3 — видеонейросеть Google",
     heroDescription:
@@ -2189,6 +2208,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "kling",
+    updatedAt: "2026-07-26",
     modelName: "Kling 3.0",
     heroTitle: "Kling — универсальная видеонейросеть",
     heroDescription:
@@ -2284,6 +2304,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "chatgpt",
+    updatedAt: "2026-07-26",
     modelName: "ChatGPT",
     heroTitle: "ChatGPT на русском — без VPN и регистрации в OpenAI",
     heroDescription:
@@ -2364,6 +2385,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "claude",
+    updatedAt: "2026-07-26",
     modelName: "Claude",
     heroTitle: "Claude — нейросеть Anthropic на русском",
     heroDescription:
@@ -2444,6 +2466,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "gemini",
+    updatedAt: "2026-07-26",
     modelName: "Gemini",
     heroTitle: "Gemini — нейросеть Google на русском",
     heroDescription:
@@ -2524,6 +2547,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "grok",
+    updatedAt: "2026-07-26",
     modelName: "Grok",
     heroTitle: "Grok — нейросеть xAI с поиском в реальном времени",
     heroDescription:
@@ -2604,6 +2628,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "deepseek",
+    updatedAt: "2026-07-26",
     modelName: "DeepSeek",
     heroTitle: "DeepSeek — открытая нейросеть для текста и рассуждений",
     heroDescription:
@@ -2684,6 +2709,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "perplexity",
+    updatedAt: "2026-07-26",
     modelName: "Perplexity",
     heroTitle: "Perplexity — ИИ-поиск с источниками",
     heroDescription:
@@ -2764,6 +2790,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "seedream",
+    updatedAt: "2026-07-26",
     modelName: "Seedream",
     heroTitle: "Seedream — быстрая генерация изображений до 4K",
     heroDescription:
@@ -2846,6 +2873,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "flux",
+    updatedAt: "2026-07-26",
     modelName: "Flux",
     heroTitle: "Flux — нейросеть с контролем композиции",
     heroDescription:
@@ -2926,6 +2954,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "gpt-image",
+    updatedAt: "2026-07-26",
     modelName: "GPT Image",
     heroTitle: "GPT Image — генератор изображений от OpenAI",
     heroDescription:
@@ -3006,6 +3035,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "imagen",
+    updatedAt: "2026-07-26",
     modelName: "Imagen 4",
     heroTitle: "Imagen 4 — фотореализм от Google",
     heroDescription:
@@ -3086,6 +3116,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "hailuo",
+    updatedAt: "2026-07-26",
     modelName: "Hailuo AI",
     heroTitle: "Hailuo — видеонейросеть MiniMax",
     heroDescription:
@@ -3180,6 +3211,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "elevenlabs",
+    updatedAt: "2026-07-26",
     modelName: "ElevenLabs",
     heroTitle: "ElevenLabs — озвучка, неотличимая от диктора",
     heroDescription:
@@ -3264,6 +3296,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "suno",
+    updatedAt: "2026-07-26",
     modelName: "Suno",
     heroTitle: "Suno — нейросеть, которая пишет песни",
     heroDescription:
