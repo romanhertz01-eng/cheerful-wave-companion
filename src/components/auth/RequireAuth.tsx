@@ -1,8 +1,10 @@
-import { Navigate } from "@tanstack/react-router";
+import { Navigate, useLocation } from "@tanstack/react-router";
 import { useAuth } from "@/contexts/AuthContext";
+import { buildAuthHref } from "@/lib/authRedirect";
 
 export function RequireAuth({ children }: { children: React.ReactNode }) {
   const { isAuthed } = useAuth();
-  if (!isAuthed) return <Navigate to="/auth" replace />;
+  const location = useLocation();
+  if (!isAuthed) return <Navigate to={buildAuthHref(location.pathname)} replace />;
   return <>{children}</>;
 }
