@@ -1,8 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /*?utm_
-Disallow: /*?fbclid
-Disallow: /*?gclid
 
 User-agent: Yandex
 Allow: /

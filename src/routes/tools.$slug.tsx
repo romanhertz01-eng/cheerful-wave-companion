@@ -1,8 +1,13 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, notFound } from "@tanstack/react-router";
 import ToolPage from "@/pages/ToolPage";
 import { getToolPageData } from "@/data/toolPages";
 
 export const Route = createFileRoute("/tools/$slug")({
+  loader: ({ params }) => {
+    const data = getToolPageData(params.slug);
+    if (!data) throw notFound();
+    return { data };
+  },
   component: ToolPage,
   head: ({ params }) => {
     const data = getToolPageData(params.slug);
