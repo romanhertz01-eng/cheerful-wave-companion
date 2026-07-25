@@ -1,6 +1,7 @@
 
 import { useParams, Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronRight, Play, Heart, Eye, ZoomIn, Scissors, Wand2, Package, Eraser, RefreshCw, Brush, type LucideIcon } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { getToolPageData, getRelatedTools } from "@/data/toolPages";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
@@ -48,6 +49,24 @@ const modelCards = [
 const ToolPage = () => {
   const { slug } = useParams({ strict: false }) as { slug?: string };
   const data = slug ? getToolPageData(slug) : undefined;
+  const workspaceRef = useRef<HTMLDivElement | null>(null);
+  const [showFloatingBar, setShowFloatingBar] = useState(false);
+
+  useEffect(() => {
+    if (!data?.tool) return;
+    const el = workspaceRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setShowFloatingBar(!entry.isIntersecting),
+      { threshold: 0, rootMargin: "0px 0px -80% 0px" }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [data?.tool, data?.slug]);
+
+  const scrollToWorkspace = () => {
+    workspaceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   if (!data) {
     return (
@@ -134,7 +153,11 @@ const ToolPage = () => {
         </div>
       </section>
 
-      {data.tool && <ToolWorkspace data={data} />}
+      {data.tool && (
+        <div ref={workspaceRef}>
+          <ToolWorkspace data={data} />
+        </div>
+      )}
 
       {/* Intro (tool pages) */}
       {data.tool && data.intro && (
@@ -545,6 +568,33 @@ const ToolPage = () => {
       )}
 
       <Footer />
+
+      {data.tool && (
+        <div
+          className={cn(
+            "fixed bottom-0 left-0 right-0 z-40 border-t border-border bg-background/95 backdrop-blur transition-all duration-300",
+            showFloatingBar ? "translate-y-0 opacity-100" : "translate-y-full opacity-0 pointer-events-none"
+          )}
+          aria-hidden={!showFloatingBar}
+        >
+          <div className="max-w-4xl mx-auto px-4 py-3 flex items-center gap-3">
+            <span className="hidden md:block flex-1 truncate text-sm text-muted-foreground">
+              {data.tool.textPlaceholder ?? "Опишите задачу…"}
+            </span>
+            <span className="md:hidden flex-1" />
+            <span className="border border-border rounded-full px-3 py-1 text-xs text-muted-foreground whitespace-nowrap">
+              {data.modelName}
+            </span>
+            <button
+              type="button"
+              onClick={scrollToWorkspace}
+              className="gradient-accent text-white rounded-full px-4 py-2 text-sm font-semibold hover:opacity-90 transition-opacity whitespace-nowrap"
+            >
+              Генерировать
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
