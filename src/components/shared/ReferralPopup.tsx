@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export function ReferralPopup({ onClose }: { onClose: () => void }) {
   const [copied, setCopied] = useState(false);
-  const refLink = "https://era2.ai/ref/USER123";
+  const refLink = "https://cheerful-wave-companion.lovable.app/ref/USER123";
 
   const handleCopy = () => {
     navigator.clipboard.writeText(refLink);

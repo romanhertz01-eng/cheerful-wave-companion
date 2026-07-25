@@ -13,7 +13,7 @@ export const Route = createFileRoute('/ai/audio')({
       { property: 'og:title', content: aiAudioPage.seo.title },
       { property: 'og:description', content: aiAudioPage.seo.description },
       { property: 'og:url', content: aiAudioPage.seo.canonical },
-      { property: 'og:image', content: 'https://era2.ai/og-image.png' },
+      { property: 'og:image', content: 'https://cheerful-wave-companion.lovable.app/og-image.png' },
     ],
     links: [{ rel: 'canonical', href: aiAudioPage.seo.canonical }],
   }),

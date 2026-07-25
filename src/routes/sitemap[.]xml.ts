@@ -9,7 +9,7 @@ import { aiAudioPage } from "@/data/seo/pages/aiAudio";
 import { aiTextPage } from "@/data/seo/pages/aiText";
 import { aiAgentsPage } from "@/data/seo/pages/aiAgents";
 
-const BASE_URL = "https://era2.ai";
+const BASE_URL = "https://cheerful-wave-companion.lovable.app";
 
 type Entry = { path: string; lastmod?: string };
 

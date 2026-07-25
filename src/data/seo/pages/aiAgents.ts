@@ -13,7 +13,7 @@ export const aiAgentsPage: SeoPage = {
     title: 'ИИ-агенты — готовые ассистенты для работы | ERA2.ai',
     description:
       'Маркетолог, копирайтер, программист, юрист — готовые ИИ-ассистенты под задачу. Единая подписка, оплата в рублях, без VPN.',
-    canonical: 'https://era2.ai/ai/agents',
+    canonical: 'https://cheerful-wave-companion.lovable.app/ai/agents',
     robots: 'index,follow',
   },
   breadcrumbs: [

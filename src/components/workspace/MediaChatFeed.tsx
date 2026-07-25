@@ -152,7 +152,7 @@ export function MediaChatFeed({ generations }: Props) {
                   Промпт
                 </button>
                 <button
-                  onClick={() => copy(`https://era2.ai/share/${gen.id}`, "Ссылка скопирована")}
+                  onClick={() => copy(`https://cheerful-wave-companion.lovable.app/share/${gen.id}`, "Ссылка скопирована")}
                   className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-[8px] text-[12px] text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
                   title="Поделиться"
                 >

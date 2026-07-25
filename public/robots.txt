@@ -8,4 +8,4 @@ Clean-param: next&plan&period&model&utm_source&utm_medium&utm_campaign&utm_conte
 User-agent: MJ12bot
 Disallow: /
 
-Sitemap: https://era2.ai/sitemap.xml
+Sitemap: https://cheerful-wave-companion.lovable.app/sitemap.xml
