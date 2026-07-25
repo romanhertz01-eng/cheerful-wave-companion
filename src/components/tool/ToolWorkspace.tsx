@@ -341,7 +341,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
         <p className="text-muted-foreground text-center max-w-[640px] mx-auto mb-8">{data.heroDescription}</p>
         <div className="rounded-2xl border border-border bg-background/60 p-5 flex flex-col gap-4">
           <div className="flex items-center gap-2">
-            <Link to="/toolkit" className="p-1.5 rounded-md hover:bg-muted transition-colors">
+            <Link to={isAuthed ? "/toolkit" : "/studios"} className="p-1.5 rounded-md hover:bg-muted transition-colors">
               <ArrowLeft size={16} />
             </Link>
           </div>
