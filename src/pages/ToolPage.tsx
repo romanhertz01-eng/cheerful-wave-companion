@@ -136,6 +136,7 @@ const ToolPage = () => {
       )}
 
       {/* Community gallery */}
+      {!data.tool && (
       <section className="max-w-6xl mx-auto px-4 py-12">
         <h2 className="text-xl md:text-2xl font-bold mb-6">Изучите другие источники вдохновения от сообщества ERA2</h2>
         <div className="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
@@ -159,6 +160,25 @@ const ToolPage = () => {
           Генерировать больше →
         </Link>
       </section>
+      )}
+
+      {/* Examples (tool pages) */}
+      {data.tool && data.examples && (
+        <section className="max-w-5xl mx-auto px-4 py-12">
+          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.examples.heading}</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {data.examples.images.map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt={`${data.examples!.heading} — ${i + 1}`}
+                loading="lazy"
+                className="w-full aspect-square object-cover rounded-xl border border-white/10"
+              />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Feature blocks (tool pages) */}
       {data.tool && data.featureBlocks && (
