@@ -22,4 +22,6 @@
   <url><loc>https://era2.ai/tools/text-to-speech</loc></url>
   <url><loc>https://era2.ai/tools/voice-cloning</loc></url>
   <url><loc>https://era2.ai/tools/transcribe</loc></url>
+  <url><loc>https://era2.ai/tools/object-remover</loc></url>
+  <url><loc>https://era2.ai/tools/watermark-remover</loc></url>
 </urlset>
