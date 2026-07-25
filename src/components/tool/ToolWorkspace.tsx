@@ -465,6 +465,22 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                 />
               ))}
             </div>
+          ) : resultType === "video" ? (
+            <div className="mt-4 relative w-full aspect-video rounded-xl border border-white/10 overflow-hidden bg-background/60">
+              <img
+                src="/community/02.jpg"
+                alt="Готовое видео"
+                className="absolute inset-0 w-full h-full object-cover opacity-80"
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg" style={{ background: "#E85420" }}>
+                  <PlayIcon size={28} className="ml-1 text-white" fill="white" />
+                </div>
+              </div>
+              <div className="absolute bottom-2 left-3 text-[11px] text-white/90 bg-black/40 backdrop-blur px-2 py-1 rounded">
+                Видео готово · MP4
+              </div>
+            </div>
           ) : (
           <div className="mt-4 rounded-xl border border-border p-4 flex items-center gap-3 bg-background/60">
             <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "#E85420" }}>
