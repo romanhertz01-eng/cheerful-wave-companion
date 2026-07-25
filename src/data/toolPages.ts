@@ -18,6 +18,9 @@ export interface ToolPageData {
     selects?: { label: string; options: string[]; defaultIndex?: number }[];
     demoImage?: string;
     demoCaption?: string;
+    voices?: string[];
+    textPlaceholder?: string;
+    maxChars?: number;
   };
   howItWorks?: {
     title: string;
