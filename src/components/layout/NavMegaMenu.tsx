@@ -87,7 +87,7 @@ const TABS: TabConfig[] = [
       { icon: TrendingUp, title: "Улучшить качество", desc: "Апскейл видео" },
     ],
     models: [
-      { name: "Kling", desc: "Реалистичное видео" },
+      { name: "Kling", desc: "Реалистичное видео", publicHref: "/tools/kling" },
       { name: "Veo", desc: "От Google", publicHref: "/tools/veo" },
       { name: "Runway", desc: "Профессиональный" },
       { name: "Seedance", desc: "От ByteDance", publicHref: "/tools/seedance" },
