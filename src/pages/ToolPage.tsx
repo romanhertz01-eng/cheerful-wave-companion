@@ -351,6 +351,24 @@ const ToolPage = () => {
       </section>
       )}
 
+      {/* Tips (tool pages) */}
+      {data.tool && data.tips && (
+        <section className="max-w-5xl mx-auto px-4 py-12">
+          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.tips.heading}</h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            {data.tips.items.map((it, i) => (
+              <div
+                key={i}
+                className="rounded-xl border border-white/10 bg-white/[0.04] shadow-sm p-5 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
+              >
+                <h4 className="font-semibold mb-1">{it.title}</h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">{it.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       <FAQ items={data.faqItems ?? toolPageItems} />
 
       {/* Final CTA (tool pages) */}
