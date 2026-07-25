@@ -1,5 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
 import { useAuth } from "@/contexts/AuthContext";
+import { buildAuthHref } from "@/lib/authRedirect";
 
 interface Pill {
   label: string;
@@ -18,7 +19,12 @@ export function SeoPromptBlock({ placeholder, pills, actionLabel, actionCredits,
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate({ to: isAuthed ? targetRoute : "/auth" });
+    if (isAuthed) {
+      navigate({ to: targetRoute });
+    } else {
+      const next = typeof window !== "undefined" ? window.location.pathname + window.location.search : undefined;
+      navigate({ to: buildAuthHref(next) });
+    }
   };
 
   return (
