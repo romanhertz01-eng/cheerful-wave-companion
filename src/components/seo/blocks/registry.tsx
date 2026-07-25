@@ -2,6 +2,8 @@ import type { ComponentType } from 'react';
 import type { BlockType } from '@/data/seo/types';
 import { BlockPlaceholder } from './BlockPlaceholder';
 import { HeroBlock } from './HeroBlock';
+import { HeroGeneratorBlock } from './HeroGeneratorBlock';
+import { PricingStripBlock } from './PricingStripBlock';
 import { GalleryBlock } from './GalleryBlock';
 import { ScenarioChipsBlock } from './ScenarioChipsBlock';
 import { HowItWorksBlock } from './HowItWorksBlock';
@@ -16,6 +18,7 @@ const P: ComponentType<any> = BlockPlaceholder;
 
 export const blockRegistry: Record<BlockType, ComponentType<any>> = {
   hero: HeroBlock,
+  heroGenerator: HeroGeneratorBlock,
   interactiveDemo: P,
   beforeAfter: P,
   gallery: GalleryBlock,
@@ -25,7 +28,7 @@ export const blockRegistry: Record<BlockType, ComponentType<any>> = {
   howItWorks: HowItWorksBlock,
   capabilities: P,
   specs: P,
-  pricingStrip: P,
+  pricingStrip: PricingStripBlock,
   comparisonTable: P,
   editorial: EditorialBlock,
   faq: FaqBlock,
