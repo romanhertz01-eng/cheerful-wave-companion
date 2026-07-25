@@ -41,6 +41,19 @@ export function SeoRenderer({ def }: { def: SeoPage }) {
       }
     : null;
 
+  const articleLd =
+    def.pageKind === 'guide'
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Article',
+          headline: def.seo.title,
+          dateModified: def.updatedAt,
+          author: { '@type': 'Organization', name: 'ERA2' },
+          publisher: { '@type': 'Organization', name: 'ERA2' },
+          mainEntityOfPage: def.seo.canonical,
+        }
+      : null;
+
   return (
     <>
       {breadcrumbLd && (
@@ -53,6 +66,12 @@ export function SeoRenderer({ def }: { def: SeoPage }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+        />
+      )}
+      {articleLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleLd) }}
         />
       )}
       {hasBreadcrumbs && (
