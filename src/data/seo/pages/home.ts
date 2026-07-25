@@ -69,7 +69,7 @@ export const homePage: SeoPage = {
           { name: 'Seedance 2.0', badge: 'NEW', desc: 'Видео из текста и изображений', image: '/models/03.jpg', href: '/tools/seedance' },
           { name: 'GPT-5', desc: 'Тексты, код и анализ документов', image: '/models/04.jpg', href: '/tools/chatgpt' },
           { name: 'Claude', desc: 'Длинные тексты и работа с данными', image: '/models/05.jpg', href: '/tools/claude' },
-          { name: 'ElevenLabs', desc: 'Озвучка и клонирование голоса', image: '/models/06.jpg' },
+          { name: 'ElevenLabs', desc: 'Озвучка и клонирование голоса', image: '/models/06.jpg', href: '/tools/elevenlabs' },
         ],
       },
     },
