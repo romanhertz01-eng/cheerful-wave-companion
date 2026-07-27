@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { X, Zap } from "lucide-react";
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
+import { toolPages } from "@/data/toolPages";
 
 export function PromoBanner() {
   const [dismissed, setDismissed] = useState(() => {
     if (typeof window === "undefined") return false;
     return localStorage.getItem("era2_promo_banner_dismissed") === "true";
   });
+  const { pathname } = useLocation();
 
   if (dismissed) return null;
 
@@ -14,6 +16,14 @@ export function PromoBanner() {
     localStorage.setItem("era2_promo_banner_dismissed", "true");
     setDismissed(true);
   };
+
+  const isVideoContext = (() => {
+    if (pathname === "/ai/video") return true;
+    const m = pathname.match(/^\/tools\/([^/]+)/);
+    if (!m) return false;
+    const tool = toolPages.find((t) => t.slug === m[1]);
+    return tool?.tool?.resultType === "video";
+  })();
 
   return (
     <div
@@ -23,17 +33,25 @@ export function PromoBanner() {
       }}
     >
       <Zap size={14} className="shrink-0" />
-      <span className="font-semibold whitespace-nowrap">150 кредитов бесплатно</span>
-      <span className="opacity-70 hidden md:inline">·</span>
-      <span className="opacity-90 hidden md:inline">
-        Попробуйте 90+ нейросетей без VPN
-      </span>
+      {isVideoContext ? (
+        <span className="font-semibold text-center">
+          Начните бесплатно с изображений и текста — видео доступно с тарифа Базовый
+        </span>
+      ) : (
+        <>
+          <span className="font-semibold whitespace-nowrap">150 кредитов бесплатно</span>
+          <span className="opacity-70 hidden md:inline">·</span>
+          <span className="opacity-90 hidden md:inline">
+            Попробуйте 90+ нейросетей без VPN
+          </span>
+        </>
+      )}
       <Link
-        to="/auth"
+        to={isVideoContext ? "/pricing" : "/auth"}
         className="ml-1 sm:ml-2 inline-flex items-center h-7 px-3 rounded-full bg-white/15 hover:bg-white/25 transition-colors text-xs font-semibold backdrop-blur-sm whitespace-nowrap"
       >
-        <span className="hidden sm:inline">Начать бесплатно</span>
-        <span className="sm:hidden">Начать</span>
+        <span className="hidden sm:inline">{isVideoContext ? "Смотреть тарифы" : "Начать бесплатно"}</span>
+        <span className="sm:hidden">{isVideoContext ? "Тарифы" : "Начать"}</span>
       </Link>
       <button
         onClick={handleDismiss}

@@ -4,7 +4,7 @@ import { plans } from "@/data/plans";
 
 const TITLE = "Тарифы на нейросети — от 790 ₽ в месяц | ERA2.ai";
 const DESCRIPTION =
-  "Единая подписка на 90+ нейросетей: ChatGPT, Midjourney, Sora и другие. Тарифы от 790 ₽/мес, оплата российскими картами и СБП, 150 кредитов бесплатно при регистрации.";
+  "Единая подписка на 90+ нейросетей: ChatGPT, Kling, Sora и другие. Тарифы от 790 ₽/мес, оплата российскими картами и СБП, 150 кредитов бесплатно при регистрации.";
 const CANONICAL = "https://cheerful-wave-companion.lovable.app/pricing";
 
 const softwareApplicationLd = JSON.stringify({
