@@ -30,6 +30,12 @@ export interface ToolPageData {
     legalNote?: string;
     uploadHints?: string[];
     resultType?: "audio" | "images" | "video" | "text";
+    pricing?: {
+      mode: "per-second" | "per-clip" | "per-message" | "per-1k-chars";
+      unitLabel: string;
+      rates: Array<{ label: string; rate: number; matchOption?: string }>;
+      minCredits?: number;
+    };
   };
   howItWorks?: {
     title: string;
