@@ -66,6 +66,9 @@ const TABS: TabConfig[] = [
       { icon: Eraser, title: "Удалить фон", desc: "Удаление и замена фона", publicHref: "/tools/remove-background" },
       { icon: Scissors, title: "Удалить объект", desc: "Удаление людей и предметов", publicHref: "/tools/object-remover" },
       { icon: ZoomIn, title: "Улучшить качество", desc: "Повышение чёткости и деталей", publicHref: "/tools/image-upscaler" },
+      { icon: RefreshCw, title: "Реставрация фото", desc: "Убрать царапины и заломы", publicHref: "/tools/photo-restoration" },
+      { icon: Paintbrush, title: "Раскрасить ч/б фото", desc: "Цвет для архивных снимков", publicHref: "/tools/colorize-photo" },
+      { icon: Eraser, title: "Удалить водяной знак", desc: "Со своих материалов", publicHref: "/tools/watermark-remover" },
     ],
     models: [
       { name: "Nano Banana", desc: "Быстрая генерация", publicHref: "/tools/nano-banana" },
@@ -74,7 +77,6 @@ const TABS: TabConfig[] = [
       { name: "GPT Image", desc: "От OpenAI", publicHref: "/tools/gpt-image" },
       { name: "Flux", desc: "Фотореализм", publicHref: "/tools/flux" },
       { name: "Imagen", desc: "От Google", publicHref: "/tools/imagen" },
-      { name: "Higgsfield", desc: "Soul / Speak" },
     ],
   },
   {
