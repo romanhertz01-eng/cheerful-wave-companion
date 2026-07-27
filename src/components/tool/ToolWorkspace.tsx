@@ -8,6 +8,44 @@ import { buildAuthHref } from "@/lib/authRedirect";
 
 type Status = "idle" | "loading" | "done";
 
+type ToolPricing = NonNullable<NonNullable<ToolPageData["tool"]>["pricing"]>;
+type ToolSelects = NonNullable<NonNullable<ToolPageData["tool"]>["selects"]>;
+
+function computePricingLabel(
+  pricing: ToolPricing,
+  selects: ToolSelects,
+  selectIdx: number[],
+  chars: number
+): string {
+  const chosen = selects.map(
+    (s, i) => s.options[selectIdx[i] ?? s.defaultIndex ?? 0]
+  );
+  const matched = pricing.rates.find(
+    (r) => r.matchOption && chosen.includes(r.matchOption)
+  );
+  const rate = (matched ?? pricing.rates[0]).rate;
+
+  if (pricing.mode === "per-second") {
+    const dIdx = selects.findIndex((s) => /длит/i.test(s.label));
+    let seconds = 1;
+    if (dIdx >= 0) {
+      const opt = selects[dIdx].options[selectIdx[dIdx] ?? selects[dIdx].defaultIndex ?? 0];
+      const m = opt.match(/\d+/);
+      if (m) seconds = parseInt(m[0], 10);
+    }
+    const total = rate * seconds;
+    return `${rate} кр/сек · ролик ${seconds} с ≈ ${total} кр`;
+  }
+  if (pricing.mode === "per-message") return `${rate} кр за сообщение`;
+  if (pricing.mode === "per-clip") return `${rate} кр за ролик`;
+  if (pricing.mode === "per-1k-chars") {
+    const min = pricing.minCredits ?? 0;
+    const total = Math.max(min, Math.ceil((chars * rate) / 1000 / 5) * 5);
+    return `≈ ${total} кр за этот текст`;
+  }
+  return "";
+}
+
 export function ToolWorkspace({ data }: { data: ToolPageData }) {
   const tool = data.tool!;
   if (tool.layout === "row") {
@@ -232,7 +270,9 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
           {has("generate") && (
             <div className="pt-1 border-t border-border">
               <p className="text-[11px] text-muted-foreground mb-2">
-                {tool.types
+                {tool.pricing
+                  ? computePricingLabel(tool.pricing, tool.selects ?? [], selectIdx, 0)
+                  : tool.types
                   ? `Требуется кредитов: ${tool.types[selectedType].credits}`
                   : `модель: ${tool.modelName} · ${tool.credits} кредитов`}
               </p>
@@ -453,7 +493,11 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                   </div>
                 </div>
               ))}
-              <span className="text-[11px] text-muted-foreground">{tool.credits} кредитов</span>
+              <span className="text-[11px] text-muted-foreground">
+                {tool.pricing
+                  ? computePricingLabel(tool.pricing, selects, selectIdx, value.length)
+                  : `${tool.credits} кредитов`}
+              </span>
             </div>
             <button
               type="button"

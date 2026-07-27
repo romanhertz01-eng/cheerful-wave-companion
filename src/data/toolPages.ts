@@ -30,6 +30,12 @@ export interface ToolPageData {
     legalNote?: string;
     uploadHints?: string[];
     resultType?: "audio" | "images" | "video" | "text";
+    pricing?: {
+      mode: "per-second" | "per-clip" | "per-message" | "per-1k-chars";
+      unitLabel: string;
+      rates: Array<{ label: string; rate: number; matchOption?: string }>;
+      minCredits?: number;
+    };
   };
   howItWorks?: {
     title: string;
@@ -2246,10 +2252,19 @@ export const toolPages: ToolPageData[] = [
       maxChars: 2000,
       selects: [
         { label: "Версия", options: ["Kling 3.0", "Motion Control", "Kling 2.6", "Kling 2.5 Turbo", "Kling O1"] },
-        { label: "Длительность", options: ["5с", "8с", "10с"] },
+        { label: "Длительность", options: ["5 сек", "10 сек"] },
         { label: "Формат", options: ["16:9", "9:16", "1:1", "4:3"] },
-        { label: "Разрешение", options: ["720p", "1080p"] },
+        { label: "Разрешение", options: ["720p", "1080p", "4K"] },
       ],
+      pricing: {
+        mode: "per-second",
+        unitLabel: "за секунду",
+        rates: [
+          { label: "720p · без звука", rate: 115, matchOption: "720p" },
+          { label: "1080p · без звука", rate: 145, matchOption: "1080p" },
+          { label: "4K", rate: 630, matchOption: "4K" },
+        ],
+      },
     },
     intro: {
       heading: "Kling в России: рабочая лошадка видеогенерации",
@@ -4476,6 +4491,17 @@ export const toolPages: ToolPageData[] = [
       selects: [
         { label: "Модель", options: ["GPT 5", "Claude", "Gemini", "Grok", "DeepSeek"] },
       ],
+      pricing: {
+        mode: "per-message",
+        unitLabel: "за сообщение",
+        rates: [
+          { label: "DeepSeek", rate: 3, matchOption: "DeepSeek" },
+          { label: "Gemini", rate: 3, matchOption: "Gemini" },
+          { label: "GPT 5", rate: 6, matchOption: "GPT 5" },
+          { label: "Claude", rate: 10, matchOption: "Claude" },
+          { label: "Grok", rate: 7, matchOption: "Grok" },
+        ],
+      },
     },
     intro: {
       heading: "Чат, который отвечает на всё",
