@@ -107,9 +107,9 @@ const TABS: TabConfig[] = [
       { icon: AudioLines, title: "Озвучка текста", desc: "Текст в речь", publicHref: "/tools/text-to-speech" },
       { icon: Mic, title: "Клон голоса", desc: "Копирование голоса", publicHref: "/tools/voice-cloning" },
       { icon: Volume2, title: "Смена голоса", desc: "Изменение тембра", publicHref: "/tools/voice-changer" },
-      { icon: Activity, title: "Создание звуков", desc: "Генерация эффектов" },
+      { icon: Activity, title: "Создание звуков", desc: "Генерация эффектов", publicHref: "/tools/sound-effects" },
       { icon: FileText, title: "Транскрибация", desc: "Речь в текст", publicHref: "/tools/transcribe" },
-      { icon: VolumeX, title: "Удаление шума", desc: "Очистка и улучшение" },
+      { icon: VolumeX, title: "Удаление шума", desc: "Очистка и улучшение", publicHref: "/tools/audio-denoise" },
     ],
     models: [
       { name: "ElevenLabs", desc: "Озвучка и голос", publicHref: "/tools/elevenlabs" },
