@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  MessageSquare, PenLine, Globe, FileSearch, Languages, Code, Lightbulb,
+  MessageSquare, PenLine, Globe, FileSearch, Languages, Code,
   Image as ImageIcon, Camera, Paintbrush, Eraser, Scissors, ZoomIn, RefreshCw,
   Video, Sparkles, Film, User, TrendingUp,
   Music, AudioLines, Mic, Volume2, Activity, VolumeX,
