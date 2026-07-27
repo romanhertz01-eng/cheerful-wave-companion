@@ -41,7 +41,7 @@ const TABS: TabConfig[] = [
     features: [
       { icon: MessageSquare, title: "Чат с ИИ", desc: "Ответы на любые вопросы" },
       { icon: PenLine, title: "Написать текст", desc: "Статьи, посты, тексты" },
-      { icon: Globe, title: "Поиск в интернете", desc: "Актуальная информация" },
+      { icon: Globe, title: "Поиск в интернете", desc: "Актуальная информация", publicHref: "/tools/perplexity" },
       { icon: FileSearch, title: "Анализ документов", desc: "Исследования и разбор" },
       { icon: Languages, title: "Перевод текста", desc: "Перевод с сохранением смысла" },
       { icon: Code, title: "Написать код", desc: "Создание и исправление кода" },
@@ -85,6 +85,7 @@ const TABS: TabConfig[] = [
       { icon: Video, title: "Создать видео", desc: "Генерация из текста", publicHref: "/tools/video-generation" },
       { icon: Sparkles, title: "Оживить фото", desc: "Анимация изображений", publicHref: "/tools/ozhivit-foto" },
       { icon: User, title: "ИИ Аватар", desc: "Говорящие аватары", publicHref: "/tools/talking-avatar" },
+      { icon: Film, title: "Видео для карточки Ozon", desc: "Ролик для маркетплейса", publicHref: "/tools/ozon-product-video" },
     ],
     models: [
       { name: "Kling", desc: "Реалистичное видео", publicHref: "/tools/kling" },
@@ -94,8 +95,8 @@ const TABS: TabConfig[] = [
       { name: "Hailuo", desc: "Minimax", publicHref: "/tools/hailuo" },
       { name: "Wan", desc: "Alibaba" },
       { name: "Sora", desc: "От OpenAI", publicHref: "/tools/sora" },
-      { name: "HeyGen", desc: "AI аватары" },
-      { name: "Hedra", desc: "Говорящие персонажи" },
+      { name: "HeyGen", desc: "AI аватары", publicHref: "/tools/talking-avatar" },
+      { name: "Hedra", desc: "Говорящие персонажи", publicHref: "/tools/talking-avatar" },
     ],
   },
   {
