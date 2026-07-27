@@ -2252,10 +2252,19 @@ export const toolPages: ToolPageData[] = [
       maxChars: 2000,
       selects: [
         { label: "Версия", options: ["Kling 3.0", "Motion Control", "Kling 2.6", "Kling 2.5 Turbo", "Kling O1"] },
-        { label: "Длительность", options: ["5с", "8с", "10с"] },
+        { label: "Длительность", options: ["5 сек", "10 сек"] },
         { label: "Формат", options: ["16:9", "9:16", "1:1", "4:3"] },
-        { label: "Разрешение", options: ["720p", "1080p"] },
+        { label: "Разрешение", options: ["720p", "1080p", "4K"] },
       ],
+      pricing: {
+        mode: "per-second",
+        unitLabel: "за секунду",
+        rates: [
+          { label: "720p · без звука", rate: 115, matchOption: "720p" },
+          { label: "1080p · без звука", rate: 145, matchOption: "1080p" },
+          { label: "4K", rate: 630, matchOption: "4K" },
+        ],
+      },
     },
     intro: {
       heading: "Kling в России: рабочая лошадка видеогенерации",
