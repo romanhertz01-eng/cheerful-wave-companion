@@ -32,7 +32,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <div className="min-h-screen bg-background">
         <Header
           onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
-          showBurger={showSidebar}
+          showBurger={showSidebar || !isAuthed}
         />
 
         {showSidebar && (
