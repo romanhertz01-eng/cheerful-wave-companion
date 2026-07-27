@@ -12,7 +12,7 @@ export const homePage: SeoPage = {
   seo: {
     title: 'ERA2.ai — 90+ нейросетей в одной подписке | Оплата в рублях, без VPN',
     description:
-      'ChatGPT, Claude, Midjourney, Seedance, ElevenLabs и 90+ нейросетей в одном окне. Тексты, изображения, видео и озвучка по единой подписке. Оплата российскими картами, VPN не нужен.',
+      'ChatGPT, Claude, Kling, Seedance, ElevenLabs и 90+ нейросетей в одном окне. Тексты, изображения, видео и озвучка по единой подписке. Оплата российскими картами, VPN не нужен.',
     canonical: 'https://cheerful-wave-companion.lovable.app/',
     robots: 'index, follow',
   },
@@ -66,7 +66,6 @@ export const homePage: SeoPage = {
         heading: 'Модели внутри подписки',
         items: [
           { name: 'Nano Banana 2', badge: 'NEW', desc: 'Генерация и точное редактирование изображений', image: '/models/01.jpg', href: '/tools/nano-banana' },
-          { name: 'Midjourney', badge: 'TOP', desc: 'Художественная эстетика и детализация', image: '/models/02.jpg', href: '/tools/midjourney' },
           { name: 'Seedance 2.0', badge: 'NEW', desc: 'Видео из текста и изображений', image: '/models/03.jpg', href: '/tools/seedance' },
           { name: 'GPT-5', desc: 'Тексты, код и анализ документов', image: '/models/04.jpg', href: '/tools/chatgpt' },
           { name: 'Claude', desc: 'Длинные тексты и работа с данными', image: '/models/05.jpg', href: '/tools/claude' },
