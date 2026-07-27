@@ -1093,6 +1093,7 @@ export const toolPages: ToolPageData[] = [
   {
     slug: "midjourney",
     updatedAt: "2026-07-26",
+    status: "draft",
     modelName: "Midjourney",
     heroTitle: "Генератор изображений Midjourney",
     heroDescription:
@@ -1395,7 +1396,7 @@ export const toolPages: ToolPageData[] = [
     modelChips: {
       heading: "Все главные генераторы — в одной подписке",
       sub: "Не нужно выбирать один сервис: переключайте модели под задачу в один клик.",
-      models: ["Nano Banana 2", "Flux", "Seedream", "GPT Image", "Imagen 4", "Midjourney", "Kling Image", "Grok Imagine", "Recraft", "Ideogram", "Qwen Image", "Wan"],
+      models: ["Nano Banana 2", "Flux", "Seedream", "GPT Image", "Kling Image", "Grok Imagine", "Recraft", "Ideogram", "Qwen Image", "Wan"],
     },
     bigStat: {
       value: "90+",
@@ -3046,6 +3047,7 @@ export const toolPages: ToolPageData[] = [
   {
     slug: "imagen",
     updatedAt: "2026-07-26",
+    status: "draft",
     modelName: "Imagen 4",
     heroTitle: "Imagen 4 — фотореализм от Google",
     heroDescription:
