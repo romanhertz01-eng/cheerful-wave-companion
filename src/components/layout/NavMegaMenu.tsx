@@ -41,7 +41,7 @@ const TABS: TabConfig[] = [
     features: [
       { icon: MessageSquare, title: "Чат с ИИ", desc: "Ответы на любые вопросы" },
       { icon: PenLine, title: "Написать текст", desc: "Статьи, посты, тексты" },
-      { icon: Globe, title: "Поиск в интернете", desc: "Актуальная информация" },
+      { icon: Globe, title: "Поиск в интернете", desc: "Актуальная информация", publicHref: "/tools/perplexity" },
       { icon: FileSearch, title: "Анализ документов", desc: "Исследования и разбор" },
       { icon: Languages, title: "Перевод текста", desc: "Перевод с сохранением смысла" },
       { icon: Code, title: "Написать код", desc: "Создание и исправление кода" },
@@ -66,6 +66,9 @@ const TABS: TabConfig[] = [
       { icon: Eraser, title: "Удалить фон", desc: "Удаление и замена фона", publicHref: "/tools/remove-background" },
       { icon: Scissors, title: "Удалить объект", desc: "Удаление людей и предметов", publicHref: "/tools/object-remover" },
       { icon: ZoomIn, title: "Улучшить качество", desc: "Повышение чёткости и деталей", publicHref: "/tools/image-upscaler" },
+      { icon: RefreshCw, title: "Реставрация фото", desc: "Убрать царапины и заломы", publicHref: "/tools/photo-restoration" },
+      { icon: Paintbrush, title: "Раскрасить ч/б фото", desc: "Цвет для архивных снимков", publicHref: "/tools/colorize-photo" },
+      { icon: Eraser, title: "Удалить водяной знак", desc: "Со своих материалов", publicHref: "/tools/watermark-remover" },
     ],
     models: [
       { name: "Nano Banana", desc: "Быстрая генерация", publicHref: "/tools/nano-banana" },
@@ -74,7 +77,6 @@ const TABS: TabConfig[] = [
       { name: "GPT Image", desc: "От OpenAI", publicHref: "/tools/gpt-image" },
       { name: "Flux", desc: "Фотореализм", publicHref: "/tools/flux" },
       { name: "Imagen", desc: "От Google", publicHref: "/tools/imagen" },
-      { name: "Higgsfield", desc: "Soul / Speak" },
     ],
   },
   {
@@ -83,6 +85,7 @@ const TABS: TabConfig[] = [
       { icon: Video, title: "Создать видео", desc: "Генерация из текста", publicHref: "/tools/video-generation" },
       { icon: Sparkles, title: "Оживить фото", desc: "Анимация изображений", publicHref: "/tools/ozhivit-foto" },
       { icon: User, title: "ИИ Аватар", desc: "Говорящие аватары", publicHref: "/tools/talking-avatar" },
+      { icon: Film, title: "Видео для карточки Ozon", desc: "Ролик для маркетплейса", publicHref: "/tools/ozon-product-video" },
     ],
     models: [
       { name: "Kling", desc: "Реалистичное видео", publicHref: "/tools/kling" },
@@ -92,8 +95,8 @@ const TABS: TabConfig[] = [
       { name: "Hailuo", desc: "Minimax", publicHref: "/tools/hailuo" },
       { name: "Wan", desc: "Alibaba" },
       { name: "Sora", desc: "От OpenAI", publicHref: "/tools/sora" },
-      { name: "HeyGen", desc: "AI аватары" },
-      { name: "Hedra", desc: "Говорящие персонажи" },
+      { name: "HeyGen", desc: "AI аватары", publicHref: "/tools/talking-avatar" },
+      { name: "Hedra", desc: "Говорящие персонажи", publicHref: "/tools/talking-avatar" },
     ],
   },
   {
