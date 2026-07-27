@@ -39,13 +39,12 @@ const TABS: TabConfig[] = [
   {
     key: "text", label: "Текст", route: "/text", publicRoute: "/ai/text",
     features: [
-      { icon: MessageSquare, title: "Чат с ИИ", desc: "Ответы на любые вопросы" },
+      { icon: MessageSquare, title: "Чат с ИИ", desc: "Ответы на любые вопросы", publicHref: "/tools/ai-chat" },
       { icon: PenLine, title: "Написать текст", desc: "Статьи, посты, тексты", publicHref: "/tools/ai-writer" },
       { icon: Globe, title: "Поиск в интернете", desc: "Актуальная информация", publicHref: "/tools/perplexity" },
       { icon: FileSearch, title: "Анализ документов", desc: "Исследования и разбор", publicHref: "/tools/document-analysis" },
       { icon: Languages, title: "Перевод текста", desc: "Перевод с сохранением смысла", publicHref: "/tools/translate" },
       { icon: Code, title: "Написать код", desc: "Создание и исправление кода", publicHref: "/tools/ai-code" },
-      { icon: Lightbulb, title: "Генерация идей", desc: "Концепции, названия, слоганы" },
     ],
     models: [
       { name: "ChatGPT", desc: "GPT от OpenAI", publicHref: "/tools/chatgpt" },
@@ -122,10 +121,9 @@ const TABS: TabConfig[] = [
     features: [
       { icon: TrendingUp, title: "Маркетолог", desc: "Стратегия и продвижение", publicHref: "/tools/ai-marketer" },
       { icon: PenLine, title: "Копирайтер", desc: "Тексты и SEO", publicHref: "/tools/ai-copywriter" },
-      { icon: Code, title: "Программист", desc: "Код и отладка" },
-      { icon: Languages, title: "Переводчик", desc: "50+ языков" },
+      { icon: Code, title: "Программист", desc: "Код и отладка", publicHref: "/tools/ai-code" },
+      { icon: Languages, title: "Переводчик", desc: "50+ языков", publicHref: "/tools/translate" },
       { icon: FileSearch, title: "Юрист", desc: "Анализ документов", publicHref: "/tools/ai-lawyer" },
-      { icon: Lightbulb, title: "Генерация идей", desc: "Концепции и слоганы" },
     ],
     models: [
       { name: "ChatGPT", desc: "Универсальный ИИ", publicHref: "/tools/chatgpt" },
