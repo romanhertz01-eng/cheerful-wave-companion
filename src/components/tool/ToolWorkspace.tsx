@@ -270,7 +270,9 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
           {has("generate") && (
             <div className="pt-1 border-t border-border">
               <p className="text-[11px] text-muted-foreground mb-2">
-                {tool.types
+                {tool.pricing
+                  ? computePricingLabel(tool.pricing, tool.selects ?? [], selectIdx, 0)
+                  : tool.types
                   ? `Требуется кредитов: ${tool.types[selectedType].credits}`
                   : `модель: ${tool.modelName} · ${tool.credits} кредитов`}
               </p>
