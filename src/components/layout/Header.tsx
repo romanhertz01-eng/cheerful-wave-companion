@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Clock, Menu, Moon, Search, Sun } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -7,6 +8,7 @@ import { useCommandPalette } from "@/hooks/useCommandPalette";
 import { UserDropdown } from "./UserDropdown";
 import { NavMegaMenu } from "./NavMegaMenu";
 import { NotificationsDropdown } from "./NotificationsDropdown";
+import { MobileNavDrawer } from "./MobileNavDrawer";
 import { PromoBanner } from "@/components/shared/PromoBanner";
 import { PROMO_ACTIVE, PROMO_LABEL, PROMO_TEXT } from "@/config/promo";
 
@@ -22,6 +24,7 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
   const { isAuthed } = useAuth();
   const { setOpen } = useCommandPalette();
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   return (
     <>
@@ -29,9 +32,9 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
       <header className="sticky top-0 z-40 h-16 flex items-center justify-between px-4 md:px-6 bg-background/85 backdrop-blur-md border-b border-border" style={{ height: "var(--header-height)" }}>
       {/* Left: burger + logo */}
       <div className="flex items-center gap-3">
-        {showBurger && isAuthed && (
+        {showBurger && (
           <button
-            onClick={onToggleSidebar}
+            onClick={() => (isAuthed ? onToggleSidebar() : setMobileNavOpen(true))}
             className="lg:hidden p-2 rounded-full hover:bg-secondary transition-colors"
             aria-label="Меню"
           >
@@ -142,6 +145,9 @@ export function Header({ onToggleSidebar, showBurger = true }: HeaderProps) {
         )}
       </div>
       </header>
+      {!isAuthed && (
+        <MobileNavDrawer open={mobileNavOpen} onClose={() => setMobileNavOpen(false)} />
+      )}
     </>
   );
 }
