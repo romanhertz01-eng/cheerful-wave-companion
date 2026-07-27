@@ -411,6 +411,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "photo-restoration",
+    status: "draft",
     updatedAt: "2026-07-26",
     modelName: "ERA2 Restore",
     heroTitle: "Реставрация старых фото",
@@ -530,6 +531,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "colorize-photo",
+    status: "draft",
     updatedAt: "2026-07-26",
     modelName: "ERA2 Colorize",
     heroTitle: "Раскрасить чёрно-белое фото",
@@ -648,6 +650,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "text-to-speech",
+    status: "draft",
     updatedAt: "2026-07-26",
     modelName: "ElevenLabs",
     heroTitle: "Озвучка текста",
@@ -769,6 +772,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "voice-cloning",
+    status: "draft",
     updatedAt: "2026-07-26",
     modelName: "ElevenLabs Voice Clone",
     heroTitle: "Клонировать голос",
@@ -885,6 +889,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "transcribe",
+    status: "draft",
     updatedAt: "2026-07-26",
     modelName: "ERA2 Транскрибация",
     heroTitle: "Расшифровать аудио в текст",
@@ -1531,6 +1536,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "object-remover",
+    status: "draft",
     updatedAt: "2026-07-26",
     modelName: "ERA2 Eraser",
     heroTitle: "Удалить объект с фото",
@@ -1649,6 +1655,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "watermark-remover",
+    status: "draft",
     updatedAt: "2026-07-26",
     modelName: "ERA2 Eraser",
     heroTitle: "Удалить водяной знак с фото",
@@ -1766,6 +1773,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "talking-avatar",
+    status: "draft",
     updatedAt: "2026-07-26",
     modelName: "HeyGen",
     heroTitle: "Говорящий аватар по фото",
@@ -1899,6 +1907,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "ozon-product-video",
+    status: "draft",
     updatedAt: "2026-07-26",
     modelName: "Kling 3.0",
     heroTitle: "Видео для карточки Ozon",
@@ -3708,7 +3717,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "video-upscaler",
-    status: "published",
+    status: "draft",
     updatedAt: "2026-07-27",
     modelName: "ERA2 Видео-апскейл",
     heroTitle: "Апскейл видео нейросетью",
@@ -3951,7 +3960,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "voice-changer",
-    status: "published",
+    status: "draft",
     updatedAt: "2026-07-27",
     modelName: "ERA2 Голос",
     heroTitle: "Смена голоса нейросетью",
@@ -4030,7 +4039,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "sound-effects",
-    status: "published",
+    status: "draft",
     updatedAt: "2026-07-27",
     modelName: "ERA2 Звуки",
     heroTitle: "Создание звуков и эффектов нейросетью",
@@ -4109,7 +4118,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "audio-denoise",
-    status: "published",
+    status: "draft",
     updatedAt: "2026-07-27",
     modelName: "ERA2 Шумодав",
     heroTitle: "Удаление шума из аудио",
