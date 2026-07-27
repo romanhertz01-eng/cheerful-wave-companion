@@ -61,7 +61,7 @@ const TABS: TabConfig[] = [
     key: "design", label: "Дизайн", route: "/design", publicRoute: "/ai/image",
     features: [
       { icon: ImageIcon, title: "Создать изображение", desc: "Генерация по тексту", publicHref: "/tools/image-generation" },
-      { icon: Camera, title: "Сделать ИИ-фото", desc: "Реалистичные фото людей" },
+      { icon: Camera, title: "Сделать ИИ-фото", desc: "Реалистичные фото людей", publicHref: "/tools/ai-portrait" },
       { icon: Paintbrush, title: "Редактор фото", desc: "Изменение и доработка" },
       { icon: Eraser, title: "Удалить фон", desc: "Удаление и замена фона", publicHref: "/tools/remove-background" },
       { icon: Scissors, title: "Удалить объект", desc: "Удаление людей и предметов", publicHref: "/tools/object-remover" },
@@ -86,6 +86,7 @@ const TABS: TabConfig[] = [
       { icon: Sparkles, title: "Оживить фото", desc: "Анимация изображений", publicHref: "/tools/ozhivit-foto" },
       { icon: User, title: "ИИ Аватар", desc: "Говорящие аватары", publicHref: "/tools/talking-avatar" },
       { icon: Film, title: "Видео для карточки Ozon", desc: "Ролик для маркетплейса", publicHref: "/tools/ozon-product-video" },
+      { icon: ZoomIn, title: "Улучшить качество", desc: "Апскейл видео до 4K", publicHref: "/tools/video-upscaler" },
     ],
     models: [
       { name: "Kling", desc: "Реалистичное видео", publicHref: "/tools/kling" },
