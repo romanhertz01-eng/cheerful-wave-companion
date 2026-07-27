@@ -62,7 +62,7 @@ const TABS: TabConfig[] = [
     features: [
       { icon: ImageIcon, title: "Создать изображение", desc: "Генерация по тексту", publicHref: "/tools/image-generation" },
       { icon: Camera, title: "Сделать ИИ-фото", desc: "Реалистичные фото людей", publicHref: "/tools/ai-portrait" },
-      { icon: Paintbrush, title: "Редактор фото", desc: "Изменение и доработка" },
+      { icon: Paintbrush, title: "Редактор фото", desc: "Изменение и доработка", publicHref: "/tools/photo-editor" },
       { icon: Eraser, title: "Удалить фон", desc: "Удаление и замена фона", publicHref: "/tools/remove-background" },
       { icon: Scissors, title: "Удалить объект", desc: "Удаление людей и предметов", publicHref: "/tools/object-remover" },
       { icon: ZoomIn, title: "Улучшить качество", desc: "Повышение чёткости и деталей", publicHref: "/tools/image-upscaler" },
@@ -106,7 +106,7 @@ const TABS: TabConfig[] = [
       { icon: Music, title: "Создать песню", desc: "Генерация музыки и вокала", publicHref: "/tools/suno" },
       { icon: AudioLines, title: "Озвучка текста", desc: "Текст в речь", publicHref: "/tools/text-to-speech" },
       { icon: Mic, title: "Клон голоса", desc: "Копирование голоса", publicHref: "/tools/voice-cloning" },
-      { icon: Volume2, title: "Смена голоса", desc: "Изменение тембра" },
+      { icon: Volume2, title: "Смена голоса", desc: "Изменение тембра", publicHref: "/tools/voice-changer" },
       { icon: Activity, title: "Создание звуков", desc: "Генерация эффектов" },
       { icon: FileText, title: "Транскрибация", desc: "Речь в текст", publicHref: "/tools/transcribe" },
       { icon: VolumeX, title: "Удаление шума", desc: "Очистка и улучшение" },
