@@ -13,19 +13,19 @@ import {
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { useAuth } from "@/contexts/AuthContext";
 
-interface FeatureItem {
+export interface FeatureItem {
   icon: LucideIcon;
   title: string;
   desc: string;
   publicHref?: string;
 }
-interface ModelItem {
+export interface ModelItem {
   name: string;
   desc: string;
   badge?: string;
   publicHref?: string;
 }
-interface TabConfig {
+export interface TabConfig {
   key: string;
   label: string;
   route: string;
@@ -35,7 +35,7 @@ interface TabConfig {
   modelsTitle?: string;
 }
 
-const TABS: TabConfig[] = [
+export const TABS: TabConfig[] = [
   {
     key: "text", label: "Текст", route: "/text", publicRoute: "/ai/text",
     features: [
