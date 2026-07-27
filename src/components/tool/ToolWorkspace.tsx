@@ -37,7 +37,7 @@ function computePricingLabel(
     return `${rate} кр/сек · ролик ${seconds} с ≈ ${total} кр`;
   }
   if (pricing.mode === "per-message") return `${rate} кр за сообщение`;
-  if (pricing.mode === "per-clip") return `${rate} кр за ролик`;
+  if (pricing.mode === "per-clip") return `${rate} кр ${pricing.unitLabel || "за ролик"}`;
   if (pricing.mode === "per-1k-chars") {
     const min = pricing.minCredits ?? 0;
     const total = Math.max(min, Math.ceil((chars * rate) / 1000 / 5) * 5);
