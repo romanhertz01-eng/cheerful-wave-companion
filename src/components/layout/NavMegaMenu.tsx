@@ -102,7 +102,7 @@ const TABS: TabConfig[] = [
   {
     key: "audio", label: "Аудио", route: "/audio", publicRoute: "/ai/audio",
     features: [
-      { icon: Music, title: "Создать песню", desc: "Генерация музыки и вокала", publicHref: "/tools/suno" },
+      { icon: Music, title: "Создать песню", desc: "Генерация музыки и вокала", publicHref: "/tools/create-song" },
       { icon: AudioLines, title: "Озвучка текста", desc: "Текст в речь", publicHref: "/tools/text-to-speech" },
       { icon: Mic, title: "Клон голоса", desc: "Копирование голоса", publicHref: "/tools/voice-cloning" },
       { icon: Volume2, title: "Смена голоса", desc: "Изменение тембра", publicHref: "/tools/voice-changer" },
