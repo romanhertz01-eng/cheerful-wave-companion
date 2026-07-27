@@ -64,9 +64,8 @@ const TABS: TabConfig[] = [
       { icon: Camera, title: "Сделать ИИ-фото", desc: "Реалистичные фото людей" },
       { icon: Paintbrush, title: "Редактор фото", desc: "Изменение и доработка" },
       { icon: Eraser, title: "Удалить фон", desc: "Удаление и замена фона", publicHref: "/tools/remove-background" },
-      { icon: Scissors, title: "Удалить объект", desc: "Удаление людей и предметов" },
+      { icon: Scissors, title: "Удалить объект", desc: "Удаление людей и предметов", publicHref: "/tools/object-remover" },
       { icon: ZoomIn, title: "Улучшить качество", desc: "Повышение чёткости и деталей", publicHref: "/tools/image-upscaler" },
-      { icon: RefreshCw, title: "Замена лица", desc: "Face Swap на фото" },
     ],
     models: [
       { name: "Nano Banana", desc: "Быстрая генерация", publicHref: "/tools/nano-banana" },
@@ -83,9 +82,7 @@ const TABS: TabConfig[] = [
     features: [
       { icon: Video, title: "Создать видео", desc: "Генерация из текста", publicHref: "/tools/video-generation" },
       { icon: Sparkles, title: "Оживить фото", desc: "Анимация изображений", publicHref: "/tools/ozhivit-foto" },
-      { icon: Film, title: "Видео редактор", desc: "Изменение видео" },
       { icon: User, title: "ИИ Аватар", desc: "Говорящие аватары", publicHref: "/tools/talking-avatar" },
-      { icon: TrendingUp, title: "Улучшить качество", desc: "Апскейл видео" },
     ],
     models: [
       { name: "Kling", desc: "Реалистичное видео", publicHref: "/tools/kling" },
@@ -102,7 +99,7 @@ const TABS: TabConfig[] = [
   {
     key: "audio", label: "Аудио", route: "/audio", publicRoute: "/ai/audio",
     features: [
-      { icon: Music, title: "Создать песню", desc: "Генерация музыки и вокала" },
+      { icon: Music, title: "Создать песню", desc: "Генерация музыки и вокала", publicHref: "/tools/suno" },
       { icon: AudioLines, title: "Озвучка текста", desc: "Текст в речь", publicHref: "/tools/text-to-speech" },
       { icon: Mic, title: "Клон голоса", desc: "Копирование голоса", publicHref: "/tools/voice-cloning" },
       { icon: Volume2, title: "Смена голоса", desc: "Изменение тембра" },
@@ -127,10 +124,10 @@ const TABS: TabConfig[] = [
       { icon: Lightbulb, title: "Генерация идей", desc: "Концепции и слоганы" },
     ],
     models: [
-      { name: "ChatGPT", desc: "Универсальный ИИ" },
-      { name: "Claude", desc: "Глубокий анализ" },
-      { name: "Gemini", desc: "От Google" },
-      { name: "DeepSeek", desc: "Reasoning модель" },
+      { name: "ChatGPT", desc: "Универсальный ИИ", publicHref: "/tools/chatgpt" },
+      { name: "Claude", desc: "Глубокий анализ", publicHref: "/tools/claude" },
+      { name: "Gemini", desc: "От Google", publicHref: "/tools/gemini" },
+      { name: "DeepSeek", desc: "Reasoning модель", publicHref: "/tools/deepseek" },
     ],
   },
 ];
