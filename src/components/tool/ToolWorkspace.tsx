@@ -419,13 +419,13 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
             </div>
           </div>
 
-          <div className="flex items-center justify-between gap-3 pt-2 border-t border-border">
-            <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex flex-col gap-3 pt-2 border-t border-border sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-2 flex-wrap min-w-0">
               <span className="border border-border rounded-full px-3 py-1 text-xs">{tool.modelName}</span>
               {selects.map((sel, si) => (
-                <div key={si} className="flex items-center gap-1">
+                <div key={si} className="flex items-center gap-1 flex-wrap">
                   <span className="text-[11px] text-muted-foreground">{sel.label}:</span>
-                  <div className="flex items-center gap-1 rounded-lg border border-border p-0.5">
+                  <div className="flex items-center gap-1 rounded-lg border border-border p-0.5 flex-wrap">
                     {sel.options.map((opt, oi) => {
                       const active = (selectIdx[si] ?? 0) === oi;
                       return (
@@ -459,7 +459,7 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
               type="button"
               disabled={isAuthed && (!value.trim() || status === "loading")}
               onClick={onGenerate}
-              className="h-10 px-5 rounded-lg font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2"
+              className="w-full sm:w-auto h-10 px-5 rounded-lg font-semibold text-white transition-opacity disabled:opacity-40 disabled:cursor-not-allowed hover:opacity-90 flex items-center justify-center gap-2 shrink-0"
               style={{ background: "#E85420" }}
             >
               {status === "loading" ? (
