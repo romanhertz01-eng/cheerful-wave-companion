@@ -42,9 +42,9 @@ const TABS: TabConfig[] = [
       { icon: MessageSquare, title: "Чат с ИИ", desc: "Ответы на любые вопросы" },
       { icon: PenLine, title: "Написать текст", desc: "Статьи, посты, тексты", publicHref: "/tools/ai-writer" },
       { icon: Globe, title: "Поиск в интернете", desc: "Актуальная информация", publicHref: "/tools/perplexity" },
-      { icon: FileSearch, title: "Анализ документов", desc: "Исследования и разбор" },
+      { icon: FileSearch, title: "Анализ документов", desc: "Исследования и разбор", publicHref: "/tools/document-analysis" },
       { icon: Languages, title: "Перевод текста", desc: "Перевод с сохранением смысла", publicHref: "/tools/translate" },
-      { icon: Code, title: "Написать код", desc: "Создание и исправление кода" },
+      { icon: Code, title: "Написать код", desc: "Создание и исправление кода", publicHref: "/tools/ai-code" },
       { icon: Lightbulb, title: "Генерация идей", desc: "Концепции, названия, слоганы" },
     ],
     models: [
