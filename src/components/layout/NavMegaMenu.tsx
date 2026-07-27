@@ -120,11 +120,11 @@ const TABS: TabConfig[] = [
     key: "agents", label: "Агенты", route: "/agents", publicRoute: "/ai/agents",
     modelsTitle: "РАБОТАЮТ НА",
     features: [
-      { icon: TrendingUp, title: "Маркетолог", desc: "Стратегия и продвижение" },
-      { icon: PenLine, title: "Копирайтер", desc: "Тексты и SEO" },
+      { icon: TrendingUp, title: "Маркетолог", desc: "Стратегия и продвижение", publicHref: "/tools/ai-marketer" },
+      { icon: PenLine, title: "Копирайтер", desc: "Тексты и SEO", publicHref: "/tools/ai-copywriter" },
       { icon: Code, title: "Программист", desc: "Код и отладка" },
       { icon: Languages, title: "Переводчик", desc: "50+ языков" },
-      { icon: FileSearch, title: "Юрист", desc: "Анализ документов" },
+      { icon: FileSearch, title: "Юрист", desc: "Анализ документов", publicHref: "/tools/ai-lawyer" },
       { icon: Lightbulb, title: "Генерация идей", desc: "Концепции и слоганы" },
     ],
     models: [
