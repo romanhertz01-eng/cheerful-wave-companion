@@ -493,7 +493,11 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                   </div>
                 </div>
               ))}
-              <span className="text-[11px] text-muted-foreground">{tool.credits} кредитов</span>
+              <span className="text-[11px] text-muted-foreground">
+                {tool.pricing
+                  ? computePricingLabel(tool.pricing, selects, selectIdx, value.length)
+                  : `${tool.credits} кредитов`}
+              </span>
             </div>
             <button
               type="button"
