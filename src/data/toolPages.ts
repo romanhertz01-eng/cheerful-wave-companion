@@ -4491,6 +4491,17 @@ export const toolPages: ToolPageData[] = [
       selects: [
         { label: "Модель", options: ["GPT 5", "Claude", "Gemini", "Grok", "DeepSeek"] },
       ],
+      pricing: {
+        mode: "per-message",
+        unitLabel: "за сообщение",
+        rates: [
+          { label: "DeepSeek", rate: 3, matchOption: "DeepSeek" },
+          { label: "Gemini", rate: 3, matchOption: "Gemini" },
+          { label: "GPT 5", rate: 6, matchOption: "GPT 5" },
+          { label: "Claude", rate: 10, matchOption: "Claude" },
+          { label: "Grok", rate: 7, matchOption: "Grok" },
+        ],
+      },
     },
     intro: {
       heading: "Чат, который отвечает на всё",
