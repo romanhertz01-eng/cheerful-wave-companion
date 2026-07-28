@@ -2292,7 +2292,7 @@ export const toolPages: ToolPageData[] = [
       layout: "row",
       model: "kling-3.0",
       modelName: "Kling 3.0",
-      credits: 75,
+      credits: 575,
       bricks: [],
       resultType: "video",
       textPlaceholder: "Опишите сцену: «серфер входит в волну, камера следует сбоку, брызги в контровом свете»…",
