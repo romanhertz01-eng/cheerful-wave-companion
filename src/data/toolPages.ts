@@ -1854,7 +1854,7 @@ export const toolPages: ToolPageData[] = [
       layout: "row",
       model: "heygen-avatar",
       modelName: "HeyGen",
-      credits: 90,
+      credits: 80,
       bricks: [],
       resultType: "video",
       uploadHints: [
@@ -1876,6 +1876,11 @@ export const toolPages: ToolPageData[] = [
         "Артём — энергичный",
       ],
       selects: [{ label: "Разрешение", options: ["540P", "720P"] }],
+      pricing: {
+        mode: "per-second",
+        unitLabel: "за секунду",
+        rates: [{ label: "HeyGen Avatar IV", rate: 80 }],
+      },
       legalNote: "Используйте своё фото или фото человека, давшего письменное согласие.",
     },
     intro: {
