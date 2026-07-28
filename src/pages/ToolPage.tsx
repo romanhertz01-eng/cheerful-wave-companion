@@ -163,317 +163,210 @@ const ToolPage = () => {
         </div>
       )}
 
-      {/* Intro (tool pages) */}
-      {data.tool && data.intro && (
-        <section className="max-w-3xl mx-auto px-4 py-12 text-center">
-          <h2 className="text-2xl md:text-[32px] font-bold mb-4">{data.intro.heading}</h2>
-          <p className="text-muted-foreground leading-relaxed">{data.intro.text}</p>
-        </section>
-      )}
-
-      {/* Visual cards (model pages) */}
-      {data.kind === 'model' && data.visualCards && (
-        <VisualCards
-          heading={data.visualCards.heading}
-          sub={data.visualCards.sub}
-          cards={data.visualCards.cards}
-        />
-      )}
-
-      {/* Model chips (tool pages) */}
-      {data.tool && data.modelChips && (
-        <section className="max-w-5xl mx-auto px-4 py-12">
-          <h2 className="text-2xl md:text-[32px] font-bold mb-3 text-center">{data.modelChips.heading}</h2>
-          {data.modelChips.sub && (
-            <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">{data.modelChips.sub}</p>
-          )}
-          <div className="flex flex-wrap justify-center gap-3">
-            {data.modelChips.models.map((name) => (
-              <div
-                key={name}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-white/10 bg-white/[0.04] text-sm font-medium hover:border-primary/40 transition-colors"
-              >
-                <ModelGlyph name={name} size={20} />
-                <span>{name}</span>
+      {(() => {
+        const sections: Record<string, React.ReactNode> = {
+          intro: data.intro ? (
+            <section key="intro" className="max-w-3xl mx-auto px-4 py-12 text-center">
+              <h2 className="text-2xl md:text-[32px] font-bold mb-4">{data.intro.heading}</h2>
+              <p className="text-muted-foreground leading-relaxed">{data.intro.text}</p>
+            </section>
+          ) : null,
+          visualCards: data.visualCards ? (
+            <VisualCards
+              key="visualCards"
+              heading={data.visualCards.heading}
+              sub={data.visualCards.sub}
+              cards={data.visualCards.cards}
+            />
+          ) : null,
+          specs: data.specs ? (
+            <section key="specs" className="max-w-3xl mx-auto px-4 py-12">
+              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.specs.heading}</h2>
+              <div className="flex flex-col">
+                {data.specs.items.map((it, i) => (
+                  <div key={i} className="flex justify-between py-3 border-b border-border/60 gap-4">
+                    <span className="text-muted-foreground">{it.label}</span>
+                    <span className="font-medium text-right">{it.value}</span>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Examples (tool pages) */}
-      {data.tool && data.examples && (
-        <section className="max-w-5xl mx-auto px-4 py-12">
-          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.examples.heading}</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {data.examples.images.map((src, i) => (
-              <img
-                key={i}
-                src={src}
-                alt={`${data.examples!.heading} — ${i + 1}`}
-                loading="lazy"
-                className="w-full aspect-square object-cover rounded-xl border border-white/10"
-              />
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Feature blocks (tool pages) */}
-      {data.tool && data.featureBlocks && (
-        <section className="max-w-5xl mx-auto px-4 py-12 flex flex-col gap-16">
-          {data.featureBlocks.map((b, i) => (
-            <div
-              key={i}
-              className={cn(
-                "flex flex-col gap-6 md:gap-12 items-center",
-                b.image && (i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse")
-              )}
-            >
-              {b.image && (
-                <div className="md:w-1/2 w-full rounded-2xl border border-border overflow-hidden aspect-[4/3]">
-                  <img src={b.image} alt={b.title} loading="lazy" className="w-full h-full object-cover" />
-                </div>
-              )}
-              <div className={cn("w-full", b.image ? "md:w-1/2" : "max-w-3xl text-center mx-auto")}>
-                <h3 className="text-2xl md:text-[28px] font-bold mb-3">{b.title}</h3>
-                <p className="text-muted-foreground mb-5 leading-relaxed">{b.desc}</p>
-                <button
-                  type="button"
-                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                  className="gradient-accent text-white rounded-full px-6 py-2.5 font-semibold hover:opacity-90 transition-opacity"
+            </section>
+          ) : null,
+          comparisonTable: data.comparisonTable ? (
+            <section key="comparisonTable" className="max-w-5xl mx-auto px-4 py-12">
+              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.comparisonTable.heading}</h2>
+              <div className="overflow-x-auto -mx-4 px-4">
+                <table className="w-full min-w-[640px] text-sm">
+                  <thead>
+                    <tr>
+                      <th className="text-left py-3 pr-4 font-normal text-muted-foreground w-1/4"></th>
+                      {data.comparisonTable.columns.map((c, i) => (
+                        <th
+                          key={c}
+                          className={
+                            "text-left py-3 px-4 font-semibold " +
+                            (i === 0 ? "bg-white/[0.04] rounded-t-lg" : "")
+                          }
+                        >
+                          {c}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.comparisonTable.rows.map((row, ri) => (
+                      <tr key={ri} className="border-t border-border/60">
+                        <td className="py-3 pr-4 text-muted-foreground align-top">{row.label}</td>
+                        {row.values.map((v, vi) => (
+                          <td
+                            key={vi}
+                            className={
+                              "py-3 px-4 align-top " +
+                              (vi === 0 ? "bg-white/[0.04] font-medium" : "")
+                            }
+                          >
+                            {v}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          ) : null,
+          featureBlocks: data.featureBlocks ? (
+            <section key="featureBlocks" className="max-w-5xl mx-auto px-4 py-12 flex flex-col gap-16">
+              {data.featureBlocks.map((b, i) => (
+                <div
+                  key={i}
+                  className={cn(
+                    "flex flex-col gap-6 md:gap-12 items-center",
+                    b.image && (i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse")
+                  )}
                 >
-                  {b.cta}
-                </button>
-              </div>
-            </div>
-          ))}
-        </section>
-      )}
-
-      {/* Use cases (tool pages) */}
-      {data.tool && data.useCases && (
-        <section className="max-w-5xl mx-auto px-4 py-12">
-          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.useCases.heading}</h2>
-          <div className="grid md:grid-cols-2 gap-4">
-            {data.useCases.items.map((it, i) => (
-              <div
-                key={i}
-                className="rounded-xl border border-white/10 bg-white/[0.04] shadow-sm p-5 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
-              >
-                <h4 className="font-semibold mb-1">{it.title}</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">{it.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* How it works */}
-      {data.tool && data.howItWorks && (
-        <section className="max-w-5xl mx-auto px-4 py-12">
-          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">
-            {data.howItWorks.title}
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {data.howItWorks.steps.map((step, i) => (
-              <div
-                key={i}
-                className="bg-card border border-border shadow-sm rounded-xl p-6 hover:border-primary/40 hover:bg-muted/50 transition-colors"
-              >
-                <span className="gradient-accent-text font-bold text-sm mb-2 block">Шаг {i + 1}</span>
-                <h4 className="font-semibold mb-1">{step.title}</h4>
-                <p className="text-sm text-muted-foreground">{step.desc}</p>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-8">
-            <button
-              type="button"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="gradient-accent text-white rounded-full px-8 py-3 font-semibold hover:opacity-90 transition-opacity"
-            >
-              {data.howItWorks.cta ?? data.finalCta?.button ?? "Попробовать"}
-            </button>
-          </div>
-        </section>
-      )}
-
-      {/* Specs (tool pages) */}
-      {data.tool && data.specs && (
-        <section className="max-w-3xl mx-auto px-4 py-12">
-          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.specs.heading}</h2>
-          <div className="flex flex-col">
-            {data.specs.items.map((it, i) => (
-              <div key={i} className="flex justify-between py-3 border-b border-border/60 gap-4">
-                <span className="text-muted-foreground">{it.label}</span>
-                <span className="font-medium text-right">{it.value}</span>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Features (model landings only) */}
-      {!data.tool && (
-      <section className="max-w-5xl mx-auto px-4 py-12">
-        <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">
-          Основные возможности {data.modelName}
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {data.features.map((f, i) => (
-            <div
-              key={i}
-              className="bg-card border border-border shadow-sm rounded-xl p-5 flex flex-col gap-3 hover:border-primary/40 hover:bg-muted/50 transition-colors"
-            >
-              <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-xl shrink-0">
-                {f.icon}
-              </div>
-              <div>
-                <h4 className="font-semibold mb-1">{f.title}</h4>
-                <p className="text-sm text-muted-foreground">{f.description}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-      )}
-
-      {/* Video tutorial — только для лендингов моделей изображений */}
-      {!data.tool && data.category === "image" && (
-      <section className="bg-card border-y border-border">
-        <div className="max-w-5xl mx-auto px-4 py-16">
-          <h2 className="text-2xl md:text-[32px] font-bold mb-8">Как работает генератор текста в изображение ERA2</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="aspect-video rounded-xl bg-muted border border-border relative overflow-hidden cursor-pointer group">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 rounded-full bg-red-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Play size={28} className="text-white ml-1" fill="white" />
-                </div>
-              </div>
-              <div className="absolute bottom-4 left-4 right-4">
-                <p className="text-sm text-foreground font-medium">How to Convert Text to Image with ERA2</p>
-              </div>
-            </div>
-            <div className="space-y-6">
-              {[
-                { num: "1", title: "Введите текстовую подсказку", desc: "Опишите изображение которое хотите создать максимально детально." },
-                { num: "2", title: "Создайте изображение", desc: "Создайте своё изображение с помощью нашей ИИ и параметров искусственного интеллекта." },
-                { num: "3", title: "Загрузите результат", desc: "Загрузите готовое изображение и используйте его как угодно." },
-              ].map((s) => (
-                <div key={s.num} className="flex gap-4">
-                  <span className="text-2xl font-bold gradient-accent-text shrink-0">{s.num}</span>
-                  <div>
-                    <h4 className="font-semibold mb-1">{s.title}</h4>
-                    <p className="text-sm text-muted-foreground">{s.desc}</p>
+                  {b.image && (
+                    <div className="md:w-1/2 w-full rounded-2xl border border-border overflow-hidden aspect-[4/3]">
+                      <img src={b.image} alt={b.title} loading="lazy" className="w-full h-full object-cover" />
+                    </div>
+                  )}
+                  <div className={cn("w-full", b.image ? "md:w-1/2" : "max-w-3xl text-center mx-auto")}>
+                    <h3 className="text-2xl md:text-[28px] font-bold mb-3">{b.title}</h3>
+                    <p className="text-muted-foreground mb-5 leading-relaxed">{b.desc}</p>
+                    <button
+                      type="button"
+                      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                      className="gradient-accent text-white rounded-full px-6 py-2.5 font-semibold hover:opacity-90 transition-opacity"
+                    >
+                      {b.cta}
+                    </button>
                   </div>
                 </div>
               ))}
-            </div>
-          </div>
-        </div>
-      </section>
-      )}
-
-      {/* Enhanced CTA — только для лендингов моделей изображений */}
-      {!data.tool && data.category === "image" && (
-      <section className="max-w-3xl mx-auto px-4 py-16 md:py-20 text-center">
-        <h2 className="text-[24px] md:text-[32px] font-bold mb-4 leading-tight">
-          Превращайте слова в нечто удивительное с нашим ИИ-генератором изображений.
-        </h2>
-        <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-8 max-w-[600px] mx-auto">
-          Генератор изображений на основе текста ERA2 создаёт реалистичные изображения строго следуя любой заданной подсказке.
-        </p>
-        <Link
-          to={targetPage as any}
-          className="inline-flex items-center justify-center w-full max-w-[600px] px-8 py-4 rounded-full border-2 border-border text-base font-semibold hover:border-primary transition-colors"
-        >
-          Попробуйте наш генератор изображений на основе ИИ
-        </Link>
-        <div className="mt-8 max-w-[400px] mx-auto aspect-[4/3] rounded-xl border border-border" style={{ background: "linear-gradient(135deg, #1a1030, #0f1a2e)" }} />
-      </section>
-      )}
-
-      {/* Tips (tool pages) */}
-      {data.tool && data.tips && (
-        <section className="max-w-5xl mx-auto px-4 py-12">
-          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.tips.heading}</h2>
-          <div className="grid md:grid-cols-3 gap-4">
-            {data.tips.items.map((it, i) => (
-              <div
-                key={i}
-                className="rounded-xl border border-white/10 bg-white/[0.04] shadow-sm p-5 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
-              >
-                <h4 className="font-semibold mb-1">{it.title}</h4>
-                <p className="text-sm text-muted-foreground leading-relaxed">{it.desc}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Big stat (tool pages) */}
-      {data.tool && data.bigStat && (
-        <section className="px-4 py-16 md:py-24 text-center">
-          <div className="text-[56px] md:text-[88px] font-bold gradient-accent-text leading-none">{data.bigStat.value}</div>
-          <div className="text-xl md:text-2xl font-bold mt-3">{data.bigStat.label}</div>
-          {data.bigStat.sub && (
-            <p className="text-muted-foreground mt-2 max-w-[560px] mx-auto">{data.bigStat.sub}</p>
-          )}
-          {data.bigStat.button && (
-            <AuthCTALink
-              to={targetPage}
-              className="inline-block gradient-accent text-white rounded-full px-8 py-3.5 font-semibold mt-8 hover:opacity-90 transition-opacity"
-            >
-              {data.bigStat.button}
-            </AuthCTALink>
-          )}
-        </section>
-      )}
-
-      {data.comparisonTable && (
-        <section className="max-w-5xl mx-auto px-4 py-12">
-          <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.comparisonTable.heading}</h2>
-          <div className="overflow-x-auto -mx-4 px-4">
-            <table className="w-full min-w-[640px] text-sm">
-              <thead>
-                <tr>
-                  <th className="text-left py-3 pr-4 font-normal text-muted-foreground w-1/4"></th>
-                  {data.comparisonTable.columns.map((c, i) => (
-                    <th
-                      key={c}
-                      className={
-                        "text-left py-3 px-4 font-semibold " +
-                        (i === 0 ? "bg-white/[0.04] rounded-t-lg" : "")
-                      }
-                    >
-                      {c}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {data.comparisonTable.rows.map((row, ri) => (
-                  <tr key={ri} className="border-t border-border/60">
-                    <td className="py-3 pr-4 text-muted-foreground align-top">{row.label}</td>
-                    {row.values.map((v, vi) => (
-                      <td
-                        key={vi}
-                        className={
-                          "py-3 px-4 align-top " +
-                          (vi === 0 ? "bg-white/[0.04] font-medium" : "")
-                        }
-                      >
-                        {v}
-                      </td>
-                    ))}
-                  </tr>
+            </section>
+          ) : null,
+          tips: data.tips ? (
+            <section key="tips" className="max-w-5xl mx-auto px-4 py-12">
+              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.tips.heading}</h2>
+              <div className="grid md:grid-cols-2 gap-4">
+                {data.tips.items.map((it, i) => (
+                  <div
+                    key={i}
+                    className="rounded-xl border border-white/10 bg-white/[0.04] shadow-sm p-5 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
+                  >
+                    <h4 className="font-semibold mb-1">{it.title}</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{it.desc}</p>
+                  </div>
                 ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      )}
+              </div>
+            </section>
+          ) : null,
+          useCases: data.useCases ? (
+            <section key="useCases" className="max-w-5xl mx-auto px-4 py-12">
+              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.useCases.heading}</h2>
+              <div className="grid md:grid-cols-2 gap-4">
+                {data.useCases.items.map((it, i) => (
+                  <div
+                    key={i}
+                    className="rounded-xl border border-white/10 bg-white/[0.04] shadow-sm p-5 hover:border-primary/40 hover:bg-white/[0.06] transition-colors"
+                  >
+                    <h4 className="font-semibold mb-1">{it.title}</h4>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{it.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null,
+          modelChips: data.modelChips ? (
+            <section key="modelChips" className="max-w-5xl mx-auto px-4 py-12">
+              <h2 className="text-2xl md:text-[32px] font-bold mb-3 text-center">{data.modelChips.heading}</h2>
+              {data.modelChips.sub && (
+                <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">{data.modelChips.sub}</p>
+              )}
+              <div className="flex flex-wrap justify-center gap-3">
+                {data.modelChips.models.map((name) => (
+                  <div
+                    key={name}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-white/10 bg-white/[0.04] text-sm font-medium hover:border-primary/40 transition-colors"
+                  >
+                    <ModelGlyph name={name} size={20} />
+                    <span>{name}</span>
+                  </div>
+                ))}
+              </div>
+            </section>
+          ) : null,
+          howItWorks: data.howItWorks ? (
+            <section key="howItWorks" className="max-w-5xl mx-auto px-4 py-12">
+              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">
+                {data.howItWorks.title}
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {data.howItWorks.steps.map((step, i) => (
+                  <div
+                    key={i}
+                    className="bg-card border border-border shadow-sm rounded-xl p-6 hover:border-primary/40 hover:bg-muted/50 transition-colors"
+                  >
+                    <span className="gradient-accent-text font-bold text-sm mb-2 block">Шаг {i + 1}</span>
+                    <h4 className="font-semibold mb-1">{step.title}</h4>
+                    <p className="text-sm text-muted-foreground">{step.desc}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="text-center mt-8">
+                <button
+                  type="button"
+                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                  className="gradient-accent text-white rounded-full px-8 py-3 font-semibold hover:opacity-90 transition-opacity"
+                >
+                  {data.howItWorks.cta ?? data.finalCta?.button ?? "Попробовать"}
+                </button>
+              </div>
+            </section>
+          ) : null,
+          examples: data.examples ? (
+            <section key="examples" className="max-w-5xl mx-auto px-4 py-12">
+              <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{data.examples.heading}</h2>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                {data.examples.images.map((src, i) => (
+                  <img
+                    key={i}
+                    src={src}
+                    alt={`${data.examples!.heading} — ${i + 1}`}
+                    loading="lazy"
+                    className="w-full aspect-square object-cover rounded-xl border border-white/10"
+                  />
+                ))}
+              </div>
+            </section>
+          ) : null,
+        };
+
+        const modelOrder = ["intro", "visualCards", "specs", "comparisonTable", "featureBlocks", "tips", "useCases", "modelChips", "howItWorks"];
+        const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "examples", "specs", "modelChips"];
+        const order = data.kind === "model" ? modelOrder : toolOrder;
+        return <>{order.map((k) => sections[k])}</>;
+      })()}
 
       {showRelated && (
         <section className="max-w-5xl mx-auto px-4 py-12">
