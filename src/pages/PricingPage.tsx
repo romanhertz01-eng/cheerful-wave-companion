@@ -111,7 +111,7 @@ const PricingPage = () => {
 
         {isEnterprise ? (
           <a
-            href="mailto:sales@cheerful-wave-companion.lovable.app?subject=Enterprise%20запрос"
+            href="mailto:sales@era2.ai?subject=Enterprise%20запрос"
             className={cn(
               "mt-4 w-full py-3 rounded-xl text-sm font-semibold transition-colors text-center",
               "border border-border text-foreground hover:bg-muted/50"
@@ -337,10 +337,10 @@ const PricingPage = () => {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-5">
             <div className="px-4 py-2.5 rounded-full text-sm text-foreground bg-card border border-border">
-              cheerful-wave-companion.lovable.app/ref/user123
+              era2.ai/ref/user123
             </div>
             <button
-              onClick={() => copy("https://cheerful-wave-companion.lovable.app/ref/user123", "Реферальная ссылка скопирована")}
+              onClick={() => copy("https://era2.ai/ref/user123", "Реферальная ссылка скопирована")}
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold border border-border text-foreground hover:bg-muted/50 transition-colors"
             >
               <Copy className="h-4 w-4" />
