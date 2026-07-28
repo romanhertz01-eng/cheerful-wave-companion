@@ -1,3 +1,4 @@
+import { ORIGIN } from "@/lib/origin";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import {
@@ -18,7 +19,7 @@ import { useAuth } from "@/contexts/AuthContext";
 const STUDIOS_TITLE = "Все нейросети — каталог из 90+ ИИ-моделей | ERA2.ai";
 const STUDIOS_DESCRIPTION =
   "Полный каталог нейросетей ЭРА2: генерация текста, изображений, видео и озвучки. Выбирайте модель под задачу — всё в одной подписке, без VPN.";
-const STUDIOS_CANONICAL = "https://cheerful-wave-companion.lovable.app/studios";
+const STUDIOS_CANONICAL = `${ORIGIN}/studios`;
 
 export const Route = createFileRoute("/studios")({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -32,7 +33,7 @@ export const Route = createFileRoute("/studios")({
       { property: "og:title", content: STUDIOS_TITLE },
       { property: "og:description", content: STUDIOS_DESCRIPTION },
       { property: "og:url", content: STUDIOS_CANONICAL },
-      { property: "og:image", content: "https://cheerful-wave-companion.lovable.app/og-image.png" },
+      { property: "og:image", content: `${ORIGIN}/og-image.png` },
     ],
     links: [{ rel: "canonical", href: STUDIOS_CANONICAL }],
   }),

@@ -1,10 +1,11 @@
+import { ORIGIN } from "@/lib/origin";
 import { useState } from "react";
 import { X, Gift, Copy, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export function ReferralPopup({ onClose }: { onClose: () => void }) {
   const [copied, setCopied] = useState(false);
-  const refLink = "https://cheerful-wave-companion.lovable.app/ref/USER123";
+  const refLink = `${ORIGIN}/ref/USER123`;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(refLink);

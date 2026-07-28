@@ -1,3 +1,4 @@
+import { ORIGIN } from "@/lib/origin";
 import type { SeoPage } from '../types';
 
 export const aiAudioPage: SeoPage = {
@@ -13,7 +14,7 @@ export const aiAudioPage: SeoPage = {
     title: 'Нейросети для аудио — озвучка, музыка, клон голоса | ERA2.ai',
     description:
       'Озвучка текста ElevenLabs, песни Suno, клонирование голоса и транскрибация. Единая подписка, оплата в рублях, без VPN.',
-    canonical: 'https://cheerful-wave-companion.lovable.app/ai/audio',
+    canonical: `${ORIGIN}/ai/audio`,
     robots: 'index,follow',
   },
   breadcrumbs: [

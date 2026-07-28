@@ -1,3 +1,4 @@
+import { ORIGIN } from "@/lib/origin";
 import type { SeoPage } from '../types';
 
 export const aiAgentsPage: SeoPage = {
@@ -13,7 +14,7 @@ export const aiAgentsPage: SeoPage = {
     title: 'ИИ-агенты — готовые ассистенты для работы | ERA2.ai',
     description:
       'Маркетолог, копирайтер, программист, юрист — готовые ИИ-ассистенты под задачу. Единая подписка, оплата в рублях, без VPN.',
-    canonical: 'https://cheerful-wave-companion.lovable.app/ai/agents',
+    canonical: `${ORIGIN}/ai/agents`,
     robots: 'index,follow',
   },
   breadcrumbs: [

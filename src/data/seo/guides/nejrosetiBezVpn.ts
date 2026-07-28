@@ -1,3 +1,4 @@
+import { ORIGIN } from "@/lib/origin";
 import type { SeoPage } from '../types';
 
 export const nejrosetiBezVpnGuide: SeoPage = {
@@ -13,7 +14,7 @@ export const nejrosetiBezVpnGuide: SeoPage = {
   seo: {
     title: 'Нейросети без VPN: как пользоваться из России в 2026 | ERA2.ai',
     description: 'ChatGPT, Midjourney, Sora и Claude недоступны из России напрямую. Разбираем три способа доступа, их риски и цены — и показываем самый простой путь: 90+ нейросетей в браузере, без VPN, с оплатой в рублях.',
-    canonical: 'https://cheerful-wave-companion.lovable.app/guides/nejroseti-bez-vpn',
+    canonical: `${ORIGIN}/guides/nejroseti-bez-vpn`,
     robots: 'index, follow',
   },
   breadcrumbs: [

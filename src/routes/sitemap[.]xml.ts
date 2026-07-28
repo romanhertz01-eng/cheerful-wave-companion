@@ -1,3 +1,4 @@
+import { ORIGIN } from "@/lib/origin";
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { toolPages } from "@/data/toolPages";
@@ -9,7 +10,7 @@ import { aiAudioPage } from "@/data/seo/pages/aiAudio";
 import { aiTextPage } from "@/data/seo/pages/aiText";
 import { aiAgentsPage } from "@/data/seo/pages/aiAgents";
 
-const BASE_URL = "https://cheerful-wave-companion.lovable.app";
+const BASE_URL = ORIGIN;
 
 type Entry = { path: string; lastmod?: string };
 

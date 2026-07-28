@@ -1,3 +1,4 @@
+import { ORIGIN } from "@/lib/origin";
 import type { SeoPage } from '../types';
 
 export const homePage: SeoPage = {
@@ -13,7 +14,7 @@ export const homePage: SeoPage = {
     title: 'ERA2.ai — 90+ нейросетей в одной подписке | Оплата в рублях, без VPN',
     description:
       'ChatGPT, Claude, Kling, Seedance, ElevenLabs и 90+ нейросетей в одном окне. Тексты, изображения, видео и озвучка по единой подписке. Оплата российскими картами, VPN не нужен.',
-    canonical: 'https://cheerful-wave-companion.lovable.app/',
+    canonical: `${ORIGIN}/`,
     robots: 'index, follow',
   },
   breadcrumbs: [],

@@ -1,3 +1,4 @@
+import { ORIGIN } from "@/lib/origin";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -22,7 +23,7 @@ export function SeoRenderer({ def }: { def: SeoPage }) {
           '@type': 'ListItem',
           position: i + 1,
           name: c.label,
-          item: `https://cheerful-wave-companion.lovable.app${c.href}`,
+          item: `${ORIGIN}${c.href}`,
         })),
       }
     : null;
