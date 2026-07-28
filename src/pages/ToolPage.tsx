@@ -9,6 +9,7 @@ import { plans } from "@/data/plans";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
 import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
+import { VisualCards } from "@/components/tool/VisualCards";
 import { AuthCTALink } from "@/components/auth/AuthCTALink";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
@@ -168,6 +169,15 @@ const ToolPage = () => {
           <h2 className="text-2xl md:text-[32px] font-bold mb-4">{data.intro.heading}</h2>
           <p className="text-muted-foreground leading-relaxed">{data.intro.text}</p>
         </section>
+      )}
+
+      {/* Visual cards (model pages) */}
+      {data.visualCards && (
+        <VisualCards
+          heading={data.visualCards.heading}
+          sub={data.visualCards.sub}
+          cards={data.visualCards.cards}
+        />
       )}
 
       {/* Model chips (tool pages) */}
