@@ -690,7 +690,7 @@ export const toolPages: ToolPageData[] = [
       layout: "row",
       model: "elevenlabs-tts",
       modelName: "ElevenLabs",
-      credits: 30,
+      credits: 95,
       bricks: [],
       voices: [
         "Алёна — мягкий женский",
@@ -701,6 +701,19 @@ export const toolPages: ToolPageData[] = [
       ],
       textPlaceholder: "Вставьте текст, который нужно озвучить…",
       maxChars: 2000,
+      selects: [
+        { label: "Режим", options: ["Быстрое", "Студийное", "Диалоги"] },
+      ],
+      pricing: {
+        mode: "per-1k-chars",
+        unitLabel: "за 1000 знаков",
+        minCredits: 25,
+        rates: [
+          { label: "Студийное", rate: 95, matchOption: "Студийное" },
+          { label: "Диалоги", rate: 115, matchOption: "Диалоги" },
+          { label: "Быстрое", rate: 50, matchOption: "Быстрое" },
+        ],
+      },
     },
     howItWorks: {
       title: "Как озвучить текст за 3 шага",
