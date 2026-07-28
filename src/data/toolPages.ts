@@ -2777,14 +2777,22 @@ export const toolPages: ToolPageData[] = [
       layout: "row",
       model: "deepseek-v3",
       modelName: "DeepSeek V3",
-      credits: 1,
+      credits: 3,
       bricks: [],
       resultType: "text",
       textPlaceholder: "Задайте задачу: «найди ошибку в этой формуле и объясни ход решения»…",
       maxChars: 4000,
       selects: [
-        { label: "Версия", options: ["DeepSeek V3", "DeepSeek R1", "DeepSeek Chat", "DeepSeek Reasoner"] },
+        { label: "Версия", options: ["V4-Flash", "V4-Pro"] },
       ],
+      pricing: {
+        mode: "per-message",
+        unitLabel: "за сообщение",
+        rates: [
+          { label: "V4-Flash", rate: 3, matchOption: "V4-Flash" },
+          { label: "V4-Pro", rate: 10, matchOption: "V4-Pro" },
+        ],
+      },
     },
     intro: {
       heading: "DeepSeek на русском: рассуждающая модель для всех",
