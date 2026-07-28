@@ -1,5 +1,6 @@
 export interface ToolPageData {
   slug: string;
+  kind: 'tool' | 'model';
   status?: 'published' | 'draft';
   updatedAt?: string;
   modelName: string;
@@ -64,6 +65,7 @@ export interface ToolPageData {
 export const toolPages: ToolPageData[] = [
   {
     slug: "ozhivit-foto",
+    kind: 'tool',
     updatedAt: "2026-07-26",
     modelName: "Kling 3.0",
     heroTitle: "Оживить фото",
@@ -199,6 +201,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "remove-background",
+    kind: 'tool',
     updatedAt: "2026-07-26",
     modelName: "Recraft",
     heroTitle: "Удалить фон с фото",
@@ -319,6 +322,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "image-upscaler",
+    kind: 'tool',
     updatedAt: "2026-07-26",
     modelName: "Topaz Upscale",
     heroTitle: "Улучшить качество фото",
@@ -440,6 +444,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "photo-restoration",
+    kind: 'tool',
     status: "draft",
     updatedAt: "2026-07-26",
     modelName: "ERA2 Restore",
@@ -560,6 +565,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "colorize-photo",
+    kind: 'tool',
     status: "draft",
     updatedAt: "2026-07-26",
     modelName: "ERA2 Colorize",
@@ -679,6 +685,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "text-to-speech",
+    kind: 'tool',
     status: "published",
     updatedAt: "2026-07-28",
     modelName: "ElevenLabs",
@@ -814,6 +821,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "voice-cloning",
+    kind: 'tool',
     status: "draft",
     updatedAt: "2026-07-26",
     modelName: "ElevenLabs Voice Clone",
@@ -932,6 +940,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "transcribe",
+    kind: 'tool',
     status: "draft",
     updatedAt: "2026-07-26",
     modelName: "ERA2 Транскрибация",
@@ -1049,6 +1058,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "nano-banana",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "Nano Banana",
     heroTitle: "Генератор изображений Nano Banana",
@@ -1152,6 +1162,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "midjourney",
+    kind: 'model',
     updatedAt: "2026-07-26",
     status: "draft",
     modelName: "Midjourney",
@@ -1238,6 +1249,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "seedance",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "Seedance",
     heroTitle: "Генератор видео Seedance",
@@ -1345,6 +1357,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "image-generation",
+    kind: 'tool',
     updatedAt: "2026-07-26",
     modelName: "Nano Banana 2",
     heroTitle: "Создать изображение по описанию",
@@ -1476,6 +1489,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "video-generation",
+    kind: 'tool',
     updatedAt: "2026-07-26",
     modelName: "Kling 3.0",
     heroTitle: "Создать видео по описанию",
@@ -1616,6 +1630,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "object-remover",
+    kind: 'tool',
     status: "draft",
     updatedAt: "2026-07-26",
     modelName: "ERA2 Eraser",
@@ -1735,6 +1750,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "watermark-remover",
+    kind: 'tool',
     status: "draft",
     updatedAt: "2026-07-26",
     modelName: "ERA2 Eraser",
@@ -1853,6 +1869,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "talking-avatar",
+    kind: 'tool',
     status: "published",
     updatedAt: "2026-07-28",
     modelName: "HeyGen",
@@ -1992,6 +2009,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "ozon-product-video",
+    kind: 'tool',
     status: "published",
     updatedAt: "2026-07-28",
     modelName: "Kling 3.0",
@@ -2123,6 +2141,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "sora",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "Sora 2",
     heroTitle: "Sora — видеонейросеть OpenAI",
@@ -2236,6 +2255,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "veo",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "Veo 3",
     heroTitle: "Veo 3 — видеонейросеть Google",
@@ -2340,6 +2360,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "kling",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "Kling 3.0",
     heroTitle: "Kling — универсальная видеонейросеть",
@@ -2455,6 +2476,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "chatgpt",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "ChatGPT",
     heroTitle: "ChatGPT на русском — без VPN и регистрации в OpenAI",
@@ -2548,6 +2570,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "claude",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "Claude",
     heroTitle: "Claude — нейросеть Anthropic на русском",
@@ -2640,6 +2663,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "gemini",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "Gemini",
     heroTitle: "Gemini — нейросеть Google на русском",
@@ -2731,6 +2755,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "grok",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "Grok",
     heroTitle: "Grok — нейросеть xAI с поиском в реальном времени",
@@ -2822,6 +2847,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "deepseek",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "DeepSeek",
     heroTitle: "DeepSeek — открытая нейросеть для текста и рассуждений",
@@ -2913,6 +2939,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "perplexity",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "Perplexity",
     heroTitle: "Perplexity — ИИ-поиск с источниками",
@@ -3006,6 +3033,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "seedream",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "Seedream",
     heroTitle: "Seedream — быстрая генерация изображений до 2K Pro",
@@ -3098,6 +3126,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "flux",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "Flux",
     heroTitle: "Flux — нейросеть с контролем композиции",
@@ -3179,6 +3208,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "gpt-image",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "GPT Image",
     heroTitle: "GPT Image — генератор изображений от OpenAI",
@@ -3260,6 +3290,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "imagen",
+    kind: 'model',
     updatedAt: "2026-07-26",
     status: "draft",
     modelName: "Imagen 4",
@@ -3342,6 +3373,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "hailuo",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "Hailuo AI",
     heroTitle: "Hailuo — видеонейросеть MiniMax",
@@ -3445,6 +3477,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "elevenlabs",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "ElevenLabs",
     heroTitle: "ElevenLabs — озвучка, неотличимая от диктора",
@@ -3543,6 +3576,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "suno",
+    kind: 'model',
     updatedAt: "2026-07-26",
     modelName: "Suno",
     heroTitle: "Suno — нейросеть, которая пишет песни",
@@ -3624,6 +3658,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "translate",
+    kind: 'tool',
     updatedAt: "2026-07-27",
     status: "published",
     modelName: "ERA2 Перевод",
@@ -3707,6 +3742,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "ai-writer",
+    kind: 'tool',
     updatedAt: "2026-07-27",
     status: "published",
     modelName: "ERA2 Копирайтер",
@@ -3790,6 +3826,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "document-analysis",
+    kind: 'tool',
     updatedAt: "2026-07-27",
     status: "published",
     modelName: "ERA2 Документы",
@@ -3872,6 +3909,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "ai-code",
+    kind: 'tool',
     updatedAt: "2026-07-27",
     status: "published",
     modelName: "ERA2 Код",
@@ -3955,6 +3993,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "video-upscaler",
+    kind: 'tool',
     status: "published",
     updatedAt: "2026-07-28",
     modelName: "ERA2 Видео-апскейл",
@@ -4043,6 +4082,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "ai-portrait",
+    kind: 'tool',
     status: "published",
     updatedAt: "2026-07-27",
     modelName: "Nano Banana 2",
@@ -4123,6 +4163,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "photo-editor",
+    kind: 'tool',
     status: "published",
     updatedAt: "2026-07-27",
     modelName: "Nano Banana 2",
@@ -4203,6 +4244,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "voice-changer",
+    kind: 'tool',
     status: "draft",
     updatedAt: "2026-07-27",
     modelName: "ERA2 Голос",
@@ -4283,6 +4325,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "sound-effects",
+    kind: 'tool',
     status: "published",
     updatedAt: "2026-07-28",
     modelName: "ERA2 Звуки",
@@ -4362,6 +4405,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "audio-denoise",
+    kind: 'tool',
     status: "draft",
     updatedAt: "2026-07-27",
     modelName: "ERA2 Шумодав",
@@ -4444,6 +4488,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "ai-lawyer",
+    kind: 'tool',
     updatedAt: "2026-07-27",
     status: "published",
     modelName: "ИИ-Юрист",
@@ -4525,6 +4570,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "ai-copywriter",
+    kind: 'tool',
     updatedAt: "2026-07-27",
     status: "published",
     modelName: "ИИ-Копирайтер",
@@ -4606,6 +4652,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "ai-marketer",
+    kind: 'tool',
     updatedAt: "2026-07-27",
     status: "published",
     modelName: "ИИ-Маркетолог",
@@ -4687,6 +4734,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "ai-chat",
+    kind: 'tool',
     updatedAt: "2026-07-27",
     status: "published",
     modelName: "ERA2 Чат",
@@ -4782,6 +4830,7 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "create-song",
+    kind: 'tool',
     status: "published",
     updatedAt: "2026-07-27",
     modelName: "ERA2 Песня",
@@ -4880,3 +4929,6 @@ export function getRelatedTools(slug: string, limit = 6): ToolPageData[] {
   const combined = sameCat.length >= 3 ? sameCat : [...sameCat, ...rest];
   return combined.slice(0, limit);
 }
+
+export const toolPagesByKind = (kind: 'tool' | 'model') =>
+  toolPages.filter((p) => p.kind === kind);
