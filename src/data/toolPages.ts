@@ -2424,8 +2424,18 @@ export const toolPages: ToolPageData[] = [
       textPlaceholder: "Спросите что угодно: «составь план запуска интернет-магазина за месяц»…",
       maxChars: 4000,
       selects: [
-        { label: "Версия", options: ["GPT 5.4 Pro", "GPT 5.4", "GPT 5.3", "GPT 5.2", "GPT 5.1"] },
+        { label: "Версия", options: ["GPT 5.2", "GPT-5.6 Luna", "GPT 5.4", "GPT 5.5"] },
       ],
+      pricing: {
+        mode: "per-message",
+        unitLabel: "за сообщение",
+        rates: [
+          { label: "GPT-5.6 Luna", rate: 4, matchOption: "GPT-5.6 Luna" },
+          { label: "GPT 5.2", rate: 6, matchOption: "GPT 5.2" },
+          { label: "GPT 5.4", rate: 10, matchOption: "GPT 5.4" },
+          { label: "GPT 5.5", rate: 18, matchOption: "GPT 5.5" },
+        ],
+      },
     },
     intro: {
       heading: "ChatGPT в России: полный доступ в одном окне",
