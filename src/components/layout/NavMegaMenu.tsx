@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { useAuth } from "@/contexts/AuthContext";
+import { isPublished } from "@/data/toolPages";
 
 export interface FeatureItem {
   icon: LucideIcon;
