@@ -23,7 +23,7 @@ export const Route = createFileRoute("/sitemap.xml")({
       GET: async ({ request }) => {
         const host = (request.headers.get("host") ?? "").toLowerCase();
         if (!PROD_HOSTS.has(host)) {
-          return new Response("", { status: 404 });
+          return new Response(null, { status: 404 });
         }
         const entries: Entry[] = [];
 
@@ -74,6 +74,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           headers: {
             "Content-Type": "application/xml",
             "Cache-Control": "public, max-age=3600",
+            "Vary": "Host",
           },
         });
       },
