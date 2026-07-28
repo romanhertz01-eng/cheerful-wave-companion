@@ -2878,10 +2878,10 @@ export const toolPages: ToolPageData[] = [
         mode: "per-message",
         unitLabel: "за сообщение",
         rates: [
-          { label: "Sonar", rate: 15, matchOption: "Sonar" },
           { label: "Sonar Pro", rate: 35, matchOption: "Sonar Pro" },
           { label: "Reasoning Pro", rate: 25, matchOption: "Reasoning Pro" },
           { label: "Deep Research", rate: 150, matchOption: "Deep Research" },
+          { label: "Sonar", rate: 15, matchOption: "Sonar" },
         ],
       },
     },
