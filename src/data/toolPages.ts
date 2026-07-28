@@ -1046,6 +1046,14 @@ export const toolPages: ToolPageData[] = [
         { label: "Формат", options: ["1:1", "16:9", "9:16", "4:3"] },
         { label: "Качество", options: ["1K", "2K"] },
       ],
+      pricing: {
+        mode: "per-clip",
+        unitLabel: "за изображение",
+        rates: [
+          { label: "2K", rate: 70, matchOption: "2K" },
+          { label: "1K", rate: 45, matchOption: "1K" },
+        ],
+      },
     },
     intro: {
       heading: "Nano Banana — нейросеть Google для изображений, доступная из России",
