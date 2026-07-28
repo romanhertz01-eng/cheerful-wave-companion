@@ -54,6 +54,11 @@ export interface ToolPageData {
   modelChips?: { heading: string; sub?: string; models: string[] };
   bigStat?: { value: string; label: string; sub?: string; button?: string };
   examples?: { heading: string; images: string[] };
+  visualCards?: {
+    heading: string;
+    sub?: string;
+    cards: { title: string; desc?: string; image: string }[];
+  };
 }
 
 export const toolPages: ToolPageData[] = [
