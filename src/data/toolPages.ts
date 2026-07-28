@@ -2688,14 +2688,22 @@ export const toolPages: ToolPageData[] = [
       layout: "row",
       model: "grok-3",
       modelName: "Grok 3",
-      credits: 1,
+      credits: 7,
       bricks: [],
       resultType: "text",
       textPlaceholder: "Спросите о свежем: «что изменилось в правилах маркировки рекламы»…",
       maxChars: 4000,
       selects: [
-        { label: "Версия", options: ["Grok 3", "Grok 3 Reasoner", "Grok 3 Deep Search", "Grok 4"] },
+        { label: "Версия", options: ["Grok 4.3", "Grok 4.5"] },
       ],
+      pricing: {
+        mode: "per-message",
+        unitLabel: "за сообщение",
+        rates: [
+          { label: "Grok 4.3", rate: 7, matchOption: "Grok 4.3" },
+          { label: "Grok 4.5", rate: 13, matchOption: "Grok 4.5" },
+        ],
+      },
     },
     intro: {
       heading: "Grok в России: свежие ответы без VPN",
