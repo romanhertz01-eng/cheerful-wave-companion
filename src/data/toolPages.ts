@@ -2441,6 +2441,8 @@ export const toolPages: ToolPageData[] = [
       model: "gpt-5.2",
       modelName: "GPT 5.2",
       credits: 6,
+
+      planNote: "Luna безлимитно с тарифа Про, GPT 5.4 — с Ультры",
       bricks: [],
       resultType: "text",
       textPlaceholder: "Спросите что угодно: «составь план запуска интернет-магазина за месяц»…",
@@ -2532,6 +2534,8 @@ export const toolPages: ToolPageData[] = [
       model: "claude-3.5-haiku",
       modelName: "Claude 3.5 Haiku",
       credits: 10,
+
+      planNote: "Haiku безлимитно с тарифа Про, Sonnet — с Ультры",
       bricks: [],
       resultType: "text",
       textPlaceholder: "Опишите задачу: «перепиши это письмо мягче, сохранив требования»…",
@@ -2622,6 +2626,8 @@ export const toolPages: ToolPageData[] = [
       model: "gemini-2.5-flash",
       modelName: "Gemini 2.5 Flash",
       credits: 3,
+
+      planNote: "Flash безлимитно с тарифа Про",
       bricks: [],
       resultType: "text",
       textPlaceholder: "Спросите или прикрепите скриншот: «объясни, что не так в этой таблице»…",
@@ -2711,6 +2717,8 @@ export const toolPages: ToolPageData[] = [
       model: "grok-3",
       modelName: "Grok 3",
       credits: 7,
+
+      planNote: "Grok 4.3 безлимитно с тарифа Макс, 4.5 — с Ультры",
       bricks: [],
       resultType: "text",
       textPlaceholder: "Спросите о свежем: «что изменилось в правилах маркировки рекламы»…",
@@ -2800,6 +2808,8 @@ export const toolPages: ToolPageData[] = [
       model: "deepseek-v3",
       modelName: "DeepSeek V3",
       credits: 3,
+
+      planNote: "Безлимит с тарифа Базовый — 100 сообщений в день",
       bricks: [],
       resultType: "text",
       textPlaceholder: "Задайте задачу: «найди ошибку в этой формуле и объясни ход решения»…",
@@ -2889,6 +2899,8 @@ export const toolPages: ToolPageData[] = [
       model: "sonar-pro",
       modelName: "Sonar Pro",
       credits: 15,
+
+      planNote: "Работает только за кредиты — безлимиты тарифов не распространяются",
       bricks: [],
       resultType: "text",
       textPlaceholder: "Спросите как у поисковика: «сравни тарифы CDN-провайдеров для видео в РФ»…",
@@ -4662,6 +4674,8 @@ export const toolPages: ToolPageData[] = [
       model: "gpt-5",
       modelName: "GPT 5",
       credits: 1,
+
+      planNote: "Быстрые модели безлимитны с тарифа Про",
       bricks: [],
       resultType: "text",
       textPlaceholder: "Спросите что угодно: «объясни, как работает сложный процент, на примере»…",
