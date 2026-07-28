@@ -1,8 +1,8 @@
+import { ORIGIN } from "@/lib/origin";
 import { createFileRoute } from '@tanstack/react-router';
 import { SeoRenderer } from '@/components/seo/SeoPage';
 import { resolveRobots } from '@/data/seo/robots';
 import { aiAgentsPage } from '@/data/seo/pages/aiAgents';
-import { ORIGIN } from "@/lib/origin";
 
 export const Route = createFileRoute('/ai/agents')({
   component: () => <SeoRenderer def={aiAgentsPage} />,

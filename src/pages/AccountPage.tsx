@@ -1,6 +1,6 @@
+import { ORIGIN } from "@/lib/origin";
 import { useEffect, useState } from "react";
 import {
-import { ORIGIN } from "@/lib/origin";
   CreditCard,
   X,
   Zap,

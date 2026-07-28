@@ -1,7 +1,7 @@
+import { ORIGIN } from "@/lib/origin";
 import { useState } from "react";
 import { X, Gift, Copy, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ORIGIN } from "@/lib/origin";
 
 export function ReferralPopup({ onClose }: { onClose: () => void }) {
   const [copied, setCopied] = useState(false);

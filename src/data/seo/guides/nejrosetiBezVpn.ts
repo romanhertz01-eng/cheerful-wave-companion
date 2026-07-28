@@ -1,5 +1,5 @@
-import type { SeoPage } from '../types';
 import { ORIGIN } from "@/lib/origin";
+import type { SeoPage } from '../types';
 
 export const nejrosetiBezVpnGuide: SeoPage = {
   id: 'guide-nejroseti-bez-vpn',

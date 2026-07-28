@@ -1,5 +1,5 @@
-import type { SeoPage } from '../types';
 import { ORIGIN } from "@/lib/origin";
+import type { SeoPage } from '../types';
 
 export const aiImagePage: SeoPage = {
   id: 'ai-image',

@@ -1,8 +1,8 @@
+import { ORIGIN } from "@/lib/origin";
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { ChevronRight } from 'lucide-react';
 import { guides } from '@/data/seo/guides';
 import { Footer } from '@/components/shared/Footer';
-import { ORIGIN } from "@/lib/origin";
 
 const isEmpty = Object.keys(guides).length === 0;
 const TITLE = 'Гайды по нейросетям — инструкции ЭРА2 | ERA2.ai';

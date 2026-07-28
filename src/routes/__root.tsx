@@ -1,3 +1,4 @@
+import { ORIGIN } from "@/lib/origin";
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -9,7 +10,6 @@ import { OnboardingTour } from "@/components/shared/OnboardingTour";
 import { CopyToastProvider } from "@/components/shared/CopyToast";
 import { CornerPromo } from "@/components/shared/CornerPromo";
 import { DailyCheckIn } from "@/components/shared/DailyCheckIn";
-import { ORIGIN } from "@/lib/origin";
 
 import appCss from "../styles.css?url";
 

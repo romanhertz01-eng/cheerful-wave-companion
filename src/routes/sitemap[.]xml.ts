@@ -1,3 +1,4 @@
+import { ORIGIN } from "@/lib/origin";
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { toolPages } from "@/data/toolPages";
@@ -8,7 +9,6 @@ import { aiVideoPage } from "@/data/seo/pages/aiVideo";
 import { aiAudioPage } from "@/data/seo/pages/aiAudio";
 import { aiTextPage } from "@/data/seo/pages/aiText";
 import { aiAgentsPage } from "@/data/seo/pages/aiAgents";
-import { ORIGIN } from "@/lib/origin";
 
 const BASE_URL = ORIGIN;
 

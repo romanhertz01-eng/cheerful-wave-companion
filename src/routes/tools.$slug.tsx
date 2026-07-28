@@ -1,7 +1,7 @@
+import { ORIGIN } from "@/lib/origin";
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import ToolPage from "@/pages/ToolPage";
 import { getToolPageData } from "@/data/toolPages";
-import { ORIGIN } from "@/lib/origin";
 
 export const Route = createFileRoute("/tools/$slug")({
   loader: ({ params }) => {

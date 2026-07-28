@@ -1,3 +1,4 @@
+import { ORIGIN } from "@/lib/origin";
 
 import { Link, getRouteApi } from "@tanstack/react-router";
 import { ArrowRight, ChevronRight, Play } from "lucide-react";
@@ -11,7 +12,6 @@ import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
 import { AuthCTALink } from "@/components/auth/AuthCTALink";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { ORIGIN } from "@/lib/origin";
 
 const toolRouteApi = getRouteApi("/tools/$slug");
 

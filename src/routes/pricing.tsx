@@ -1,7 +1,7 @@
+import { ORIGIN } from "@/lib/origin";
 import { createFileRoute } from "@tanstack/react-router";
 import PricingPage from "@/pages/PricingPage";
 import { plans } from "@/data/plans";
-import { ORIGIN } from "@/lib/origin";
 
 const TITLE = "Тарифы на нейросети — от 790 ₽ в месяц | ERA2.ai";
 const DESCRIPTION =

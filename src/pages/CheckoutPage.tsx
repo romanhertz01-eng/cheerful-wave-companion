@@ -1,3 +1,4 @@
+import { ORIGIN } from "@/lib/origin";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearch, useNavigate } from "@tanstack/react-router";
 import { ArrowLeft, Gift, X } from "lucide-react";
@@ -5,7 +6,6 @@ import { SiVisa, SiMastercard, SiTelegram } from "@icons-pack/react-simple-icons
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { plans } from "@/data/plans";
-import { ORIGIN } from "@/lib/origin";
 
 type PeriodId = "1m" | "3m" | "6m" | "12m";
 
