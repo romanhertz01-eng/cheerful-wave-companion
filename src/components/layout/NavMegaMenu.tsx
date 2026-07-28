@@ -250,7 +250,12 @@ export function NavMegaMenu() {
                   {activeTab.modelsTitle || "Модели"}
                 </div>
                 <div className="flex flex-col gap-0.5">
-                  {activeTab.models!.map((m) => {
+                  {activeTab.models!.filter((m) => {
+                    if (!m.publicHref) return true;
+                    const match = m.publicHref.match(/^\/tools\/(.+)$/);
+                    if (!match) return true;
+                    return isPublished(match[1]);
+                  }).map((m) => {
                     const href = isAuthed ? activeTab.route : (m.publicHref ?? activeTab.publicRoute);
                     return (
                     <Link
