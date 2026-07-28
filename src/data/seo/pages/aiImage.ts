@@ -1,4 +1,5 @@
 import type { SeoPage } from '../types';
+import { ORIGIN } from "@/lib/origin";
 
 export const aiImagePage: SeoPage = {
   id: 'ai-image',
@@ -13,7 +14,7 @@ export const aiImagePage: SeoPage = {
     title: 'Нейросети для изображений — генерация картинок онлайн | ERA2.ai',
     description:
       'Создавайте изображения из текста, удаляйте фон и улучшайте фото: Nano Banana, Midjourney, Flux. Единая подписка, оплата в рублях, без VPN.',
-    canonical: 'https://cheerful-wave-companion.lovable.app/ai/image',
+    canonical: `${ORIGIN}/ai/image`,
     robots: 'index,follow',
   },
   breadcrumbs: [

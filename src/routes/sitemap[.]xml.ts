@@ -8,8 +8,9 @@ import { aiVideoPage } from "@/data/seo/pages/aiVideo";
 import { aiAudioPage } from "@/data/seo/pages/aiAudio";
 import { aiTextPage } from "@/data/seo/pages/aiText";
 import { aiAgentsPage } from "@/data/seo/pages/aiAgents";
+import { ORIGIN } from "@/lib/origin";
 
-const BASE_URL = "https://cheerful-wave-companion.lovable.app";
+const BASE_URL = ORIGIN;
 
 type Entry = { path: string; lastmod?: string };
 

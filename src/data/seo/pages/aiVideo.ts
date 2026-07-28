@@ -1,4 +1,5 @@
 import type { SeoPage } from '../types';
+import { ORIGIN } from "@/lib/origin";
 
 export const aiVideoPage: SeoPage = {
   id: 'ai-video',
@@ -13,7 +14,7 @@ export const aiVideoPage: SeoPage = {
     title: 'Нейросети для видео — генерация и обработка видео ИИ | ERA2.ai',
     description:
       'Создавайте и обрабатывайте видео нейросетями: текст в видео, оживить фото, ИИ-аватар, апскейл. Kling, Veo, Runway, Sora и другие — единая подписка, оплата в рублях.',
-    canonical: 'https://cheerful-wave-companion.lovable.app/ai/video',
+    canonical: `${ORIGIN}/ai/video`,
     robots: 'index,follow',
   },
   breadcrumbs: [

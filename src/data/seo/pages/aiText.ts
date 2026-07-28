@@ -1,4 +1,5 @@
 import type { SeoPage } from '../types';
+import { ORIGIN } from "@/lib/origin";
 
 export const aiTextPage: SeoPage = {
   id: 'ai-text',
@@ -13,7 +14,7 @@ export const aiTextPage: SeoPage = {
     title: 'Нейросети для текста — ChatGPT, Claude, Gemini на русском | ERA2.ai',
     description:
       'Пишите статьи, переводите и генерируйте код с ChatGPT, Claude, Gemini, DeepSeek. Единая подписка, оплата в рублях, без VPN.',
-    canonical: 'https://cheerful-wave-companion.lovable.app/ai/text',
+    canonical: `${ORIGIN}/ai/text`,
     robots: 'index,follow',
   },
   breadcrumbs: [

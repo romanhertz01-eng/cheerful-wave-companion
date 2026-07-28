@@ -11,6 +11,7 @@ import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
 import { AuthCTALink } from "@/components/auth/AuthCTALink";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { ORIGIN } from "@/lib/origin";
 
 const toolRouteApi = getRouteApi("/tools/$slug");
 
@@ -51,9 +52,9 @@ const ToolPage = () => {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Главная", item: "https://cheerful-wave-companion.lovable.app/" },
-      { "@type": "ListItem", position: 2, name: "Инструменты", item: "https://cheerful-wave-companion.lovable.app/studios" },
-      { "@type": "ListItem", position: 3, name: data.heroTitle, item: `https://cheerful-wave-companion.lovable.app/tools/${data.slug}` },
+      { "@type": "ListItem", position: 1, name: "Главная", item: `${ORIGIN}/` },
+      { "@type": "ListItem", position: 2, name: "Инструменты", item: `${ORIGIN}/studios` },
+      { "@type": "ListItem", position: 3, name: data.heroTitle, item: `${ORIGIN}/tools/${data.slug}` },
     ],
   };
   const related = getRelatedTools(data.slug);
@@ -71,7 +72,7 @@ const ToolPage = () => {
         name: `${data.modelName} в ERA2`,
         applicationCategory: "MultimediaApplication",
         operatingSystem: "Web",
-        url: `https://cheerful-wave-companion.lovable.app/tools/${data.slug}`,
+        url: `${ORIGIN}/tools/${data.slug}`,
         offers: {
           "@type": "Offer",
           price: minPaidPrice,

@@ -2,6 +2,7 @@ import { createFileRoute, notFound } from '@tanstack/react-router';
 import { SeoRenderer } from '@/components/seo/SeoPage';
 import { resolveRobots } from '@/data/seo/robots';
 import { guides } from '@/data/seo/guides';
+import { ORIGIN } from "@/lib/origin";
 
 export const Route = createFileRoute('/guides/$slug')({
   loader: ({ params }) => {
@@ -13,7 +14,7 @@ export const Route = createFileRoute('/guides/$slug')({
   head: ({ params }) => {
     const guide = guides[params.slug];
     if (!guide) return {};
-    const canonical = `https://cheerful-wave-companion.lovable.app/guides/${params.slug}`;
+    const canonical = `${ORIGIN}/guides/${params.slug}`;
     return {
       meta: [
         { title: guide.seo.title },

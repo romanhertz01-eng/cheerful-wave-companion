@@ -5,6 +5,7 @@ import { SiVisa, SiMastercard, SiTelegram } from "@icons-pack/react-simple-icons
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { plans } from "@/data/plans";
+import { ORIGIN } from "@/lib/origin";
 
 type PeriodId = "1m" | "3m" | "6m" | "12m";
 
@@ -71,7 +72,7 @@ export default function CheckoutPage() {
     if (!agreed) return;
     if (isGift) {
       const code = Math.random().toString(36).slice(2, 6).toUpperCase();
-      setGiftModal({ link: `https://cheerful-wave-companion.lovable.app/gift/DEMO-${code}` });
+      setGiftModal({ link: `${ORIGIN}/gift/DEMO-${code}` });
       return;
     }
     toast("Переход к оплате", { description: `${plan.name} · ${selected.label} · ${fmtRub(selected.total)}` });

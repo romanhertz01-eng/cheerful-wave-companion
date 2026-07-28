@@ -1,6 +1,7 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import ToolPage from "@/pages/ToolPage";
 import { getToolPageData } from "@/data/toolPages";
+import { ORIGIN } from "@/lib/origin";
 
 export const Route = createFileRoute("/tools/$slug")({
   loader: ({ params }) => {
@@ -13,7 +14,7 @@ export const Route = createFileRoute("/tools/$slug")({
     const data = getToolPageData(params.slug);
     if (!data) return {};
     const title = `${data.heroTitle} онлайн — нейросеть | ERA2.ai`;
-    const canonical = `https://cheerful-wave-companion.lovable.app/tools/${params.slug}`;
+    const canonical = `${ORIGIN}/tools/${params.slug}`;
     const robots = data.status === 'draft' ? 'noindex, follow' : 'index, follow';
     return {
       meta: [
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/tools/$slug")({
         { property: "og:title", content: title },
         { property: "og:description", content: data.heroDescription },
         { property: "og:url", content: canonical },
-        { property: "og:image", content: "https://cheerful-wave-companion.lovable.app/og-image.png" },
+        { property: "og:image", content: `${ORIGIN}/og-image.png` },
       ],
       links: [{ rel: "canonical", href: canonical }],
     };

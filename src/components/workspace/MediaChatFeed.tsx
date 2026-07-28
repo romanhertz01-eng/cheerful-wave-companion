@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useCopyToast } from "@/components/shared/CopyToast";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { Placeholder } from "@/components/ui/era";
+import { ORIGIN } from "@/lib/origin";
 
 export interface MediaGeneration {
   id: string;
@@ -152,7 +153,7 @@ export function MediaChatFeed({ generations }: Props) {
                   Промпт
                 </button>
                 <button
-                  onClick={() => copy(`https://cheerful-wave-companion.lovable.app/share/${gen.id}`, "Ссылка скопирована")}
+                  onClick={() => copy(`${ORIGIN}/share/${gen.id}`, "Ссылка скопирована")}
                   className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-[8px] text-[12px] text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
                   title="Поделиться"
                 >

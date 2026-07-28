@@ -9,6 +9,7 @@ import { OnboardingTour } from "@/components/shared/OnboardingTour";
 import { CopyToastProvider } from "@/components/shared/CopyToast";
 import { CornerPromo } from "@/components/shared/CornerPromo";
 import { DailyCheckIn } from "@/components/shared/DailyCheckIn";
+import { ORIGIN } from "@/lib/origin";
 
 import appCss from "../styles.css?url";
 
@@ -41,12 +42,12 @@ export const Route = createRootRoute({
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "ERA2.ai" },
       { property: "og:locale", content: "ru_RU" },
-      { property: "og:image", content: "https://cheerful-wave-companion.lovable.app/og-image.png" },
+      { property: "og:image", content: `${ORIGIN}/og-image.png` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { name: "twitter:title", content: "ERA2.ai — Агрегатор нейросетей" },
       { name: "twitter:description", content: "Единая подписка на ChatGPT, Claude, Midjourney, Sora, ElevenLabs и 90+ других нейросетей. Без VPN, оплата в рублях." },
-      { name: "twitter:image", content: "https://cheerful-wave-companion.lovable.app/og-image.png" },
+      { name: "twitter:image", content: `${ORIGIN}/og-image.png` },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#E85420" },
       { name: "apple-mobile-web-app-capable", content: "yes" },
@@ -69,8 +70,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
       "@context": "https://schema.org",
       "@type": "Organization",
       name: "ERA2",
-      url: "https://cheerful-wave-companion.lovable.app",
-      logo: "https://cheerful-wave-companion.lovable.app/favicon.svg",
+      url: ORIGIN,
+      logo: `${ORIGIN}/favicon.svg`,
       alternateName: ["ЭРА2", "era2", "ERA2.ai"],
       description:
         "Агрегатор нейросетей: 90+ ИИ-моделей по единой подписке с оплатой в рублях",
@@ -79,13 +80,13 @@ function RootShell({ children }: { children: React.ReactNode }) {
       "@context": "https://schema.org",
       "@type": "WebSite",
       name: "ERA2.ai",
-      url: "https://cheerful-wave-companion.lovable.app",
+      url: ORIGIN,
       inLanguage: "ru-RU",
       potentialAction: {
         "@type": "SearchAction",
         target: {
           "@type": "EntryPoint",
-          urlTemplate: "https://cheerful-wave-companion.lovable.app/studios?q={search_term_string}",
+          urlTemplate: `${ORIGIN}/studios?q={search_term_string}`,
         },
         "query-input": "required name=search_term_string",
       },

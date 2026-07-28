@@ -1,4 +1,5 @@
 import type { SeoPage } from '../types';
+import { ORIGIN } from "@/lib/origin";
 
 export const kakOzhivitStaroeFotoGuide: SeoPage = {
   id: 'guide-kak-ozhivit-staroe-foto',
@@ -15,7 +16,7 @@ export const kakOzhivitStaroeFotoGuide: SeoPage = {
     title: 'Как оживить старое фото нейросетью — пошаговая инструкция | ERA2.ai',
     description:
       'Превращаем архивный снимок в живое видео за 5 минут: подготовка фото, реставрация повреждений, выбор типа анимации и пошаговая инструкция. Без VPN, с оплатой в рублях.',
-    canonical: 'https://cheerful-wave-companion.lovable.app/guides/kak-ozhivit-staroe-foto',
+    canonical: `${ORIGIN}/guides/kak-ozhivit-staroe-foto`,
     robots: 'index, follow',
   },
   breadcrumbs: [

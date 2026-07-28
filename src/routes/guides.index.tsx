@@ -2,12 +2,13 @@ import { createFileRoute, Link } from '@tanstack/react-router';
 import { ChevronRight } from 'lucide-react';
 import { guides } from '@/data/seo/guides';
 import { Footer } from '@/components/shared/Footer';
+import { ORIGIN } from "@/lib/origin";
 
 const isEmpty = Object.keys(guides).length === 0;
 const TITLE = 'Гайды по нейросетям — инструкции ЭРА2 | ERA2.ai';
 const DESCRIPTION =
   'Пошаговые гайды и инструкции по нейросетям: как создавать изображения, видео, тексты и аудио в ЭРА2.';
-const CANONICAL = 'https://cheerful-wave-companion.lovable.app/guides';
+const CANONICAL = `${ORIGIN}/guides`;
 
 export const Route = createFileRoute('/guides/')({
   component: GuidesHub,
@@ -19,7 +20,7 @@ export const Route = createFileRoute('/guides/')({
       { property: 'og:title', content: TITLE },
       { property: 'og:description', content: DESCRIPTION },
       { property: 'og:url', content: CANONICAL },
-      { property: 'og:image', content: 'https://cheerful-wave-companion.lovable.app/og-image.png' },
+      { property: 'og:image', content: `${ORIGIN}/og-image.png` },
     ],
     links: [{ rel: 'canonical', href: CANONICAL }],
   }),

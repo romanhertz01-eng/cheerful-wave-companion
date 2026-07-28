@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import PricingPage from "@/pages/PricingPage";
 import { plans } from "@/data/plans";
+import { ORIGIN } from "@/lib/origin";
 
 const TITLE = "Тарифы на нейросети — от 790 ₽ в месяц | ERA2.ai";
 const DESCRIPTION =
   "Единая подписка на 90+ нейросетей: ChatGPT, Kling, Sora и другие. Тарифы от 790 ₽/мес, оплата российскими картами и СБП, 150 кредитов бесплатно при регистрации.";
-const CANONICAL = "https://cheerful-wave-companion.lovable.app/pricing";
+const CANONICAL = `${ORIGIN}/pricing`;
 
 const softwareApplicationLd = JSON.stringify({
   "@context": "https://schema.org",
@@ -35,7 +36,7 @@ export const Route = createFileRoute("/pricing")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:url", content: CANONICAL },
-      { property: "og:image", content: "https://cheerful-wave-companion.lovable.app/og-image.png" },
+      { property: "og:image", content: `${ORIGIN}/og-image.png` },
     ],
     links: [{ rel: "canonical", href: CANONICAL }],
     scripts: [
