@@ -3356,7 +3356,7 @@ export const toolPages: ToolPageData[] = [
         "Дарья — деловой",
       ],
       selects: [
-        { label: "Режим", options: ["Быстрое", "Студийное", "Диалоги"] },
+        { label: "Режим", options: ["Студийное", "Быстрое", "Диалоги"] },
       ],
       pricing: {
         mode: "per-1k-chars",
