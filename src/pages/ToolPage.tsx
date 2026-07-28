@@ -36,6 +36,8 @@ const ToolPage = () => {
     workspaceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  const targetPage = data.category === "video" ? "/video" : data.category === "audio" ? "/audio" : "/design";
+
   const faqForLd = data.faqItems ?? toolPageItems;
   const faqLd = {
     "@context": "https://schema.org",
