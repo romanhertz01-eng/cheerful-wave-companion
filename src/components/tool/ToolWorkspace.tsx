@@ -504,6 +504,9 @@ function RowWorkspace({ data }: { data: ToolPageData }) {
                   ? computePricingLabel(tool.pricing, selects, selectIdx, value.length)
                   : `${tool.credits} кредитов`}
               </span>
+              {tool.planNote && (
+                <span className="text-[11px]" style={{ color: "#E85420" }}>{tool.planNote}</span>
+              )}
             </div>
             <button
               type="button"
