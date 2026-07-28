@@ -36,11 +36,14 @@ export const Route = createFileRoute("/sitemap.xml")({
         }
         const publishedGuides = Object.values(guides).filter((g) => g.status === "published");
         if (publishedGuides.length > 0) {
-          const maxLastmod = publishedGuides
+          const dates = publishedGuides
             .map((g) => g.updatedAt)
-            .sort()
-            .pop();
-          entries.push({ path: "/guides", lastmod: maxLastmod });
+            .filter((d): d is string => typeof d === "string" && d.length > 0);
+          if (dates.length > 0) {
+            entries.push({ path: "/guides", lastmod: dates.sort().pop() });
+          } else {
+            entries.push({ path: "/guides" });
+          }
         }
 
         for (const page of [aiImagePage, aiVideoPage, aiAudioPage, aiTextPage, aiAgentsPage]) {
