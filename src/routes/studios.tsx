@@ -15,11 +15,14 @@ import { textProviders } from "@/data/textModels";
 import { imageProviders } from "@/data/imageModels";
 import { videoProviders } from "@/data/videoModels";
 import { useAuth } from "@/contexts/AuthContext";
+import { studiosPage } from "@/data/seo/pages/studios";
+import { resolveRobots } from "@/data/seo/robots";
+import type { SeoPage } from "@/data/seo/types";
 
-const STUDIOS_TITLE = "Все нейросети — каталог из 90+ ИИ-моделей | ERA2.ai";
-const STUDIOS_DESCRIPTION =
-  "Полный каталог нейросетей ЭРА2: генерация текста, изображений, видео и озвучки. Выбирайте модель под задачу — всё в одной подписке, без VPN.";
-const STUDIOS_CANONICAL = `${ORIGIN}/studios`;
+const STUDIOS_TITLE = studiosPage.seo.title;
+const STUDIOS_DESCRIPTION = studiosPage.seo.description;
+const STUDIOS_CANONICAL = studiosPage.seo.canonical;
+const STUDIOS_ROBOTS = resolveRobots(studiosPage as SeoPage);
 
 export const Route = createFileRoute("/studios")({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -29,7 +32,7 @@ export const Route = createFileRoute("/studios")({
     meta: [
       { title: STUDIOS_TITLE },
       { name: "description", content: STUDIOS_DESCRIPTION },
-      { name: "robots", content: "index, follow" },
+      { name: "robots", content: STUDIOS_ROBOTS },
       { property: "og:title", content: STUDIOS_TITLE },
       { property: "og:description", content: STUDIOS_DESCRIPTION },
       { property: "og:url", content: STUDIOS_CANONICAL },
