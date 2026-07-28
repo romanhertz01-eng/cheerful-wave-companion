@@ -11,13 +11,18 @@ import { aiTextPage } from "@/data/seo/pages/aiText";
 import { aiAgentsPage } from "@/data/seo/pages/aiAgents";
 
 const BASE_URL = ORIGIN;
+const PROD_HOSTS = new Set(["era2.ai", "www.era2.ai"]);
 
 type Entry = { path: string; lastmod?: string };
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
-      GET: async () => {
+      GET: async ({ request }) => {
+        const host = (request.headers.get("host") ?? "").toLowerCase();
+        if (!PROD_HOSTS.has(host)) {
+          return new Response("", { status: 404 });
+        }
         const entries: Entry[] = [];
 
         entries.push({ path: "/", lastmod: homePage.updatedAt });
