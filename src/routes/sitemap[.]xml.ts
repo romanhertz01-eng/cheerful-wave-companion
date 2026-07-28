@@ -9,6 +9,8 @@ import { aiVideoPage } from "@/data/seo/pages/aiVideo";
 import { aiAudioPage } from "@/data/seo/pages/aiAudio";
 import { aiTextPage } from "@/data/seo/pages/aiText";
 import { aiAgentsPage } from "@/data/seo/pages/aiAgents";
+import { pricingPage } from "@/data/seo/pages/pricing";
+import { studiosPage } from "@/data/seo/pages/studios";
 
 const BASE_URL = ORIGIN;
 const PROD_HOSTS = new Set(["era2.ai", "www.era2.ai"]);
@@ -26,8 +28,12 @@ export const Route = createFileRoute("/sitemap.xml")({
         const entries: Entry[] = [];
 
         entries.push({ path: "/", lastmod: homePage.updatedAt });
-        entries.push({ path: "/pricing" });
-        entries.push({ path: "/studios" });
+        if (pricingPage.status === "published") {
+          entries.push({ path: "/pricing", lastmod: pricingPage.updatedAt });
+        }
+        if (studiosPage.status === "published") {
+          entries.push({ path: "/studios", lastmod: studiosPage.updatedAt });
+        }
         entries.push({ path: "/guides" });
 
         for (const page of [aiImagePage, aiVideoPage, aiAudioPage, aiTextPage, aiAgentsPage]) {

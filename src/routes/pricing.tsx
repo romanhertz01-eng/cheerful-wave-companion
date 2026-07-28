@@ -2,11 +2,14 @@ import { ORIGIN } from "@/lib/origin";
 import { createFileRoute } from "@tanstack/react-router";
 import PricingPage from "@/pages/PricingPage";
 import { plans } from "@/data/plans";
+import { pricingPage } from "@/data/seo/pages/pricing";
+import { resolveRobots } from "@/data/seo/robots";
+import type { SeoPage } from "@/data/seo/types";
 
-const TITLE = "Тарифы на нейросети — от 790 ₽ в месяц | ERA2.ai";
-const DESCRIPTION =
-  "Единая подписка на 90+ нейросетей: ChatGPT, Kling, Sora и другие. Тарифы от 790 ₽/мес, оплата российскими картами и СБП, 150 кредитов бесплатно при регистрации.";
-const CANONICAL = `${ORIGIN}/pricing`;
+const TITLE = pricingPage.seo.title;
+const DESCRIPTION = pricingPage.seo.description;
+const CANONICAL = pricingPage.seo.canonical;
+const ROBOTS = resolveRobots(pricingPage as SeoPage);
 
 const softwareApplicationLd = JSON.stringify({
   "@context": "https://schema.org",
@@ -32,7 +35,7 @@ export const Route = createFileRoute("/pricing")({
     meta: [
       { title: TITLE },
       { name: "description", content: DESCRIPTION },
-      { name: "robots", content: "index, follow" },
+      { name: "robots", content: ROBOTS },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:url", content: CANONICAL },
