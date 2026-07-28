@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { isPublished } from "@/data/toolPages";
 
 interface ToolItem {
   title: string;
@@ -13,11 +14,16 @@ interface ToolGridBlockProps {
 }
 
 export function ToolGridBlock({ heading, items }: ToolGridBlockProps) {
+  const visible = items.filter((it) => {
+    const match = it.href.match(/^\/tools\/([^/?#]+)/);
+    if (!match) return true;
+    return isPublished(match[1]);
+  });
   return (
     <section className="max-w-6xl mx-auto px-4 py-12">
       <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{heading}</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {items.map((it) => (
+        {visible.map((it) => (
           <Link
             key={it.title}
             to={it.href}
