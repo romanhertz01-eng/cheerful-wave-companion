@@ -172,7 +172,7 @@ const ToolPage = () => {
       )}
 
       {/* Visual cards (model pages) */}
-      {data.kind === 'model' && data.visualCards && (
+      {data.visualCards && (
         <VisualCards
           heading={data.visualCards.heading}
           sub={data.visualCards.sub}
