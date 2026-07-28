@@ -2094,15 +2094,13 @@ export const toolPages: ToolPageData[] = [
         { label: "Версия", options: ["Sora 2", "Sora 2 Pro"] },
         { label: "Длительность", options: ["5 сек", "10 сек"] },
         { label: "Формат", options: ["16:9", "9:16", "1:1", "4:3"] },
-        { label: "Разрешение", options: ["720p", "1080p"] },
       ],
       pricing: {
         mode: "per-second",
         unitLabel: "за секунду",
         rates: [
-          { label: "Sora 2 Pro", rate: 480, matchOption: "Pro" },
-          { label: "Sora 2 · 720p", rate: 160, matchOption: "720p" },
-          { label: "Sora 2 · 1080p", rate: 160, matchOption: "1080p" },
+          { label: "Sora 2 Pro · 720p", rate: 480, matchOption: "Sora 2 Pro" },
+          { label: "Sora 2 · 720p", rate: 160, matchOption: "Sora 2" },
         ],
       },
     },
