@@ -279,6 +279,9 @@ export function ToolWorkspace({ data }: { data: ToolPageData }) {
                   ? `Требуется кредитов: ${tool.types[selectedType].credits}`
                   : `модель: ${tool.modelName} · ${tool.credits} кредитов`}
               </p>
+              {tool.planNote && (
+                <p className="text-[11px] mb-2" style={{ color: "#E85420" }}>{tool.planNote}</p>
+              )}
               <button
                 type="button"
                 disabled={isAuthed && (!file || status === "loading")}
