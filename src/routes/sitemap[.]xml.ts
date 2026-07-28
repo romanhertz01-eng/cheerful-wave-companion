@@ -34,7 +34,14 @@ export const Route = createFileRoute("/sitemap.xml")({
         if (studiosPage.status === "published") {
           entries.push({ path: "/studios", lastmod: studiosPage.updatedAt });
         }
-        entries.push({ path: "/guides" });
+        const publishedGuides = Object.values(guides).filter((g) => g.status === "published");
+        if (publishedGuides.length > 0) {
+          const maxLastmod = publishedGuides
+            .map((g) => g.updatedAt)
+            .sort()
+            .pop();
+          entries.push({ path: "/guides", lastmod: maxLastmod });
+        }
 
         for (const page of [aiImagePage, aiVideoPage, aiAudioPage, aiTextPage, aiAgentsPage]) {
           if (page.status === "published") {
