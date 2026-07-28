@@ -36,6 +36,7 @@ export interface ToolPageData {
       rates: Array<{ label: string; rate: number; matchOption?: string }>;
       minCredits?: number;
     };
+    planNote?: string;
   };
   howItWorks?: {
     title: string;
