@@ -4831,6 +4831,11 @@ export function getToolPageData(slug: string): ToolPageData | undefined {
   return toolPages.find((t) => t.slug === slug);
 }
 
+export function isPublished(slug: string): boolean {
+  const p = toolPages.find((t) => t.slug === slug);
+  return !!p && p.status !== 'draft';
+}
+
 export function getRelatedTools(slug: string, limit = 6): ToolPageData[] {
   const current = toolPages.find((t) => t.slug === slug);
   if (!current) return [];

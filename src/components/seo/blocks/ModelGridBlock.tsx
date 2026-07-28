@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
+import { isPublished } from "@/data/toolPages";
 
 interface ModelItem {
   name: string;
@@ -37,11 +38,17 @@ function Card({ m }: { m: ModelItem }) {
 }
 
 export function ModelGridBlock({ heading, items }: ModelGridBlockProps) {
+  const visible = items.filter((m) => {
+    if (!m.href) return true;
+    const match = m.href.match(/^\/tools\/([^/?#]+)/);
+    if (!match) return true;
+    return isPublished(match[1]);
+  });
   return (
     <section className="max-w-5xl mx-auto px-4 py-12">
       <h2 className="text-2xl md:text-[32px] font-bold mb-8 text-center">{heading}</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {items.map((m) =>
+        {visible.map((m) =>
           m.href ? (
             <Link key={m.name} to={m.href} className="block">
               <Card m={m} />
