@@ -669,8 +669,8 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "text-to-speech",
-    status: "draft",
-    updatedAt: "2026-07-26",
+    status: "published",
+    updatedAt: "2026-07-28",
     modelName: "ElevenLabs",
     heroTitle: "Озвучка текста",
     heroDescription:
@@ -1833,8 +1833,8 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "talking-avatar",
-    status: "draft",
-    updatedAt: "2026-07-26",
+    status: "published",
+    updatedAt: "2026-07-28",
     modelName: "HeyGen",
     heroTitle: "Говорящий аватар по фото",
     heroDescription:
@@ -1967,8 +1967,8 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "ozon-product-video",
-    status: "draft",
-    updatedAt: "2026-07-26",
+    status: "published",
+    updatedAt: "2026-07-28",
     modelName: "Kling 3.0",
     heroTitle: "Видео для карточки Ozon",
     heroDescription:
@@ -3886,8 +3886,8 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "video-upscaler",
-    status: "draft",
-    updatedAt: "2026-07-27",
+    status: "published",
+    updatedAt: "2026-07-28",
     modelName: "ERA2 Видео-апскейл",
     heroTitle: "Апскейл видео нейросетью",
     heroDescription: "Улучшите качество ролика до 4K: чёткость, детали и плавность без пересъёмки. Старые записи, сжатые ролики, кадры с телефона.",
@@ -4214,8 +4214,8 @@ export const toolPages: ToolPageData[] = [
   },
   {
     slug: "sound-effects",
-    status: "draft",
-    updatedAt: "2026-07-27",
+    status: "published",
+    updatedAt: "2026-07-28",
     modelName: "ERA2 Звуки",
     heroTitle: "Создание звуков и эффектов нейросетью",
     heroDescription: "Любой звук по текстовому описанию: шаги по снегу, дверь замка, космический гул, интерфейсные клики. Без стоков и микрофона.",
