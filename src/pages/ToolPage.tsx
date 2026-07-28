@@ -1,7 +1,7 @@
 import { ORIGIN } from "@/lib/origin";
 
 import { Link, getRouteApi } from "@tanstack/react-router";
-import { ArrowRight, ChevronRight, Play } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
 import { getRelatedTools, type ToolPageData } from "@/data/toolPages";
@@ -10,7 +10,6 @@ import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
 import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
 import { VisualCards } from "@/components/tool/VisualCards";
-import { AuthCTALink } from "@/components/auth/AuthCTALink";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
@@ -36,8 +35,6 @@ const ToolPage = () => {
   const scrollToWorkspace = () => {
     workspaceRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-
-  const targetPage = data.category === "video" ? "/video" : data.category === "audio" ? "/audio" : "/design";
 
   const faqForLd = data.faqItems ?? toolPageItems;
   const faqLd = {
