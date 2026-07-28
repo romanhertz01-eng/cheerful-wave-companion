@@ -2866,14 +2866,24 @@ export const toolPages: ToolPageData[] = [
       layout: "row",
       model: "sonar-pro",
       modelName: "Sonar Pro",
-      credits: 5,
+      credits: 15,
       bricks: [],
       resultType: "text",
       textPlaceholder: "Спросите как у поисковика: «сравни тарифы CDN-провайдеров для видео в РФ»…",
       maxChars: 4000,
       selects: [
-        { label: "Режим", options: ["Sonar Pro", "Sonar Deep Research"] },
+        { label: "Режим", options: ["Sonar", "Sonar Pro", "Reasoning Pro", "Deep Research"] },
       ],
+      pricing: {
+        mode: "per-message",
+        unitLabel: "за сообщение",
+        rates: [
+          { label: "Sonar", rate: 15, matchOption: "Sonar" },
+          { label: "Sonar Pro", rate: 35, matchOption: "Sonar Pro" },
+          { label: "Reasoning Pro", rate: 25, matchOption: "Reasoning Pro" },
+          { label: "Deep Research", rate: 150, matchOption: "Deep Research" },
+        ],
+      },
     },
     intro: {
       heading: "Perplexity в России: поиск, который отвечает",
