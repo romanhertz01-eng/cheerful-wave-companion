@@ -32,10 +32,12 @@ export const models: AIModel[] = [
     icon: "🤖",
     slug: "chatgpt",
     subModels: [
-      { id: "gpt-5.2", name: "GPT 5.2", credits: 10, isNew: true },
-      { id: "gpt-5", name: "GPT 5", credits: 6 },
-      { id: "gpt-5-mini", name: "GPT 5 mini", credits: 1 },
-      { id: "gpt-web", name: "GPT Web", credits: 2 },
+      { id: "gpt-5-6-luna", name: "GPT-5.6 Luna", credits: 4 },
+      { id: "gpt-5-2", name: "GPT 5.2", credits: 6 },
+      { id: "gpt-5-4", name: "GPT 5.4", credits: 10 },
+      { id: "gpt-5-6-terra", name: "GPT-5.6 Terra", credits: 10 },
+      { id: "gpt-5-5", name: "GPT 5.5", credits: 18 },
+      { id: "gpt-5-6-sol", name: "GPT-5.6 Sol", credits: 18, isNew: true },
     ],
   },
   {
@@ -48,10 +50,12 @@ export const models: AIModel[] = [
     icon: "🧠",
     slug: "claude",
     subModels: [
-      { id: "claude-4-opus", name: "Claude 4 Opus", credits: 8, isNew: true },
-      { id: "claude-4-sonnet", name: "Claude 4 Sonnet", credits: 4 },
-      { id: "claude-4.5-sonnet", name: "Claude 4.5 Sonnet", credits: 3 },
-      { id: "claude-4.5-haiku", name: "Claude 4.5 Haiku", credits: 1 },
+      { id: "claude-haiku-4-5", name: "Haiku 4.5", credits: 3 },
+      { id: "claude-sonnet-4-6", name: "Sonnet 4.6", credits: 10 },
+      { id: "claude-sonnet-5", name: "Sonnet 5", credits: 10, isNew: true },
+      { id: "claude-opus-4-7", name: "Opus 4.7", credits: 18 },
+      { id: "claude-opus-4-8", name: "Opus 4.8", credits: 20 },
+      { id: "claude-fable-5", name: "Fable 5", credits: 40, isNew: true },
     ],
   },
   {
@@ -64,9 +68,12 @@ export const models: AIModel[] = [
     icon: "💎",
     slug: "gemini",
     subModels: [
-      { id: "gemini-2.5-pro", name: "Gemini 2.5 Pro", credits: 1, isNew: true },
-      { id: "gemini-2.5-flash", name: "Gemini 2.5 Flash", credits: 1 },
-      { id: "gemini-3-pro", name: "Gemini 3 Pro", credits: 2 },
+      { id: "gemini-2-5-flash", name: "Gemini 2.5 Flash", credits: 3 },
+      { id: "gemini-3-flash", name: "Gemini 3 Flash", credits: 3 },
+      { id: "gemini-3-5-flash", name: "Gemini 3.5 Flash", credits: 6, isNew: true },
+      { id: "gemini-2-5-pro", name: "Gemini 2.5 Pro", credits: 6 },
+      { id: "gemini-3-pro", name: "Gemini 3 Pro", credits: 6 },
+      { id: "gemini-3-1-pro", name: "Gemini 3.1 Pro", credits: 6, isNew: true },
     ],
   },
   {
@@ -79,10 +86,8 @@ export const models: AIModel[] = [
     icon: "⚡",
     slug: "grok",
     subModels: [
-      { id: "grok-4", name: "Grok 4", credits: 8, isNew: true },
-      { id: "grok-3", name: "Grok 3", credits: 4 },
-      { id: "grok-3-reasoner", name: "Grok 3 Reasoner", credits: 6 },
-      { id: "grok-3-deep-search", name: "Grok 3 Deep Search", credits: 5 },
+      { id: "grok-4-3", name: "Grok 4.3", credits: 7 },
+      { id: "grok-4-5", name: "Grok 4.5", credits: 13, isNew: true },
     ],
   },
   {
@@ -95,10 +100,8 @@ export const models: AIModel[] = [
     icon: "🔍",
     slug: "deepseek",
     subModels: [
-      { id: "deepseek-r1", name: "DeepSeek R1", credits: 2, isNew: true },
-      { id: "deepseek-v3", name: "DeepSeek V3", credits: 1 },
-      { id: "deepseek-chat", name: "DeepSeek Chat", credits: 1 },
-      { id: "deepseek-reasoner", name: "DeepSeek Reasoner", credits: 1 },
+      { id: "deepseek-v4-flash", name: "DeepSeek V4-Flash", credits: 3 },
+      { id: "deepseek-v4-pro", name: "DeepSeek V4-Pro", credits: 10 },
     ],
   },
   {
@@ -111,8 +114,10 @@ export const models: AIModel[] = [
     icon: "🌐",
     slug: "perplexity",
     subModels: [
-      { id: "sonar-pro", name: "Perplexity Sonar Pro", credits: 5, isNew: true },
-      { id: "sonar-deep-research", name: "Sonar Deep Research", credits: 8 },
+      { id: "sonar", name: "Perplexity Sonar", credits: 15 },
+      { id: "sonar-pro", name: "Perplexity Sonar Pro", credits: 35 },
+      { id: "sonar-reasoning-pro", name: "Sonar Reasoning Pro", credits: 25 },
+      { id: "sonar-deep-research", name: "Sonar Deep Research", credits: 150 },
     ],
   },
   {
@@ -125,8 +130,9 @@ export const models: AIModel[] = [
     icon: "🔮",
     slug: "qwen",
     subModels: [
-      { id: "qwen-3-max-thinking", name: "Qwen 3 Max Thinking", credits: 3, isNew: true },
-      { id: "qwen-3-thinking", name: "Qwen 3 Thinking", credits: 2 },
+      { id: "qwen-3-6-flash", name: "Qwen 3.6 Flash", credits: 3 },
+      { id: "qwen-3-7-plus", name: "Qwen 3.7 Plus", credits: 3 },
+      { id: "qwen-3-7-max", name: "Qwen 3.7 Max", credits: 18, isNew: true },
     ],
   },
 
