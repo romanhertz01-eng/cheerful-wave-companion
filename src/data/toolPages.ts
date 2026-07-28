@@ -2509,14 +2509,23 @@ export const toolPages: ToolPageData[] = [
       layout: "row",
       model: "claude-3.5-haiku",
       modelName: "Claude 3.5 Haiku",
-      credits: 1,
+      credits: 10,
       bricks: [],
       resultType: "text",
       textPlaceholder: "Опишите задачу: «перепиши это письмо мягче, сохранив требования»…",
       maxChars: 4000,
       selects: [
-        { label: "Версия", options: ["Claude 4.6 Opus", "Claude 4.6 Sonnet", "Claude 4.5 Opus", "Claude 4.5 Sonnet", "Claude 4.1 Opus"] },
+        { label: "Версия", options: ["Sonnet 4.6", "Haiku 4.5", "Opus 4.7"] },
       ],
+      pricing: {
+        mode: "per-message",
+        unitLabel: "за сообщение",
+        rates: [
+          { label: "Haiku 4.5", rate: 3, matchOption: "Haiku 4.5" },
+          { label: "Sonnet 4.6", rate: 10, matchOption: "Sonnet 4.6" },
+          { label: "Opus 4.7", rate: 18, matchOption: "Opus 4.7" },
+        ],
+      },
     },
     intro: {
       heading: "Claude в России: доступ без ограничений",
