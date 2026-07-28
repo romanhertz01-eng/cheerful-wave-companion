@@ -2599,14 +2599,22 @@ export const toolPages: ToolPageData[] = [
       layout: "row",
       model: "gemini-2.5-flash",
       modelName: "Gemini 2.5 Flash",
-      credits: 1,
+      credits: 3,
       bricks: [],
       resultType: "text",
       textPlaceholder: "Спросите или прикрепите скриншот: «объясни, что не так в этой таблице»…",
       maxChars: 4000,
       selects: [
-        { label: "Версия", options: ["Gemini 2.5 Flash", "Gemini 2.5 Pro", "Gemini 3 Pro", "Gemini 3.1 Pro Preview"] },
+        { label: "Версия", options: ["Flash", "Pro"] },
       ],
+      pricing: {
+        mode: "per-message",
+        unitLabel: "за сообщение",
+        rates: [
+          { label: "Flash", rate: 3, matchOption: "Flash" },
+          { label: "Pro", rate: 6, matchOption: "Pro" },
+        ],
+      },
     },
     intro: {
       heading: "Gemini в России: доступ к моделям Google",
