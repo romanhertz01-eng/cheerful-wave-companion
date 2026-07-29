@@ -5,12 +5,8 @@ interface ShowcaseStripProps {
 export function ShowcaseStrip({ images }: ShowcaseStripProps) {
   if (!images.length) return null;
   return (
-    <section className="w-full py-8 overflow-hidden">
-      <style>{`.showcase-strip::-webkit-scrollbar{display:none}`}</style>
-      <div
-        className="showcase-strip flex gap-3 overflow-x-auto snap-x px-4"
-        style={{ scrollbarWidth: "none" }}
-      >
+    <section className="py-8 w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+      <div className="no-scrollbar flex gap-3 overflow-x-auto snap-x px-4">
         {images.map((src, i) => (
           <div
             key={i}

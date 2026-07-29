@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type ShowreelItem = { image: string; prompt?: string; label?: string };
 
@@ -10,12 +10,26 @@ interface ModelShowreelProps {
 
 export function ModelShowreel({ heading, sub, items }: ModelShowreelProps) {
   const [activeIdx, setActiveIdx] = useState(0);
-  const [visible, setVisible] = useState(true);
+  const firstSrc = items[0]?.image ?? "";
+  const [frontSrc, setFrontSrc] = useState(firstSrc);
+  const [backSrc, setBackSrc] = useState(firstSrc);
+  const [frontOnTop, setFrontOnTop] = useState(true);
+  const mountedRef = useRef(false);
 
   useEffect(() => {
-    setVisible(false);
-    const t = setTimeout(() => setVisible(true), 120);
-    return () => clearTimeout(t);
+    if (!mountedRef.current) {
+      mountedRef.current = true;
+      return;
+    }
+    const nextSrc = items[activeIdx]?.image ?? "";
+    if (frontOnTop) {
+      setBackSrc(nextSrc);
+      setFrontOnTop(false);
+    } else {
+      setFrontSrc(nextSrc);
+      setFrontOnTop(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeIdx]);
 
   if (!items.length) return null;
@@ -30,15 +44,23 @@ export function ModelShowreel({ heading, sub, items }: ModelShowreelProps) {
         </p>
       )}
 
-      <div className="mt-8 aspect-[2/1] w-full rounded-2xl overflow-hidden border border-white/10 bg-white/[0.03]">
+      <div className="mt-8 aspect-[2/1] w-full rounded-2xl overflow-hidden border border-white/10 bg-white/[0.03] relative">
         <img
-          key={activeIdx}
-          src={active.image}
+          src={frontSrc}
           alt={active.label ?? heading}
-          loading={activeIdx === 0 ? "eager" : "lazy"}
+          loading="eager"
           className={
-            "w-full h-full object-cover transition-opacity duration-300 " +
-            (visible ? "opacity-100" : "opacity-0")
+            "absolute inset-0 w-full h-full object-cover transition-opacity duration-300 " +
+            (frontOnTop ? "opacity-100" : "opacity-0")
+          }
+        />
+        <img
+          src={backSrc}
+          alt={active.label ?? heading}
+          loading="lazy"
+          className={
+            "absolute inset-0 w-full h-full object-cover transition-opacity duration-300 " +
+            (frontOnTop ? "opacity-0" : "opacity-100")
           }
         />
       </div>
