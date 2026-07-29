@@ -106,7 +106,7 @@ export const MOCK_GENERATIONS: Generation[] = [
   {
     id: "i-2",
     type: "image",
-    providerId: "midjourney",
+    providerId: "seedream",
     modelName: "Midjourney v7",
     credits: 45,
     prompt: "Архитектура будущего: башня из стекла и меди в пустыне",

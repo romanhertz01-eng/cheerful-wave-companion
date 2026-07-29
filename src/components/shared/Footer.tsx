@@ -20,7 +20,6 @@ const toolsLinks = [
   { label: "Реставрация фото", to: "/tools/photo-restoration" },
   { label: "Озвучка текста", to: "/tools/text-to-speech" },
   { label: "ChatGPT", to: "/tools/chatgpt" },
-  { label: "Midjourney", to: "/tools/midjourney" },
   { label: "Sora", to: "/tools/sora" },
 ];
 
