@@ -138,7 +138,6 @@ export const models: AIModel[] = [
 
   // === IMAGE ===
   {
-  {
     id: "nano-banana",
     name: "Nano Banana",
     provider: "Google",
