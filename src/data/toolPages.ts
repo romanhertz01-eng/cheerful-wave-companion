@@ -60,6 +60,11 @@ export interface ToolPageData {
     sub?: string;
     cards: { title: string; desc?: string; image: string }[];
   };
+  showreel?: {
+    heading: string;
+    sub?: string;
+    items: { image: string; prompt?: string; label?: string }[];
+  };
 }
 
 export const toolPages: ToolPageData[] = [
