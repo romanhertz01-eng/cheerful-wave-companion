@@ -66,6 +66,15 @@ export interface ToolPageData {
     items: { image: string; prompt?: string; label?: string }[];
   };
   showcaseStrip?: { images: string[] };
+  transformShowcase?: {
+    heading: string;
+    sub?: string;
+    inputLabel?: string;
+    outputLabel?: string;
+    inputs: string[];
+    outputs: string[];
+    prompt?: string;
+  };
 }
 
 export const toolPages: ToolPageData[] = [
@@ -1107,6 +1116,13 @@ export const toolPages: ToolPageData[] = [
         { title: "Разрешение до 4K", desc: "Готово к печати и крупным форматам", image: "/community/03.jpg" },
         { title: "Точность к промпту", desc: "Модель не додумывает — делает то, что описано", image: "/community/04.jpg" },
       ],
+    },
+    transformShowcase: {
+      heading: "Один персонаж — любые сцены",
+      sub: "Загрузите портрет, и модель сохранит черты лица в новых ракурсах, одежде и окружении",
+      inputs: ["/community/01.jpg", "/community/02.jpg"],
+      outputs: ["/community/03.jpg", "/community/04.jpg", "/community/05.jpg"],
+      prompt: "Тот же человек в джинсовой куртке на фоне синей стены, дневной свет",
     },
     features: [
       { icon: "🎨", title: "Генерация изображений SOTA", description: "Создавайте фотореалистичные и иллюстративные изображения со стилистической точностью" },

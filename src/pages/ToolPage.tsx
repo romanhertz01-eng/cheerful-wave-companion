@@ -12,6 +12,7 @@ import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
 import { VisualCards } from "@/components/tool/VisualCards";
 import { ModelShowreel } from "@/components/tool/ModelShowreel";
 import { ShowcaseStrip } from "@/components/tool/ShowcaseStrip";
+import { TransformShowcase } from "@/components/tool/TransformShowcase";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
@@ -189,6 +190,18 @@ const ToolPage = () => {
               heading={data.showreel.heading}
               sub={data.showreel.sub}
               items={data.showreel.items}
+            />
+          ) : null,
+          transformShowcase: data.transformShowcase ? (
+            <TransformShowcase
+              key="transformShowcase"
+              heading={data.transformShowcase.heading}
+              sub={data.transformShowcase.sub}
+              inputLabel={data.transformShowcase.inputLabel}
+              outputLabel={data.transformShowcase.outputLabel}
+              inputs={data.transformShowcase.inputs}
+              outputs={data.transformShowcase.outputs}
+              prompt={data.transformShowcase.prompt}
             />
           ) : null,
           specs: data.specs ? (
@@ -389,7 +402,7 @@ const ToolPage = () => {
           );
         }
 
-        const modelOrder = ["showcaseStrip", "intro", "visualCards", "showreel", "specs", "comparisonTable", "featureBlocks", "tips", "useCases", "modelChips", "howItWorks", "bigStat"];
+        const modelOrder = ["showcaseStrip", "intro", "visualCards", "showreel", "transformShowcase", "specs", "comparisonTable", "featureBlocks", "tips", "useCases", "modelChips", "howItWorks", "bigStat"];
         const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "examples", "specs", "modelChips", "bigStat"];
         const order = data.kind === "model" ? modelOrder : toolOrder;
         return <>{order.map((k) => sections[k])}</>;
