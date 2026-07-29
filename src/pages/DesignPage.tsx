@@ -39,15 +39,14 @@ const designScenarios = [
 ];
 
 const designGridModels = [
-  { name: "Nano Banana 2", desc: "Премиум генерация", isNew: true, credits: 300 },
-  { name: "MidJourney", desc: "Топ для арта", badges: ["Топ"], credits: 80 },
-  { name: "Seedream 5 Lite", desc: "Быстрая генерация", isNew: true, credits: 2 },
-  { name: "GPT Image 1.5", desc: "От OpenAI", credits: 40 },
-  { name: "Flux", desc: "State of the art", badges: ["SOTA"], credits: 15 },
-  { name: "Runway", desc: "Креативная генерация", credits: 20 },
-  { name: "Imagen 4", desc: "От Google", badges: ["Google"], credits: 8 },
-  { name: "Higgsfield Soul", desc: "Уникальный стиль", isNew: true, credits: 15 },
-  { name: "Kling V3 Omni", desc: "Мультимодальная", isNew: true, credits: 25 },
+  { name: "Nano Banana 2 · 1K", desc: "За изображение", isNew: true, credits: 45 },
+  { name: "Seedream 5.0 Lite", desc: "За изображение", isNew: true, credits: 30 },
+  { name: "GPT Image 2 · 1K", desc: "От OpenAI", isNew: true, credits: 35 },
+  { name: "Flux-2 Pro · 1K", desc: "SOTA", badges: ["SOTA"], isNew: true, credits: 40 },
+  { name: "Grok Imagine", desc: "От xAI", credits: 25 },
+  { name: "Qwen Image", desc: "От Alibaba", credits: 55 },
+  { name: "Topaz Upscale · 2K", desc: "Апскейл", credits: 80 },
+  { name: "Recraft Crisp Upscale", desc: "Утилита", credits: 5 },
 ];
 
 const welcomeScenarios: WelcomeScenario[] = [
