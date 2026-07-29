@@ -68,7 +68,7 @@ const welcomeScenarios: WelcomeScenario[] = [
     desc: "Минималистичный лого для бренда",
     prompt: "Minimal flat vector logo design, clean lines, modern typography, white background, professional branding",
     providerId: "flux",
-    subModelId: "flux-kontext-pro",
+    subModelId: "flux-2-pro-1k",
     aspect: "1:1",
     quality: "2K",
     quantity: 4,
@@ -90,7 +90,7 @@ const welcomeScenarios: WelcomeScenario[] = [
     desc: "Пост, сторис, обложка",
     prompt: "Eye-catching social media post design, bold typography, gradient background, modern aesthetic, Instagram ready",
     providerId: "nano-banana",
-    subModelId: "banana-2",
+    subModelId: "nb-2-1k",
     aspect: "1:1",
     quality: "2K",
     quantity: 1,
@@ -101,7 +101,7 @@ const welcomeScenarios: WelcomeScenario[] = [
     desc: "Неоновый город будущего",
     prompt: "Cyberpunk city at night, neon lights, rain reflections on wet streets, holographic billboards, blade runner atmosphere, cinematic wide angle",
     providerId: "nano-banana",
-    subModelId: "banana-2",
+    subModelId: "nb-2-1k",
     aspect: "16:9",
     quality: "2K",
     quantity: 2,
@@ -122,7 +122,7 @@ const welcomeScenarios: WelcomeScenario[] = [
 const DesignPage = () => {
   const [prompt, setPrompt] = useState("");
   const [selectedProviderId, setSelectedProviderId] = useState("nano-banana");
-  const [selectedSubModelId, setSelectedSubModelId] = useState("banana-2");
+  const [selectedSubModelId, setSelectedSubModelId] = useState("nb-2-1k");
   const [aspectRatio, setAspectRatio] = useState("1:1");
   const [quantity, setQuantity] = useState(1);
   const [quality, setQuality] = useState("2K");

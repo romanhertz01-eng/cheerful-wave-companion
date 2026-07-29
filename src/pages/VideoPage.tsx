@@ -32,7 +32,7 @@ const welcomeScenarios: WelcomeScenario[] = [
     desc: "Видео для продвижения продукта",
     prompt: "Product showcase commercial, smooth camera movement, clean white studio, premium lighting, slow motion details",
     providerId: "kling",
-    subModelId: "kling-3.0",
+    subModelId: "kling-3-0",
     aspect: "16:9",
     duration: "5s",
     resolution: "1080p",
@@ -43,7 +43,7 @@ const welcomeScenarios: WelcomeScenario[] = [
     desc: "Визуальный ряд к треку",
     prompt: "Music video scene, cinematic color grading, dynamic transitions, artistic visual effects, concert atmosphere",
     providerId: "kling",
-    subModelId: "kling-3.0",
+    subModelId: "kling-3-0",
     aspect: "16:9",
     duration: "10s",
     resolution: "1080p",
@@ -54,7 +54,7 @@ const welcomeScenarios: WelcomeScenario[] = [
     desc: "Оживить статичного героя",
     prompt: "Character animation, smooth movement, expressive gestures, 3D rendered style, professional quality",
     providerId: "kling",
-    subModelId: "kling-3.0",
+    subModelId: "kling-3-0",
     aspect: "1:1",
     duration: "5s",
     resolution: "720p",
@@ -75,7 +75,7 @@ const welcomeScenarios: WelcomeScenario[] = [
     desc: "9:16 вертикальное видео",
     prompt: "Trendy vertical video, fast cuts, text overlay ready, vibrant colors, social media optimized, engaging hook",
     providerId: "kling",
-    subModelId: "kling-3.0",
+    subModelId: "kling-3-0",
     aspect: "9:16",
     duration: "5s",
     resolution: "1080p",
@@ -96,7 +96,7 @@ const welcomeScenarios: WelcomeScenario[] = [
 const VideoPage = () => {
   const [prompt, setPrompt] = useState("");
   const [selectedProviderId, setSelectedProviderId] = useState("kling");
-  const [selectedSubModelId, setSelectedSubModelId] = useState("kling-3.0");
+  const [selectedSubModelId, setSelectedSubModelId] = useState("kling-3-0");
   const [aspectRatio, setAspectRatio] = useState("16:9");
   const [duration, setDuration] = useState("5s");
   const [resolution, setResolution] = useState("720p");
