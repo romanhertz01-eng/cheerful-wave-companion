@@ -83,7 +83,7 @@ export const MOCK_HISTORY: HistoryItem[] = [
   {
     id: "h-i-2",
     type: "image",
-    providerId: "midjourney",
+    providerId: "seedream",
     modelName: "Midjourney v7",
     credits: 45,
     prompt: "Архитектура будущего: башня из стекла и меди в пустыне",
@@ -105,7 +105,7 @@ export const MOCK_HISTORY: HistoryItem[] = [
   {
     id: "h-i-4",
     type: "image",
-    providerId: "midjourney",
+    providerId: "seedream",
     modelName: "Midjourney v7",
     credits: 45,
     prompt: "Натюрморт: чашка кофе, книга, тёплый свет окна",
@@ -139,7 +139,7 @@ export const MOCK_HISTORY: HistoryItem[] = [
   {
     id: "h-i-7",
     type: "image",
-    providerId: "midjourney",
+    providerId: "seedream",
     modelName: "Midjourney v7",
     credits: 45,
     prompt: "Изометрическая иллюстрация уютной кофейни",
@@ -173,7 +173,7 @@ export const MOCK_HISTORY: HistoryItem[] = [
   {
     id: "h-i-10",
     type: "image",
-    providerId: "midjourney",
+    providerId: "seedream",
     modelName: "Midjourney v7",
     credits: 45,
     prompt: "Фантастический пейзаж: летающие острова на закате",

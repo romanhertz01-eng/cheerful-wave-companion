@@ -39,15 +39,14 @@ const designScenarios = [
 ];
 
 const designGridModels = [
-  { name: "Nano Banana 2", desc: "Премиум генерация", isNew: true, credits: 300 },
-  { name: "MidJourney", desc: "Топ для арта", badges: ["Топ"], credits: 80 },
-  { name: "Seedream 5 Lite", desc: "Быстрая генерация", isNew: true, credits: 2 },
-  { name: "GPT Image 1.5", desc: "От OpenAI", credits: 40 },
-  { name: "Flux", desc: "State of the art", badges: ["SOTA"], credits: 15 },
-  { name: "Runway", desc: "Креативная генерация", credits: 20 },
-  { name: "Imagen 4", desc: "От Google", badges: ["Google"], credits: 8 },
-  { name: "Higgsfield Soul", desc: "Уникальный стиль", isNew: true, credits: 15 },
-  { name: "Kling V3 Omni", desc: "Мультимодальная", isNew: true, credits: 25 },
+  { name: "Nano Banana 2 · 1K", desc: "За изображение", isNew: true, credits: 45 },
+  { name: "Seedream 5.0 Lite", desc: "За изображение", isNew: true, credits: 30 },
+  { name: "GPT Image 2 · 1K", desc: "От OpenAI", isNew: true, credits: 35 },
+  { name: "Flux-2 Pro · 1K", desc: "SOTA", badges: ["SOTA"], isNew: true, credits: 40 },
+  { name: "Grok Imagine", desc: "От xAI", credits: 25 },
+  { name: "Qwen Image", desc: "От Alibaba", credits: 55 },
+  { name: "Topaz Upscale · 2K", desc: "Апскейл", credits: 80 },
+  { name: "Recraft Crisp Upscale", desc: "Утилита", credits: 5 },
 ];
 
 const welcomeScenarios: WelcomeScenario[] = [
@@ -56,8 +55,8 @@ const welcomeScenarios: WelcomeScenario[] = [
     title: "Фотореалистичный портрет",
     desc: "Портрет человека с детализацией",
     prompt: "Photorealistic portrait of a young woman, soft studio lighting, shallow depth of field, 85mm lens, high detail skin texture, natural makeup",
-    providerId: "midjourney",
-    subModelId: "7",
+    providerId: "seedream",
+    subModelId: "seedream-5-lite",
     aspect: "3:4",
     quality: "2K",
     quantity: 2,
@@ -68,7 +67,7 @@ const welcomeScenarios: WelcomeScenario[] = [
     desc: "Минималистичный лого для бренда",
     prompt: "Minimal flat vector logo design, clean lines, modern typography, white background, professional branding",
     providerId: "flux",
-    subModelId: "flux-kontext-pro",
+    subModelId: "flux-2-pro-1k",
     aspect: "1:1",
     quality: "2K",
     quantity: 4,
@@ -78,8 +77,8 @@ const welcomeScenarios: WelcomeScenario[] = [
     title: "Аниме иллюстрация",
     desc: "Персонаж в стиле аниме",
     prompt: "Anime style character illustration, vibrant colors, detailed eyes, dynamic pose, studio ghibli inspired",
-    providerId: "midjourney",
-    subModelId: "niji-7",
+    providerId: "seedream",
+    subModelId: "seedream-4-5",
     aspect: "3:4",
     quality: "2K",
     quantity: 2,
@@ -90,7 +89,7 @@ const welcomeScenarios: WelcomeScenario[] = [
     desc: "Пост, сторис, обложка",
     prompt: "Eye-catching social media post design, bold typography, gradient background, modern aesthetic, Instagram ready",
     providerId: "nano-banana",
-    subModelId: "banana-2",
+    subModelId: "nb-2-1k",
     aspect: "1:1",
     quality: "2K",
     quantity: 1,
@@ -101,7 +100,7 @@ const welcomeScenarios: WelcomeScenario[] = [
     desc: "Неоновый город будущего",
     prompt: "Cyberpunk city at night, neon lights, rain reflections on wet streets, holographic billboards, blade runner atmosphere, cinematic wide angle",
     providerId: "nano-banana",
-    subModelId: "banana-2",
+    subModelId: "nb-2-1k",
     aspect: "16:9",
     quality: "2K",
     quantity: 2,
@@ -122,7 +121,7 @@ const welcomeScenarios: WelcomeScenario[] = [
 const DesignPage = () => {
   const [prompt, setPrompt] = useState("");
   const [selectedProviderId, setSelectedProviderId] = useState("nano-banana");
-  const [selectedSubModelId, setSelectedSubModelId] = useState("banana-2");
+  const [selectedSubModelId, setSelectedSubModelId] = useState("nb-2-1k");
   const [aspectRatio, setAspectRatio] = useState("1:1");
   const [quantity, setQuantity] = useState(1);
   const [quality, setQuality] = useState("2K");

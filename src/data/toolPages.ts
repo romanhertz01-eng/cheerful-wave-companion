@@ -90,7 +90,7 @@ export const toolPages: ToolPageData[] = [
       "Модель Kling анализирует изображение и достраивает движение по законам физики и композиции.",
     tool: {
       layout: "panel",
-      model: "kling-3.0",
+      model: "kling-3-0",
       modelName: "Kling 3.0",
       credits: 115,
       bricks: ["type-preset", "upload-1", "generate"],
@@ -1073,7 +1073,7 @@ export const toolPages: ToolPageData[] = [
     category: "image",
     tool: {
       layout: "row",
-      model: "nano-banana-2",
+      model: "nb-2-1k",
       modelName: "Nano Banana 2",
       credits: 45,
       bricks: [],
@@ -1178,7 +1178,7 @@ export const toolPages: ToolPageData[] = [
     category: "image",
     tool: {
       layout: "row",
-      model: "midjourney",
+      model: "nano-banana",
       modelName: "Midjourney",
       credits: 80,
       bricks: [],
@@ -1264,7 +1264,7 @@ export const toolPages: ToolPageData[] = [
     category: "video",
     tool: {
       layout: "row",
-      model: "seedance-2.0",
+      model: "seedance-2-0",
       modelName: "Seedance 2.0",
       credits: 330,
       bricks: [],
@@ -1372,7 +1372,7 @@ export const toolPages: ToolPageData[] = [
     category: "image",
     tool: {
       layout: "row",
-      model: "nano-banana-2",
+      model: "nb-2-1k",
       modelName: "Nano Banana 2",
       credits: 45,
       bricks: [],
@@ -1504,7 +1504,7 @@ export const toolPages: ToolPageData[] = [
     category: "video",
     tool: {
       layout: "row",
-      model: "kling-3.0",
+      model: "kling-3-0",
       modelName: "Kling 3.0",
       credits: 115,
       bricks: [],
@@ -1895,7 +1895,7 @@ export const toolPages: ToolPageData[] = [
       "HeyGen и Hedra синхронизируют артикуляцию с фонемами речи и достраивают микромимику.",
     tool: {
       layout: "row",
-      model: "heygen-avatar",
+      model: "hailuo-2-3-std",
       modelName: "HeyGen",
       credits: 80,
       bricks: [],
@@ -2035,7 +2035,7 @@ export const toolPages: ToolPageData[] = [
       "Kling и Seedance строят аккуратное движение камеры вокруг товара, сохраняя форму и материалы.",
     tool: {
       layout: "panel",
-      model: "kling-3.0",
+      model: "kling-3-0",
       modelName: "Kling 3.0",
       credits: 115,
       bricks: ["upload-1", "select", "generate"],
@@ -2280,7 +2280,7 @@ export const toolPages: ToolPageData[] = [
       "Модель Google DeepMind генерирует видео и аудио согласованно, опираясь на языковое понимание Gemini: длинные детальные промпты переводятся в сцену без потери инструкций.",
     tool: {
       layout: "row",
-      model: "veo-3",
+      model: "veo-fast-720p",
       modelName: "Veo 3",
       credits: 355,
       bricks: [],
@@ -2385,7 +2385,7 @@ export const toolPages: ToolPageData[] = [
       "Kling — семейство видеомоделей Kuaishou с диффузионной генерацией и модулем управления движением: модель предсказывает согласованную динамику сцены и позволяет задавать траектории объектов и камеры.",
     tool: {
       layout: "row",
-      model: "kling-3.0",
+      model: "kling-3-0",
       modelName: "Kling 3.0",
       credits: 575,
       bricks: [],
@@ -3263,7 +3263,7 @@ export const toolPages: ToolPageData[] = [
       "Мультимодальная модель OpenAI: генерация изображений опирается на то же языковое ядро, что и ChatGPT, — отсюда понимание контекста, инструкций и текста внутри изображения.",
     tool: {
       layout: "row",
-      model: "gpt-image-1.5",
+      model: "gpt-image-2-1k",
       modelName: "GPT Image 1.5",
       credits: 35,
       bricks: [],
@@ -3346,7 +3346,7 @@ export const toolPages: ToolPageData[] = [
       "Диффузионная модель Google DeepMind четвёртого поколения, обученная с упором на фотографическую достоверность: физика света, материалы, глубина резкости.",
     tool: {
       layout: "row",
-      model: "imagen-4",
+      model: "nano-banana",
       modelName: "Imagen 4",
       credits: 8,
       bricks: [],
@@ -3428,7 +3428,7 @@ export const toolPages: ToolPageData[] = [
       "Видеомодель MiniMax с акцентом на кинематографию движения: генерация из текста и изображения, устойчивые пролёты камеры и согласованная динамика объектов.",
     tool: {
       layout: "row",
-      model: "hailuo",
+      model: "hailuo-2-3-std",
       modelName: "Hailuo AI",
       credits: 200,
       bricks: [],
@@ -3631,7 +3631,7 @@ export const toolPages: ToolPageData[] = [
       "Генеративная модель Suno синтезирует музыку и вокал совместно: жанр, настроение и структура задаются описанием, текст песни — свой или сгенерированный.",
     tool: {
       layout: "row",
-      model: "suno-song",
+      model: "suno-track",
       modelName: "Suno",
       credits: 80,
       bricks: [],
@@ -4135,7 +4135,7 @@ export const toolPages: ToolPageData[] = [
     technologyDescription: "Портреты генерируют модели с сильным фотореализмом (Nano Banana, Imagen): естественная кожа без «пластика», корректная анатомия, студийные световые схемы по текстовому описанию.",
     tool: {
       layout: "row",
-      model: "nano-banana-2",
+      model: "nb-2-1k",
       modelName: "Nano Banana 2",
       credits: 45,
       bricks: [],
@@ -4216,7 +4216,7 @@ export const toolPages: ToolPageData[] = [
     technologyDescription: "Правки выполняет Nano Banana — модель Google с лучшим на рынке текстовым редактированием изображений: понимает объекты сцены и меняет их согласованно со светом и перспективой.",
     tool: {
       layout: "row",
-      model: "nano-banana-2",
+      model: "nb-2-1k",
       modelName: "Nano Banana 2",
       credits: 45,
       bricks: [],
@@ -4883,7 +4883,7 @@ export const toolPages: ToolPageData[] = [
     technologyDescription: "Песню генерирует модель Suno v4 через каталог ЭРА2: полноценные треки с вокалом, вступлением, куплетами и припевом, с сохранением жанра и настроения по вашему описанию.",
     tool: {
       layout: "row",
-      model: "suno-song",
+      model: "suno-track",
       modelName: "Suno v4",
       credits: 80,
       bricks: [],

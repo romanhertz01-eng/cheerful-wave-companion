@@ -31,12 +31,11 @@ export const videoProviders: VideoProvider[] = [
     icon: "🎬",
     badge: "Топ",
     subModels: [
-      { id: "kling-3.0", name: "Kling 3.0", credits: 75, isNew: true, isDefault: true, desc: "Топовое видео", time: "60 сек" },
-      { id: "kling-3.0-motion", name: "Kling 3.0 Motion Control", credits: 75, isNew: true, desc: "Контроль движения", time: "60 сек" },
-      { id: "kling-2.6", name: "Kling 2.6", credits: 75, desc: "Стабильная", time: "60 сек" },
-      { id: "kling-2.5-turbo", name: "Kling 2.5 Turbo", credits: 30, desc: "Быстрая", time: "60 сек" },
-      { id: "kling-o1", name: "Kling O1", credits: 75, desc: "Мультимодальная", time: "60 сек" },
-      { id: "kling-01", name: "Kling 01", credits: 75, desc: "Стандартная", time: "60 сек" },
+      { id: "kling-3-0", name: "Kling 3.0", credits: 115, isNew: true, isDefault: true, desc: "720p · за секунду", time: "60 сек" },
+      { id: "kling-3-0-turbo", name: "Kling 3.0 Turbo", credits: 145, isNew: true, desc: "Ускоренная · за секунду", time: "60 сек" },
+      { id: "kling-3-0-motion", name: "Kling 3.0 Motion Control", credits: 190, isNew: true, desc: "Контроль движения · за секунду", time: "60 сек" },
+      { id: "kling-2-6", name: "Kling 2.6", credits: 370, desc: "За клип 5 сек", time: "5 сек" },
+      { id: "kling-2-5-turbo", name: "Kling 2.5 Turbo", credits: 285, desc: "За клип 5 сек", time: "5 сек" },
     ],
     aspectRatios: ["16:9", "9:16", "1:1", "4:3", "3:4"],
     durationOptions: ["5s", "8s", "10s"],
@@ -50,8 +49,9 @@ export const videoProviders: VideoProvider[] = [
     icon: "📊",
     badge: "60% OFF",
     subModels: [
-      { id: "seedance-2.0", name: "Seedance 2.0", credits: 48, isNew: true, isDefault: true, badge: "60% OFF", desc: "Кинематографичный мир", time: "120 сек" },
-      { id: "seedance-1.0", name: "Seedance 1.0", credits: 60, desc: "Стандартная", time: "120 сек" },
+      { id: "seedance-2-0-fast", name: "Seedance 2.0 Fast", credits: 105, isNew: true, desc: "480p · за секунду", time: "120 сек" },
+      { id: "seedance-2-0", name: "Seedance 2.0", credits: 330, isNew: true, isDefault: true, badge: "60% OFF", desc: "720p · за секунду", time: "120 сек" },
+      { id: "seedance-2-0-1080p", name: "Seedance 2.0 · 1080p", credits: 960, isNew: true, desc: "1080p · за секунду", time: "120 сек" },
     ],
     aspectRatios: ["16:9", "9:16", "1:1", "4:3"],
     durationOptions: ["5s", "8s", "10s"],
@@ -64,7 +64,9 @@ export const videoProviders: VideoProvider[] = [
     icon: "🌊",
     badge: "Google",
     subModels: [
-      { id: "veo-3", name: "Veo 3", credits: 120, isNew: true, isDefault: true, desc: "Топовая модель Google", time: "120 сек" },
+      { id: "veo-fast-720p", name: "Veo Fast 720p", credits: 355, isNew: true, isDefault: true, desc: "За клип", time: "120 сек" },
+      { id: "veo-fast-1080p", name: "Veo Fast 1080p", credits: 385, isNew: true, desc: "За клип", time: "120 сек" },
+      { id: "veo-fast-4k", name: "Veo Fast 4K", credits: 1065, isNew: true, desc: "За клип", time: "120 сек" },
     ],
     aspectRatios: ["16:9", "9:16", "1:1"],
     durationOptions: ["5s", "8s"],
@@ -76,8 +78,8 @@ export const videoProviders: VideoProvider[] = [
     icon: "⬛",
     badge: "OpenAI",
     subModels: [
-      { id: "sora-2", name: "Sora 2", credits: 480, isDefault: true, desc: "Флагман видеогенерации", time: "180 сек" },
-      { id: "sora-2-pro", name: "Sora 2 Pro", credits: 1440, desc: "Максимальное качество", time: "300 сек" },
+      { id: "sora-2", name: "Sora 2", credits: 160, isDefault: true, desc: "Флагман · за секунду", time: "180 сек" },
+      { id: "sora-2-pro", name: "Sora 2 Pro", credits: 480, desc: "Максимум · за секунду", time: "300 сек" },
     ],
     aspectRatios: ["16:9", "9:16", "1:1", "4:3"],
     durationOptions: ["5s", "10s", "15s"],
@@ -89,7 +91,8 @@ export const videoProviders: VideoProvider[] = [
     icon: "🌊",
     badge: "Open Source",
     subModels: [
-      { id: "wan-2.1-video", name: "Wan AI", credits: 30, isDefault: true, desc: "Открытая модель", time: "90 сек" },
+      { id: "wan-2-7", name: "Wan 2.7", credits: 130, isDefault: true, isNew: true, desc: "720p · за секунду", time: "90 сек" },
+      { id: "wan-2-7-1080p", name: "Wan 2.7 · 1080p", credits: 195, isNew: true, desc: "1080p · за секунду", time: "90 сек" },
     ],
     aspectRatios: ["16:9", "9:16", "1:1"],
     durationOptions: ["4s", "5s", "8s"],
@@ -101,47 +104,11 @@ export const videoProviders: VideoProvider[] = [
     icon: "🎬",
     badge: "NEW",
     subModels: [
-      { id: "hailuo", name: "Hailuo AI", credits: 40, isNew: true, isDefault: true, desc: "Новый игрок", time: "90 сек" },
+      { id: "hailuo-2-3-std", name: "Hailuo 2.3 Std", credits: 200, isNew: true, isDefault: true, desc: "За клип 6 сек", time: "6 сек" },
+      { id: "hailuo-2-3-pro", name: "Hailuo 2.3 Pro", credits: 365, isNew: true, desc: "За клип 6 сек", time: "6 сек" },
     ],
     aspectRatios: ["16:9", "9:16", "1:1"],
     durationOptions: ["5s", "8s"],
-    resolutionOptions: ["720p", "1080p"],
-  },
-  {
-    id: "vidu",
-    name: "Vidu AI",
-    icon: "🎬",
-    badge: "NEW",
-    subModels: [
-      { id: "vidu", name: "Vidu AI", credits: 40, isNew: true, isDefault: true, desc: "Новый игрок", time: "90 сек" },
-    ],
-    aspectRatios: ["16:9", "9:16", "1:1", "4:3"],
-    durationOptions: ["5s", "8s"],
-    resolutionOptions: ["720p", "1080p"],
-  },
-  {
-    id: "heygen",
-    name: "HeyGen",
-    icon: "",
-    badge: "NEW",
-    subModels: [
-      { id: "heygen-avatar", name: "HeyGen Avatar", credits: 120, isNew: true, isDefault: true, desc: "Реалистичные AI аватары", time: "120 сек" },
-      { id: "heygen-video-translate", name: "HeyGen Video Translate", credits: 150, desc: "Перевод видео с липсинком", time: "180 сек" },
-    ],
-    aspectRatios: ["16:9", "9:16", "1:1"],
-    durationOptions: ["15s", "30s", "60s"],
-    resolutionOptions: ["720p", "1080p"],
-  },
-  {
-    id: "hedra",
-    name: "Hedra",
-    icon: "",
-    badge: "NEW",
-    subModels: [
-      { id: "hedra-character", name: "Hedra Character-1", credits: 80, isNew: true, isDefault: true, desc: "Говорящие персонажи", time: "60 сек" },
-    ],
-    aspectRatios: ["16:9", "9:16", "1:1"],
-    durationOptions: ["5s", "10s", "15s"],
     resolutionOptions: ["720p", "1080p"],
   },
 ];
@@ -160,7 +127,7 @@ export interface VideoCarouselCard {
 export const videoCarouselCards: VideoCarouselCard[] = [
   {
     providerId: "seedance",
-    subModelId: "seedance-2.0",
+    subModelId: "seedance-2-0",
     title: "SEEDANCE 2.0",
     desc: "Создайте мир, который вы себе представляете.",
     gradient: "linear-gradient(135deg, #0a2e1a, #1b4e2d)",
@@ -168,7 +135,7 @@ export const videoCarouselCards: VideoCarouselCard[] = [
   },
   {
     providerId: "kling",
-    subModelId: "kling-3.0-motion",
+    subModelId: "kling-3-0-motion",
     title: "KLING 3.0 MOTION",
     desc: "Динамический захват обновлён до максимума",
     gradient: "linear-gradient(135deg, #0a1a2e, #1b2d4e)",
@@ -176,9 +143,9 @@ export const videoCarouselCards: VideoCarouselCard[] = [
   },
   {
     providerId: "veo",
-    subModelId: "veo-3",
-    title: "VEO 3",
-    desc: "Топовая модель видеогенерации от Google",
+    subModelId: "veo-fast-720p",
+    title: "VEO FAST",
+    desc: "Быстрая видеогенерация от Google",
     gradient: "linear-gradient(135deg, #1a0f2e, #2d1b4e)",
     badge: "NEW",
   },
@@ -197,14 +164,14 @@ export interface VideoGridCard {
 }
 
 export const videoGridCards: VideoGridCard[] = [
-  { providerId: "kling", subModelId: "kling-3.0", label: "Kling 3.0", shortDesc: "Топовое видео от Kling AI", credits: 75, isNew: true, icon: "🎬" },
-  { providerId: "seedance", subModelId: "seedance-2.0", label: "Seedance 2.0", shortDesc: "Кинематографичный мир", credits: 48, isNew: true, icon: "📊" },
-  { providerId: "veo", subModelId: "veo-3", label: "Veo 3", shortDesc: "Топовая модель Google", credits: 120, isNew: true, icon: "🌊" },
-  { providerId: "sora", subModelId: "sora-2", label: "Sora 2", shortDesc: "Флагман видеогенерации OpenAI", credits: 480, icon: "⬛" },
-  { providerId: "sora", subModelId: "sora-2-pro", label: "Sora 2 Pro", shortDesc: "Максимальное качество", credits: 1440, icon: "⬛" },
-  { providerId: "wan", subModelId: "wan-2.1-video", label: "Wan AI 2.1", shortDesc: "Open Source видео", credits: 30, icon: "🌊" },
-  { providerId: "hailuo", subModelId: "hailuo", label: "Hailuo AI", shortDesc: "Быстрое качественное видео", credits: 40, isNew: true, icon: "🎬" },
-  { providerId: "vidu", subModelId: "vidu", label: "Vidu AI", shortDesc: "Детализированное видео", credits: 50, isNew: true, icon: "🎬" },
+  { providerId: "kling", subModelId: "kling-3-0", label: "Kling 3.0", shortDesc: "720p · 115 кр/сек", credits: 115, isNew: true, icon: "🎬" },
+  { providerId: "seedance", subModelId: "seedance-2-0", label: "Seedance 2.0", shortDesc: "720p · 330 кр/сек", credits: 330, isNew: true, icon: "📊" },
+  { providerId: "veo", subModelId: "veo-fast-720p", label: "Veo Fast 720p", shortDesc: "355 кр за клип", credits: 355, isNew: true, icon: "🌊" },
+  { providerId: "sora", subModelId: "sora-2", label: "Sora 2", shortDesc: "160 кр/сек", credits: 160, icon: "⬛" },
+  { providerId: "sora", subModelId: "sora-2-pro", label: "Sora 2 Pro", shortDesc: "480 кр/сек", credits: 480, icon: "⬛" },
+  { providerId: "wan", subModelId: "wan-2-7", label: "Wan 2.7", shortDesc: "Open Source · 130 кр/сек", credits: 130, isNew: true, icon: "🌊" },
+  { providerId: "hailuo", subModelId: "hailuo-2-3-std", label: "Hailuo 2.3 Std", shortDesc: "200 кр за клип 6с", credits: 200, isNew: true, icon: "🎬" },
+  { providerId: "hailuo", subModelId: "hailuo-2-3-pro", label: "Hailuo 2.3 Pro", shortDesc: "365 кр за клип 6с", credits: 365, isNew: true, icon: "🎬" },
 ];
 
 // ─── Prompt suggestions ───
