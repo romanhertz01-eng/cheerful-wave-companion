@@ -29,8 +29,13 @@ const ToolPage = () => {
     const el = workspaceRef.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([entry]) => setShowFloatingBar(!entry.isIntersecting),
-      { threshold: 0, rootMargin: "0px 0px -80% 0px" }
+      ([entry]) => {
+        // Показывать липкий бар только когда ToolWorkspace ПОЛНОСТЬЮ ушёл вверх.
+        const scrolledAbove =
+          !entry.isIntersecting && entry.boundingClientRect.bottom <= 0;
+        setShowFloatingBar(scrolledAbove);
+      },
+      { threshold: 0 }
     );
     io.observe(el);
     return () => io.disconnect();
@@ -155,11 +160,6 @@ const ToolPage = () => {
                 </div>
                 <p className="text-[11px] text-muted-foreground mt-3">1 изображение создаётся, фон, цвет и стиль из настроенных</p>
               </div>
-              {data.kind === 'model' && data.heroFacts && data.heroFacts.length > 0 && (
-                <p className="mt-5 text-sm text-muted-foreground text-center">
-                  {data.heroFacts.join(" · ")}
-                </p>
-              )}
             </>
           )}
         </div>
@@ -169,6 +169,12 @@ const ToolPage = () => {
         <div ref={workspaceRef}>
           <ToolWorkspace data={data} />
         </div>
+      )}
+
+      {data.kind === 'model' && data.heroFacts && data.heroFacts.length > 0 && (
+        <p className="mt-5 text-sm text-muted-foreground text-center">
+          {data.heroFacts.join(" · ")}
+        </p>
       )}
 
       {(() => {
