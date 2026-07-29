@@ -50,7 +50,7 @@ export function ModelShowreel({ heading, sub, items }: ModelShowreelProps) {
           alt={active.label ?? heading}
           loading="eager"
           className={
-            "absolute inset-0 w-full h-full object-cover transition-opacity duration-300 " +
+            "absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-300 " +
             (frontOnTop ? "opacity-100" : "opacity-0")
           }
         />
@@ -59,7 +59,7 @@ export function ModelShowreel({ heading, sub, items }: ModelShowreelProps) {
           alt={active.label ?? heading}
           loading="lazy"
           className={
-            "absolute inset-0 w-full h-full object-cover transition-opacity duration-300 " +
+            "absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-300 " +
             (frontOnTop ? "opacity-0" : "opacity-100")
           }
         />
