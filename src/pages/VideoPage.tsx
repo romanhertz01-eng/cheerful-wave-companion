@@ -86,7 +86,7 @@ const welcomeScenarios: WelcomeScenario[] = [
     desc: "Поздравление с анимацией",
     prompt: "Animated greeting card, floating particles, warm colors, celebration mood, gentle camera movement, sparkle effects",
     providerId: "kling",
-    subModelId: "kling-2.1",
+    subModelId: "kling-2-6",
     aspect: "1:1",
     duration: "5s",
     resolution: "720p",

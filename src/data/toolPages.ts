@@ -1178,7 +1178,7 @@ export const toolPages: ToolPageData[] = [
     category: "image",
     tool: {
       layout: "row",
-      model: "midjourney",
+      model: "nano-banana",
       modelName: "Midjourney",
       credits: 80,
       bricks: [],
@@ -3346,7 +3346,7 @@ export const toolPages: ToolPageData[] = [
       "Диффузионная модель Google DeepMind четвёртого поколения, обученная с упором на фотографическую достоверность: физика света, материалы, глубина резкости.",
     tool: {
       layout: "row",
-      model: "imagen-4",
+      model: "nano-banana",
       modelName: "Imagen 4",
       credits: 8,
       bricks: [],
@@ -3428,7 +3428,7 @@ export const toolPages: ToolPageData[] = [
       "Видеомодель MiniMax с акцентом на кинематографию движения: генерация из текста и изображения, устойчивые пролёты камеры и согласованная динамика объектов.",
     tool: {
       layout: "row",
-      model: "hailuo",
+      model: "hailuo-2-3-std",
       modelName: "Hailuo AI",
       credits: 200,
       bricks: [],
