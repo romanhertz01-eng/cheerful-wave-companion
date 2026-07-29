@@ -13,6 +13,7 @@ import { VisualCards } from "@/components/tool/VisualCards";
 import { ModelShowreel } from "@/components/tool/ModelShowreel";
 import { ShowcaseStrip } from "@/components/tool/ShowcaseStrip";
 import { TransformShowcase } from "@/components/tool/TransformShowcase";
+import { ModelGallery } from "@/components/tool/ModelGallery";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
@@ -202,6 +203,14 @@ const ToolPage = () => {
               inputs={data.transformShowcase.inputs}
               outputs={data.transformShowcase.outputs}
               prompt={data.transformShowcase.prompt}
+            />
+          ) : null,
+          gallery: data.gallery ? (
+            <ModelGallery
+              key="gallery"
+              heading={data.gallery.heading}
+              images={data.gallery.images}
+              initialCount={data.gallery.initialCount}
             />
           ) : null,
           specs: data.specs ? (
@@ -402,7 +411,7 @@ const ToolPage = () => {
           );
         }
 
-        const modelOrder = ["showcaseStrip", "intro", "visualCards", "showreel", "transformShowcase", "specs", "comparisonTable", "featureBlocks", "tips", "useCases", "modelChips", "howItWorks", "bigStat"];
+        const modelOrder = ["showcaseStrip", "intro", "visualCards", "showreel", "transformShowcase", "specs", "comparisonTable", "featureBlocks", "gallery", "tips", "useCases", "modelChips", "howItWorks", "bigStat"];
         const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "examples", "specs", "modelChips", "bigStat"];
         const order = data.kind === "model" ? modelOrder : toolOrder;
         return <>{order.map((k) => sections[k])}</>;
