@@ -10,6 +10,7 @@ import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
 import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
 import { VisualCards } from "@/components/tool/VisualCards";
+import { ModelShowreel } from "@/components/tool/ModelShowreel";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
@@ -176,6 +177,14 @@ const ToolPage = () => {
               heading={data.visualCards.heading}
               sub={data.visualCards.sub}
               cards={data.visualCards.cards}
+            />
+          ) : null,
+          showreel: data.showreel ? (
+            <ModelShowreel
+              key="showreel"
+              heading={data.showreel.heading}
+              sub={data.showreel.sub}
+              items={data.showreel.items}
             />
           ) : null,
           specs: data.specs ? (
@@ -376,7 +385,7 @@ const ToolPage = () => {
           );
         }
 
-        const modelOrder = ["intro", "visualCards", "specs", "comparisonTable", "featureBlocks", "tips", "useCases", "modelChips", "howItWorks", "bigStat"];
+        const modelOrder = ["intro", "visualCards", "showreel", "specs", "comparisonTable", "featureBlocks", "tips", "useCases", "modelChips", "howItWorks", "bigStat"];
         const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "examples", "specs", "modelChips", "bigStat"];
         const order = data.kind === "model" ? modelOrder : toolOrder;
         return <>{order.map((k) => sections[k])}</>;
