@@ -65,6 +65,7 @@ export interface ToolPageData {
     sub?: string;
     items: { image: string; prompt?: string; label?: string }[];
   };
+  showcaseStrip?: { images: string[] };
 }
 
 export const toolPages: ToolPageData[] = [
@@ -2484,6 +2485,18 @@ export const toolPages: ToolPageData[] = [
           prompt: "Камера проезжает через светлую скандинавскую гостиную, солнечные пятна на полу, растения у окна, медленное горизонтальное движение" },
         { image: "/community/06.jpg", label: "Динамика",
           prompt: "Бегун стартует с низкого старта на стадионе, брызги воды в воздухе, замедленная съёмка переходит в обычную скорость" },
+      ],
+    },
+    showcaseStrip: {
+      images: [
+        "/community/01.jpg",
+        "/community/02.jpg",
+        "/community/03.jpg",
+        "/community/04.jpg",
+        "/community/05.jpg",
+        "/community/06.jpg",
+        "/community/07.jpg",
+        "/community/08.jpg",
       ],
     },
     faqItems: [
