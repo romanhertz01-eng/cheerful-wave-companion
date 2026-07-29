@@ -160,11 +160,6 @@ const ToolPage = () => {
                 </div>
                 <p className="text-[11px] text-muted-foreground mt-3">1 изображение создаётся, фон, цвет и стиль из настроенных</p>
               </div>
-              {data.kind === 'model' && data.heroFacts && data.heroFacts.length > 0 && (
-                <p className="mt-5 text-sm text-muted-foreground text-center">
-                  {data.heroFacts.join(" · ")}
-                </p>
-              )}
             </>
           )}
         </div>
@@ -174,6 +169,12 @@ const ToolPage = () => {
         <div ref={workspaceRef}>
           <ToolWorkspace data={data} />
         </div>
+      )}
+
+      {data.kind === 'model' && data.heroFacts && data.heroFacts.length > 0 && (
+        <p className="mt-5 text-sm text-muted-foreground text-center">
+          {data.heroFacts.join(" · ")}
+        </p>
       )}
 
       {(() => {
