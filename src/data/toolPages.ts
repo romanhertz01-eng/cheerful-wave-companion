@@ -11,6 +11,7 @@ export interface ToolPageData {
   keyFeatureDescription: string;
   technologyDescription: string;
   category: "image" | "video" | "audio" | "text";
+  heroFacts?: string[];
   tool?: {
     layout: "panel" | "row";
     model: string;
