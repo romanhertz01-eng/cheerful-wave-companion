@@ -4,7 +4,7 @@ import { Link, getRouteApi } from "@tanstack/react-router";
 import { ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { ModelGlyph } from "@/components/ui/era/ModelGlyph";
-import { getRelatedTools, type ToolPageData } from "@/data/toolPages";
+import { getRelatedTools, isPublished, type ToolPageData } from "@/data/toolPages";
 import { plans } from "@/data/plans";
 import { FAQ, toolPageItems } from "@/components/shared/FAQ";
 import { Footer } from "@/components/shared/Footer";
@@ -337,16 +337,44 @@ const ToolPage = () => {
               {data.modelChips.sub && (
                 <p className="text-muted-foreground text-center mb-8 max-w-2xl mx-auto">{data.modelChips.sub}</p>
               )}
-              <div className="flex flex-wrap justify-center gap-3">
-                {data.modelChips.models.map((name) => (
-                  <div
-                    key={name}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-white/10 bg-white/[0.04] text-sm font-medium hover:border-primary/40 transition-colors"
-                  >
-                    <ModelGlyph name={name} size={20} />
-                    <span>{name}</span>
-                  </div>
-                ))}
+              <div className="flex gap-4 overflow-x-auto no-scrollbar -mx-4 px-4 md:mx-0 md:px-0">
+                {data.modelChips.models
+                  .filter((m) => (m.slug ? isPublished(m.slug) : true))
+                  .map((m) => {
+                    const inner = (
+                      <>
+                        <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                          <ModelGlyph name={m.name} size={32} />
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold text-base">{m.name}</span>
+                          {m.badge && (
+                            <span className="text-[10px] uppercase px-2 py-0.5 rounded-full bg-primary/15 text-primary">
+                              {m.badge}
+                            </span>
+                          )}
+                        </div>
+                        {m.priceFrom && (
+                          <div className="mt-3 text-sm text-primary font-mono">{m.priceFrom}</div>
+                        )}
+                      </>
+                    );
+                    const base = "shrink-0 w-[200px] rounded-xl border border-white/10 bg-white/[0.04] p-5 transition-colors";
+                    return m.slug ? (
+                      <Link
+                        key={m.name}
+                        to="/tools/$slug"
+                        params={{ slug: m.slug }}
+                        className={cn(base, "hover:border-primary/40 hover:bg-white/[0.06]")}
+                      >
+                        {inner}
+                      </Link>
+                    ) : (
+                      <div key={m.name} className={base}>
+                        {inner}
+                      </div>
+                    );
+                  })}
               </div>
             </section>
           ) : null,

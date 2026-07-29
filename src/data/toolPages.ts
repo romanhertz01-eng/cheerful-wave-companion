@@ -52,7 +52,11 @@ export interface ToolPageData {
   tips?: { heading: string; items: { title: string; desc: string }[] };
   specs?: { heading: string; items: { label: string; value: string }[] };
   comparisonTable?: { heading: string; columns: string[]; rows: { label: string; values: string[] }[] };
-  modelChips?: { heading: string; sub?: string; models: string[] };
+  modelChips?: {
+    heading: string;
+    sub?: string;
+    models: { name: string; slug?: string; badge?: string; priceFrom?: string }[];
+  };
   bigStat?: { value: string; label: string; sub?: string; button?: string };
   examples?: { heading: string; images: string[] };
   visualCards?: {
@@ -1516,7 +1520,18 @@ export const toolPages: ToolPageData[] = [
     modelChips: {
       heading: "Все главные генераторы — в одной подписке",
       sub: "Не нужно выбирать один сервис: переключайте модели под задачу в один клик.",
-      models: ["Nano Banana 2", "Flux", "Seedream", "GPT Image", "Kling Image", "Grok Imagine", "Recraft", "Ideogram", "Qwen Image", "Wan"],
+      models: [
+        { name: "Nano Banana 2", slug: "nano-banana", priceFrom: "от 45 cr" },
+        { name: "Flux", slug: "flux", priceFrom: "от 40 cr" },
+        { name: "Seedream", slug: "seedream", priceFrom: "от 30 cr" },
+        { name: "GPT Image", slug: "gpt-image", priceFrom: "от 35 cr" },
+        { name: "Kling Image" },
+        { name: "Grok Imagine" },
+        { name: "Recraft" },
+        { name: "Ideogram" },
+        { name: "Qwen Image" },
+        { name: "Wan" },
+      ],
     },
     bigStat: {
       value: "90+",
@@ -1657,7 +1672,16 @@ export const toolPages: ToolPageData[] = [
     modelChips: {
       heading: "Модели видео-генерации в одном месте",
       sub: "Kling для динамики, Veo для кинематографа, Seedance для движения — выбирайте под сюжет.",
-      models: ["Kling 3.0", "Veo 3", "Sora 2", "Seedance 2.0", "Hailuo", "Wan 2.7", "Vidu", "HeyGen"],
+      models: [
+        { name: "Kling 3.0", slug: "kling", priceFrom: "от 575 cr" },
+        { name: "Veo 3", slug: "veo", priceFrom: "от 355 cr" },
+        { name: "Sora 2", slug: "sora", priceFrom: "от 800 cr" },
+        { name: "Seedance 2.0", slug: "seedance", priceFrom: "от 330 cr" },
+        { name: "Hailuo", slug: "hailuo", priceFrom: "от 200 cr" },
+        { name: "Wan 2.7" },
+        { name: "Vidu" },
+        { name: "HeyGen" },
+      ],
     },
     bigStat: {
       value: "90+",
