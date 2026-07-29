@@ -75,7 +75,13 @@ export interface ToolPageData {
     outputs: string[];
     prompt?: string;
   };
+  gallery?: {
+    heading: string;
+    images: string[];
+    initialCount?: number;
+  };
 }
+
 
 export const toolPages: ToolPageData[] = [
   {
