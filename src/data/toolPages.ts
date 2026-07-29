@@ -1308,6 +1308,7 @@ export const toolPages: ToolPageData[] = [
     heroTitle: "Генератор видео Seedance",
     heroDescription:
       "Видеомодель ByteDance с самым естественным движением: танцы, спорт, многокадровые сцены из текста или фото. Без VPN, бюджетный вход в 480p, флагманское качество в 1080p.",
+    heroFacts: ["от 330 cr/сек", "5–10 секунд", "до 1080p"],
     category: "video",
     tool: {
       layout: "row",
