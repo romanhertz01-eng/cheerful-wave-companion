@@ -1090,6 +1090,7 @@ export const toolPages: ToolPageData[] = [
     heroTitle: "Генератор изображений Nano Banana",
     heroDescription:
       "Генерируйте и редактируйте изображения нейросетью Google: точные правки по тексту, один персонаж во всех кадрах, надписи без ошибок. Без VPN, оплата в рублях.",
+    heroFacts: ["от 45 cr", "~30 сек", "до 4K"],
     category: "image",
     tool: {
       layout: "row",
