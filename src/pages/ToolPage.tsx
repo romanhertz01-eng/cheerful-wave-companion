@@ -29,8 +29,13 @@ const ToolPage = () => {
     const el = workspaceRef.current;
     if (!el) return;
     const io = new IntersectionObserver(
-      ([entry]) => setShowFloatingBar(!entry.isIntersecting),
-      { threshold: 0, rootMargin: "0px 0px -80% 0px" }
+      ([entry]) => {
+        // Показывать липкий бар только когда ToolWorkspace ПОЛНОСТЬЮ ушёл вверх.
+        const scrolledAbove =
+          !entry.isIntersecting && entry.boundingClientRect.bottom <= 0;
+        setShowFloatingBar(scrolledAbove);
+      },
+      { threshold: 0 }
     );
     io.observe(el);
     return () => io.disconnect();
