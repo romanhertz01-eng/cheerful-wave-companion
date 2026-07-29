@@ -66,6 +66,15 @@ export interface ToolPageData {
     items: { image: string; prompt?: string; label?: string }[];
   };
   showcaseStrip?: { images: string[] };
+  transformShowcase?: {
+    heading: string;
+    sub?: string;
+    inputLabel?: string;
+    outputLabel?: string;
+    inputs: string[];
+    outputs: string[];
+    prompt?: string;
+  };
 }
 
 export const toolPages: ToolPageData[] = [
