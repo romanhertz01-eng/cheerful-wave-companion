@@ -444,7 +444,7 @@ const ToolPage = () => {
           );
         }
 
-        const modelOrder = ["showcaseStrip", "intro", "visualCards", "showreel", "transformShowcase", "specs", "comparisonTable", "featureBlocks", "gallery", "tips", "useCases", "modelChips", "howItWorks", "bigStat"];
+        const modelOrder = ["showcaseStrip", "modelChips", "intro", "visualCards", "showreel", "transformShowcase", "specs", "comparisonTable", "featureBlocks", "gallery", "tips", "useCases", "howItWorks", "bigStat"];
         const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "examples", "specs", "modelChips", "bigStat"];
         const order = data.kind === "model" ? modelOrder : toolOrder;
         return <>{order.map((k) => sections[k])}</>;
