@@ -11,6 +11,7 @@ export interface ToolPageData {
   keyFeatureDescription: string;
   technologyDescription: string;
   category: "image" | "video" | "audio" | "text";
+  heroFacts?: string[];
   tool?: {
     layout: "panel" | "row";
     model: string;
@@ -1089,6 +1090,7 @@ export const toolPages: ToolPageData[] = [
     heroTitle: "Генератор изображений Nano Banana",
     heroDescription:
       "Генерируйте и редактируйте изображения нейросетью Google: точные правки по тексту, один персонаж во всех кадрах, надписи без ошибок. Без VPN, оплата в рублях.",
+    heroFacts: ["от 45 cr", "~30 сек", "до 4K"],
     category: "image",
     tool: {
       layout: "row",
@@ -2209,6 +2211,7 @@ export const toolPages: ToolPageData[] = [
     heroTitle: "Sora — видеонейросеть OpenAI",
     heroDescription:
       "Флагман генерации видео: кинематографичные сцены со звуком, реалистичная физика и постоянные персонажи. Доступ из России без VPN, оплата в рублях.",
+    heroFacts: ["от 160 cr/сек", "до 180 секунд", "до 1080p"],
     category: "video",
     features: [
       { icon: "🎬", title: "Кино-качество", description: "Сцены уровня продакшена из текстового описания" },
@@ -2428,6 +2431,7 @@ export const toolPages: ToolPageData[] = [
     heroTitle: "Kling — универсальная видеонейросеть",
     heroDescription:
       "Топ-модель для видео из текста и фото: 6 версий под любую задачу, контроль движения, от 115 кр/сек в 720p (ролик 5 с ≈ 575 кр). Без VPN, оплата в рублях.",
+    heroFacts: ["от 115 cr/сек", "5–10 секунд", "до 1080p"],
     category: "video",
     features: [
       { icon: "🎬", title: "Универсал", description: "Люди, предметы, пейзажи — стабильно хороший результат" },
