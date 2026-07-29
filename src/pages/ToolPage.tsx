@@ -11,6 +11,7 @@ import { Footer } from "@/components/shared/Footer";
 import { ToolWorkspace } from "@/components/tool/ToolWorkspace";
 import { VisualCards } from "@/components/tool/VisualCards";
 import { ModelShowreel } from "@/components/tool/ModelShowreel";
+import { ShowcaseStrip } from "@/components/tool/ShowcaseStrip";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
@@ -165,6 +166,9 @@ const ToolPage = () => {
 
       {(() => {
         const sections: Record<string, React.ReactNode> = {
+          showcaseStrip: data.showcaseStrip ? (
+            <ShowcaseStrip key="showcaseStrip" images={data.showcaseStrip.images} />
+          ) : null,
           intro: data.intro ? (
             <section key="intro" className="max-w-3xl mx-auto px-4 py-12 text-center">
               <h2 className="text-2xl md:text-[32px] font-bold mb-4">{data.intro.heading}</h2>
@@ -385,7 +389,7 @@ const ToolPage = () => {
           );
         }
 
-        const modelOrder = ["intro", "visualCards", "showreel", "specs", "comparisonTable", "featureBlocks", "tips", "useCases", "modelChips", "howItWorks", "bigStat"];
+        const modelOrder = ["showcaseStrip", "intro", "visualCards", "showreel", "specs", "comparisonTable", "featureBlocks", "tips", "useCases", "modelChips", "howItWorks", "bigStat"];
         const toolOrder = ["intro", "featureBlocks", "useCases", "howItWorks", "examples", "specs", "modelChips", "bigStat"];
         const order = data.kind === "model" ? modelOrder : toolOrder;
         return <>{order.map((k) => sections[k])}</>;
